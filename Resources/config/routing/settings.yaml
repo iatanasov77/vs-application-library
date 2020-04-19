@@ -1,0 +1,7 @@
+# controller: VS\ApplicationBundle\Controller\GeneralSettingsController::index
+vs_app_settings:
+    resource: |
+        alias: vs_application.settings
+        path: /settings
+        templates: "@VSApplication/Settings"
+    type: sylius.resource

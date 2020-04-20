@@ -26,10 +26,11 @@
         "alcaeus/mongo-php-adapter": "^1.1",
         "doctrine/mongodb-odm-bundle": "^3.0"
     },
-    "require-dev": {
-    	"symfony/debug-bundle": "^4.2",
-        "symfony/maker-bundle": "^1.13",
-        "symplify/changelog-linker": "^7.3@dev"
+    "suggest": {
+        "monolog/monolog": "Allows more advanced logging of the application flow",
+        "symfony/debug-bundle": "Allows developement debugging",
+        "symfony/maker-bundle": "Standard symfony console maker tools",
+        "symplify/changelog-linker": "Allows generation of nice CHANGELOG.md file"
     },
     "conflict": {
         "doctrine/doctrine-bundle": "<1.3",

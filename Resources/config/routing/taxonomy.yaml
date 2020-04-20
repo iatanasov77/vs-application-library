@@ -1,7 +1,10 @@
 vs_app_taxonomy:
-    path: /taxonomy/index
-    controller: VS\ApplicationBundle\Controller\TaxonomyController::index
+    resource: |
+        alias: vs_application.taxonomy
+        path: /taxonomy
+        templates: "@VSApplication/Taxonomy"
+    type: sylius.resource
 
-vs_app_taxon:
+vs_application_taxon:
     path: /taxonomy/taxons
     controller: VS\ApplicationBundle\Controller\TaxonController::index

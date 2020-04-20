@@ -4,6 +4,8 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use VS\ApplicationBundle\Form\GeneralSettingsForm;
+
 class GeneralSettingsController extends ResourceController
 {
     public function index( Request $request ): Response
@@ -12,7 +14,7 @@ class GeneralSettingsController extends ResourceController
         $settings   = $er->findBy( [], ['id'=>'DESC'], 1, 0 );
         
         $oSettings  = isset( $settings[0] ) ? $settings[0] : $er->createNew();
-        $form       = $this->createForm( SettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] );
+        $form       = $this->createForm( GeneralSettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] );
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
@@ -22,7 +24,7 @@ class GeneralSettingsController extends ResourceController
             
             return $this->redirect($this->generateUrl( 'vs_app_settings' ));
         }
-        
+        var_dump($form); die;
         return $this->render( '@VSApplicationBundle/Settings/index.html.twig', [
             'form'  => $form->createView(),
             'item'  => $oSettings

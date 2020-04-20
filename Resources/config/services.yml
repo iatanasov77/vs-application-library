@@ -2,6 +2,9 @@ imports:
     - { resource: services/form.yaml }
 
 parameters:
+    lang: 'en'
+    locale: 'en_US'
+    menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
 #    ia_cms.example.class: IACmsBundle\Example
 
 services:

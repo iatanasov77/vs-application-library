@@ -27,6 +27,8 @@
         "doctrine/mongodb-odm-bundle": "^3.0"
     },
     "require-dev": {
+    	"symfony/debug-bundle": "^4.2",
+        "symfony/maker-bundle": "^1.13",
         "symplify/changelog-linker": "^7.3@dev"
     },
     "conflict": {

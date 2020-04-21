@@ -11,7 +11,7 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: false
+        public: true
         
     ###########################################################
     # Menu services
@@ -48,17 +48,17 @@ services:
     ###########################################################
     # Taxonomy services
     ###########################################################
-    vs_app.form.type.taxonomy_vocabulary:
-        class: IACmsBundle\Form\TaxonomyVocabularyForm
-        tags:
-            - { name: form.type, alias: 'vs_app_taxonomy_vocabularies' }
-        arguments: ['@doctrine']
-        
-    vs_app.form.type.taxonomy_term:
-        class: IACmsBundle\Form\TaxonomyTermForm
-        tags:
-            - { name: form.type, alias: 'vs_app_taxonomy_terms' }
-        arguments: ['@doctrine']
+#    vs_app.form.type.taxonomy_vocabulary:
+#        class: VSCmsBundle\Form\TaxonomyVocabularyForm
+#        tags:
+#            - { name: form.type, alias: 'vs_app_taxonomy_vocabularies' }
+#        arguments: ['@doctrine']
+#        
+#    vs_app.form.type.taxonomy_term:
+#        class: IACmsBundle\Form\TaxonomyTermForm
+#        tags:
+#            - { name: form.type, alias: 'vs_app_taxonomy_terms' }
+#        arguments: ['@doctrine']
         
     ##############################################################
     # Maintenance mode services

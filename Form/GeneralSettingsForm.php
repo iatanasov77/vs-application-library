@@ -20,19 +20,14 @@ class GeneralSettingsForm extends AbstractResourceType
     public function __construct( string $dataClass, string $pageClass )
     {
         parent::__construct( $dataClass );
-        
+        //var_dump($pageClass); die;
         $this->pageClass = $pageClass;
     }
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add( 'maintenanceMode', CollectionType::class, ['label' => 'Maintenance Mode',
-                'entry_type' => CheckboxType::class,
-                'entry_options' => [
-                    'attr' => ['class' => 'email-box'],
-                ],
-            ])
+            ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'Maintenance Mode'])
             
             ->add( 'maintenancePage', EntityType::class, [
                 'class'         => $this->pageClass,

@@ -89,8 +89,9 @@ class MenuBuilder implements ContainerAwareInterface
     
     protected function build( &$menu, $config )
     {
-        foreach ( $config as $mg ) {
+        foreach ( $config as $id => $mg ) {
             $params = [
+                'id'                => $id,
                 'uri'               => isset( $mg['uri'] ) ? $mg['uri'] : null,
                 'route'             => isset( $mg['route'] ) ? $mg['route'] : null,
                 'routeParameters'   => isset( $mg['routeParameters'] ) ? $mg['routeParameters'] : [],

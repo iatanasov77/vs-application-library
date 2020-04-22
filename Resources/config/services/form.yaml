@@ -1,5 +1,5 @@
 services:
-    vs_application.settings.form.type:
+    vs_application.resources.settings.form:
         public: true
         class: VS\ApplicationBundle\Form\GeneralSettingsForm
         tags:

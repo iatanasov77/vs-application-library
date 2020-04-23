@@ -26,6 +26,11 @@
         "alcaeus/mongo-php-adapter": "^1.1",
         "doctrine/mongodb-odm-bundle": "^3.0"
     },
+    "config": {
+        "platform": {
+            "ext-mongo": "1.6.16"
+        }
+    },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow",
         "symfony/debug-bundle": "Allows developement debugging",

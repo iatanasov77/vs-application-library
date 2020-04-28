@@ -1,34 +1,79 @@
 <?php namespace VS\ApplicationBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use VS\ApplicationBundle\Entity\GeneralSettings;
-use VS\ApplicationBundle\Form\GeneralSettingsForm;
+use VS\ApplicationBundle\Component\Slug;
 
-class TaxonomyController extends Controller
+class TaxonomyController extends ResourceController
 {
-    public function index( Request $request ): Response
+    public function indexAction( Request $request ) : Response
     {
-        $settings   = $this->getDoctrine()->getRepository( GeneralSettings::class )
-                                            ->findBy( [], ['id'=>'DESC'], 1, 0 );
+        return $this->render( '@VSApplication/Taxonomy/index.html.twig', [
+            'items' => $this->getRepository()->findAll()
+        ]);
+    }
+    
+    public function createAction( Request $request ): Response
+    {
+        $oTaxonomy  = $this->getFactory()->createNew();
         
-        $oSettings  = isset( $settings[0] ) ? $settings[0] : new GeneralSettings();
-        $form       = $this->createForm( SettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] );
+        return $this->edit( $request, $oTaxonomy );
+    }
+    
+    public function updateAction( Request $request ): Response
+    {
+        $oTaxonomy  = $this->getRepository()->find( $request->attributes->get( 'id' ) );
         
-        $form->handleRequest( $request );
-        if( $form->isSubmitted() && $form->isValid() ) {
+        return $this->edit( $request, $oTaxonomy );
+    }
+    
+    protected function edit( Request $request, ResourceInterface $oTaxonomy )
+    {
+        $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );        
+        $form           = $this->resourceFormFactory->create( $configuration, $oTaxonomy );
+
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
+            $taxonomy   = $form->getData();
+            if ( ! $taxonomy->getRootTaxon() ) {
+                $taxonomy->setRootTaxon( $this->createRootTaxon( $taxonomy ) );
+            }
+            
             $em = $this->getDoctrine()->getManager();
-            $em->persist( $form->getData() );
+            $em->persist( $taxonomy );
             $em->flush();
             
-            return $this->redirect($this->generateUrl( 'app_settings_index' ));
+            return $this->redirect($this->generateUrl( 'vs_application_taxonomy_index' ));
         }
         
-        return $this->render( '@IAApplicationCoreBundle/Settings/index.html.twig', [
+        return $this->render( '@VSApplication/Taxonomy/edit.html.twig', [
             'form'  => $form->createView(),
-            'item'  => $oSettings
+            'item'  => $oTaxonomy
         ]);
+    }
+    
+    protected function getRepository()
+    {
+        return $this->get( 'vs_application.repository.taxonomy' );
+    }
+    
+    protected function getFactory()
+    {
+        return $this->get( 'vs_application.factory.taxonomy' );
+    }
+    
+    protected function createRootTaxon( $taxonomy )
+    {
+        $rootTaxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
+        
+        // @NOTE Force generation of slug
+        $rootTaxon->getTranslation( 'en' )->setName( $taxonomy->getName() );
+        $rootTaxon->getTranslation( 'en' )->setDescription( 'Root taxon of Taxonomy: "' . $taxonomy->getName() . '"' );
+        $rootTaxon->getTranslation( 'en' )->setSlug( Slug::generate( $taxonomy->getName() ) );
+        $rootTaxon->getTranslation( 'en' )->setTranslatable( $rootTaxon );
+        
+        return $rootTaxon;
     }
 }

@@ -1,13 +1,64 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Doctrine\ORM\Mapping as ORM;
+use VS\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 
-class Taxonomy implements ResourceInterface
+class Taxonomy implements TaxonomyInterface
 {
+    /** @var integer */
     protected $id;
+    
+    /** @var string */
+    protected $name;
+    
+    /** @var string */
+    protected $description;
+    
+    protected $rootTaxon;
+    
+    public function getRootTaxon()
+    {
+        return $this->rootTaxon;    
+    }
+    
+    public function setRootTaxon( $taxon )
+    {
+        $this->rootTaxon    = $taxon;
+        
+        return $this;
+    }
+    
+    public function getTaxons()
+    {
+        return $this->rootTaxon->getChildren();
+    }
     
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function setName( $name )
+    {
+        $this->name = $name;
+        
+        return $this;
+    }
+    
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    public function setDescription( $description )
+    {
+        $this->description = $description;
+        
+        return $this;
     }
 }

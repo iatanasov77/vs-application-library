@@ -14,22 +14,17 @@
     "require": {
         "php": "^5.5.9 || ^7.0",
        	"sylius/resource-bundle": "^1.6",
-       	"sylius/taxonomy-bundle": "^1.6",
+       	"sylius/taxonomy": "^1.6",
        	
        	"knplabs/knp-menu-bundle": "^2.0",
-       	"gedmo/doctrine-extensions": "*",
+       	"gedmo/doctrine-extensions": "^2.4",
        	
        	"symfony/security-acl": "^3.0",
-        "symfony/console": "*",
+        "symfony/console": "^4.4",
         "composer/semver": "^1.5",
         
         "alcaeus/mongo-php-adapter": "^1.1",
         "doctrine/mongodb-odm-bundle": "^3.0"
-    },
-    "config": {
-        "platform": {
-            "ext-mongo": "1.6.16"
-        }
     },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow",

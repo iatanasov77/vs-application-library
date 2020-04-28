@@ -1,9 +1,17 @@
-vs_app_taxonomy:
+vs_application_taxonomy:
     resource: |
         alias: vs_application.taxonomy
         path: /taxonomy
         templates: "@VSApplication/Taxonomy"
     type: sylius.resource
+
+vs_application_taxonomy_taxons:
+    path: /taxonomy_{id}/taxons
+    controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::index
+    
+vs_application_taxonomy_taxons_gtreetable:
+    path: /taxonomy_{id}/gtreetable-taxons
+    controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::gtreeTableSource
 
 vs_application_taxon:
     path: /taxonomy/taxons

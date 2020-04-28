@@ -44,21 +44,6 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu, alias: breadcrumbs }
-
-    ###########################################################
-    # Taxonomy services
-    ###########################################################
-#    vs_app.form.type.taxonomy_vocabulary:
-#        class: VSCmsBundle\Form\TaxonomyVocabularyForm
-#        tags:
-#            - { name: form.type, alias: 'vs_app_taxonomy_vocabularies' }
-#        arguments: ['@doctrine']
-#        
-#    vs_app.form.type.taxonomy_term:
-#        class: IACmsBundle\Form\TaxonomyTermForm
-#        tags:
-#            - { name: form.type, alias: 'vs_app_taxonomy_terms' }
-#        arguments: ['@doctrine']
         
     ##############################################################
     # Maintenance mode services

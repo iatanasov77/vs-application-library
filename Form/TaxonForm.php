@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-use VS\ApplicationBundle\Form\Type\TaxonTranslationType;
+use Doctrine\ORM\EntityRepository;
 
 class TaxonForm extends AbstractResourceType
 {
@@ -25,15 +25,19 @@ class TaxonForm extends AbstractResourceType
         $builder
             ->add( 'currentLocale', HiddenType::class )
 
-            ->add( 'parent', EntityType::class, [
-                'required'      => false,
+            ->add( 'parentTaxon', EntityType::class, [
+                'mapped'        => false,
+                'required'      => true,
                 'label'         => 'Parent',
                 'class'         => $this->dataClass,
                 'choice_label'  => 'name',
-                'placeholder'   => '-- Parent Taxon --',
-                
-                'multiple'      => false,
-                'expanded'      => false
+                'query_builder' => function ( EntityRepository $er ) use ( $options )
+                {
+                    //var_dump( $er ); die;
+                    return $er->createQueryBuilder( 't' )
+                                ->where( 't.root = :rootTaxon' )
+                                ->setParameter( 'rootTaxon', $options['rootTaxon'] );
+                }
             ])
             
             ->add( 'name', TextType::class, ['label' => 'Name'] )
@@ -47,6 +51,10 @@ class TaxonForm extends AbstractResourceType
     public function configureOptions( OptionsResolver $resolver ): void
     {
         parent::configureOptions( $resolver );
+        
+        $resolver->setDefaults([
+            'rootTaxon' => null,
+        ]);
     }
 }
 

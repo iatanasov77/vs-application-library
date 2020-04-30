@@ -16,3 +16,11 @@ vs_application_taxonomy_taxons_gtreetable:
 vs_application_taxon:
     path: /taxonomy/taxons
     controller: VS\ApplicationBundle\Controller\TaxonController::index
+    
+vs_application_taxonomy_taxon_edit:
+    path: /taxonomy-taxon/{taxonomyId}
+    controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::editTaxon
+    
+vs_application_taxonomy_taxon_handle:
+    path: /taxonomy-taxon/{taxonomyId}/handle
+    controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::handleTaxon

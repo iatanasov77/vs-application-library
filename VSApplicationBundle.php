@@ -1,6 +1,5 @@
 <?php namespace VS\ApplicationBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 

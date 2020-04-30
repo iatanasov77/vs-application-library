@@ -5,8 +5,8 @@ class I18N
     public static function Languages()
     {
         return [
-            'en' => 'English',
-            'bg' => 'Bulgarian'
+            'en_US' => 'English',
+            'bg_BG' => 'Bulgarian'
         ];
     }
     

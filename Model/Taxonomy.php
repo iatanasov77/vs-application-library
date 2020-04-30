@@ -16,6 +16,8 @@ class Taxonomy implements TaxonomyInterface
     
     protected $rootTaxon;
     
+    protected $locale;
+    
     public function getRootTaxon()
     {
         return $this->rootTaxon;    
@@ -58,6 +60,18 @@ class Taxonomy implements TaxonomyInterface
     public function setDescription( $description )
     {
         $this->description = $description;
+        
+        return $this;
+    }
+    
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
         
         return $this;
     }

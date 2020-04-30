@@ -31,12 +31,13 @@ class TaxonomyController extends ResourceController
     }
     
     protected function edit( Request $request, ResourceInterface $oTaxonomy )
-    {
+    {//var_dump($request->getLocale()); die;
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );        
         $form           = $this->resourceFormFactory->create( $configuration, $oTaxonomy );
 
         if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request)->isValid() ) {
             $taxonomy   = $form->getData();
+            
             if ( ! $taxonomy->getRootTaxon() ) {
                 $taxonomy->setRootTaxon( $this->createRootTaxon( $taxonomy ) );
             }
@@ -66,13 +67,15 @@ class TaxonomyController extends ResourceController
     
     protected function createRootTaxon( $taxonomy )
     {
+        $locale     = $taxonomy->getLocale() ?: 'en';
         $rootTaxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
         // @NOTE Force generation of slug
-        $rootTaxon->getTranslation( 'en' )->setName( $taxonomy->getName() );
-        $rootTaxon->getTranslation( 'en' )->setDescription( 'Root taxon of Taxonomy: "' . $taxonomy->getName() . '"' );
-        $rootTaxon->getTranslation( 'en' )->setSlug( Slug::generate( $taxonomy->getName() ) );
-        $rootTaxon->getTranslation( 'en' )->setTranslatable( $rootTaxon );
+        $rootTaxon->setCurrentLocale( $locale );
+        $rootTaxon->getTranslation()->setName( $taxonomy->getName() );
+        $rootTaxon->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $taxonomy->getName() . '"' );
+        $rootTaxon->getTranslation()->setSlug( Slug::generate( $taxonomy->getName() ) );
+        $rootTaxon->getTranslation()->setTranslatable( $rootTaxon );
         
         return $rootTaxon;
     }

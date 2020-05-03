@@ -1,17 +1,15 @@
 <?php namespace VS\ApplicationBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-
-use VS\ApplicationBundle\Model\GeneralSettings;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 
 class GeneralSettingsForm extends AbstractResourceType
 {
@@ -20,13 +18,18 @@ class GeneralSettingsForm extends AbstractResourceType
     public function __construct( string $dataClass, string $pageClass )
     {
         parent::__construct( $dataClass );
-        //var_dump($pageClass); die;
+   
         $this->pageClass = $pageClass;
     }
     
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
+            ->add( 'theme', ThemeNameChoiceType::class, [
+                'label'     => 'Theme',
+                //'mapped'    => false
+            ])
+            
             ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'Maintenance Mode'])
             
             ->add( 'maintenancePage', EntityType::class, [
@@ -46,9 +49,5 @@ class GeneralSettingsForm extends AbstractResourceType
     public function configureOptions( OptionsResolver $resolver ): void
     {
         parent::configureOptions( $resolver );
-        
-//         $resolver->setDefaults([
-//             'data_class' => GeneralSettings::class
-//         ]);
     }
 }

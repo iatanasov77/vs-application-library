@@ -1,38 +1,24 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 use VS\ApplicationBundle\Model\Interfaces\PageInterface;
 
-class Settings implements ResourceInterface
+class Settings implements SettingsInterface
 {   
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    /** @var integer */
     protected $id;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="maintenanceMode", type="boolean", options={"default":"0"}, nullable=false)
-     */
+    /** @var boolean */
     protected $maintenanceMode;
     
-    /**
-     * @ORM\OneToOne(targetEntity="VS\ApplicationBundle\Model\Interfaces\PageInterface")
-     */
+    /** @var VS\ApplicationBundle\Model\Interfaces\PageInterface */
     protected $maintenancePage;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="languages", type="string")
-     */
+    /** @var string */
     protected $languages;
+    
+    /** @var string */
+    protected $theme;
     
     public function getId()
     {
@@ -73,5 +59,17 @@ class Settings implements ResourceInterface
     public function getLanguages()
     {
         return $this->languages;
+    }
+    
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+        
+        return $this;
+    }
+    
+    public function getTheme()
+    {
+        return $this->theme;
     }
 }

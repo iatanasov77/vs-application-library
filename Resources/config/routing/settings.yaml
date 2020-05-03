@@ -5,14 +5,3 @@ vs_app_settings:
         path: /settings
         templates: "@VSApplication/Settings"
     type: sylius.resource
-    
-vs_app_settings_index_BACKUP:
-    path: /settings
-    methods: [GET, POST]
-    defaults:
-        _controller: app.controller.book:createAction
-        _sylius:
-            form:
-                type: App\Form\BookType
-                options:
-                    validation_groups: [sylius, my_custom_group]

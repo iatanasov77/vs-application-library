@@ -10,9 +10,13 @@ vs_application_taxonomy_taxons:
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::index
     
 vs_application_taxonomy_taxons_gtreetable:
-    path: /taxonomy_{id}/gtreetable-taxons
+    path: /taxonomy_{id}/taxons/gtreetable
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::gtreeTableSource
 
+vs_application_taxonomy_taxons_easyui_combotree:
+    path: /taxonomy_{id}/taxons/easyui-combotree
+    controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::easyuiComboTreeSource
+    
 vs_application_taxon:
     path: /taxonomy/taxons
     controller: VS\ApplicationBundle\Controller\TaxonController::index

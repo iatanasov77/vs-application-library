@@ -70,13 +70,24 @@ class TaxonomyTaxonsController extends Controller
         $ertt           = $this->getTaxonRepository();
         $ert            = $this->getTaxonomyRepository();
         $rootTaxonId    = $ert->find( $request->attributes->get( 'id' ) )->getRootTaxon()->getId();
-
+        
         $parentId       = (int)$request->query->get( 'taxonId' );
         $taxons         = $ertt->getTaxonsAsArray( $rootTaxonId, $parentId );
         //var_dump( $taxons ); die;
         $gtreeTableData = $this->buildGtreeTableData( $taxons );
         
         return new JsonResponse( ['nodes' => $gtreeTableData, 'readonly' => true] );
+    }
+    
+    public function easyuiComboTreeSource( Request $request ): Response
+    {
+        $ert            = $this->getTaxonomyRepository();
+        $rootTaxon      = $ert->find( $request->attributes->get( 'id' ) )->getRootTaxon();
+        $data           = [];
+        
+        $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data );
+        
+        return new JsonResponse( $data );
     }
     
     protected function getTaxonomyRepository()
@@ -102,6 +113,24 @@ class TaxonomyTaxonsController extends Controller
         }
         
         return $data;
+    }
+    
+    protected function buildEasyuiCombotreeData( $tree, &$data )
+    {
+        $key    = 0;
+        foreach( $tree as $node ) {
+            $data[$key]   = [
+                'id'        => $node->getId(),
+                'text'      => $node->getName(),
+                'children'  => []
+            ];
+            
+            if ( $node->getChildren()->count() ) {
+                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'] );
+            }
+            
+            $key++;
+        }
     }
     
     protected function getRootTaxon( $taxonomyId )

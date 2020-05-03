@@ -5,17 +5,26 @@ use IA\CmsBundle\Entity\Page;
 
 class SiteSettings extends Settings
 {
+    /** @var mixed */
+    protected $id;
+    
+    /** @var TaxonInterface */
+    protected $site;
+    
     /**
+     * /** @var SettingsInterface */
      * @ORM\ManyToOne(targetEntity="SettingsSite", inversedBy="settings")
      */
-    private $site;
+    protected $settings;
     
-    public function getSite(): ?SettingsSite
+    
+    
+    public function getSite():  ?TaxonInterface
     {
         return $this->site;
     }
     
-    public function setSite(?SettingsSite $site): self
+    public function setSite( ?TaxonInterface $site): self
     {
         $this->site = $site;
         if ( $site ) {
@@ -23,5 +32,10 @@ class SiteSettings extends Settings
             
         }
         return $this;
+    }
+    
+    public function __toString()
+    {
+        return $this->site ? $this->site->getName() : '';
     }
 }

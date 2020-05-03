@@ -5,7 +5,9 @@ class I18N
     public static function Languages()
     {
         return [
+            'en'    => 'English',
             'en_US' => 'English',
+            'bg'    => 'Bulgarian',
             'bg_BG' => 'Bulgarian'
         ];
     }
@@ -17,7 +19,7 @@ class I18N
         
         $ret        = [];
         foreach( $envLangs as $l ) {
-            $ret[$l]    = isset( $langs[$l] ) ? $langs[$l] : 'Unknown';
+            $ret[$l]    = isset( $langs[$l] ) ? $langs[$l] : 'Lang not available in this environement';
         }
         
         return $ret;

@@ -44,20 +44,18 @@ class TaxonRepository extends EntityRepository
         return $query->getResult();
     }
     
-    /**
-     * @NOTE NE STAVA
-     */
-    public function getTaxonsWithQueryBuilder( $rootTaxon )
+    public function getTaxonsWithQueryBuilder( $rootTaxon, $level = null )
     {
-        // e tva ne stava be da go eba
-        // $rootTaxon->getChildren();
-        $qb = $this->createQueryBuilder( 'tt' );
-        
-        $query  = $qb->select( 'tt' )
+        $qb = $this->createQueryBuilder( 'tt' )
+                    ->select( 'tt' )
                     ->where( 'tt.root = :rootTaxon' )
-                    ->setParameter( 'rootTaxon', $rootTaxon )
-                    ->getQuery();
+                    ->setParameter( 'rootTaxon', $rootTaxon );
         
-        return $query->getResult();
+        if ( $level !== null ) {
+            $qb->andWhere( 'tt.level = :level' )
+                ->setParameter( 'level', $level );
+        }
+            
+        return $qb->getQuery()->getResult();
     }
 }

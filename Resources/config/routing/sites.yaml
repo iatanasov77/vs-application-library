@@ -1,6 +1,0 @@
-vs_app_sites:
-    resource: |
-        alias: vs_application.site
-        path: /sites
-        templates: "@VSApplication/Sites"
-    type: sylius.resource

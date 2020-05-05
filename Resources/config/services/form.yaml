@@ -1,7 +1,7 @@
 services:
     vs_application.resources.settings.form:
         public: true
-        class: VS\ApplicationBundle\Form\GeneralSettingsForm
+        class: VS\ApplicationBundle\Form\SettingsForm
         tags:
             - { name: form.type }
         arguments: ['%vs_application.model.settings.class%', '%vs_cms.model.pages.class%']

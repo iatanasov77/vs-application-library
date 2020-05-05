@@ -19,5 +19,7 @@
         <field name="languages" type="string" nullable="true"/>
         
         <field name="theme" type="string" nullable="true"/>
+        
+        <many-to-one field="site" target-entity="VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface"  />
     </mapped-superclass>
 </doctrine-mapping>

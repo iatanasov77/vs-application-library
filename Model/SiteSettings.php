@@ -1,9 +1,10 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
-use IA\CmsBundle\Entity\Page;
+use VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface;
+use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-class SiteSettings extends Settings
+class SiteSettings implements SiteSettingsInterface
 {
     /** @var mixed */
     protected $id;
@@ -11,28 +12,38 @@ class SiteSettings extends Settings
     /** @var TaxonInterface */
     protected $site;
     
-    /**
-     * /** @var SettingsInterface */
-     * @ORM\ManyToOne(targetEntity="SettingsSite", inversedBy="settings")
-     */
+    /** @var SettingsInterface */
     protected $settings;
     
-    
+    public function getId()
+    {
+        return $this->id;
+    }
     
     public function getSite():  ?TaxonInterface
     {
         return $this->site;
     }
     
-    public function setSite( ?TaxonInterface $site): self
+    public function setSite( ?TaxonInterface $site): SiteSettingsInterface
     {
         $this->site = $site;
-        if ( $site ) {
-            $this->site_id = $site->getId();
-            
-        }
+        
         return $this;
     }
+    
+    public function getSettings():  ?SettingsInterface
+    {
+        return $this->settings;
+    }
+    
+    public function setSettings( ?SettingsInterface $settings): SiteSettingsInterface
+    {
+        $this->settings = $settings;
+        
+        return $this;
+    }
+    
     
     public function __toString()
     {

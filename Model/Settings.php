@@ -2,6 +2,7 @@
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 use VS\ApplicationBundle\Model\Interfaces\PageInterface;
+use VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface;
 
 class Settings implements SettingsInterface
 {   
@@ -19,6 +20,9 @@ class Settings implements SettingsInterface
     
     /** @var string */
     protected $theme;
+    
+    /** @var SiteSettingsInterface */
+    protected $site;
     
     public function getId()
     {
@@ -71,5 +75,17 @@ class Settings implements SettingsInterface
     public function getTheme()
     {
         return $this->theme;
+    }
+    
+    public function getSite(): ?SiteSettingsInterface
+    {
+        return $this->site;
+    }
+    
+    public function setSite(?SiteSettingsInterface $site): self
+    {
+        $this->site = $site;
+        
+        return $this;
     }
 }

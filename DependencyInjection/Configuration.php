@@ -9,13 +9,14 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
 
-use VS\ApplicationBundle\Model\Site;
+use VS\ApplicationBundle\Model\SiteSettings;
 use VS\ApplicationBundle\Controller\SiteController;
 use VS\ApplicationBundle\Form\SiteForm;
 
+use VS\ApplicationBundle\Repository\SettingsRepository;
 use VS\ApplicationBundle\Model\Settings;
-use VS\ApplicationBundle\Controller\GeneralSettingsController;
-use VS\ApplicationBundle\Form\GeneralSettingsForm;
+use VS\ApplicationBundle\Controller\SettingsController;
+use VS\ApplicationBundle\Form\SettingsForm;
 
 use VS\ApplicationBundle\Repository\TaxonomyRepository;
 use VS\ApplicationBundle\Model\Taxonomy;
@@ -67,14 +68,14 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode( 'resources' )
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode( 'site' )
+                        ->arrayNode( 'site_settings' )
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode( 'options' )->end()
                                 ->arrayNode( 'classes' )
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode( 'model' )->defaultValue( Site::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'model' )->defaultValue( SiteSettings::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( SiteController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->cannotBeEmpty()->end()
@@ -93,10 +94,11 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Settings::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'controller' )->defaultValue( GeneralSettingsController::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( SettingsController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( SettingsRepository::class )->cannotBeEmpty()->end()
+                                        //->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'form' )->defaultValue( GeneralSettingsForm::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( SettingsForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

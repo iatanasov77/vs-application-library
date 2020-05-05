@@ -1,48 +1,43 @@
 <?php namespace VS\ApplicationBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 
-use IA\CmsBundle\Entity\Page;
-use VS\ApplicationBundle\Entity\GeneralSettings;
-
-class SiteForm extends AbstractResourceType implements ContainerAwareInterface
+class SettingsForm extends AbstractResourceType
 {
-    use ContainerAwareTrait;
+    protected $pageClass;
     
-    public function __construct($container = null)
+    public function __construct( string $dataClass, string $pageClass )
     {
-        $this->container = $container;
+        parent::__construct( $dataClass );
+   
+        $this->pageClass = $pageClass;
     }
     
-    public function getName()
-    {
-        return 'ia_web_content_thief_projects';
-    }
-    
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add( 'maintenanceMode', CollectionType::class, ['label' => 'Maintenance Mode',
-                'entry_type' => CheckboxType::class,
-                'entry_options' => [
-                    'attr' => ['class' => 'email-box'],
-                ],
+            ->add( 'site_taxon', HiddenType::class, [
+                'mapped'    => false,
+            ])
+        
+            ->add( 'theme', ThemeNameChoiceType::class, [
+                'label'     => 'Theme'
             ])
             
+            ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'Maintenance Mode'])
+            
             ->add( 'maintenancePage', EntityType::class, [
-                'class'         => Page::class,
+                'class'         => $this->pageClass,
                 'placeholder'   => '-- Choose a Page --',
                 'choice_label'  => 'title',
                 'required'      => false
@@ -57,8 +52,6 @@ class SiteForm extends AbstractResourceType implements ContainerAwareInterface
     
     public function configureOptions( OptionsResolver $resolver ): void
     {
-        $resolver->setDefaults([
-            'data_class' => GeneralSettings::class
-        ]);
+        parent::configureOptions( $resolver );
     }
 }

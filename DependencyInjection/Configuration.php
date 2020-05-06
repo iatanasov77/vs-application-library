@@ -46,6 +46,7 @@ class Configuration implements ConfigurationInterface
         
         $rootNode
             ->children()
+                ->booleanNode( 'multi_site' )->defaultFalse()->end()
                 ->scalarNode( 'orm_driver' )->defaultValue( SyliusResourceBundle::DRIVER_DOCTRINE_ORM )->cannotBeEmpty()->end()
             ->end()
         ;

@@ -11,7 +11,7 @@ class SettingsController extends ResourceController
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $er             = $this->get( 'vs_application.repository.settings' );
-        $settings       = $er->findBy( [], ['id'=>'DESC'], 1, 0 );
+        $settings       = $er->getSettings();
         
         $oSettings  = isset( $settings[0] ) ? $settings[0] : $er->createNew();
         $form       = $this->resourceFormFactory->create( $configuration, $oSettings );
@@ -22,7 +22,19 @@ class SettingsController extends ResourceController
          */
         return $this->render( '@VSApplication/Settings/index.html.twig', [
             'settingsForm'  => $form,   // $form->createView()
-            'item'  => $oSettings
+            'item'          => $oSettings,
+            'siteSettings'  => $this->getSiteSettings()
         ]);
+    }
+    
+    protected function getSiteSettings(): array
+    {
+        if ( $this->container->getParameter('vs_application.multi_site') ) {
+            return  [
+                \App\Entity\SiteSettings::SITE_TEST   => $er->getSettings( $this->get( 'vs_application.repository.site_settings' )->find( 1 ) )
+            ];
+        } else {
+            return [];
+        }
     }
 }

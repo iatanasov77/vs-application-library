@@ -1,52 +1,29 @@
 <?php namespace VS\ApplicationBundle\Repository;
 
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
-class SettingsRepository extends EntityRepository
+class SettingsRepository extends EntityRepository implements ContainerAwareInterface
 {
-    public function getSettings( $site )
-    {
-        $qb = $this->getEntityManager()->createQueryBuilder();
-    }
+    use ContainerAwareTrait;
     
-    public function getSettingsBySite( $siteId ): SettingsInterface
+    public function getSettings( $site = null ): SettingsInterface
     {
-        $conn   = $this->getEntityManager()->getConnection();
+        $qb = $this->createQueryBuilder( 's' )
+                    ->select( 's' )
+                    ->orderBy( 's.id', 'DESC' )
+                    ->setMaxResults( 1 )
+                    ->setFirstResult( 0 );
         
-        $sql        = '
-            SELECT s.id FROM VSORG_Settings AS s 
-            LEFT JOIN VSORG_SettingsSites as ss ON ss.id = s.site_id
-            WHERE ss.id = :siteId 
-            ORDER BY s.id DESC 
-            LIMIT 0, 1
-        ';
-        $stmt       = $conn->prepare( $sql );
-        $stmt->execute( ['siteId' => $siteId] );
+        if ( $site == null ) {
+            $qb->where( 's.site IS NULL' );
+        } else {
+            $qb->where( 's.site = :site' )->setParameter( 'site', $site );
+        }
         
-        $sBySite    = $stmt->fetch();
-        
-        return $sBySite ? $this->find( $sBySite['id'] ) : new Settings();
-    }
-    
-    public function getGeneralSettings(): SettingsInterface
-    {
-        $conn   = $this->getEntityManager()->getConnection();
-        
-        $sql        = '
-            SELECT s.id FROM VSORG_Settings AS s
-            WHERE s.site_id IS NULL
-            ORDER BY s.id DESC
-            LIMIT 0, 1
-        ';
-        $stmt       = $conn->prepare( $sql );
-        $stmt->execute();
-        
-        $sBySite    = $stmt->fetch();
-        $oSettings  = $this->find( $sBySite['id'] );
-
-        return $oSettings ?: new Settings();
+        return $qb->getQuery()->getResult();
     }
 }

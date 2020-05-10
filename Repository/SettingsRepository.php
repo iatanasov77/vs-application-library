@@ -10,10 +10,14 @@ class SettingsRepository extends EntityRepository implements ContainerAwareInter
 {
     use ContainerAwareTrait;
     
-    public function getSettings( $site = null ): SettingsInterface
+    public function getSettings( $site = null ): ?SettingsInterface
     {
+        /**
+         * @NOTE $this->container is NULL i dont know why and i cannot use it for now
+         */
+        
         $qb = $this->createQueryBuilder( 's' )
-                    ->select( 's' )
+                    
                     ->orderBy( 's.id', 'DESC' )
                     ->setMaxResults( 1 )
                     ->setFirstResult( 0 );
@@ -21,9 +25,11 @@ class SettingsRepository extends EntityRepository implements ContainerAwareInter
         if ( $site == null ) {
             $qb->where( 's.site IS NULL' );
         } else {
-            $qb->where( 's.site = :site' )->setParameter( 'site', $site );
+            $qb->leftJoin( 's.site', 'ss' )
+                ->where( 'ss.site = :site' )->setParameter( 'site', $site );
         }
+        $result = $qb->getQuery()->getResult();
         
-        return $qb->getQuery()->getResult();
+        return isset( $result[0] ) ? $result[0] : null;
     }
 }

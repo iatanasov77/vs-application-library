@@ -9,7 +9,7 @@ class TaxonRepository extends EntityRepository
     {
         $em     = $this->getEntityManager();
         $sql    = "
-            SELECT t.*, tt.* FROM APP_Taxons t LEFT JOIN APP_TaxonTranslations tt ON tt.translatable_id = t.id 
+            SELECT t.*, tt.* FROM VSAPP_Taxons t LEFT JOIN VSAPP_TaxonTranslations tt ON tt.translatable_id = t.id 
             WHERE tree_root=:rootTaxonId AND parent_id IS NOT NULL
         ";
         $params['rootTaxonId']  = $rootTaxonId;
@@ -36,7 +36,7 @@ class TaxonRepository extends EntityRepository
         
         $rsm->addRootEntityFromClassMetadata( get_class( $rootTaxon ), 'tt' );
         $sql = "
-            SELECT * FROM APP_Taxons WHERE tree_root=?
+            SELECT * FROM VSAPP_Taxons WHERE tree_root=?
         ";
         $query = $em->createNativeQuery( $sql, $rsm );
         $query->setParameter( 1, $rootTaxon->getId() );

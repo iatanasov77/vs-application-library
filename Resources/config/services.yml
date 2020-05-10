@@ -11,7 +11,7 @@ services:
         public: true
         
         
-    vs_application.repository.settings:
+    vs_app.repository.settings:
         lazy: true
         class: VS\ApplicationBundle\Repository\SettingsRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]

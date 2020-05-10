@@ -19,8 +19,8 @@ class SettingsForm extends AbstractResourceType
     public function __construct( string $dataClass, string $pageClass )
     {
         parent::__construct( $dataClass );
-   
-        $this->pageClass = $pageClass;
+ 
+        $this->pageClass    = $pageClass;
     }
     
     public function buildForm( FormBuilderInterface $builder, array $options )
@@ -53,5 +53,14 @@ class SettingsForm extends AbstractResourceType
     public function configureOptions( OptionsResolver $resolver ): void
     {
         parent::configureOptions( $resolver );
+        
+        $resolver->setDefaults([
+            'siteId' => null,
+        ]);
+    }
+    
+    public function getBlockPrefix(): string
+    {
+        return 'vsapp_settings';
     }
 }

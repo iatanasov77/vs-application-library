@@ -26,5 +26,6 @@ class VSApplicationExtension extends AbstractResourceExtension
         
         // Set values need to be accesible from controller
         $container->setParameter( 'vs_application.multi_site', $config[ 'multi_site' ] );
+        $container->setParameter( 'vs_application.taxonomy', $config[ 'taxonomy' ] );
     }
 }

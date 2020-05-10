@@ -20,6 +20,10 @@
         
         <field name="theme" type="string" nullable="true"/>
         
-        <many-to-one field="site" target-entity="VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface"  />
+        <many-to-one field="site" target-entity="VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface">
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

@@ -5,6 +5,10 @@ vs_app_settings:
         templates: "@VSApplication/Settings"
     type: sylius.resource
 
+vs_app_settings_edit:
+    path: /settings-edit
+    controller: VS\ApplicationBundle\Controller\SettingsExtController::index
+
 vs_app_settings_handle:
-    path: /settings-handle/{siteId}
+    path: /settings-edit/handle-{siteId}
     controller: VS\ApplicationBundle\Controller\SettingsExtController::handle

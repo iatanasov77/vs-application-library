@@ -1,4 +1,5 @@
 services:
+    #vs_application.form.type.settings:
     vs_application.resources.settings.form:
         public: true
         class: VS\ApplicationBundle\Form\SettingsForm

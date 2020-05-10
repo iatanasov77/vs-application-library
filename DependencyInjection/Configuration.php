@@ -5,12 +5,10 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-//use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as SyliusEntityRepository;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
 
 use VS\ApplicationBundle\Model\SiteSettings;
-use VS\ApplicationBundle\Controller\SiteController;
 use VS\ApplicationBundle\Form\SiteForm;
 
 use VS\ApplicationBundle\Repository\SettingsRepository;
@@ -25,7 +23,6 @@ use VS\ApplicationBundle\Form\TaxonomyForm;
 
 use VS\ApplicationBundle\Repository\TaxonRepository;
 use VS\ApplicationBundle\Model\Taxon;
-use VS\ApplicationBundle\Controller\TaxonController;
 use VS\ApplicationBundle\Form\TaxonForm;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
@@ -44,19 +41,25 @@ class Configuration implements ConfigurationInterface
         $treeBuilder    = new TreeBuilder( 'vs_application' );
         $rootNode       = $treeBuilder->getRootNode();
         
+        // Main Config
         $rootNode
             ->children()
                 ->booleanNode( 'multi_site' )->defaultFalse()->end()
                 ->scalarNode( 'orm_driver' )->defaultValue( SyliusResourceBundle::DRIVER_DOCTRINE_ORM )->cannotBeEmpty()->end()
+                ->arrayNode( 'taxonomy' )
+                    ->scalarPrototype()->end()
+                ->end()
             ->end()
         ;
         
+        // Menu Config
         $rootNode
             ->children()
                 ->variableNode( 'menu' )->end()
             ->end()
         ;
         
+        // Resources Config
         $this->addResourcesSection( $rootNode );
             
         return $treeBuilder;
@@ -78,7 +81,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( SiteSettings::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'controller' )->defaultValue( SiteController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( SiteForm::class )->cannotBeEmpty()->end()
@@ -131,7 +134,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Taxon::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'controller' )->defaultValue( TaxonController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         //->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TaxonRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()

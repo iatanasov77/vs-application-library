@@ -10,20 +10,6 @@ services:
         autoconfigure: true
         public: true
         
-        
-    vs_app.repository.settings:
-        lazy: true
-        class: VS\ApplicationBundle\Repository\SettingsRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - "AcmeBundle:Entity/User"
-        calls:
-            - method: setContainer
-              arguments:
-                - '@service_container'
-        
-        
-        
     ###########################################################
     # Menu services
     ###########################################################

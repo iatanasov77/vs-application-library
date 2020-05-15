@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 use VS\ApplicationBundle\Form\SettingsForm;
+use VS\ApplicationBundle\Component\Exception\DatabaseFixtureMissingException;
 
 class SettingsExtController extends Controller
 {
@@ -21,6 +22,9 @@ class SettingsExtController extends Controller
         if ( $this->container->getParameter( 'vs_application.multi_site' ) ) {
             $taxonomyIds    = $this->container->getParameter( 'vs_application.taxonomy' );
             $siteTaxonomy   = $this->get( 'vs_application.repository.taxonomy' )->find( $taxonomyIds['sites'] );
+            if ( ! $siteTaxonomy ) {
+                throw new DatabaseFixtureMissingException( 'The Taxonomy "sites" is missing but "vs_application.multi_site" is "true".' );
+            }
             
             foreach ( $siteTaxonomy->getTaxons() as $site ) {
                 $oSettingsSite      = $this->getEntity( $site->getId() );

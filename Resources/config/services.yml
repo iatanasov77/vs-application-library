@@ -1,5 +1,6 @@
 imports:
     - { resource: services/form.yaml }
+    - { resource: services/theme.yaml }
 
 parameters:
     menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"

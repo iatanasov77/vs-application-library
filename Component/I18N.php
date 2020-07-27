@@ -15,11 +15,13 @@ class I18N
     public static function LanguagesAvailable()
     {
         $langs      = self::Languages();
-        $envLangs   = explode( ',', $_ENV['LANGUAGES'] );
-        
         $ret        = [];
-        foreach( $envLangs as $l ) {
-            $ret[$l]    = isset( $langs[$l] ) ? $langs[$l] : 'Lang not available in this environement';
+        
+        if ( isset( $_ENV['LANGUAGES'] ) ) {
+            $envLangs   = explode( ',', $_ENV['LANGUAGES'] );
+            foreach( $envLangs as $l ) {
+                $ret[$l]    = isset( $langs[$l] ) ? $langs[$l] : 'Lang not available in this environement';
+            }
         }
         
         return $ret;

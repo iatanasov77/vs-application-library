@@ -1,0 +1,7 @@
+services:          
+    vs_application.site.theme.context:
+        class: VS\ApplicationBundle\Component\Theme\SiteSettingsThemeContext
+        arguments:
+            - '@sylius.repository.theme'
+            - '@vs_application.repository.settings'
+    

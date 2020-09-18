@@ -3,6 +3,7 @@ imports:
 
 parameters:
 #    ia_cms.example.class: IACmsBundle\Example
+    menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
 
 services:
     _defaults:

@@ -44,7 +44,7 @@
     },
     "autoload": {
         "psr-4": {
-            "VS\\ApplicationBundle\\": ""
+            "VS\\ApplicationBundle\\": "lib/"
         }
     },
     "minimum-stability" : "dev"

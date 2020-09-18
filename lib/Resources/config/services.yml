@@ -1,0 +1,97 @@
+imports:
+    - { resource: services/form.yaml }
+    - { resource: services/theme.yaml }
+
+parameters:
+    #ia_cms.example.class: IACmsBundle\Example
+    menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        
+    ###########################################################
+    # Menu services
+    ###########################################################
+    vs_app.menu_builder:
+        class: VS\ApplicationBundle\Component\Menu\MenuBuilder
+        arguments: ["%menu.config_file%", "@security.authorization_checker", "@router"]
+        calls:
+          - [ setContainer ]
+
+    vs_app.main_menu:
+        autowire: false
+        class: Knp\Menu\MenuItem
+        factory: ["@vs_app.menu_builder", mainMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: main }
+            
+    vs_app.profile_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@vs_app.menu_builder", profileMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: profile }
+    
+    vs_app.breadcrumbs_menu:
+        autowire: false
+        class: Knp\Menu\MenuItem
+        factory: ["@vs_app.menu_builder", breadcrumbsMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: breadcrumbs }
+        
+    ##############################################################
+    # Maintenance mode services
+    ##############################################################
+    vs_app.twig.alerts:
+        class: VS\ApplicationBundle\Twig\Alerts
+    
+    vs_app.listener.maintenance:
+        class: VS\ApplicationBundle\EventListener\MaintenanceListener
+        arguments: 
+            - '@service_container'
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }
+            
+    ##############################################################
+    # Console commands
+    ##############################################################
+    vs_app.command.bumpversion:
+        class: VS\ApplicationBundle\Command\BumpVersionCommand
+        tags:
+            - 'console.command'
+    vs_app.command.assets.sources:
+        class: VS\ApplicationBundle\Command\AssetsSourcesCommand
+        arguments:
+            - '@filesystem'
+        tags:
+            - 'console.command'
+    vs_app.command.assets.dependencies:
+        class: VS\ApplicationBundle\Command\CheckAssetDependenciesCommand
+        arguments:
+            - '@filesystem'
+        tags:
+            - 'console.command'
+
+    ##############################################################
+    # I18N services
+    ##############################################################
+    vs_app.session:
+        public: true
+        class: Symfony\Component\HttpFoundation\Session\Session
+
+    vs_app.subscriber.locale:
+        class: VS\ApplicationBundle\EventSubscriber\LocaleSubscriber
+        arguments: ['%kernel.default_locale%']
+        # uncomment the next line if you are not using autoconfigure
+        tags: [kernel.event_subscriber]
+
+    vs_app.subscriber.user_locale:
+        class: VS\ApplicationBundle\EventSubscriber\UserLocaleSubscriber
+        arguments: ["@vs_app.session"]
+        # uncomment the next line if you are not using autoconfigure
+        tags: [kernel.event_subscriber]

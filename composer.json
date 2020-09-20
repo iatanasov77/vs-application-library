@@ -27,10 +27,7 @@
         "composer/semver": "^1.5",
         
         "alcaeus/mongo-php-adapter": "^1.1",
-        "doctrine/mongodb-odm-bundle": "^3.0",
-        
-        "vankosoft/users-bundle": "dev-develop",
-        "vankosoft/cms-bundle": "dev-develop"
+        "doctrine/mongodb-odm-bundle": "^3.0"
     },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow",

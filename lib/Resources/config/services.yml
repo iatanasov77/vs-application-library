@@ -13,6 +13,13 @@ services:
         public: true
         
     ###########################################################
+    # Theme services
+    ###########################################################
+    vs_app.site.theme.context:
+        class: Sylius\Bundle\ThemeBundle\Context\SettableThemeContext
+        arguments: ["@sylius.theme.hierarchy_provider"]
+    
+    ###########################################################
     # Menu services
     ###########################################################
     vs_app.menu_builder:

@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GeneralSettingsController extends ResourceController
 {
-    public function index( Request $request ): Response
+    public function indexAction( Request $request ): Response
     {
         $er         = $this->getSettingsRepository();
         $settings   = $er->findBy( [], ['id'=>'DESC'], 1, 0 );
@@ -24,8 +24,9 @@ class GeneralSettingsController extends ResourceController
         }
         
         return $this->render( '@VSApplicationBundle/Settings/index.html.twig', [
-            'form'  => $form->createView(),
-            'item'  => $oSettings
+            'form'          => $form->createView(),
+            'settingsForm'  => $form,
+            'item'          => $oSettings
         ]);
     }
     

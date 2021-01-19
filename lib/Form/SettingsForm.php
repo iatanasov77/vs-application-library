@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 use VS\ApplicationBundle\Model\GeneralSettings;
 
-class GeneralSettingsForm extends AbstractResourceType
+class SettingsForm extends AbstractResourceType
 {
     protected $pageClass;
     
@@ -27,24 +27,24 @@ class GeneralSettingsForm extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add( 'maintenanceMode', CollectionType::class, ['label' => 'Maintenance Mode',
-                'entry_type' => CheckboxType::class,
-                'entry_options' => [
-                    'attr' => ['class' => 'email-box'],
-                ],
-            ])
+//             ->add( 'maintenanceMode', CollectionType::class, ['label' => 'Maintenance Mode',
+//                 'entry_type' => CheckboxType::class,
+//                 'entry_options' => [
+//                     'attr' => ['class' => 'email-box'],
+//                 ],
+//             ])
             
-            ->add( 'maintenancePage', EntityType::class, [
-                'class'         => $this->pageClass,
-                'placeholder'   => '-- Choose a Page --',
-                'choice_label'  => 'title',
-                'required'      => false
-            ])
+//             ->add( 'maintenancePage', EntityType::class, [
+//                 'class'         => $this->pageClass,
+//                 'placeholder'   => '-- Choose a Page --',
+//                 'choice_label'  => 'title',
+//                 'required'      => false
+//             ])
             
-            ->add( 'languages', TextType::class, ['label' => 'Languages'] )
+//             ->add( 'languages', TextType::class, ['label' => 'Languages'] )
             
-            ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
+//             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
+//             ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
         ;
     }
     

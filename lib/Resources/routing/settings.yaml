@@ -1,7 +1,0 @@
-vs_application_settings:
-    resource: |
-        alias: vs_application.settings
-        except: ['show']
-        path: /settings
-        templates: "VSApplicationBundle:Settings"
-    type: sylius.resource

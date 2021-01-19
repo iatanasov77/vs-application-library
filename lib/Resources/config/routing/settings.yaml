@@ -1,14 +1,14 @@
-vs_app_settings:
+vs_application_settings:
     resource: |
         alias: vs_application.settings
         path: /settings
         templates: "@VSApplication/Settings"
     type: sylius.resource
 
-vs_app_settings_edit:
+vs_application_settings_edit:
     path: /settings-edit
     controller: VS\ApplicationBundle\Controller\SettingsExtController::index
 
-vs_app_settings_handle:
+vs_application_settings_handle:
     path: /settings-edit/handle-{siteId}
     controller: VS\ApplicationBundle\Controller\SettingsExtController::handle

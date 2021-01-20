@@ -1,0 +1,120 @@
+<?php namespace VS\ApplicationBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Resource\ResourceActions;
+
+class AbstractCrudController extends ResourceController
+{
+    private $classInfo;
+    
+    public function indexAction( Request $request ) : Response
+    {
+        $this->classInfo( $request );   // call this for every controller action
+        $configuration = $this->requestConfigurationFactory->create( $this->metadata, $request );
+        
+        $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
+        $resource = $this->findOr404( $configuration );
+        
+        $view = View::create( $resource );
+        if ($configuration->isHtmlRequest()) {
+            $view
+                ->setTemplate( $configuration->getTemplate( ResourceActions::INDEX . '.html' ) )
+                ->setTemplateVar( $this->metadata->getName() )
+                ->setData([
+                    'configuration'             => $configuration,
+                    'metadata'                  => $this->metadata,
+                    'resource'                  => $resource,
+                    $this->metadata->getName()  => $resource,
+                    'items'                     => $this->getRepository()->findAll(),
+                ])
+            ;
+        }
+        
+        return $this->viewHandler->handle( $configuration, $view );
+    }
+    
+    public function createAction( Request $request ) : Response
+    {
+        return $this->editAction( 0, $request );
+    }
+    
+    public function updateAction( Request $request ) : Response
+    {
+        return $this->editAction( $request->attributes->get( 'id' ), $request );
+    }
+    
+    public function editAction( $id, Request $request )
+    {
+        $this->classInfo( $request );   // call this for every controller action
+        $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
+        
+        $er             = $this->getRepository();
+        $entity         = $id ? $er->findOneBy( ['id' => $id] ) : $this->getFactory()->createNew();
+        $form           = $this->resourceFormFactory->create( $configuration, $entity );
+        
+        if ( in_array( $request->getMethod(), ['POST', 'PUT', 'PATCH'], true ) && $form->handleRequest( $request) ) { // ->isValid()
+            $em     = $this->getDoctrine()->getManager();
+            $entity = $form->getData();
+            
+            // middleware method
+            $this->prepareEntity( $entity, $form, $request );
+            
+            $em->persist( $entity );
+            $em->flush();
+            
+            $routesPrefix   = $this->classInfo['bundle'] . '_' . $this->classInfo['controller'];
+            if ( $form->getClickedButton() && 'btnApply' === $form->getClickedButton()->getName() ) {
+                return $this->redirect( $this->generateUrl( $routesPrefix . '_update', ['id' => $entity->getId()] ) );
+            } else {
+                return $this->redirect( $this->generateUrl( $routesPrefix . '_index' ) );
+            }
+        }
+        
+        $view   = View::create()
+            ->setTemplate( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ) )
+            ->setData( array_merge( [
+                'item' => $entity,
+                'form' => $form->createView(),
+            ], $this->customData() ) )
+        ;
+        return $this->viewHandler->handle( $configuration, $view );
+    }
+    
+    protected function classInfo( Request $request )
+    {
+        if ( ! $this->classInfo ) {
+            // when write this code request return: vs_users.controller.users:indexAction
+            $info           = explode( '.', $request->attributes->get( '_controller' ) );
+            $controllerInfo = explode( ':', $info[2] );
+            
+            $this->classInfo    = [
+                'bundle'        => $info[0],
+                'controller'    => $controllerInfo[0],
+                'action'        => $controllerInfo[1],
+            ];
+        }
+    }
+    
+    protected function prepareEntity( &$entity, $form, Request $request )
+    {
+        
+    }
+    
+    protected function customData(): array
+    {
+        return [];
+    }
+    
+    protected function getRepository()
+    {
+        return $this->get( $this->classInfo['bundle'] . '.repository.' . $this->classInfo['controller'] );
+    }
+    
+    protected function getFactory()
+    {
+        return $this->get( $this->classInfo['bundle'] . '.factory.' . $this->classInfo['controller'] );
+    }
+}

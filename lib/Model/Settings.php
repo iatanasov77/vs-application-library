@@ -16,7 +16,7 @@ class Settings implements SettingsInterface
     protected $maintenancePage;
 
     /** @var string */
-    protected $languages;
+    protected $language;
     
     /** @var string */
     protected $theme;
@@ -53,16 +53,16 @@ class Settings implements SettingsInterface
         return $this;
     }
     
-    public function setLanguages($languages)
+    public function setLanguage($language)
     {
-        $this->languages = $languages;
+        $this->language = $language;
         
         return $this;
     }
     
-    public function getLanguages()
+    public function getLanguage()
     {
-        return $this->languages;
+        return $this->language;
     }
     
     public function setTheme($theme)

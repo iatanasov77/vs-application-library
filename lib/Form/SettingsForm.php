@@ -27,24 +27,20 @@ class SettingsForm extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//             ->add( 'maintenanceMode', CollectionType::class, ['label' => 'Maintenance Mode',
-//                 'entry_type' => CheckboxType::class,
-//                 'entry_options' => [
-//                     'attr' => ['class' => 'email-box'],
-//                 ],
-//             ])
+            ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'Maintenance Mode'] )
             
-//             ->add( 'maintenancePage', EntityType::class, [
-//                 'class'         => $this->pageClass,
-//                 'placeholder'   => '-- Choose a Page --',
-//                 'choice_label'  => 'title',
-//                 'required'      => false
-//             ])
+            ->add( 'maintenancePage', EntityType::class, [
+                'class'         => $this->pageClass,
+                'placeholder'   => '-- Choose a Page --',
+                'choice_label'  => 'title',
+                'required'      => false
+            ])
             
-//             ->add( 'languages', TextType::class, ['label' => 'Languages'] )
+            ->add( 'language', TextType::class, ['label' => 'Language'] )
+            ->add( 'theme', TextType::class, ['label' => 'Theme'] )
             
-//             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
-//             ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
+            ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
+            ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
         ;
     }
     

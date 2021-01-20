@@ -45,6 +45,8 @@ class MaintenanceListener
         
         // If maintenance is active and in prod environment and user is not admin
         if ( $maintenanceMode ) {
+            // Use this for DEBUG
+            // if( true ) {
             if (
                 ( ! $this->user || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug

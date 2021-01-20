@@ -6,6 +6,6 @@ interface SettingsInterface extends ResourceInterface
 {
     public function getMaintenanceMode();
     public function getMaintenancePage(): ?PageInterface;
-    public function getLanguages();
+    public function getLanguage();
     public function getTheme();
 }

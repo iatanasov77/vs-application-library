@@ -5,21 +5,21 @@ vs_application_taxonomy:
         templates: "@VSApplication/Taxonomy"
     type: sylius.resource
 
+vs_application_taxon:
+    path: /taxonomy/taxons
+    controller: VS\ApplicationBundle\Controller\TaxonController::index
+
 vs_application_taxonomy_taxons:
     path: /taxonomy_{id}/taxons
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::index
     
 vs_application_taxonomy_taxons_gtreetable:
-    path: /taxonomy_{id}/taxons/gtreetable
+    path: /taxonomy_{taxonomyId}/taxons/gtreetable
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::gtreeTableSource
 
 vs_application_taxonomy_taxons_easyui_combotree:
     path: /taxonomy_{id}/taxons/easyui-combotree
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::easyuiComboTreeSource
-    
-vs_application_taxon:
-    path: /taxonomy/taxons
-    controller: VS\ApplicationBundle\Controller\TaxonController::index
     
 vs_application_taxonomy_taxon_edit:
     path: /taxonomy-taxon/{taxonomyId}

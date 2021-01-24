@@ -26,6 +26,9 @@ use VS\ApplicationBundle\Model\Taxon;
 use VS\ApplicationBundle\Form\TaxonForm;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
+use VS\ApplicationBundle\Model\Translation;
+use Gedmo\Translatable\Entity\Repository\TranslationRepository;
+
 /**
  * This is the class that validates and merges configuration from your app/config files
  *
@@ -150,6 +153,23 @@ class Configuration implements ConfigurationInterface
                                                 ->scalarNode( 'model' )->defaultValue( TaxonTranslation::class )->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode( 'translation' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( Translation::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( TranslationRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                        //->scalarNode( 'form' )->defaultValue( SiteForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

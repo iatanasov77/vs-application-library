@@ -1,6 +1,5 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use VS\ApplicationBundle\Model\Interfaces\TaxonomyInterface;
 
 class Taxonomy implements TaxonomyInterface

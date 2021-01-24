@@ -1,0 +1,34 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        
+    vs_app.menu_builder:
+        class: VS\ApplicationBundle\Component\Menu\MenuBuilder
+        arguments: ["%menu.config_file%", "@security.authorization_checker", "@router"]
+        calls:
+          - [ setContainer ]
+
+    vs_app.main_menu:
+        autowire: false
+        class: Knp\Menu\MenuItem
+        factory: ["@vs_app.menu_builder", mainMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: main }
+            
+    vs_app.profile_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@vs_app.menu_builder", profileMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: profile }
+    
+    vs_app.breadcrumbs_menu:
+        autowire: false
+        class: Knp\Menu\MenuItem
+        factory: ["@vs_app.menu_builder", breadcrumbsMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: breadcrumbs }

@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
-class SettingsRepository extends EntityRepository implements ContainerAwareInterface
+class SettingsRepository extends EntityRepository implements SettingsRepositoryInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
     

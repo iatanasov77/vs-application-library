@@ -1,7 +1,14 @@
-services:          
-    vs_application.site.theme.context:
-        class: VS\ApplicationBundle\Component\Theme\SiteSettingsThemeContext
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    vs_app.listener.theme_change:
+        class: VS\ApplicationBundle\EventListener\ThemeChangeListener
         arguments:
+            - '@sylius.theme.context.settable'
             - '@sylius.repository.theme'
             - '@vs_application.repository.settings'
-    
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }

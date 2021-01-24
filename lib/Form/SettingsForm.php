@@ -1,6 +1,7 @@
 <?php namespace VS\ApplicationBundle\Form;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,7 +38,13 @@ class SettingsForm extends AbstractResourceType
             ])
             
             ->add( 'language', TextType::class, ['label' => 'Language'] )
-            ->add( 'theme', TextType::class, ['label' => 'Theme'] )
+            
+            ->add('theme', ThemeNameChoiceType::class, [
+                'label' => 'Theme',
+                'required' => false,
+                'empty_data' => null,
+                'placeholder' => 'No theme',
+            ])
             
             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
             ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )

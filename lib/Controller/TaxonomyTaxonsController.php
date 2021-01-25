@@ -15,10 +15,10 @@ class TaxonomyTaxonsController extends Controller
         return new Response( "NOT IMPLEMENTED !!!" );
     }
     
-    public function editTaxon( Request $request ): Response
+    public function editTaxon( $taxonomyId, Request $request ): Response
     {
         $locale     = $request->getLocale();
-        $rootTaxon  = $this->getRootTaxon( $request->attributes->get( 'taxonomyId' ) );
+        $rootTaxon  = $this->getRootTaxon( $taxonomyId );
         
         $oTaxon     = $this->get( 'vs_application.factory.taxon' )->createNew();
         $oTaxon->setCurrentLocale( $locale );
@@ -29,7 +29,7 @@ class TaxonomyTaxonsController extends Controller
             'rootTaxon' => $rootTaxon
         ]);
         
-        return $this->render( 'form/taxon.html.twig', [
+        return $this->render( '@VSApplication/Taxon/form/taxon.html.twig', [
             'form'          => $form->createView(),
             'taxonomyId'    => $request->attributes->get( 'taxonomyId' )
         ]);
@@ -79,13 +79,18 @@ class TaxonomyTaxonsController extends Controller
         return new JsonResponse( ['nodes' => $gtreeTableData, 'readonly' => true] );
     }
     
-    public function easyuiComboTreeSource( Request $request ): Response
+    public function easyuiComboTreeSource( $taxonomyId, Request $request ): Response
     {
         $ert            = $this->getTaxonomyRepository();
-        $rootTaxon      = $ert->find( $request->attributes->get( 'id' ) )->getRootTaxon();
-        $data           = [];
+        $rootTaxon      = $ert->find( $taxonomyId,  )->getRootTaxon();
         
-        $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data );
+        $data[0]        = [
+            'id'        => $rootTaxon->getId(),
+            'text'      => $rootTaxon->getName(),
+            'children'  => []
+        ];
+        
+        $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'] );
         
         return new JsonResponse( $data );
     }

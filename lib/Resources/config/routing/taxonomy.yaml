@@ -18,7 +18,7 @@ vs_application_taxonomy_taxons_gtreetable:
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::gtreeTableSource
 
 vs_application_taxonomy_taxons_easyui_combotree:
-    path: /taxonomy_{id}/taxons/easyui-combotree
+    path: /taxonomy_{taxonomyId}/taxons/easyui-combotree
     controller: VS\ApplicationBundle\Controller\TaxonomyTaxonsController::easyuiComboTreeSource
     
 vs_application_taxonomy_taxon_edit:

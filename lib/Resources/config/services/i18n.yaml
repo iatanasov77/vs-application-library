@@ -4,10 +4,10 @@ services:
         autoconfigure: true
         public: true
         
-    vs_app.session:
-        public: true
-        class: Symfony\Component\HttpFoundation\Session\Session
-
+#     vs_app.session:
+#         public: true
+#         class: Symfony\Component\HttpFoundation\Session\Session
+# 
     vs_app.subscriber.locale:
         class: VS\ApplicationBundle\EventSubscriber\LocaleSubscriber
         arguments: ['%kernel.default_locale%']
@@ -16,6 +16,6 @@ services:
 
     vs_app.subscriber.user_locale:
         class: VS\ApplicationBundle\EventSubscriber\UserLocaleSubscriber
-        arguments: ["@vs_app.session"]
+        #arguments: ["@vs_app.session"]
         # uncomment the next line if you are not using autoconfigure
         tags: [kernel.event_subscriber]

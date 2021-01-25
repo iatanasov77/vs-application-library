@@ -10,11 +10,11 @@
         </options>
         
         <indexes>
-            <index name="translations_lookup_idx" columns="locale, object_class, foreign_key" />
+            <index name="translations_lookup_idx" columns="locale,object_class,foreign_key" />
         </indexes>
 
         <unique-constraints>
-            <unique-constraint name="lookup_unique_idx" columns="locale, object_class, field, foreign_key" />
+            <unique-constraint name="lookup_unique_idx" columns="locale,object_class,field,foreign_key" />
         </unique-constraints>
     </mapped-superclass>
 </doctrine-mapping>

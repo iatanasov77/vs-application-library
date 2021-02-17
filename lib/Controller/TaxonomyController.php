@@ -6,7 +6,7 @@ use VS\ApplicationBundle\Component\Slug;
 
 class TaxonomyController extends AbstractCrudController
 { 
-    protected function prepareEntity( &$entity, $form, Request $request )
+    protected function prepareEntity( &$entity, &$form, Request $request )
     {
         if ( ! $entity->getRootTaxon() ) {
             $entity->setRootTaxon( $this->createRootTaxon( $entity, $request->getLocale() ) );

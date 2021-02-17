@@ -73,14 +73,23 @@ class AbstractCrudController extends ResourceController
             }
         }
         
-        $view   = View::create()
-            ->setTemplate( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ) )
-            ->setData( array_merge( [
+//         $view   = View::create()
+//             ->setTemplate( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ) )
+//             ->setData( array_merge( [
+//                 'item' => $entity,
+//                 'form' => $form->createView(),
+//             ], $this->customData() ) )
+//         ;
+//         return $this->viewHandler->handle( $configuration, $view );
+        
+        if ($configuration->isHtmlRequest()) {
+            return $this->render( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ), array_merge( [
                 'item' => $entity,
                 'form' => $form->createView(),
-            ], $this->customData() ) )
-        ;
-        return $this->viewHandler->handle( $configuration, $view );
+            ], $this->customData() ) );
+        }
+        
+        return $this->createRestView( $configuration, $entity );
     }
     
     protected function classInfo( Request $request )
@@ -98,7 +107,7 @@ class AbstractCrudController extends ResourceController
         }
     }
     
-    protected function prepareEntity( &$entity, $form, Request $request )
+    protected function prepareEntity( &$entity, &$form, Request $request )
     {
         
     }

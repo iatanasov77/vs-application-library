@@ -13,6 +13,11 @@
     ],
     "require": {
         "php": "^5.5.9 || ^7.0",
+        "symfony/flex": "^1.1",
+        "symfony/security-acl": "^3.0",
+        "symfony/console": "^4.4",
+        "composer/semver": "^1.5",
+        
        	"sylius/resource-bundle": "^1.6",
        	"sylius/taxonomy": "^1.6",
        	"sylius/theme-bundle": "^1.4",
@@ -21,10 +26,6 @@
        	
        	"knplabs/knp-menu-bundle": "^2.0",
        	"gedmo/doctrine-extensions": "^2.4",
-       	
-       	"symfony/security-acl": "^3.0",
-        "symfony/console": "^4.4",
-        "composer/semver": "^1.5",
         
         "alcaeus/mongo-php-adapter": "^1.1",
         "doctrine/mongodb-odm-bundle": "^3.0"

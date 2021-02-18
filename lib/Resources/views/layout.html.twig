@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+        <title>{% block title %}.:: {{ siteTitle }}{% endblock %}</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        {% block head_styles %}
+            {{ encore_entry_link_tags( 'js/app' ) }}
+        {% endblock %}
+
+        {% block head_scripts %}
+            {{ encore_entry_script_tags( 'js/app' ) }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="dashboard-main-wrapper">
+            <div class="dashboard-header">
+                {% include '@VSApplication/Layout/top.html.twig' %}
+            </div>
+            
+            <div class="nav-left-sidebar sidebar-dark">
+                <div class="menu-list">
+                    {% include '@VSApplication/Layout/side.html.twig' %}
+                </div>
+            </div>
+            
+            <div class="dashboard-wrapper">
+            	{% block content %}{% endblock %}
+            	
+            	{% include '@VSApplication/Layout/footer.html.twig' %}
+            </div>
+        </div>
+        
+        <!-- Modal Dialogs -->
+        {% block modals %}{% endblock %}
+        
+        <!-- Optional JavaScript -->
+        {% block body_scripts %}{% endblock %}
+    </body>
+</html>

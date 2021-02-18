@@ -1,0 +1,16 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    {% set breadcrumbs = knp_menu_get_breadcrumbs_array(item) %}
+	<ol class="breadcrumb">
+    {% for link in breadcrumbs %}
+        {%- if loop.index == 1 %}
+        	<li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
+        {%- elseif not loop.last %}
+        	<li class="breadcrumb-item"><a href="{{ link.uri }}" class="breadcrumb-link">{{ link.label | trans }}</a></li>
+        {%- else %}
+            <li class="breadcrumb-item active" aria-current="page">{{ link.label | trans }}</li>
+        {%- endif %}
+    {%- endfor %}
+    </ol>
+{% endblock %}

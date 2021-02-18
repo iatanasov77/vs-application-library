@@ -14,6 +14,10 @@ services:
         autoconfigure: true
         public: true
     
+    VS\ApplicationBundle\Controller\AuthController:
+        tags: ['controller.service_arguments']
+        autowire: false
+        
     ##############################################################
     # Maintenance mode services
     ##############################################################

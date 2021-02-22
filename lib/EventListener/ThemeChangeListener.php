@@ -28,11 +28,10 @@ class ThemeChangeListener
         
         if( isset( $settings[0] ) && $settings[0]->getTheme() ) {
             $theme      = $this->themeRepository->findOneByName( $settings[0]->getTheme() );
-        }
-        
-        //$theme      = $this->themeRepository->findOneByName( 'vankosoft/test-theme' );
-        if ( $theme ) {
-            $this->themeContext->setTheme( $theme );
+            //$theme      = $this->themeRepository->findOneByName( 'vankosoft/test-theme' );
+            if ( $theme ) {
+                $this->themeContext->setTheme( $theme );
+            }
         }
     }
 }

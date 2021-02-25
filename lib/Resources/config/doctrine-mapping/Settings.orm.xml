@@ -16,8 +16,6 @@
             <join-column name="maintenance_page_id " referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
         
-        <field name="language" type="string" nullable="true"/>
-        
         <field name="theme" type="string" nullable="true"/>
         
         <many-to-one field="site" target-entity="VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface">

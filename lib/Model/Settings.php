@@ -14,9 +14,6 @@ class Settings implements SettingsInterface
     
     /** @var VS\ApplicationBundle\Model\Interfaces\PageInterface */
     protected $maintenancePage;
-
-    /** @var string */
-    protected $language;
     
     /** @var string */
     protected $theme;
@@ -51,18 +48,6 @@ class Settings implements SettingsInterface
         $this->maintenancePage = $maintenancePage;
         
         return $this;
-    }
-    
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-        
-        return $this;
-    }
-    
-    public function getLanguage()
-    {
-        return $this->language;
     }
     
     public function setTheme($theme)

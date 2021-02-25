@@ -11,23 +11,26 @@ class ThemeChangeListener
     protected $themeContext;
     protected $themeRepository;
     protected $settingsRepository;
+    protected $siteId;
     
     public function __construct(
         ThemeContextInterface $themeContext,
         ThemeRepositoryInterface $themeRepository,
-        SettingsRepositoryInterface $settingsRepository
+        SettingsRepositoryInterface $settingsRepository,
+        int $siteId = null
     ) {
         $this->themeContext         = $themeContext;
         $this->themeRepository      = $themeRepository;
         $this->settingsRepository   = $settingsRepository;
+        $this->siteId               = $siteId;
     }
     
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest( GetResponseEvent $event )
     {
-        $settings   = $this->settingsRepository->findBy( [], ['id'=>'DESC'], 1, 0 );
-        
-        if( isset( $settings[0] ) && $settings[0]->getTheme() ) {
-            $theme      = $this->themeRepository->findOneByName( $settings[0]->getTheme() );
+        $settings   = $this->settingsRepository->getSettings( $this->siteId );
+
+        if( $settings && $settings->getTheme() ) {
+            $theme      = $this->themeRepository->findOneByName( $settings->getTheme() );
             //$theme      = $this->themeRepository->findOneByName( 'vankosoft/test-theme' );
             if ( $theme ) {
                 $this->themeContext->setTheme( $theme );

@@ -1,5 +1,6 @@
 imports:
     - { resource: services/form.yaml }
+    - { resource: services/maintenance.yaml }
     - { resource: services/theme.yaml }
     - { resource: services/menu.yaml }
     - { resource: services/i18n.yaml }
@@ -7,6 +8,7 @@ imports:
 parameters:
     #ia_cms.example.class: IACmsBundle\Example
     menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
+    vs_app.settings.site_id: null
 
 services:
     _defaults:
@@ -17,19 +19,6 @@ services:
     VS\ApplicationBundle\Controller\AuthController:
         tags: ['controller.service_arguments']
         autowire: false
-        
-    ##############################################################
-    # Maintenance mode services
-    ##############################################################
-    vs_app.twig.alerts:
-        class: VS\ApplicationBundle\Twig\Alerts
-    
-    vs_app.listener.maintenance:
-        class: VS\ApplicationBundle\EventListener\MaintenanceListener
-        arguments: 
-            - '@service_container'
-        tags:
-            - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }
             
     ##############################################################
     # Console commands

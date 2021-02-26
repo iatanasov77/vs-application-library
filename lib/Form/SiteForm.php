@@ -14,8 +14,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-use IA\CmsBundle\Entity\Page;
-use VS\ApplicationBundle\Entity\GeneralSettings;
+use VS\CmsBundle\Model\Page;
+use VS\ApplicationBundle\Model\Settings;
 
 class SiteForm extends AbstractResourceType implements ContainerAwareInterface
 {
@@ -24,11 +24,6 @@ class SiteForm extends AbstractResourceType implements ContainerAwareInterface
     public function __construct($container = null)
     {
         $this->container = $container;
-    }
-    
-    public function getName()
-    {
-        return 'ia_web_content_thief_projects';
     }
     
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -58,7 +53,7 @@ class SiteForm extends AbstractResourceType implements ContainerAwareInterface
     public function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver->setDefaults([
-            'data_class' => GeneralSettings::class
+            'data_class' => Settings::class
         ]);
     }
 }

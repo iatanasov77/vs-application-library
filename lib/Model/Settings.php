@@ -1,7 +1,7 @@
 <?php namespace VS\ApplicationBundle\Model;
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
-use VS\ApplicationBundle\Model\Interfaces\PageInterface;
+use VS\CmsBundle\Model\PageInterface;
 use VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface;
 
 class Settings implements SettingsInterface
@@ -12,7 +12,7 @@ class Settings implements SettingsInterface
     /** @var boolean */
     protected $maintenanceMode;
     
-    /** @var VS\ApplicationBundle\Model\Interfaces\PageInterface */
+    /** @var VS\CmsBundle\Model\PageInterface */
     protected $maintenancePage;
     
     /** @var string */

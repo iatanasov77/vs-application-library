@@ -1,6 +1,7 @@
 <?php namespace VS\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use VS\CmsBundle\Model\PageInterface;
 
 interface SettingsInterface extends ResourceInterface
 {

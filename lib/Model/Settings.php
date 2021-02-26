@@ -1,8 +1,8 @@
 <?php namespace VS\ApplicationBundle\Model;
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
-use VS\CmsBundle\Model\PageInterface;
 use VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface;
+use VS\CmsBundle\Model\PageInterface;
 
 class Settings implements SettingsInterface
 {   

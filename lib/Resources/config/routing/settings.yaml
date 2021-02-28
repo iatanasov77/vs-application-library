@@ -12,3 +12,41 @@ vs_application_settings_edit:
 vs_application_settings_handle:
     path: /settings-edit/handle-{siteId}
     controller: VS\ApplicationBundle\Controller\SettingsExtController::handle
+    
+
+
+
+##############################################################################
+#
+#   OLD ROUTES
+#
+##############################################################################    
+    
+###############################
+# GeneralSettingsController
+###############################
+
+#app_settings_index:
+#    path: /settings
+#    controller: App\Controller\Admin\GeneralSettingsController::index
+#    
+#app_settings_sites_settings:
+#    path: /settings/sites/{id}/settings
+#    controller: App\Controller\Admin\GeneralSettingsController::siteSettings
+#    
+#app_settings_sites_handle:
+#    path: /settings/{siteId}/handle
+#    controller: App\Controller\Admin\GeneralSettingsController::handleSettings
+
+###################################
+# SettingsSitesController
+###################################
+
+#app_settings_sites_edit:
+#    path: /settings/sites/{id}/edit
+#    controller: App\Controller\Admin\SettingsSitesController::edit
+#       
+#app_settings_sites_delete:
+#    path: /settings/sites/{id}/delete
+#    controller: App\Controller\Admin\SettingsSitesController::delete
+

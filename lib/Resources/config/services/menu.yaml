@@ -29,6 +29,6 @@ services:
         autowire: false
         class: Knp\Menu\MenuItem
         factory: ["@vs_app.menu_builder", breadcrumbsMenu]
-        arguments: ["@knp_menu.factory"]
+        arguments: ["@knp_menu.factory", []]
         tags:
             - { name: knp_menu.menu, alias: breadcrumbs }

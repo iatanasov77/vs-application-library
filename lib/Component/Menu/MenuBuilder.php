@@ -37,16 +37,16 @@ class MenuBuilder implements ContainerAwareInterface
         $this->cb           = new ContainerBuilder();
     }
     
-    public function mainMenu( FactoryInterface $factory )
+    public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
     {
         $this->request  = $this->container->get( 'request_stack' )->getCurrentRequest();
         $menu           = $factory->createItem( 'root' );
         
-        if ( ! isset( $this->menuConfig['mainMenu'] ) ) {
-            throw new \Exception( '"mainMenu" node must be provided at "vs_application.yaml" config file.' );
+        if ( ! isset( $this->menuConfig[$menuName] ) ) {
+            throw new \Exception( '"' . $menuName . '" node must be provided at "vs_application.yaml" config file.' );
         }
-        $this->build( $menu, $this->menuConfig['mainMenu'] );
-
+        $this->build( $menu, $this->menuConfig[$menuName] );
+        
         return $menu;
     }
     
@@ -62,7 +62,7 @@ class MenuBuilder implements ContainerAwareInterface
         return $menu;
     }
     
-    public function breadcrumbsMenu( FactoryInterface $factory )
+    public function breadcrumbsMenu( FactoryInterface $factory, array $options )
     {
         $bcmenu     = $this->mainMenu( $factory );
         $breadcrumb = $this->getCurrentMenuItem( $bcmenu );

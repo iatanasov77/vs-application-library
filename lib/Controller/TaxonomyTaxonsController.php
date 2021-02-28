@@ -10,6 +10,8 @@ use VS\ApplicationBundle\Form\TaxonForm;
 
 class TaxonomyTaxonsController extends Controller
 {
+    use TaxonomyTreeDataTrait;
+    
     public function index( Request $request ): Response
     {
         return new Response( "NOT IMPLEMENTED !!!" );
@@ -18,7 +20,7 @@ class TaxonomyTaxonsController extends Controller
     public function editTaxon( $taxonomyId, Request $request ): Response
     {
         $locale     = $request->getLocale();
-        $rootTaxon  = $this->getRootTaxon( $taxonomyId );
+        $rootTaxon  = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         
         $oTaxon     = $this->get( 'vs_application.factory.taxon' )->createNew();
         $oTaxon->setCurrentLocale( $locale );
@@ -41,7 +43,7 @@ class TaxonomyTaxonsController extends Controller
         $form       = $this->createForm( TaxonForm::class );
         
         if ( $request->isMethod( 'POST' ) ) {
-            $parentTaxon    = $this->getTaxon( $_POST['taxon_form']['parentTaxon'] );
+            $parentTaxon    = $this->getTaxonRepository()->find( $_POST['taxon_form']['parentTaxon'] );
             
             $form->submit( $request->request->get( $form->getName() ) );
             
@@ -67,84 +69,13 @@ class TaxonomyTaxonsController extends Controller
     
     public function gtreeTableSource( $taxonomyId, Request $request ): Response
     {
-        $ertt           = $this->getTaxonRepository();
-        $ert            = $this->getTaxonomyRepository();
-        $rootTaxonId    = $ert->find( $taxonomyId )->getRootTaxon()->getId();
-        
         $parentId       = (int)$request->query->get( 'parentTaxonId' );
-        $taxons         = $ertt->getTaxonsAsArray( $rootTaxonId, $parentId );
-
-        $gtreeTableData = $this->buildGtreeTableData( $taxons );
         
-        return new JsonResponse( ['nodes' => $gtreeTableData, 'readonly' => true] );
+        return new JsonResponse( $this->gtreeTableData( $taxonomyId, $parentId ) );
     }
     
     public function easyuiComboTreeSource( $taxonomyId, Request $request ): Response
     {
-        $ert            = $this->getTaxonomyRepository();
-        $rootTaxon      = $ert->find( $taxonomyId,  )->getRootTaxon();
-        
-        $data[0]        = [
-            'id'        => $rootTaxon->getId(),
-            'text'      => $rootTaxon->getName(),
-            'children'  => []
-        ];
-        
-        $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'] );
-        
-        return new JsonResponse( $data );
-    }
-    
-    protected function getTaxonomyRepository()
-    {
-        return $this->get( 'vs_application.repository.taxonomy' );
-    }
-    
-    protected function getTaxonRepository()
-    {
-        return $this->get( 'vs_application.repository.taxon' );
-    }
-    
-    protected function buildGtreeTableData( $taxons )
-    {
-        $data   = [];
-        foreach ( $taxons as $t ) {
-            $data[] = [
-                'id'    => (int)$t['id'],
-                'name'  => $t['name'],
-                'level' => $t['tree_level'],
-                'type'  => "node type"
-            ];
-        }
-        
-        return $data;
-    }
-    
-    protected function buildEasyuiCombotreeData( $tree, &$data )
-    {
-        $key    = 0;
-        foreach( $tree as $node ) {
-            $data[$key]   = [
-                'id'        => $node->getId(),
-                'text'      => $node->getName(),
-                'children'  => []
-            ];
-            
-            if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'] );
-            }
-            
-            $key++;
-        }
-    }
-    
-    protected function getRootTaxon( $taxonomyId )
-    {
-        return $this->get( 'vs_application.repository.taxonomy' )->find( $taxonomyId )->getRootTaxon();
-    }
-    
-    protected function getTaxon( $taxonId )
-    {
-        return $this->get( 'vs_application.repository.taxon' )->find( $taxonId );
+        return new JsonResponse( $this->easyuiComboTreeData( $taxonomyId ) );
     }
 }

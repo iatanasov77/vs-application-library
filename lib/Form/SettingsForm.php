@@ -37,8 +37,6 @@ class SettingsForm extends AbstractResourceType
                 'required'      => false
             ])
             
-            ->add( 'language', TextType::class, ['label' => 'Language'] )
-            
             ->add('theme', ThemeNameChoiceType::class, [
                 'label' => 'Theme',
                 'required' => false,

@@ -2,7 +2,7 @@
 
 trait TaxonomyTreeDataTrait
 {
-    public function gtreeTableData( $taxonomyId, $parentId ) : array
+    protected function gtreeTableData( $taxonomyId, $parentId ) : array
     {
         $ertt           = $this->getTaxonRepository();
         $ert            = $this->getTaxonomyRepository();
@@ -15,7 +15,7 @@ trait TaxonomyTreeDataTrait
         return ['nodes' => $gtreeTableData, 'readonly' => true];
     }
     
-    public function easyuiComboTreeData( $taxonomyId ) : array
+    protected function easyuiComboTreeData( $taxonomyId ) : array
     {
         $ert            = $this->getTaxonomyRepository();
         $rootTaxon      = $ert->find( $taxonomyId,  )->getRootTaxon();

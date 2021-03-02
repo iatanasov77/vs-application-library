@@ -69,7 +69,7 @@ class TaxonomyTaxonsController extends Controller
     
     public function gtreeTableSource( $taxonomyId, Request $request ): Response
     {
-        $parentId       = (int)$request->query->get( 'parentTaxonId' );
+        $parentId       = (int)$request->query->get( 'taxonId' );
         
         return new JsonResponse( $this->gtreeTableData( $taxonomyId, $parentId ) );
     }

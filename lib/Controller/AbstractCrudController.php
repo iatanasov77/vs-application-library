@@ -73,15 +73,6 @@ class AbstractCrudController extends ResourceController
             }
         }
         
-//         $view   = View::create()
-//             ->setTemplate( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ) )
-//             ->setData( array_merge( [
-//                 'item' => $entity,
-//                 'form' => $form->createView(),
-//             ], $this->customData() ) )
-//         ;
-//         return $this->viewHandler->handle( $configuration, $view );
-        
         if ($configuration->isHtmlRequest()) {
             return $this->render( $configuration->getTemplate( ResourceActions::UPDATE . '.html' ), array_merge( [
                 'item' => $entity,

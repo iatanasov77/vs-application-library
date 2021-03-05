@@ -5,8 +5,7 @@ use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,6 +27,8 @@ class SettingsForm extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add( 'maintenanceMode', HiddenType::class )
+            
             ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'Maintenance Mode'] )
             
             ->add( 'maintenancePage', EntityType::class, [
@@ -52,9 +53,5 @@ class SettingsForm extends AbstractResourceType
     public function configureOptions( OptionsResolver $resolver ): void
     {
         parent::configureOptions( $resolver );
-        
-//         $resolver->setDefaults([
-//             'data_class' => GeneralSettings::class
-//         ]);
     }
 }

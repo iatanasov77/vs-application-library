@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+		<field name="siteId" column="site_id" type="string" nullable="true"/>
+		
         <field name="maintenanceMode" column="maintenanceMode" type="boolean" nullable="false"/>
         
         <many-to-one field="maintenancePage" target-entity="VS\CmsBundle\Model\PageInterface">
@@ -17,11 +19,5 @@
         </many-to-one>
         
         <field name="theme" type="string" nullable="true"/>
-        
-        <many-to-one field="site" target-entity="VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface">
-            <cascade>
-                <cascade-persist />
-            </cascade>
-        </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

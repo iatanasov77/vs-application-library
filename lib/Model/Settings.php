@@ -18,8 +18,8 @@ class Settings implements SettingsInterface
     /** @var string */
     protected $theme;
     
-    /** @var SiteSettingsInterface */
-    protected $site;
+    /** @var string */
+    protected $siteId;
     
     public function getId()
     {
@@ -62,14 +62,14 @@ class Settings implements SettingsInterface
         return $this->theme;
     }
     
-    public function getSite(): ?SiteSettingsInterface
+    public function getSiteId()
     {
-        return $this->site;
+        return $this->siteId;
     }
     
-    public function setSite(?SiteSettingsInterface $site): self
+    public function setSite($siteId): self
     {
-        $this->site = $site;
+        $this->siteId = $siteId;
         
         return $this;
     }

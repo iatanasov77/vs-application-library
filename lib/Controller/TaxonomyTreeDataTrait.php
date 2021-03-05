@@ -8,6 +8,9 @@ trait TaxonomyTreeDataTrait
         $ert            = $this->getTaxonomyRepository();
         $rootTaxonId    = $ert->find( $taxonomyId )->getRootTaxon()->getId();
         
+        if ( ! $parentId ) {
+            $parentId   = $rootTaxonId;
+        }
         $taxons         = $ertt->getTaxonsAsArray( $rootTaxonId, $parentId );
         
         $gtreeTableData = $this->buildGtreeTableData( $taxons );

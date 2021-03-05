@@ -23,13 +23,18 @@ class AbstractCrudController extends ResourceController
             $view
                 ->setTemplate( $configuration->getTemplate( ResourceActions::INDEX . '.html' ) )
                 ->setTemplateVar( $this->metadata->getName() )
-                ->setData([
-                    'configuration'             => $configuration,
-                    'metadata'                  => $this->metadata,
-                    'resource'                  => $resource,
-                    $this->metadata->getName()  => $resource,
-                    'items'                     => $this->getRepository()->findAll(),
-                ])
+                ->setData(
+                    array_merge(
+                        [
+                            'configuration'             => $configuration,
+                            'metadata'                  => $this->metadata,
+                            'resource'                  => $resource,
+                            $this->metadata->getName()  => $resource,
+                            'items'                     => $this->getRepository()->findAll(),
+                        ],
+                        $this->customData()
+                    )
+                )
             ;
         }
         

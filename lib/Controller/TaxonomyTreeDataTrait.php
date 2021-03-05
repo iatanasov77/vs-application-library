@@ -36,10 +36,10 @@ trait TaxonomyTreeDataTrait
         $data   = [];
         foreach ( $taxons as $t ) {
             $data[] = [
-                'id'    => (int)$t['id'],
-                'name'  => $t['name'],
-                'level' => $t['tree_level'],
-                'type'  => "node type"
+                'id'        => (int)$t['id'],
+                'name'      => $t['name'],
+                'level'     => (int)$t['tree_level'] - 1,
+                'type'      => "default"
             ];
         }
         

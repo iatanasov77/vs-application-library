@@ -30,7 +30,7 @@
             </order-by>
         </one-to-many>
 
-        <field name="code" column="code" type="string" unique="true" />
+        <field name="code" column="code" type="string" unique="true" nullable="true" />
         <field name="left" column="tree_left" type="integer">
             <gedmo:tree-left />
         </field>

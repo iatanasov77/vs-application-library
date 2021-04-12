@@ -53,8 +53,7 @@
         "monolog/monolog": "Allows more advanced logging of the application flow",
         "symfony/debug-bundle": "Allows developement debugging",
         "symfony/maker-bundle": "Standard symfony console maker tools",
-        "symplify/changelog-linker": "Allows generation of nice CHANGELOG.md file",
-        "doctrine/doctrine-migrations-bundle": "Allows using db migrations for easy deploy"
+        "symplify/changelog-linker": "Allows generation of nice CHANGELOG.md file"
     },
     "conflict": {
         "doctrine/doctrine-bundle": "<1.3",

@@ -20,7 +20,7 @@ class SettingsRepository extends EntityRepository implements SettingsRepositoryI
                     ->orderBy( 's.id', 'DESC' )
                     ->setMaxResults( 1 )
                     ->setFirstResult( 0 )
-                    ->where( 's.siteId = :site' )->setParameter( 'site', $site );
+                    ->where( 's.site = :site' )->setParameter( 'site', $site );
         ;
         $result = $qb->getQuery()->getResult();
         

@@ -32,7 +32,8 @@ class SettingsController extends ResourceController
         return $this->render( '@VSApplication/Settings/index.html.twig', [
             'form'          => $form->createView(),
             'settingsForm'  => $form,
-            'item'          => $oSettings
+            'item'          => $oSettings,
+            'sites'         => $this->getSiteRepository()->findAll()
         ]);
     }
     
@@ -44,5 +45,10 @@ class SettingsController extends ResourceController
     protected function getFactory()
     {
         return $this->get( 'vs_application.factory.settings' );
+    }
+    
+    protected function getSiteRepository()
+    {
+        return $this->get( 'vs_application.repository.site' );
     }
 }

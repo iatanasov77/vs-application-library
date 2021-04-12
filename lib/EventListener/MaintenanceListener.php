@@ -25,15 +25,13 @@ class MaintenanceListener
     
     public function onKernelRequest(GetResponseEvent $event)
     {
-        // $schema             = $this->container->get( 'doctrine' )->getConnection()->getSchemaManager();
-        // if ( $schema->tablesExist( ['VSAPP_Settings'] ) == false ) {
-        //     Alerts::$WARNINGS[]   = 'The table VSAPP_Settings does not exists !';
-        //     return;
-        // }
+        $site   = null;
+        if ( $this->siteId ) {
+            $site   = $this->container->get( 'vs_application.repository.site' )->find( $this->siteId );
+        }
         
         $repo               = $this->container->get( 'vs_application.repository.settings' );
-
-        $settings           = $repo->getSettings( $this->siteId );
+        $settings           = $repo->getSettings( $site );
         $maintenanceMode    = false;
         $maintenancePage    = false;
         $debug              = false;

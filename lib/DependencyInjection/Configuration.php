@@ -29,6 +29,9 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 use VS\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use VS\ApplicationBundle\Model\Site;
+
 /**
  * This is the class that validates and merges configuration from your app/config files
  *
@@ -75,6 +78,21 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode( 'resources' )
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->arrayNode( 'site' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( Site::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                         ->arrayNode( 'settings' )
                             ->addDefaultsIfNotSet()
                             ->children()

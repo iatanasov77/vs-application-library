@@ -1,7 +1,7 @@
 <?php namespace VS\ApplicationBundle\Model;
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
-use VS\ApplicationBundle\Model\Interfaces\SiteSettingsInterface;
+use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
 use VS\CmsBundle\Model\PageInterface;
 
 class Settings implements SettingsInterface
@@ -18,8 +18,8 @@ class Settings implements SettingsInterface
     /** @var string */
     protected $theme;
     
-    /** @var string */
-    protected $siteId;
+    /** @var SiteInterface */
+    protected $site;
     
     public function getId()
     {
@@ -62,14 +62,14 @@ class Settings implements SettingsInterface
         return $this->theme;
     }
     
-    public function getSiteId()
+    public function getSite()
     {
-        return $this->siteId;
+        return $this->site;
     }
     
-    public function setSite($siteId): self
+    public function setSite($site): self
     {
-        $this->siteId = $siteId;
+        $this->site = $site;
         
         return $this;
     }

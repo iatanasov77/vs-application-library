@@ -1,3 +1,9 @@
+0.4.0	|	Release date: **12.04.2021**
+============================================
+* New Features:
+  - Create Resource 'Site' and relate it to Settings Resource.
+
+
 0.3.0	|	Release date: **07.03.2021**
 ============================================
 * Improvements, Fixes and Refactoring:

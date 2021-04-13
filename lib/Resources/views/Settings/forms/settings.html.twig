@@ -1,0 +1,38 @@
+{{ form_start(form, { 'action': path('vs_application_settings_handle', {'siteId': siteId}), 'attr': {'id': 'formSettings_' ~ siteId, 'class': 'form-horizontal '} }) }}
+    {{ form_widget(form._token) }}
+    
+    {% if form_errors(form) is not empty %}
+        <div class="alert alert-block alert-danger fade in">
+            <button type="button" class="close close-sm" data-dismiss="alert">
+                <i class="icon-remove"></i>
+            </button>
+            <strong>Error!</strong> {{ form_errors(form) }}
+        </div>
+    {% endif %}
+    
+    <label class="custom-control custom-checkbox">  
+        <input type="checkbox" id="page_form_enabled" name="settings_form[maintenanceMode]" 
+            class="custom-control-input form-check-input"
+            {% if form.vars.value.maintenanceMode %}checked="checked"{% endif %}
+        />
+        <span class="custom-control-label">Maintenance Mode</span>
+    </label>
+
+    {% set tree_data_options = "url:'" ~ path( 'vsorg_pages_tree' ) ~ "', required:true" %}
+    <div class="form-group">
+        {{ form_label(form.maintenancePage, null, {
+            'label_attr': {'class': 'col-form-label'}
+            }) 
+        }}
+        
+        {# 'data-value': item.maintenancePage #}
+        {{ form_widget(form.maintenancePage, {
+            'attr': {
+                'class': 'easyui-combotree',
+                'data-options': tree_data_options,
+                
+            }
+        }) }}
+    </div>
+
+{{ form_end(form, {'render_rest': false}) }}

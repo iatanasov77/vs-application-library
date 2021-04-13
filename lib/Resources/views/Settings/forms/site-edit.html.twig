@@ -1,0 +1,15 @@
+<div>
+    {% if site.id %}{% set siteId = site.id %}{% else %}{% set siteId = 0 %}{% endif %}
+    {{ form_start(form, { 'action': path('app_settings_sites_edit', {'id': siteId}), 'attr': {'id': 'formSiteEdit', 'class': 'form-horizontal '} }) }}
+        <div class="formFields">
+            <div class="form-group">
+                {{ form_label(form.title, null, {
+                    'label_attr': {'class': 'col-sm-8 control-label'}
+                    }) 
+                }}
+        
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

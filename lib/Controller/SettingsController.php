@@ -5,7 +5,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use VS\ApplicationBundle\Form\SettingsForm;
-use App\Entity\Application\Site;
 
 class SettingsController extends ResourceController
 {
@@ -18,17 +17,15 @@ class SettingsController extends ResourceController
         
         $er             = $this->getRepository();
         $factory        = $this->getFactory();
-        $settings       = $er->findBy( [], ['id'=>'DESC'], 1, 0 );
+        $settings       = $er->getSettings();
         
-        $oSettings      = isset( $settings[0] ) ? $settings[0] : $factory->createNew();
+        $oSettings      = $settings ?: $factory->createNew();
         $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
         foreach( $sites as $site ) {
             $settings       = $er->getSettings( $site );
             $oSettings      = $settings ?: $factory->createNew();
-            $forms[]        = $this
-                                ->createForm( SettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] )
-                                ->createView();
+            $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         }
         
 //         $form->handleRequest( $request );

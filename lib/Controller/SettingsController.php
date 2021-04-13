@@ -24,8 +24,8 @@ class SettingsController extends ResourceController
         $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
         foreach( $sites as $site ) {
-            $settings       = $this->getDoctrine()->getRepository( Settings::class )->getSettings( $site );
-            $oSettings      = $settings ?: new Settings();
+            $settings       = $er->getSettings( $site );
+            $oSettings      = $settings ?: $factory->createNew();
             $forms[]        = $this
                                 ->createForm( SettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] )
                                 ->createView();

@@ -1,3 +1,9 @@
+0.4.4	|	Release date: **13.04.2021**
+============================================
+* Bug-Fixes:
+  - Fix SettingsController and SettingsExtController for right processing of form handling.
+
+
 0.4.3	|	Release date: **13.04.2021**
 ============================================
 * Bug-Fixes:

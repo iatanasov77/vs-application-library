@@ -1,3 +1,9 @@
+0.4.1	|	Release date: **13.04.2021**
+============================================
+* Bug-Fixes:
+  - Fix Settings Repository to get Settings when site is NULL.
+
+
 0.4.0	|	Release date: **12.04.2021**
 ============================================
 * New Features:

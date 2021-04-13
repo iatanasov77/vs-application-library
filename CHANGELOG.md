@@ -1,3 +1,9 @@
+0.4.2	|	Release date: **13.04.2021**
+============================================
+* Improvements:
+  - Fix SettingsController to pass multiple forms to the template when have multisite application.
+
+
 0.4.1	|	Release date: **13.04.2021**
 ============================================
 * Bug-Fixes:

@@ -5,11 +5,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use VS\ApplicationBundle\Form\SettingsForm;
+use App\Entity\Application\Site;
 
 class SettingsController extends ResourceController
 {
     public function indexAction( Request $request ): Response
     {
+        $forms          = [];
+        $sites          = $this->getSiteRepository()->findAll();
+        
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
         $er             = $this->getRepository();
@@ -17,23 +21,28 @@ class SettingsController extends ResourceController
         $settings       = $er->findBy( [], ['id'=>'DESC'], 1, 0 );
         
         $oSettings      = isset( $settings[0] ) ? $settings[0] : $factory->createNew();
-        $form           = $this->resourceFormFactory->create( $configuration, $oSettings );
-        //$form       = $this->createForm( SettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] );
+        $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
-        $form->handleRequest( $request );
-        if( $form->isSubmitted() && $form->isValid() ) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist( $form->getData() );
-            $em->flush();
-            
-            return $this->redirect( $this->generateUrl( 'vs_application_settings' ) );
+        foreach( $sites as $site ) {
+            $settings       = $this->getDoctrine()->getRepository( Settings::class )->getSettings( $site );
+            $oSettings      = $settings ?: new Settings();
+            $forms[]        = $this
+                                ->createForm( SettingsForm::class, $oSettings, ['data' => $oSettings, 'method' => 'POST'] )
+                                ->createView();
         }
         
+//         $form->handleRequest( $request );
+//         if( $form->isSubmitted() && $form->isValid() ) {
+//             $em = $this->getDoctrine()->getManager();
+//             $em->persist( $form->getData() );
+//             $em->flush();
+            
+//             return $this->redirect( $this->generateUrl( 'vs_application_settings' ) );
+//         }
+        
         return $this->render( '@VSApplication/Settings/index.html.twig', [
-            'form'          => $form->createView(),
-            'settingsForm'  => $form,
-            'item'          => $oSettings,
-            'sites'         => $this->getSiteRepository()->findAll()
+            'forms'         => $forms,
+            'sites'         => $sites
         ]);
     }
     

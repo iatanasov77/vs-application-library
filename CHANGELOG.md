@@ -1,3 +1,10 @@
+0.4.5	|	Release date: **15.04.2021**
+============================================
+* Some Additions:
+  - Using Imagine and user profile picture in the layout top template.
+  - Add templates/views for Settings but not made to works ;).
+
+
 0.4.4	|	Release date: **13.04.2021**
 ============================================
 * Bug-Fixes:

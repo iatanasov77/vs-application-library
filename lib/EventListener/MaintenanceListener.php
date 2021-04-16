@@ -25,25 +25,16 @@ class MaintenanceListener
     
     public function onKernelRequest(GetResponseEvent $event)
     {
+        // This will detect if we are in dev environment
+        $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
         $settings           = $this->getSettingsManager()->getSettings( $this->siteId );
-        $maintenanceMode    = false;
-        $maintenancePage    = false;
-        $debug              = false;
-        
-        if( isset( $settings ) ) {
-            $maintenanceMode    = $settings['maintenanceMode'];
-            $maintenancePage    = $settings['maintenancePage'] ? 
-                                    $this->getPagesRepository()->find( $settings['maintenancePage'] ) : 
-                                    null;
-            
-            // This will detect if we are in dev environment
-            $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
-        }
         
         // If maintenance is active and in prod environment and user is not admin
-        if ( $maintenanceMode ) {
-            // Use this for DEBUG
-            // if( true ) {
+        if ( $settings['maintenanceMode'] ) {
+            $maintenancePage    = $settings['maintenancePage'] ?
+                                    $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
+                                    null;
+            
             if (
                 ( ! $this->user || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug

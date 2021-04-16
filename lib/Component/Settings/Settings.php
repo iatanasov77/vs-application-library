@@ -58,6 +58,28 @@ class Settings
         }
     }
     
+    public function forceMaintenanceMode( bool $maintenanceMode )
+    {
+        // Sites Settings
+        $sites  = $this->getSiteRepository()->findAll();
+        foreach ( $sites as $site ) {
+            $settings   = $this->getSettings( $site->getId() );
+            $settings['maintenanceMode']    = $maintenanceMode;
+            
+            $settingsCache  = $this->cache->getItem( "settings_site_{$site->getId()}" );
+            $settingsCache->set( json_encode( $settings ) );
+            $this->cache->save( $settingsCache );
+        }
+        
+        // General Settings
+        $settings   = $this->getSettings();
+        $settings['maintenanceMode']    = $maintenanceMode;
+        
+        $settingsCache  = $this->cache->getItem( 'settings_general' );
+        $settingsCache->set( json_encode( $settings ) );
+        $this->cache->save( $settingsCache );
+    }
+    
     private function generalizeSettings( $siteId ) : array
     {
         $site   = $this->getSiteRepository()->find( $siteId );

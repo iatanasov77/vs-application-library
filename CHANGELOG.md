@@ -1,3 +1,9 @@
+0.5.3	|	Release date: **16.04.2021**
+============================================
+* Bug-Fixes:
+  - Tne MaintenaceModeCommand has not been added into services
+
+
 0.5.2	|	Release date: **16.04.2021**
 ============================================
 * New Features:

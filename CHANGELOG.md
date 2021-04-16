@@ -1,3 +1,9 @@
+0.5.10	|	Release date: **16.04.2021**
+============================================
+* Improvements:
+  - Centralize settings cache file for all sites.
+
+
 0.5.9	|	Release date: **16.04.2021**
 ============================================
 * Bug-Fixes:

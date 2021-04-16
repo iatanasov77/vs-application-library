@@ -27,6 +27,7 @@ class MaintenanceModeCommand extends Command
             
             ->addOption( 'set-maintenance', null, InputOption::VALUE_NONE, 'Set In Maintennce Mode.')
             ->addOption( 'unset-maintenance', null, InputOption::VALUE_NONE, 'Unset Maintennce Mode.')
+            ->addOption( 'dump-settings', null, InputOption::VALUE_NONE, 'Dump Settings Array (Using for debug).')
         ;
     }
     
@@ -41,6 +42,11 @@ class MaintenanceModeCommand extends Command
         
         if ( $input->getOption( 'unset-maintenance' ) ) {
             $this->container->get( 'vs_app.settings_manager' )->forceMaintenanceMode( false );
+        }
+        
+        if ( $input->getOption( 'dump-settings' ) ) {
+            $allSettings    = $this->container->get( 'vs_app.settings_manager' )->getAllSettings();
+            print_r( $allSettings );
         }
         
         return 0;

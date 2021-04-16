@@ -27,7 +27,8 @@ class SettingsExtController extends Controller
             $em->persist( $entity );
             $em->flush();
             
-            $this->get( 'vs_app.settings_manager' )->clearCache( $siteId, true );
+            //$this->get( 'vs_app.settings_manager' )->clearCache( $siteId, true );
+            $this->get( 'vs_app.settings_manager' )->saveSettings( $siteId );
             
             return $this->redirect( $this->generateUrl( 'vs_application_settings_index' ) );
         }

@@ -54,6 +54,12 @@ class Settings
         return $settings;
     }
     
+    public function saveSettings( $siteId )
+    {
+        $settings   = $siteId ? $this->generalizeSettings( $siteId ) : $this->generalSettings();
+        $this->cache->warmUp( [$cacheId => json_encode( $settings )] );
+    }
+    
     public function clearCache( $siteId, $all = false )
     {
         if ( $all ) {
@@ -84,6 +90,19 @@ class Settings
         $settings   = $this->getSettings( null );
         $settings['maintenanceMode']    = $maintenanceMode;
         $this->cache->warmUp( ['settings_general' => json_encode( $settings )] );
+    }
+    
+    // Used For Dump/Debug
+    public function getAllSettings()
+    {
+        $sites      = $this->getSiteRepository()->findAll();
+        $settings   = [];
+        foreach ( $sites as $site ) {
+            $settings["settings_site_{$site->getId()}"]   = $this->getSettings( $site->getId() );
+        }
+        $settings['settings_general']   = $this->getSettings( null );
+        
+        return $settings;
     }
     
     private function generalizeSettings( $siteId ) : array

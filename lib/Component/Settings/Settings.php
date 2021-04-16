@@ -72,7 +72,7 @@ class Settings
         }
         
         // General Settings
-        $settings   = $this->getSettings();
+        $settings   = $this->getSettings( null );
         $settings['maintenanceMode']    = $maintenanceMode;
         
         $settingsCache  = $this->cache->getItem( 'settings_general' );

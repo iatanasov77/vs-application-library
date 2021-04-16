@@ -1,9 +1,11 @@
 <?php namespace VS\ApplicationBundle\Component\Settings;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Adapter\PhpArrayAdapter;
 
 use VS\ApplicationBundle\Component\Exception\SettingsException;
 
@@ -20,9 +22,20 @@ class Settings
     public function __construct( ContainerInterface $container )
     {
         $this->container        = $container;
-        $this->cache            = new FilesystemAdapter();
+        
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
         $this->settingsKeys     = ['maintenanceMode', 'maintenancePage', 'theme'];
+        
+        // https://symfony.com/doc/current/components/cache/adapters/php_array_cache_adapter.html
+        //==========================================================================================
+        // This adapter requires turning on the opcache.enable php.ini setting.
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        $this->cache            = new PhpArrayAdapter(
+            // single file where values are cached
+            $this->getParameter( 'kernel.cache_dir' ) . '/vankosoft_settings.cache',
+            // a backup adapter, if you set values after warmup
+            new FilesystemAdapter()
+        );
     }
     
     public function getSettings( $siteId )
@@ -33,8 +46,7 @@ class Settings
         if ( ! $settingsCache->isHit() ) {
             $settings   = $siteId ? $this->generalizeSettings( $siteId ) : $this->generalSettings();
             
-            $settingsCache->set( json_encode( $settings ) );
-            $this->cache->save( $settingsCache );
+            $this->cache->warmUp( [$cacheId => json_encode( $settings )] );
         } else {
             $settings   = json_decode( $settingsCache->get(), true );
         }
@@ -65,19 +77,13 @@ class Settings
         foreach ( $sites as $site ) {
             $settings   = $this->getSettings( $site->getId() );
             $settings['maintenanceMode']    = $maintenanceMode;
-            
-            $settingsCache  = $this->cache->getItem( "settings_site_{$site->getId()}" );
-            $settingsCache->set( json_encode( $settings ) );
-            $this->cache->save( $settingsCache );
+            $this->cache->warmUp( ["settings_site_{$site->getId()}" => json_encode( $settings )] );
         }
         
         // General Settings
         $settings   = $this->getSettings( null );
         $settings['maintenanceMode']    = $maintenanceMode;
-        
-        $settingsCache  = $this->cache->getItem( 'settings_general' );
-        $settingsCache->set( json_encode( $settings ) );
-        $this->cache->save( $settingsCache );
+        $this->cache->warmUp( ['settings_general' => json_encode( $settings )] );
     }
     
     private function generalizeSettings( $siteId ) : array

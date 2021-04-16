@@ -59,10 +59,12 @@ class Settings
     
     public function saveSettings( $siteId )
     {
-        $cacheId    = $siteId ? "settings_site_{$siteId}" : 'settings_general';
-        $settings   = $siteId ? $this->generalizeSettings( $siteId ) : $this->generalSettings();
+        $cacheId        = $siteId ? "settings_site_{$siteId}" : 'settings_general';
+        $settings       = $siteId ? $this->generalizeSettings( $siteId ) : $this->generalSettings();
         
-        $this->cache->warmUp( [$cacheId => json_encode( $settings )] );
+        $settingsCache  = $this->cache->getItem( $cacheId );
+        $settingsCache->set( json_encode( $settings ) );
+        $this->cache->save( $settingsCache );
     }
     
     public function clearCache( $siteId, $all = false )

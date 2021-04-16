@@ -1,4 +1,5 @@
 imports:
+    - { resource: services/settings.yaml }
     - { resource: services/form.yaml }
     - { resource: services/maintenance.yaml }
     - { resource: services/theme.yaml }

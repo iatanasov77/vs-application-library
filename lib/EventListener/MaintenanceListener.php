@@ -25,20 +25,16 @@ class MaintenanceListener
     
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $site   = null;
-        if ( $this->siteId ) {
-            $site   = $this->container->get( 'vs_application.repository.site' )->find( $this->siteId );
-        }
-        
-        $repo               = $this->container->get( 'vs_application.repository.settings' );
-        $settings           = $repo->getSettings( $site );
+        $settings           = $this->getSettingsManager()->getSettings( $this->siteId );
         $maintenanceMode    = false;
         $maintenancePage    = false;
         $debug              = false;
         
         if( isset( $settings ) ) {
-            $maintenanceMode    = $settings->getMaintenanceMode();
-            $maintenancePage    = $settings->getMaintenancePage();
+            $maintenanceMode    = $settings['maintenanceMode'];
+            $maintenancePage    = $settings['maintenancePage'] ? 
+                                    $this->getPagesRepository()->find( $settings['maintenancePage'] ) : 
+                                    null;
             
             // This will detect if we are in dev environment
             $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
@@ -52,12 +48,26 @@ class MaintenanceListener
                 ( ! $this->user || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
             ) {
-                $event->setResponse( new Response( $maintenancePage->getText(), 503 ) );
+                if ( $maintenancePage ) {
+                    $event->setResponse( new Response( $maintenancePage->getText(), 503 ) );
+                } else {
+                    $event->setResponse( new Response( 'The System is in Maintenance Mode !', 503 ) );
+                }
                 
                 $event->stopPropagation();
             } else {
                 Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
             }   
         }
+    }
+    
+    protected function getSettingsManager()
+    {
+        return $this->container->get( 'vs_app.settings_manager' );
+    }
+    
+    protected function getPagesRepository()
+    {
+        return $this->container->get( 'vs_cms.repository.pages' );
     }
 }

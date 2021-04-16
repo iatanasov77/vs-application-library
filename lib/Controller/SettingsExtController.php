@@ -22,9 +22,12 @@ class SettingsExtController extends Controller
             if ( $siteId && ( ! $entity->getSite() ) ) {
                 $entity->setSite( $this->getSiteRepository()->find( $siteId ) );
             }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist( $entity );
             $em->flush();
+            
+            $this->get( 'vs_app.settings_manager' )->clearCache( $siteId );
             
             return $this->redirect( $this->generateUrl( 'vs_application_settings_index' ) );
         }

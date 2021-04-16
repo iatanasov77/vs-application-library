@@ -1,3 +1,9 @@
+0.5.12	|	Release date: **16.04.2021**
+============================================
+* Bug-Fixes:
+  - Fix SettingsManager:saveSettings method.
+
+
 0.5.11	|	Release date: **16.04.2021**
 ============================================
 * Bug-Fixes:

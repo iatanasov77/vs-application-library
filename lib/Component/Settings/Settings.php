@@ -56,7 +56,9 @@ class Settings
     
     public function saveSettings( $siteId )
     {
+        $cacheId    = $siteId ? "settings_site_{$siteId}" : 'settings_general';
         $settings   = $siteId ? $this->generalizeSettings( $siteId ) : $this->generalSettings();
+        
         $this->cache->warmUp( [$cacheId => json_encode( $settings )] );
     }
     

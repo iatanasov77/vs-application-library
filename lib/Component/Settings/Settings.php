@@ -83,18 +83,23 @@ class Settings
     
     public function forceMaintenanceMode( bool $maintenanceMode )
     {
+        $allSettings    = [];
+        
         // Sites Settings
         $sites  = $this->getSiteRepository()->findAll();
         foreach ( $sites as $site ) {
-            $settings   = $this->getSettings( $site->getId() );
-            $settings['maintenanceMode']    = $maintenanceMode;
-            $this->cache->warmUp( ["settings_site_{$site->getId()}" => json_encode( $settings )] );
+            $settings                                       = $this->getSettings( $site->getId() );
+            $settings['maintenanceMode']                    = $maintenanceMode;
+            
+            $allSettings["settings_site_{$site->getId()}"]  = json_encode( $settings );
         }
         
         // General Settings
-        $settings   = $this->getSettings( null );
-        $settings['maintenanceMode']    = $maintenanceMode;
-        $this->cache->warmUp( ['settings_general' => json_encode( $settings )] );
+        $settings                           = $this->getSettings( null );
+        $settings['maintenanceMode']        = $maintenanceMode;
+        $allSettings['settings_general']    = json_encode( $settings );
+        
+        $this->cache->warmUp( $allSettings );
     }
     
     // Used For Dump/Debug

@@ -32,7 +32,7 @@ class Settings
         /////////////////////////////////////////////////////////////////////////////////////////////
         $this->cache            = new PhpArrayAdapter(
             // single file where values are cached
-            $this->getParameter( 'kernel.cache_dir' ) . '/vankosoft_settings.cache',
+            $this->container->getParameter( 'kernel.cache_dir' ) . '/vankosoft_settings.cache',
             // a backup adapter, if you set values after warmup
             new FilesystemAdapter()
         );

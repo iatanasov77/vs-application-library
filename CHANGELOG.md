@@ -1,3 +1,9 @@
+0.5.0	|	Release date: **16.04.2021**
+============================================
+* New Features:
+  - Add Settings Manager to generalize site settingsand use it from cache.
+
+
 0.4.5	|	Release date: **15.04.2021**
 ============================================
 * Some Additions:

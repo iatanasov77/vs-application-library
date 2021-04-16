@@ -1,3 +1,9 @@
+0.5.5	|	Release date: **16.04.2021**
+============================================
+* Improvements:
+  - Use PhpArrayAdapter as CacheAdapter in the SettingsManager because it allow to share settings between applications. For Example between web and cli.
+
+
 0.5.4	|	Release date: **16.04.2021**
 =============================================
 * Bug-Fixes:

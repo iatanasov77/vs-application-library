@@ -30,9 +30,12 @@ class Settings
         //==========================================================================================
         // This adapter requires turning on the opcache.enable php.ini setting.
         /////////////////////////////////////////////////////////////////////////////////////////////
+        $cacheDir              = isset( $_ENV['DIR_VAR'] ) ? 
+                                    $_ENV['DIR_VAR'] . '/cache' : 
+                                    $this->container->getParameter( 'kernel.cache_dir' );
         $this->cache            = new PhpArrayAdapter(
             // single file where values are cached
-            $this->container->getParameter( 'kernel.cache_dir' ) . '/vankosoft_settings.cache',
+            $cacheDir . '/vankosoft_settings.cache',
             // a backup adapter, if you set values after warmup
             new FilesystemAdapter()
         );

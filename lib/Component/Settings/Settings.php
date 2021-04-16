@@ -42,11 +42,20 @@ class Settings
         return $settings;
     }
     
-    public function clearCache( $siteId )
+    public function clearCache( $siteId, $all = false )
     {
-        $cacheId    = $siteId ? "settings_site_{$siteId}" : 'settings_general';
-        
-        $this->cache->deleteItem( $cacheId );
+        if ( $all ) {
+            $sites  = $this->getSiteRepository()->findAll();
+            foreach ( $sites as $site ) {
+                $this->cache->deleteItem( "settings_site_{$site->getId()}" );
+            }
+            
+            $this->cache->deleteItem( 'settings_general' );
+        } else {
+            $cacheId    = $siteId ? "settings_site_{$siteId}" : 'settings_general';
+            
+            $this->cache->deleteItem( $cacheId );
+        }
     }
     
     private function generalizeSettings( $siteId ) : array

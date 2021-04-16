@@ -1,3 +1,9 @@
+0.5.1	|	Release date: **16.04.2021**
+============================================
+* New Features:
+  - SettingsManager add option to clear the all of cached items.
+
+
 0.5.0	|	Release date: **16.04.2021**
 ============================================
 * New Features:

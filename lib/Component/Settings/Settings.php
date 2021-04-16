@@ -13,7 +13,7 @@ class Settings
 {
     private ContainerInterface $container;
     
-    private FilesystemAdapter $cache;
+    private PhpArrayAdapter $cache;
     
     private PropertyAccessor $propertyAccessor;
     

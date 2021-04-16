@@ -1,3 +1,9 @@
+0.5.2	|	Release date: **16.04.2021**
+============================================
+* New Features:
+  - Add CLI Command to force Maintenance Mode.
+
+
 0.5.1	|	Release date: **16.04.2021**
 ============================================
 * New Features:

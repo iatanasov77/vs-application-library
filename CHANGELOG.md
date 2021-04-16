@@ -1,3 +1,9 @@
+0.5.8	|	Release date: **16.04.2021**
+============================================
+* Improvements:
+  - Improvements and Debug option in the MaintenanceModeCommand.
+
+
 0.5.7	|	Release date: **16.04.2021**
 ============================================
 * Bug-Fixes:

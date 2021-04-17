@@ -6,7 +6,7 @@ class I18N
     {
         return [
             'en'    => 'English',
-            'en_US' => 'English',
+            'en_US' => 'English (US)',
             'bg'    => 'Bulgarian',
             'bg_BG' => 'Bulgarian'
         ];

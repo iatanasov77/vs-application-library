@@ -18,7 +18,8 @@ class TaxonomyForm extends AbstractResourceType
         $builder
             ->add( 'locale', ChoiceType::class, [
                 'label'     => 'Locale',
-                'choices'  => \array_flip( I18N::LanguagesAvailable() ),
+                'choices'   => \array_flip( I18N::LanguagesAvailable() ),
+                'data'      => \Locale::getDefault(),
                 'mapped'    => false,
             ])
         

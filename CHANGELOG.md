@@ -1,3 +1,9 @@
+0.5.14	|	Release date: **17.04.2021**
+============================================
+* Improvemets:
+  - Taxonomy form set current locale selected.
+
+
 0.5.13	|	Release date: **16.04.2021**
 ============================================
 * Bug-Fixes:

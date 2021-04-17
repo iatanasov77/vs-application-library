@@ -40,7 +40,7 @@
         <field name="level" column="tree_level" type="integer">
             <gedmo:tree-level />
         </field>
-        <field name="position" type="integer">
+        <field name="position" type="integer" nullable="true">
             <gedmo:sortable-position />
         </field>
 

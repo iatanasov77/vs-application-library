@@ -21,7 +21,7 @@ trait TaxonomyTreeDataTrait
         ];
     }
     
-    protected function easyuiComboTreeData( $taxonomyId ) : array
+    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [] ) : array
     {
         $ert            = $this->getTaxonomyRepository();
         $rootTaxon      = $ert->find( $taxonomyId,  )->getRootTaxon();
@@ -36,7 +36,7 @@ trait TaxonomyTreeDataTrait
         */
         
         $data   = [];
-        $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data );
+        $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues );
         
         return $data;
     }
@@ -50,14 +50,13 @@ trait TaxonomyTreeDataTrait
                 'name'          => $t['name'],
                 'level'         => (int)$t['tree_level'] - 1,
                 'type'          => "default",
-                'nodeDelete'    => 'controllerD/delete',
             ];
         }
         
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( $tree, &$data )
+    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues )
     {
         $key    = 0;
         foreach( $tree as $node ) {
@@ -66,9 +65,12 @@ trait TaxonomyTreeDataTrait
                 'text'      => $node->getName(),
                 'children'  => []
             ];
+            if ( in_array( $node->getId(), $selectedValues ) ) {
+                $data[$key]['selected'] = true;
+            }
             
             if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'] );
+                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues );
             }
             
             $key++;

@@ -1,3 +1,9 @@
+0.5.16	|	Release date: **19.04.2021**
+============================================
+* Bug-Fixes:
+  - Fix TaxonomyTreeDataTrait to return combotree data without root taxon.
+
+
 0.5.15	|	Release date: **17.04.2021**
 ============================================
 * Bug-Fixes:

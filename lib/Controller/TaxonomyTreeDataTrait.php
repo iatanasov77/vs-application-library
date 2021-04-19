@@ -66,7 +66,7 @@ trait TaxonomyTreeDataTrait
                 'children'  => []
             ];
             if ( in_array( $node->getId(), $selectedValues ) ) {
-                $data[$key]['selected'] = true;
+                $data[$key]['checked'] = true;
             }
             
             if ( $node->getChildren()->count() ) {

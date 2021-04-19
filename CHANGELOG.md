@@ -1,3 +1,9 @@
+0.5.17	|	Release date: **19.04.2021**
+============================================
+* New Features:
+  - Add Taxonomy tree data trait a method to get  EasyUI Combotree with selected.
+
+
 0.5.16	|	Release date: **19.04.2021**
 ============================================
 * Bug-Fixes:

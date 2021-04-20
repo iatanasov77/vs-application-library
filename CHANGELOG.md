@@ -1,3 +1,9 @@
+0.5.19	|	Release date: **20.04.2021**
+============================================
+* New Features:
+  - Add Option to can Supress PDO Exceptions.
+
+
 0.5.18	|	Release date: **19.04.2021**
 ============================================
 * Bug-Fixes:

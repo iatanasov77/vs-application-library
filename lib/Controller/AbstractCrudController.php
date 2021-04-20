@@ -88,6 +88,17 @@ class AbstractCrudController extends ResourceController
         return $this->createRestView( $configuration, $entity );
     }
     
+    public function deleteAction( Request $request ): Response
+    {
+        try {
+            parent::deleteAction( $request );
+        } catch ( \PDOException $e ) {
+            if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
+                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception', 500, $e );
+            }
+        }
+    }
+        
     protected function classInfo( Request $request )
     {
         if ( ! $this->classInfo ) {

@@ -1,3 +1,9 @@
+0.6.0	|	Release date: **20.04.2021**
+============================================
+* New Features:
+  - Create Taxons Abstraction to create EasyUI Tree with leafs.
+
+
 0.5.20	|	Release date: **20.04.2021**
 ============================================
 * Bug-Fixes:

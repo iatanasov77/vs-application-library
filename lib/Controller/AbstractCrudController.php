@@ -6,6 +6,9 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\ORMException;
+
 class AbstractCrudController extends ResourceController
 {
     private $classInfo;
@@ -92,9 +95,21 @@ class AbstractCrudController extends ResourceController
     {
         try {
             $response = parent::deleteAction( $request );
-        } catch ( \Exception $e ) {
+        } catch ( DBALException $e ) {
+            if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
+                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+            }
+        } catch ( \PDOException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+            }
+        } catch ( ORMException $e ) {
+            if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
+                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application ORM Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
+            }
+        } catch ( \Exception $e ) {
+            if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
+                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PHP Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         }
         

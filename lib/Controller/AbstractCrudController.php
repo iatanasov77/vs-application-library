@@ -91,12 +91,14 @@ class AbstractCrudController extends ResourceController
     public function deleteAction( Request $request ): Response
     {
         try {
-            parent::deleteAction( $request );
-        } catch ( \PDOException $e ) {
+            $response = parent::deleteAction( $request );
+        } catch ( \Exception $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
-                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception', 500, $e );
+                throw new \VS\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
         }
+        
+        return $response;
     }
         
     protected function classInfo( Request $request )

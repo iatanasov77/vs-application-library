@@ -1,3 +1,9 @@
+0.6.2	|	Release date: **22.04.2021**
+============================================
+* New Features:
+  - Create a TaxonomyHelperTrait for additin Taxonomy/Taxons Actions.
+
+
 0.6.1	|	Release date: **22.04.2021**
 ============================================
 * New Features:

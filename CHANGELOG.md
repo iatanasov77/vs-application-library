@@ -1,3 +1,9 @@
+0.6.1	|	Release date: **22.04.2021**
+============================================
+* New Features:
+  - Add Move Functionality of Taxons.
+
+
 0.6.0	|	Release date: **20.04.2021**
 ============================================
 * New Features:

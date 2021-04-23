@@ -1,3 +1,9 @@
+0.6.4	|	Release date: **23.04.2021**
+============================================
+* Bug-Fixes:
+  - RE-Fix :( EasyUI Combotree Source to get with leafs.
+
+
 0.6.3	|	Release date: **23.04.2021**
 ============================================
 * Bug-Fixes:

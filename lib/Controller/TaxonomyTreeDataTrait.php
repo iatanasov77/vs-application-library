@@ -27,7 +27,7 @@ trait TaxonomyTreeDataTrait
         return ['nodes' => $gtreeTableData];
     }
     
-    protected function easyuiComboTreeData( $taxonomyId, $displayRootTaxon = false ) : array
+    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [], $displayRootTaxon = false ) : array
     {
         $rootTaxon      = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         $data           = [];
@@ -39,9 +39,9 @@ trait TaxonomyTreeDataTrait
                 'children'  => []
             ];
             
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'] );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'], $selectedValues );
         } else {
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues );
         }
         
         return $data;
@@ -62,7 +62,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( $tree, &$data )
+    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues )
     {
         $key    = 0;
         foreach( $tree as $node ) {
@@ -71,9 +71,12 @@ trait TaxonomyTreeDataTrait
                 'text'      => $node->getName(),
                 'children'  => []
             ];
+            if ( in_array( $node->getId(), $selectedValues ) ) {
+                $data[$key]['checked'] = true;
+            }
             
             if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'] );
+                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues );
             }
             
             $key++;

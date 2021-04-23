@@ -27,7 +27,7 @@ trait TaxonomyTreeDataTrait
         return ['nodes' => $gtreeTableData];
     }
     
-    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [], $displayRootTaxon = false ) : array
+    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [], array $leafs = [], $displayRootTaxon = false ) : array
     {
         $rootTaxon      = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         $data           = [];
@@ -39,9 +39,9 @@ trait TaxonomyTreeDataTrait
                 'children'  => []
             ];
             
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'], $selectedValues );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'], $selectedValues, $leafs );
         } else {
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues, $leafs );
         }
         
         return $data;
@@ -62,7 +62,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues )
+    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues, array $leafs )
     {
         $key    = 0;
         foreach( $tree as $node ) {
@@ -76,7 +76,11 @@ trait TaxonomyTreeDataTrait
             }
             
             if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues );
+                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues, $leafs );
+            }
+            
+            if ( array_key_exists( $node->getId(), $leafs ) ) {
+                $this->buildEasyuiCombotreeData( $leafs[$node->getId()], $data[$key]['children'], $selectedValues, $leafs );
             }
             
             $key++;

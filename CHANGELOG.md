@@ -1,3 +1,9 @@
+0.6.3	|	Release date: **23.04.2021**
+============================================
+* Bug-Fixes:
+  - RE-Fix :( EasyUI Combotree Source to get set checked values.
+
+
 0.6.2	|	Release date: **22.04.2021**
 ============================================
 * New Features:

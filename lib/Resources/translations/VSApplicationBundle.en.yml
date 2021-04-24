@@ -1,0 +1,15 @@
+vs_application:
+    form:
+        locale: 'Locale'
+        title: 'Title'
+        name: 'Name'
+        description: 'Description'
+        parent: 'Parent'
+        maintenance_mode: 'Maintenance Mode'
+        maintenance_page: 'Page in Maintenance Mode'
+        maintenance_page_placeholder: '-- Choose a Page --'
+        theme: 'Theme'
+        theme_placeholder: '-- Choose a Theme --'
+        apply: 'Apply'
+        save: 'Save'
+        cancel: 'Cancel'

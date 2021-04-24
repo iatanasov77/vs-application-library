@@ -17,17 +17,18 @@ class TaxonomyForm extends AbstractResourceType
     {
         $builder
             ->add( 'locale', ChoiceType::class, [
-                'label'     => 'Locale',
-                'choices'   => \array_flip( I18N::LanguagesAvailable() ),
-                'data'      => \Locale::getDefault(),
-                'mapped'    => false,
+                'label'                 => 'vs_application.form.locale',
+                'translation_domain'    => 'VSApplicationBundle',
+                'choices'               => \array_flip( I18N::LanguagesAvailable() ),
+                'data'                  => \Locale::getDefault(),
+                'mapped'                => false,
             ])
         
-            ->add( 'name', TextType::class, ['label' => 'Title'] )
-            ->add( 'description', TextType::class, ['label' => 'Description'] )
+            ->add( 'name', TextType::class, ['label' => 'vs_application.form.title', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'description', TextType::class, ['label' => 'vs_application.form.description', 'translation_domain' => 'VSApplicationBundle',] )
                 
-            ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
+            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_application.form.cancel', 'translation_domain' => 'VSApplicationBundle',] )
         ;
     }
 

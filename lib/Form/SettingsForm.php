@@ -29,24 +29,27 @@ class SettingsForm extends AbstractResourceType
         $builder
             ->add( 'maintenanceMode', HiddenType::class )
             
-            ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'Maintenance Mode'] )
+            ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'vs_application.form.maintenance_mode', 'translation_domain' => 'VSApplicationBundle',] )
             
             ->add( 'maintenancePage', EntityType::class, [
-                'class'         => $this->pageClass,
-                'placeholder'   => '-- Choose a Page --',
-                'choice_label'  => 'title',
-                'required'      => false
+                'label'                 => 'vs_application.form.maintenance_page',
+                'translation_domain'    => 'VSApplicationBundle',
+                'class'                 => $this->pageClass,
+                'placeholder'           => 'vs_application.form.maintenance_page_placeholder',
+                'choice_label'          => 'title',
+                'required'              => false
             ])
             
             ->add('theme', ThemeNameChoiceType::class, [
-                'label' => 'Theme',
-                'required' => false,
-                'empty_data' => null,
-                'placeholder' => 'No theme',
+                'label'                 => 'vs_application.form.theme',
+                'translation_domain'    => 'VSApplicationBundle',
+                'required'              => false,
+                'empty_data'            => null,
+                'placeholder'           => 'vs_application.form.theme_placeholder',
             ])
             
-            ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
+            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_application.form.cancel', 'translation_domain' => 'VSApplicationBundle',] )
         ;
     }
     

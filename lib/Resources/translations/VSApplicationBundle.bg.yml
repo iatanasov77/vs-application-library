@@ -1,0 +1,15 @@
+vs_application:
+    form:
+        locale: 'Език'
+        title: 'Име'
+        name: 'Име'
+        description: 'Описание'
+        parent: 'Родител'
+        maintenance_mode: 'В режим на поддръжка'
+        maintenance_page: 'Страница в режим поддръжка'
+        maintenance_page_placeholder: '-- Избери Страница --'
+        theme: 'Тема'
+        theme_placeholder: '-- Избери Тема --'
+        apply: 'Въведи'
+        save: 'Запази'
+        cancel: 'Отказ'

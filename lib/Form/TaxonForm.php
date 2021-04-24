@@ -26,12 +26,13 @@ class TaxonForm extends AbstractResourceType
             ->add( 'currentLocale', HiddenType::class )
 
             ->add( 'parentTaxon', EntityType::class, [
-                'mapped'        => false,
-                'required'      => true,
-                'label'         => 'Parent',
-                'class'         => $this->dataClass,
-                'choice_label'  => 'name',
-                'query_builder' => function ( EntityRepository $er ) use ( $options )
+                'mapped'                => false,
+                'required'              => true,
+                'label'                 => 'vs_application.form.parent',
+                'translation_domain'    => 'VSApplicationBundle',
+                'class'                 => $this->dataClass,
+                'choice_label'          => 'name',
+                'query_builder'         => function ( EntityRepository $er ) use ( $options )
                 {
                     //var_dump( $er ); die;
                     return $er->createQueryBuilder( 't' )
@@ -40,11 +41,15 @@ class TaxonForm extends AbstractResourceType
                 }
             ])
             
-            ->add( 'name', TextType::class, ['label' => 'Name'] )
-            ->add( 'description', TextareaType::class, ['label' => 'Description', 'required' => false] )
-                
-            ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )
+            ->add( 'name', TextType::class, ['label' => 'vs_application.form.name', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'description', TextareaType::class, [
+                'label'                 => 'vs_application.form.description', 
+                'translation_domain'    => 'VSApplicationBundle', 
+                'required'              => false
+            ])
+
+            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_application.form.cancel', 'translation_domain' => 'VSApplicationBundle',] )
         ;
     }
 

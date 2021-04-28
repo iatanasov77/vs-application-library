@@ -1,3 +1,9 @@
+0.6.6	|	Release date: **28.04.2021**
+============================================
+* Bug-Fixes:
+  - Fix MaintenanceListener because the user is not always object but and not an object.
+
+
 0.6.5	|	Release date: **24.04.2021**
 ============================================
 * New Features:

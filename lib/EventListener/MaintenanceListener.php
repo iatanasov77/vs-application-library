@@ -36,7 +36,7 @@ class MaintenanceListener
                                     null;
             
             if (
-                ( ! $this->user || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
+                ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
             ) {
                 if ( $maintenancePage ) {

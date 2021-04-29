@@ -1,3 +1,9 @@
+0.6.7	|	Release date: **29.04.2021**
+============================================
+* New Features:
+  - MaintenanceListener Render MaintenancePage with layout.
+
+
 0.6.6	|	Release date: **28.04.2021**
 ============================================
 * Bug-Fixes:

@@ -40,7 +40,7 @@ class MaintenanceListener
                 && ! $debug
             ) {
                 if ( $maintenancePage ) {
-                    $event->setResponse( new Response( $maintenancePage->getText(), 503 ) );
+                    $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
                 } else {
                     $event->setResponse( new Response( 'The System is in Maintenance Mode !', 503 ) );
                 }
@@ -60,5 +60,18 @@ class MaintenanceListener
     protected function getPagesRepository()
     {
         return $this->container->get( 'vs_cms.repository.pages' );
+    }
+    
+    private function renderMaintenancePage( $maintenancePage ): string
+    {
+        $siteLayout = 'website/layout.html.twig';
+        
+        return $this->container->get( 'templating' )->render(
+            '@VSCms/Pages/show.html.twig',
+            [
+                'page'      => $maintenancePage,
+                'layout'    => $siteLayout,
+            ]
+        );
     }
 }

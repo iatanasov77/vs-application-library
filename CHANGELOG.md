@@ -1,3 +1,9 @@
+0.6.9	|	Release date: **30.04.2021**
+============================================
+* New Features:
+  - Change namespace of the console commands to vankosoft.
+
+
 0.6.8	|	Release date: **30.04.2021**
 ============================================
 * New Features:

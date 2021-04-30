@@ -1,3 +1,9 @@
+0.6.8	|	Release date: **30.04.2021**
+============================================
+* New Features:
+  - Send inMaintenance variable to twig when render MaintenancePage.
+
+
 0.6.7	|	Release date: **29.04.2021**
 ============================================
 * New Features:

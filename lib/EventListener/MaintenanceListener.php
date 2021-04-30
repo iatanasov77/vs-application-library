@@ -25,20 +25,18 @@ class MaintenanceListener
     
     public function onKernelRequest(GetResponseEvent $event)
     {
-        // This will detect if we are in dev environment
         $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
         $settings           = $this->getSettingsManager()->getSettings( $this->siteId );
         
-        // If maintenance is active and in prod environment and user is not admin
+        // If maintenance is active and in prod or test  environment and user is not admin
         if ( $settings['maintenanceMode'] ) {
-            $maintenancePage    = $settings['maintenancePage'] ?
-                                    $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
-                                    null;
-            
             if (
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
             ) {
+                $maintenancePage    = $settings['maintenancePage'] ?
+                                        $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
+                                        null;
                 if ( $maintenancePage ) {
                     $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
                 } else {
@@ -69,8 +67,9 @@ class MaintenanceListener
         return $this->container->get( 'templating' )->render(
             '@VSCms/Pages/show.html.twig',
             [
-                'page'      => $maintenancePage,
-                'layout'    => $siteLayout,
+                'page'          => $maintenancePage,
+                'layout'        => $siteLayout,
+                'inMainenance'  => true,
             ]
         );
     }

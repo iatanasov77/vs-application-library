@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class MaintenanceModeCommand extends Command
 {    
-    protected static $defaultName = 'vs:maintenance';
+    protected static $defaultName = 'vankosoft:maintenance';
     
     private $container;
     

@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class BumpVersionCommand extends Command
 {    
-    protected static $defaultName = 'vs:bumpversion';
+    protected static $defaultName = 'vankosoft:bumpversion';
     
     protected function configure()
     {

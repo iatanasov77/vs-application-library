@@ -11,13 +11,25 @@ use VS\ApplicationBundle\Component\Exception\SettingsException;
 
 class Settings
 {
-    private ContainerInterface $container;
+    /**
+     * @var ContainerInterface $container
+     */
+    private $container;
     
-    private PhpArrayAdapter $cache;
+    /**
+     * @var PhpArrayAdapter $cache
+     */
+    private $cache;
     
-    private PropertyAccessor $propertyAccessor;
+    /**
+     * @var PropertyAccessor $propertyAccessor
+     */
+    private $propertyAccessor;
     
-    private array $settingsKeys;
+    /**
+     * @var array $settingsKeys
+     */
+    private $settingsKeys;
     
     public function __construct( ContainerInterface $container )
     {

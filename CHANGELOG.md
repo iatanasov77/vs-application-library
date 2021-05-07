@@ -1,3 +1,9 @@
+0.6.10	|	Release date: **07.05.2021**
+============================================
+* Bug-Fixes:
+  - Remove typehints of the properties of the class  Component/Settings/Settings.
+
+
 0.6.9	|	Release date: **30.04.2021**
 ============================================
 * New Features:

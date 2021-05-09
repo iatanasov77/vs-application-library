@@ -1,6 +1,7 @@
 parameters:
+    vankosoft_host: '%env(HOST)%'
     vs_application.main_menus: ['mainMenu']
-    
+
 services:
     _defaults:
         autowire: true

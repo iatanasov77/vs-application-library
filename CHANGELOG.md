@@ -1,3 +1,9 @@
+0.6.11	|	Release date: **09.05.2021**
+============================================
+* Bug-Fixes:
+  - Set Parameter 'vankosoft_host' to can get from vs_app.menu_builder service.
+
+
 0.6.10	|	Release date: **07.05.2021**
 ============================================
 * Bug-Fixes:

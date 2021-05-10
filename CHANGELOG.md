@@ -1,3 +1,9 @@
+0.6.12	|	Release date: **10.05.2021**
+============================================
+* Bug-Fixes:
+  - Fix MenuBuilder to resolve parameters in uri's
+
+
 0.6.11	|	Release date: **09.05.2021**
 ============================================
 * Bug-Fixes:

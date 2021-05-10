@@ -10,7 +10,7 @@ services:
         
     vs_app.menu_builder:
         class: VS\ApplicationBundle\Component\Menu\MenuBuilder
-        arguments: ["%menu.config_file%", "@security.authorization_checker", "@router"]
+        arguments: ["%menu.config_file%", "@security.authorization_checker", "@router", "@parameter_bag"]
         calls:
           - [ setContainer ]
             

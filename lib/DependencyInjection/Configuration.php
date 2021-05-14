@@ -32,6 +32,9 @@ use Gedmo\Translatable\Entity\Repository\TranslationRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use VS\ApplicationBundle\Model\Site;
 
+use VS\ApplicationBundle\Model\LogEntry;
+use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
+
 /**
  * This is the class that validates and merges configuration from your app/config files
  *
@@ -170,11 +173,27 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TranslationRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
-                                        //->scalarNode( 'form' )->defaultValue( SiteForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
                         ->end()
+                        ->arrayNode( 'logentry' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( LogEntry::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( LogEntryRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
                     ->end()
                 ->end()
             ->end()

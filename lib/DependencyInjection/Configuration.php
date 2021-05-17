@@ -33,7 +33,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use VS\ApplicationBundle\Model\Site;
 
 use VS\ApplicationBundle\Model\LogEntry;
-use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
+use VS\ApplicationBundle\Repository\LogEntryRepository;
 
 /**
  * This is the class that validates and merges configuration from your app/config files

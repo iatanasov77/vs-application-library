@@ -3,11 +3,7 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        
-#     vs_app.session:
-#         public: true
-#         class: Symfony\Component\HttpFoundation\Session\Session
-# 
+ 
     vs_app.subscriber.locale:
         class: VS\ApplicationBundle\EventSubscriber\LocaleSubscriber
         arguments: ['%kernel.default_locale%']

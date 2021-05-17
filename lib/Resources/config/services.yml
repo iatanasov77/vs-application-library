@@ -5,9 +5,9 @@ imports:
     - { resource: services/theme.yaml }
     - { resource: services/menu.yaml }
     - { resource: services/i18n.yaml }
+    - { resource: services/doctrine_extensions.yaml }
 
 parameters:
-    #ia_cms.example.class: IACmsBundle\Example
     menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
     vs_app.settings.site_id: null
     vs_application.supress_pdo_exception: false

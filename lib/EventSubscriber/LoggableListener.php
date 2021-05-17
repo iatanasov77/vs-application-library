@@ -7,6 +7,8 @@ use Gedmo\Translatable\Mapping\Event\Adapter\ORM as TranslatableOrmAdapter;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\EventArgs;
 
+use VS\ApplicationBundle\EventSubscriber\Mapping\Event\Adapter\ORM as LoggableOrmAdapter;
+
 class LoggableListener extends BaseLoggableListener
 {
     /**
@@ -35,10 +37,24 @@ class LoggableListener extends BaseLoggableListener
      */
     public function onFlush( EventArgs $eventArgs )
     {
-        $this->initTranslatableAdapter( $eventArgs );
+        $this->transEa  = new TranslatableOrmAdapter();
+        $this->transEa->setEventArgs( $eventArgs );
+        
+        $this->logEa    = new LoggableOrmAdapter( $this->defaultLocale );
+        $this->logEa->setEventArgs( $eventArgs );
         
         parent::onFlush( $eventArgs );
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    /*
+    protected function getNamespace()
+    {
+        return __NAMESPACE__;
+    }
+    */
     
     /**
      * Create a new Log instance with locale
@@ -48,6 +64,12 @@ class LoggableListener extends BaseLoggableListener
      */
     protected function createLogEntry($action, $object, LoggableAdapter $ea)
     {
+        // Override Default Adapter
+        $ea = $this->logEa;
+        if ( $object->getTranslatableLocale() ) {
+            $this->logEa->setLocale( $object->getTranslatableLocale() );
+        }
+        
         $om = $ea->getObjectManager();
         $wrapped = AbstractWrapper::wrap($object, $om);
         $meta = $wrapped->getMetadata();
@@ -91,7 +113,7 @@ class LoggableListener extends BaseLoggableListener
             
             $version = 1;
             if ($action !== self::ACTION_CREATE) {
-                $version = $ea->getNewVersion($logEntryMeta, $object);
+                $version = $ea->getNewVersion($logEntryMeta, $object );
                 if (empty($version)) {
                     // was versioned later
                     $version = 1;
@@ -117,12 +139,6 @@ class LoggableListener extends BaseLoggableListener
                 $this->persistTranslation( $class, $object, $field, $om );
             }
         }
-    }
-    
-    private function initTranslatableAdapter( EventArgs $eventArgs )
-    {
-        $this->transEa  = new TranslatableOrmAdapter();
-        $this->transEa->setEventArgs( $eventArgs );
     }
     
     private function persistTranslation( $class, $object, $field, ObjectManager $om )

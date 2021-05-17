@@ -1,3 +1,10 @@
+0.7.1	|	Release date: **17.05.2021**
+============================================
+* New Features:
+  - Override Gedmo LogEntryRepository to make revert by locale possible.
+  - Make Entity Loggable Versioning depends on Locale.
+
+
 0.7.0	|	Release date: **17.05.2021**
 ============================================
 * New Features:

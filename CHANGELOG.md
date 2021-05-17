@@ -1,3 +1,10 @@
+0.7.0	|	Release date: **17.05.2021**
+============================================
+* New Features:
+  - Add Vaersioning of Translatable fields.
+  - Add LogEntry Model.
+
+
 0.6.12	|	Release date: **10.05.2021**
 ============================================
 * Bug-Fixes:

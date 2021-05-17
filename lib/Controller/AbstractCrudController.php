@@ -11,7 +11,7 @@ use Doctrine\ORM\ORMException;
 
 class AbstractCrudController extends ResourceController
 {
-    private $classInfo;
+    protected $classInfo;
     
     public function indexAction( Request $request ) : Response
     {

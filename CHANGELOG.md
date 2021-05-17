@@ -1,3 +1,9 @@
+0.7.2	|	Release date: **17.05.2021**
+============================================
+* Improvements:
+  - AbstractCrudController make classInfo protected to can get from child controllers.
+
+
 0.7.1	|	Release date: **17.05.2021**
 ============================================
 * New Features:

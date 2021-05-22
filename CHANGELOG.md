@@ -1,3 +1,11 @@
+0.7.3	|	Release date: **22.05.2021**
+============================================
+* New Features:
+* Bug-Fixes:
+  - Fix LoggableListener when not versioned entity is submited.
+  - Fix LoggableListener when translatable has not id yet.
+
+
 0.7.2	|	Release date: **17.05.2021**
 ============================================
 * Improvements:

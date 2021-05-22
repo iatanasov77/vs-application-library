@@ -62,69 +62,72 @@ class LoggableListener extends BaseLoggableListener
      * {@inheritDoc}
      * @see \Gedmo\Loggable\LoggableListener::createLogEntry()
      */
-    protected function createLogEntry($action, $object, LoggableAdapter $ea)
+    protected function createLogEntry( $action, $object, LoggableAdapter $ea )
     {
-        // Override Default Adapter
+        // Default Adapter not used. Using custom adapter $this->logEa;
         $ea = $this->logEa;
-        if ( $object->getTranslatableLocale() ) {
-            $this->logEa->setLocale( $object->getTranslatableLocale() );
-        }
         
-        $om = $ea->getObjectManager();
-        $wrapped = AbstractWrapper::wrap($object, $om);
-        $meta = $wrapped->getMetadata();
+        $om         = $this->logEa->getObjectManager();
+        $wrapped    = AbstractWrapper::wrap( $object, $om );
+        $meta       = $wrapped->getMetadata();
         
         // Filter embedded documents
-        if (isset($meta->isEmbeddedDocument) && $meta->isEmbeddedDocument) {
+        if ( isset( $meta->isEmbeddedDocument ) && $meta->isEmbeddedDocument ) {
             return;
         }
         
-        $this->submitTranslations( $meta->name, $object, $ea->getObjectManager() );
-        
-        if ($config = $this->getConfiguration($om, $meta->name)) {
-            $logEntryClass  = $this->getLogEntryClass($ea, $meta->name);
-            $logEntryMeta   = $om->getClassMetadata($logEntryClass);
+        if ( $config = $this->getConfiguration( $om, $meta->name ) ) {
+            if ( $object->getTranslatableLocale() ) {
+                $this->logEa->setLocale( $object->getTranslatableLocale() );
+            }
+            
+            if ( $action !== self::ACTION_CREATE ) {
+                $this->submitTranslations( $meta->name, $object, $om );
+            }
+            
+            $logEntryClass  = $this->getLogEntryClass( $this->logEa, $meta->name );
+            $logEntryMeta   = $om->getClassMetadata( $logEntryClass );
             /** @var \Gedmo\Loggable\Entity\LogEntry $logEntry */
             $logEntry   = $logEntryMeta->newInstance();
            
             $locale     = $object->getTranslatableLocale() ?: $this->defaultLocale;
             $logEntry->setLocale( $locale );
-            $logEntry->setAction($action);
-            $logEntry->setUsername($this->username);
-            $logEntry->setObjectClass($meta->name);
+            $logEntry->setAction( $action );
+            $logEntry->setUsername( $this->username );
+            $logEntry->setObjectClass( $meta->name );
             $logEntry->setLoggedAt();
             
             // check for the availability of the primary key
             $uow = $om->getUnitOfWork();
-            if ($action === self::ACTION_CREATE && $ea->isPostInsertGenerator($meta)) {
-                $this->pendingLogEntryInserts[spl_object_hash($object)] = $logEntry;
+            if ( $action === self::ACTION_CREATE && $this->logEa->isPostInsertGenerator( $meta ) ) {
+                $this->pendingLogEntryInserts[spl_object_hash( $object )] = $logEntry;
             } else {
-                $logEntry->setObjectId($wrapped->getIdentifier());
+                $logEntry->setObjectId( $wrapped->getIdentifier() );
             }
             $newValues = array();
-            if ($action !== self::ACTION_REMOVE && isset($config['versioned'])) {
-                $newValues = $this->getObjectChangeSetData($ea, $object, $logEntry);
-                $logEntry->setData($newValues);
+            if ( $action !== self::ACTION_REMOVE && isset( $config['versioned'] ) ) {
+                $newValues = $this->getObjectChangeSetData( $this->logEa, $object, $logEntry );
+                $logEntry->setData( $newValues );
             }
             
-            if($action === self::ACTION_UPDATE && 0 === count($newValues)) {
+            if( $action === self::ACTION_UPDATE && 0 === count( $newValues ) ) {
                 return null;
             }
             
             $version = 1;
-            if ($action !== self::ACTION_CREATE) {
-                $version = $ea->getNewVersion($logEntryMeta, $object );
-                if (empty($version)) {
+            if ( $action !== self::ACTION_CREATE ) {
+                $version = $this->logEa->getNewVersion( $logEntryMeta, $object );
+                if ( empty( $version ) ) {
                     // was versioned later
                     $version = 1;
                 }
             }
-            $logEntry->setVersion($version);
+            $logEntry->setVersion( $version );
             
-            $this->prePersistLogEntry($logEntry, $object);
+            $this->prePersistLogEntry( $logEntry, $object );
             
-            $om->persist($logEntry);
-            $uow->computeChangeSet($logEntryMeta, $logEntry);
+            $om->persist( $logEntry );
+            $uow->computeChangeSet( $logEntryMeta, $logEntry );
             
             return $logEntry;
         }

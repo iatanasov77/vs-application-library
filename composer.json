@@ -12,8 +12,7 @@
         }
     ],
     "require": {
-        "php": "^5.5.9 || ^7.0",
-        "composer/semver": "^1.5",
+        "php": "^7.2",
         
         "symfony/flex": "^1.1",
         "symfony/webpack-encore-bundle": "^1.6",
@@ -45,10 +44,7 @@
         
        	"sylius/resource-bundle": "^1.6",
        	"sylius/taxonomy": "^1.6",
-       	"sylius/theme-bundle": "^1.4",
-       	
-        "alcaeus/mongo-php-adapter": "^1.1",
-        "doctrine/mongodb-odm-bundle": "^3.0"
+       	"sylius/theme-bundle": "^1.4"
     },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow",

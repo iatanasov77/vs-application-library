@@ -1,3 +1,9 @@
+0.7.4	|	Release date: **23.05.2021**
+============================================
+* Bug-Fixes:
+  - Remove some uneeded dependencies from composer.json
+
+
 0.7.3	|	Release date: **22.05.2021**
 ============================================
 * New Features:

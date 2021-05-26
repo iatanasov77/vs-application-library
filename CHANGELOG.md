@@ -1,3 +1,9 @@
+0.8.0	|	Release date: **26.05.2021**
+============================================
+* New Features:
+  - Update Dependencies (Sylius Resource Bundle - 1.8).
+
+
 0.7.4	|	Release date: **23.05.2021**
 ============================================
 * Bug-Fixes:

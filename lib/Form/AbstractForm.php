@@ -14,9 +14,9 @@ class AbstractForm extends AbstractResourceType
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add( 'btnApply', SubmitType::class, ['label' => 'vs_users_subscriptions.form.save', 'translation_domain' => 'VSUsersSubscriptionsBundle',] )
-            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_users_subscriptions.form.save', 'translation_domain' => 'VSUsersSubscriptionsBundle',] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_users_subscriptions.form.cancel', 'translation_domain' => 'VSUsersSubscriptionsBundle',] )
+            ->add( 'btnApply', SubmitType::class, ['label' => 'vs_application.form.apply', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
+            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_application.form.cancel', 'translation_domain' => 'VSApplicationBundle',] )
         ;
     }
     

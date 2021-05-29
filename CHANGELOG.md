@@ -1,3 +1,9 @@
+0.8.2	|	Release date: **29.05.2021**
+============================================
+* New Features:
+  - Add SymfonyMonologBundle into composer.json
+
+
 0.8.1	|	Release date: **29.05.2021**
 ============================================
 * New Features and Improvements:

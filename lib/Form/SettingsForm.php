@@ -1,19 +1,16 @@
 <?php namespace VS\ApplicationBundle\Form;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 
 use VS\ApplicationBundle\Model\GeneralSettings;
 
-class SettingsForm extends AbstractResourceType
+class SettingsForm extends AbstractForm
 {
     protected $pageClass;
     
@@ -24,11 +21,11 @@ class SettingsForm extends AbstractResourceType
         $this->pageClass = $pageClass;
     }
     
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm( FormBuilderInterface $builder, array $options )
     {
+        parent::buildForm( $builder, $options );
+        
         $builder
-            ->add( 'maintenanceMode', HiddenType::class )
-            
             ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'vs_application.form.maintenance_mode', 'translation_domain' => 'VSApplicationBundle',] )
             
             ->add( 'maintenancePage', EntityType::class, [
@@ -47,14 +44,16 @@ class SettingsForm extends AbstractResourceType
                 'empty_data'            => null,
                 'placeholder'           => 'vs_application.form.theme_placeholder',
             ])
-            
-            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_application.form.cancel', 'translation_domain' => 'VSApplicationBundle',] )
         ;
     }
     
     public function configureOptions( OptionsResolver $resolver ): void
     {
         parent::configureOptions( $resolver );
+    }
+    
+    public function getName()
+    {
+        return 'vs_application.general_settings';
     }
 }

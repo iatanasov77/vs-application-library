@@ -1,27 +1,21 @@
 <?php namespace VS\ApplicationBundle\Form;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Doctrine\ORM\EntityRepository;
 
-class TaxonForm extends AbstractResourceType
+class TaxonForm extends AbstractForm
 {
-    public function __construct( $dataClass )
-    {
-        parent::__construct( $dataClass );
-    }
-    
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
+        parent::buildForm( $builder, $options );
+        
         $builder
             ->add( 'currentLocale', HiddenType::class )
 
@@ -47,9 +41,6 @@ class TaxonForm extends AbstractResourceType
                 'translation_domain'    => 'VSApplicationBundle', 
                 'required'              => false
             ])
-
-            ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
-            ->add( 'btnCancel', ButtonType::class, ['label' => 'vs_application.form.cancel', 'translation_domain' => 'VSApplicationBundle',] )
         ;
     }
 
@@ -60,6 +51,11 @@ class TaxonForm extends AbstractResourceType
         $resolver->setDefaults([
             'rootTaxon' => null,
         ]);
+    }
+    
+    public function getName()
+    {
+        return 'vs_application.taxon';
     }
 }
 

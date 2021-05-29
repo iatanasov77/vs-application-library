@@ -1,3 +1,13 @@
+0.8.1	|	Release date: **29.05.2021**
+============================================
+* New Features and Improvements:
+  - Fix All Forms to extend VankoSoft AbstractForm.
+  - Add Twig Macros for VankoSoft Forms.
+  - Fix Labels of AbstractForm.
+  - Add AbstractForm to reuse with all VankoSoft Forms.
+  - Fix AbstractCrudController with the new version of the Sylius Resource Bundle.
+
+
 0.8.0	|	Release date: **26.05.2021**
 ============================================
 * New Features:

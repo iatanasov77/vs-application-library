@@ -1,0 +1,16 @@
+
+{% macro buttons() %}
+	<div class="row">&nbsp;</div>
+	
+    <div class="input-group row">
+    	<div class="col-sm-1">
+            {{ form_widget(form.btnApply, {'attr': {'class': 'btn btn-primary', 'id':'btnApply'}}) }}
+        </div>
+        <div class="col-sm-1">
+            {{ form_widget(form.btnSave, {'attr': {'class': 'btn btn-primary', 'id':'btnSave'}}) }}
+        </div>
+        <div class="col-sm-1">
+            {{ form_widget(form.btnCancel, {'attr': {'class': 'btn btn-default', 'id':'btnCancel'}}) }}
+        </div>
+    </div>
+{% endmacro %}

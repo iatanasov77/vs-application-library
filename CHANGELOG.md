@@ -1,3 +1,9 @@
+0.8.5	|	Release date: **31.05.2021**
+============================================
+* Bug-Fixes:
+  - Pass parameter useTarget in the recorsive calling of the bootstrapTreeviewData method.
+
+
 0.8.4	|	Release date: **31.05.2021**
 ============================================
 * New Features:

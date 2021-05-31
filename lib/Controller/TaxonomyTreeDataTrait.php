@@ -101,7 +101,7 @@ trait TaxonomyTreeDataTrait
             }
             
             if ( $node->getChildren()->count() ) {
-                $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'] );
+                $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget );
             }
         }
     }

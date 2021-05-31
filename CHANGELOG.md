@@ -1,3 +1,9 @@
+0.8.3	|	Release date: **31.05.2021**
+============================================
+* New Features:
+  - Add Global Constants for Json Statuses.
+
+
 0.8.2	|	Release date: **29.05.2021**
 ============================================
 * New Features:

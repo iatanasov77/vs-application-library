@@ -1,3 +1,9 @@
+0.8.4	|	Release date: **31.05.2021**
+============================================
+* New Features:
+  - Add bootstrapTreeviewData method in the TaxonomyTreeDataTrait.
+
+
 0.8.3	|	Release date: **31.05.2021**
 ============================================
 * New Features:

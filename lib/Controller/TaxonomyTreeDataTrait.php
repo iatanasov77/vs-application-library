@@ -87,6 +87,35 @@ trait TaxonomyTreeDataTrait
         }
     }
     
+    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true )
+    {
+        foreach( $tree as $k => $node ) {
+            $data[$k]   = [
+                'text'  => $node->getName(),
+                'tags'  => ['0'],
+                'nodes' => []
+            ];
+            
+            if ( $useTarget && $this->targetCount( $node->getId() ) ) {
+                $data[$k]['href']   = $this->targetUrl( $node->getId() );
+            }
+            
+            if ( $node->getChildren()->count() ) {
+                $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'] );
+            }
+        }
+    }
+    
+    protected function targetCount( $taxonId )
+    { 
+        return 0;
+    }
+    
+    protected function targetUrl( $taxonId )
+    {
+        return '';
+    }
+    
     protected function getTaxonomyRepository()
     {
         return $this->get( 'vs_application.repository.taxonomy' );

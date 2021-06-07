@@ -87,27 +87,39 @@ trait TaxonomyTreeDataTrait
         }
     }
     
-    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true )
+    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null )
     {
         foreach( $tree as $k => $node ) {
+            
             $data[$k]   = [
                 'text'  => $node->getName(),
                 'tags'  => ['0'],
                 'nodes' => []
             ];
             
+            if ( $node->getChildren()->count() ) {
+                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId );
+            } else {
+                $expandParent   = false;
+            }
+            
+            $data[$k]['state']   = [
+                'checked'   => false,
+                'disabled'  => false,
+                'expanded'  => $expandParent,
+                'selected'  => $taxonId == $node->getId()
+            ];
+            
             if ( $useTarget && $this->targetCount( $node->getId() ) ) {
                 $data[$k]['href']   = $this->targetUrl( $node->getId() );
             }
-            
-            if ( $node->getChildren()->count() ) {
-                $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget );
-            }
         }
+        
+        return $taxonId == $node->getId();
     }
     
     protected function targetCount( $taxonId )
-    { 
+    {
         return 0;
     }
     

@@ -1,3 +1,9 @@
+0.8.6	|	Release date: **07.06.2021**
+============================================
+* New Features:
+  - Add to TaxonomyTreeDataTrait to add states to nodes.
+
+
 0.8.5	|	Release date: **31.05.2021**
 ============================================
 * Bug-Fixes:

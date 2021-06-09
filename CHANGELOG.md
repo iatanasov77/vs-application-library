@@ -1,3 +1,9 @@
+0.8.7	|	Release date: **09.06.2021**
+============================================
+* Improvements:
+  - Add SettingsSiteForm. Replace twig/extensions with twig/extra-bundle .
+
+
 0.8.6	|	Release date: **07.06.2021**
 ============================================
 * New Features:

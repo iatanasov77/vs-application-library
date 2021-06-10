@@ -23,8 +23,8 @@ use VS\ApplicationBundle\Form\TaxonomyForm;
 
 use VS\ApplicationBundle\Repository\TaxonRepository;
 use VS\ApplicationBundle\Model\Taxon;
+use VS\ApplicationBundle\Model\TaxonTranslation;
 use VS\ApplicationBundle\Form\TaxonForm;
-use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
 use VS\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;

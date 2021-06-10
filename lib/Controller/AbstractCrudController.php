@@ -20,6 +20,13 @@ class AbstractCrudController extends ResourceController
         
         $this->isGrantedOr403( $configuration, ResourceActions::INDEX );
         $resources = $this->resourcesCollectionProvider->get( $configuration, $this->repository );
+        if (
+            $this->metadata->getParameters()['classes']['interface'] == 'VS\ApplicationBundle\Model\Interfaces\TaxonRelationInterface'
+        ) {
+            foreach ( $resources as $r ) {
+                $r->setCurrentLocale( $request->getLocale() );
+            }
+        }
         
         $this->eventDispatcher->dispatchMultiple( ResourceActions::INDEX, $configuration, $resources );
         

@@ -1,3 +1,9 @@
+0.9.0	|	Release date: **11.06.2021**
+============================================
+* New Features:
+  - Add Oportunity of Translations of Taxon Relations.
+
+
 0.8.7	|	Release date: **09.06.2021**
 ============================================
 * Improvements:

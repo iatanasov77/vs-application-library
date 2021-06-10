@@ -1,12 +1,12 @@
 <?php namespace VS\ApplicationBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use VS\ApplicationBundle\Form\SettingsForm;
 
-class SettingsExtController extends Controller
+class SettingsExtController extends AbstractController
 {
     public function index( Request $request ): Response
     {

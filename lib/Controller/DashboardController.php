@@ -1,9 +1,9 @@
 <?php namespace VS\ApplicationBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class DashboardController extends Controller
+class DashboardController extends AbstractController
 {
     public function index()
     {

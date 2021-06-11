@@ -1,6 +1,7 @@
 <?php namespace VS\ApplicationBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+//use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,7 +24,8 @@ class MaintenanceListener
         }
     }
     
-    public function onKernelRequest(GetResponseEvent $event)
+    //public function onKernelRequest( GetResponseEvent $event )
+    public function onKernelRequest( RequestEvent $event )
     {
         $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
         $settings           = $this->getSettingsManager()->getSettings( $this->siteId );

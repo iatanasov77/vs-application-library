@@ -1,6 +1,6 @@
 <?php namespace VS\ApplicationBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
@@ -25,7 +25,7 @@ class ThemeChangeListener
         $this->siteId               = $siteId;
     }
     
-    public function onKernelRequest( GetResponseEvent $event )
+    public function onKernelRequest( RequestEvent $event )
     {
         $settings   = $this->settingsRepository->getSettings( $this->siteId );
 

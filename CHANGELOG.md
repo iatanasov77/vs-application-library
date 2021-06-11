@@ -1,3 +1,10 @@
+0.9.2	|	Release date: **11.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix ClassName Colision.
+  - Symfony 5 EventListener's
+
+
 0.9.1	|	Release date: **11.06.2021**
 ============================================
 * New Features:

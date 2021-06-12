@@ -8,7 +8,7 @@ imports:
     - { resource: services/doctrine_extensions.yaml }
 
 parameters:
-    menu.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
+    menu.config_file: "%kernel.project_dir%/../config/packages/vs_application.yaml"
     vs_app.settings.site_id: null
     vs_application.supress_pdo_exception: false
 

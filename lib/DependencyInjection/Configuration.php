@@ -5,8 +5,13 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
+
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use VS\ApplicationBundle\Model\Locale;
 
 use VS\ApplicationBundle\Model\SiteSettings;
 use VS\ApplicationBundle\Form\SiteForm;
@@ -58,6 +63,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode( 'taxonomy' )
                     ->scalarPrototype()->end()
                 ->end()
+                ->scalarNode( 'locale' )->defaultValue( 'en_US' )->cannotBeEmpty()->end()
             ->end()
         ;
         
@@ -189,6 +195,23 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( LogEntryRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode( 'locale' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( Locale::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( LocaleInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( ResourceController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
+                                        ->scalarNode( 'form' )->defaultValue( LocaleType::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

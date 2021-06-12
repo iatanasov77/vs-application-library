@@ -27,6 +27,7 @@
         
         "sylius/resource-bundle": "^1.8",
         "sylius/taxonomy-bundle": "^1.9",
+        "sylius/locale-bundle": "^1.9",
        	"sylius/theme-bundle": "^2.2",
        	"sylius/fixtures-bundle": "^1.7"
     },

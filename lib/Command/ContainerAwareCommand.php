@@ -4,6 +4,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * @link https://github.com/symfony/symfony/blob/v4.4.18/src/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.php
+ */
 abstract class ContainerAwareCommand extends Command implements ContainerAwareInterface
 {
     private $container;

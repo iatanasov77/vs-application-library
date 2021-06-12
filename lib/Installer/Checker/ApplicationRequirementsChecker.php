@@ -18,7 +18,7 @@ final class ApplicationRequirementsChecker implements RequirementsCheckerInterfa
 
     public function __construct( ApplicationRequirements $applicationRequirements )
     {
-        $this->applicationRequirements = $applicationRequirements;
+        $this->applicationRequirements  = $applicationRequirements;
     }
 
     public function check( InputInterface $input, OutputInterface $output ): bool

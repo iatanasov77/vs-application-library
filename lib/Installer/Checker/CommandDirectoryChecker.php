@@ -1,17 +1,4 @@
-<?php
-
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
-
-namespace Sylius\Bundle\CoreBundle\Installer\Checker;
+<?php namespace VS\ApplicationBundle\Installer\Checker;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
@@ -25,58 +12,58 @@ final class CommandDirectoryChecker
     /** @var Filesystem */
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
+    public function __construct( Filesystem $filesystem )
     {
-        $this->filesystem = $filesystem;
+        $this->filesystem   = $filesystem;
     }
 
-    public function ensureDirectoryExists($directory, OutputInterface $output): void
+    public function ensureDirectoryExists( $directory, OutputInterface $output ): void
     {
-        if (is_dir($directory)) {
+        if ( is_dir( $directory ) ) {
             return;
         }
 
         try {
-            $this->filesystem->mkdir($directory, 0755);
+            $this->filesystem->mkdir( $directory, 0755 );
 
-            $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', realpath($directory)));
-        } catch (IOException $exception) {
-            $output->writeln('');
-            $output->writeln('<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>');
-            $output->writeln('');
+            $output->writeln( sprintf( '<comment>Created "%s" directory.</comment>', realpath( $directory ) ) );
+        } catch ( IOException $exception ) {
+            $output->writeln( '' );
+            $output->writeln( '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>' );
+            $output->writeln( '' );
 
-            throw new \RuntimeException(sprintf(
+            throw new \RuntimeException( sprintf(
                 'Create directory "%s" and run command "<comment>%s</comment>"',
-                realpath($directory),
+                realpath( $directory ),
                 $this->name
-            ));
+            ) );
         }
     }
 
-    public function ensureDirectoryIsWritable($directory, OutputInterface $output): void
+    public function ensureDirectoryIsWritable( $directory, OutputInterface $output ): void
     {
-        if (is_writable($directory)) {
+        if ( is_writable( $directory ) ) {
             return;
         }
 
         try {
-            $this->filesystem->chmod($directory, 0755);
+            $this->filesystem->chmod( $directory, 0755 );
 
-            $output->writeln(sprintf('<comment>Changed "%s" permissions to 0755.</comment>', realpath($directory)));
-        } catch (IOException $exception) {
-            $output->writeln('');
-            $output->writeln('<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>');
-            $output->writeln('');
+            $output->writeln( sprintf( '<comment>Changed "%s" permissions to 0755.</comment>', realpath( $directory ) ) );
+        } catch ( IOException $exception ) {
+            $output->writeln( '' );
+            $output->writeln( '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>' );
+            $output->writeln( '' );
 
-            throw new \RuntimeException(sprintf(
+            throw new \RuntimeException( sprintf(
                 'Set "%s" writable and run command "<comment>%s</comment>"',
-                realpath(dirname($directory)),
+                realpath( dirname( $directory ) ),
                 $this->name
             ));
         }
     }
 
-    public function setCommandName(string $name): void
+    public function setCommandName( string $name ): void
     {
         $this->name = $name;
     }

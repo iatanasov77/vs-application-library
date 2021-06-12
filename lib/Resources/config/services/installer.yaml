@@ -11,7 +11,7 @@ services:
         tags:
             - 'console.command'
             
-    vs_app.installer.checker.sylius_requirements:
+    vs_app.installer.checker.application_requirements:
         class: VS\ApplicationBundle\Installer\Checker\ApplicationRequirementsChecker
         arguments:
             - '@vs_app.requirements'

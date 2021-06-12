@@ -19,17 +19,17 @@ EOT
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $fulfilled = $this->getContainer()->get('sylius.installer.checker.sylius_requirements')->check($input, $output);
+        $fulfilled = $this->getContainer()->get( 'vs_app.installer.checker.application_requirements' )->check( $input, $output );
 
-        if (!$fulfilled) {
+        if ( ! $fulfilled ) {
             throw new RuntimeException(
                 'Some system requirements are not fulfilled. Please check output messages and fix them.'
             );
         }
 
-        $output->writeln('<info>Success! Your system can run VankoSoft Application properly.</info>');
+        $output->writeln( '<info>Success! Your system can run VankoSoft Application properly.</info>' );
 
         return 0;
     }

@@ -6,6 +6,7 @@ imports:
     - { resource: services/menu.yaml }
     - { resource: services/i18n.yaml }
     - { resource: services/doctrine_extensions.yaml }
+    - { resource: services/commands.yaml }
 
 parameters:
     menu.config_file: "%kernel.project_dir%/../config/packages/vs_application.yaml"
@@ -18,31 +19,10 @@ services:
         autoconfigure: true
         public: true
     
+    ##############################################################
+    # AuthController
+    ##############################################################
     VS\ApplicationBundle\Controller\AuthController:
         tags: ['controller.service_arguments']
         autowire: false
-            
-    ##############################################################
-    # Console commands
-    ##############################################################
-    vs_app.command.maintenance:
-        class: VS\ApplicationBundle\Command\MaintenanceModeCommand
-        tags:
-            - 'console.command'
-            
-    vs_app.command.bumpversion:
-        class: VS\ApplicationBundle\Command\BumpVersionCommand
-        tags:
-            - 'console.command'
-    vs_app.command.assets.sources:
-        class: VS\ApplicationBundle\Command\AssetsSourcesCommand
-        arguments:
-            - '@filesystem'
-        tags:
-            - 'console.command'
-    vs_app.command.assets.dependencies:
-        class: VS\ApplicationBundle\Command\CheckAssetDependenciesCommand
-        arguments:
-            - '@filesystem'
-        tags:
-            - 'console.command'
+

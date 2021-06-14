@@ -7,44 +7,11 @@
 >
 
     <mapped-superclass name="VS\ApplicationBundle\Model\Taxon">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
-
-        <many-to-one field="root" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
-            <join-column name="tree_root" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
-            <gedmo:tree-root />
-        </many-to-one>
-        <many-to-one field="parent" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children">
-            <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
-            <gedmo:tree-parent />
-            <gedmo:sortable-group />
-        </many-to-one>
-
-        <one-to-many field="children" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" mapped-by="parent">
-            <cascade>
-                <cascade-persist />
+        <one-to-one field="taxonomy" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonomyInterface" mapped-by="rootTaxon">
+        	<cascade>
+                <cascade-all/>
             </cascade>
-            <order-by>
-                <order-by-field name="position" direction="ASC" />
-            </order-by>
-        </one-to-many>
-
-        <field name="code" column="code" type="string" unique="true" nullable="true" />
-        <field name="left" column="tree_left" type="integer">
-            <gedmo:tree-left />
-        </field>
-        <field name="right" column="tree_right" type="integer">
-            <gedmo:tree-right />
-        </field>
-        <field name="level" column="tree_level" type="integer">
-            <gedmo:tree-level />
-        </field>
-        <field name="position" type="integer" nullable="true">
-            <gedmo:sortable-position />
-        </field>
-
-        <gedmo:tree type="nested" />
+        </one-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

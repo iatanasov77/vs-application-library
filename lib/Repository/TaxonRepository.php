@@ -1,11 +1,11 @@
 <?php namespace VS\ApplicationBundle\Repository;
 
-use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
-// use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
-// class TaxonRepository extends NestedTreeRepository
-class TaxonRepository extends BaseTaxonRepository
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+class TaxonRepository extends NestedTreeRepository
+//use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
+//class TaxonRepository extends BaseTaxonRepository
 {
     public function getTaxonsAsArray( $rootTaxonId, $parentId )
     {

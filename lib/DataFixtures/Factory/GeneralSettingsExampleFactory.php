@@ -1,5 +1,6 @@
 <?php namespace VS\ApplicationBundle\DataFixtures\Factory;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 

@@ -54,8 +54,8 @@ EOT
         $suite = $input->getOption( 'fixture-suite' );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln('<info>Installing VankoSoft Application...</info>');
-        $outputStyle->writeln($this->getSyliusLogo());
+        $outputStyle->writeln( '<info>Installing VankoSoft Application...</info>' );
+        //$outputStyle->writeln( $this->getSyliusLogo() );
         
         $this->ensureDirectoryExistsAndIsWritable( (string) $this->getContainer()->getParameter( 'kernel.cache_dir' ), $output );
         

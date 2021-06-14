@@ -1,3 +1,9 @@
+0.9.5	|	Release date: **14.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix GeneralSettingsExampleFactory missing class requirements.
+
+
 0.9.4	|	Release date: **14.06.2021**
 ============================================
 * Bug-Fixes:

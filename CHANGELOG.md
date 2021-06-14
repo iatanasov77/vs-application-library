@@ -1,3 +1,9 @@
+0.10.1	|	Release date: **14.06.2021**
+============================================
+* New Features:
+  - Add stof/doctrine-extensions-bundle to composer requirements.
+
+
 0.10.0	|	Release date: **14.06.2021**
 ============================================
 * New Features and Improvements:

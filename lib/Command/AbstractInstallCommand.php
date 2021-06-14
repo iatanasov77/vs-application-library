@@ -93,7 +93,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     
     protected function ensureDirectoryExistsAndIsWritable( string $directory, OutputInterface $output ): void
     {
-        $checker    = $this->getContainer()->get( 'sylius.installer.checker.command_directory' );
+        $checker    = $this->getContainer()->get( 'vs_app.installer.checker.command_directory' );
         $checker->setCommandName( $this->getName() );
         
         $checker->ensureDirectoryExists( $directory, $output );

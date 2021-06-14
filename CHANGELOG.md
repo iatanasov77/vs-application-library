@@ -1,3 +1,9 @@
+0.10.0	|	Release date: **14.06.2021**
+============================================
+* New Features and Improvements:
+  - Remove sylius/taxonomy-bundle, leave only sylius/taxonomy package and make Taxonomy orm mapping here.
+
+
 0.9.9	|	Release date: **14.06.2021**
 ============================================
 * Bug-Fixes:

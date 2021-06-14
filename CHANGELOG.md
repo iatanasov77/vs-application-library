@@ -1,3 +1,9 @@
+0.9.4	|	Release date: **14.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix AbstractResourceFixture namespace.
+
+
 0.9.3	|	Release date: **14.06.2021**
 ============================================
 * New Features:

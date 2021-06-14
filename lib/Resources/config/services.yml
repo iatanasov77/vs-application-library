@@ -9,10 +9,14 @@ imports:
     - { resource: services/commands.yaml }
     - { resource: services/installer.yaml }
     - { resource: services/installer_requirements.yaml }
+    - { resource: services/fixtures_factories.yaml }
+    - { resource: services/fixtures_listeners.yaml }
+    - { resource: services/fixtures.yaml }
 
 parameters:
-    menu.config_file: "%kernel.project_dir%/../config/packages/vs_application.yaml"
-    vs_app.settings.site_id: null
+    vs_application.menu.config_file: "%kernel.project_dir%/../config/packages/vs_application.yaml"
+    vs_application.public_dir: "%kernel.project_dir%/public/admin_panel"
+    vs_application.settings.site_id: null
     vs_application.supress_pdo_exception: false
 
 services:

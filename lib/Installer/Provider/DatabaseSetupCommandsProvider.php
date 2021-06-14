@@ -51,8 +51,8 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         } catch ( \Exception $exception ) {
             $message = $exception->getMessage();
 
-            $mysqlDatabaseError     = false !== strpos($message, sprintf("Unknown database '%s'", $databaseName));
-            $postgresDatabaseError  = false !== strpos($message, sprintf('database "%s" does not exist', $databaseName));
+            $mysqlDatabaseError     = false !== strpos( $message, sprintf( "Unknown database '%s'", $databaseName ) );
+            $postgresDatabaseError  = false !== strpos( $message, sprintf( 'database "%s" does not exist', $databaseName ) );
 
             if ( $mysqlDatabaseError || $postgresDatabaseError ) {
                 return false;

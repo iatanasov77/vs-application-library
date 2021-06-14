@@ -75,15 +75,15 @@ EOT
                     $parameters['--fixture-suite']  = $suite;
                 }
                 
-                $this->commandExecutor->runCommand( 'sylius:install:' . $command['command'], $parameters, $output );
+                $this->commandExecutor->runCommand( 'vankosoft:install:' . $command['command'], $parameters, $output );
             } catch ( RuntimeException $exception ) {
                 $errored = true;
             }
         }
         
-        $outputStyle->newLine(2);
-        $outputStyle->success($this->getProperFinalMessage($errored));
-        $outputStyle->writeln('You can now open your store at the following path under the website root: /');
+        $outputStyle->newLine( 2 );
+        $outputStyle->success( $this->getProperFinalMessage( $errored ) );
+        $outputStyle->writeln( 'You can now open your store at the following path under the website root: /' );
         
         return $errored ? 1 : 0;
     }

@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    vs_application.fixture.general_settings:
+        class: 
+        arguments:
+            # - '@sylius.manager.product'
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.general_settings'
+        tags:
+            - 'sylius_fixtures.fixture'
+

@@ -28,9 +28,9 @@ use VS\ApplicationBundle\Form\TaxonomyForm;
 
 use VS\ApplicationBundle\Repository\TaxonRepository;
 use VS\ApplicationBundle\Model\Taxon;
-use VS\ApplicationBundle\Model\TaxonTranslation;
+use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 use VS\ApplicationBundle\Form\TaxonForm;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
+//use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 use VS\ApplicationBundle\Model\Translation;
@@ -169,7 +169,7 @@ class Configuration implements ConfigurationInterface
                                                 ->scalarNode('controller')->defaultValue( ResourceController::class )->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue( Factory::class )->end()
-                                                ->scalarNode('form')->defaultValue( TaxonTranslationType::class )->cannotBeEmpty()->end()
+                                                //->scalarNode('form')->defaultValue( TaxonTranslationType::class )->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

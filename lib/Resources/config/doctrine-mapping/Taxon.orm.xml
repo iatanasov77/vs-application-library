@@ -13,17 +13,21 @@
             </cascade>
         </one-to-one>
         
-        <many-to-one field="root" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <many-to-one field="root" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface">
             <join-column name="tree_root" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-root />
         </many-to-one>
-        <many-to-one field="parent" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children">
+        <many-to-one field="parent" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
             <gedmo:sortable-group />
         </many-to-one>
 
-        <one-to-many field="children" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" mapped-by="parent">
+        <one-to-many field="children" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" mapped-by="parent">
             <cascade>
                 <cascade-persist />
             </cascade>
@@ -31,8 +35,24 @@
                 <order-by-field name="position" direction="ASC" />
             </order-by>
         </one-to-many>
-        
+
+        <field name="code" column="code" type="string" unique="true" />
+        <field name="left" column="tree_left" type="integer">
+            <gedmo:tree-left />
+        </field>
+        <field name="right" column="tree_right" type="integer">
+            <gedmo:tree-right />
+        </field>
+        <field name="level" column="tree_level" type="integer">
+            <gedmo:tree-level />
+        </field>
+        <field name="position" type="integer">
+            <gedmo:sortable-position />
+        </field>
+
         <gedmo:tree type="nested" />
+
+        <field name="enabled" column="enabled" type="boolean" />
     </mapped-superclass>
 
 </doctrine-mapping>

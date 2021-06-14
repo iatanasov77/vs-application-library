@@ -31,6 +31,7 @@ use VS\ApplicationBundle\Model\Taxon;
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface;
 use VS\ApplicationBundle\Form\TaxonForm;
 //use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
+use VS\ApplicationBundle\Model\TaxonTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 use VS\ApplicationBundle\Model\Translation;

@@ -6,11 +6,6 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 use VS\ApplicationBundle\Model\Interfaces\TaxonInterface as VsTaxonInterface;
 
-/**
- * XML Mapping don't working
- * 
- * ___@ORM\MappedSuperclass
- */
 class Taxon extends BaseTaxon implements VsTaxonInterface
 {
     protected $taxonomy;

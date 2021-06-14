@@ -1,3 +1,9 @@
+0.9.6	|	Release date: **14.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix Instaler and Fixtures services.
+
+
 0.9.5	|	Release date: **14.06.2021**
 ============================================
 * Bug-Fixes:

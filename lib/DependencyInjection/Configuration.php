@@ -30,6 +30,8 @@ use VS\ApplicationBundle\Repository\TaxonRepository;
 use VS\ApplicationBundle\Model\Taxon;
 use VS\ApplicationBundle\Model\TaxonTranslation;
 use VS\ApplicationBundle\Form\TaxonForm;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
+use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 use VS\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;
@@ -154,17 +156,25 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'form' )->defaultValue( TaxonForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
-//                                 ->arrayNode( 'translation' )
-//                                     ->addDefaultsIfNotSet()
-//                                     ->children()
-//                                         ->arrayNode( 'classes' )
-//                                             ->addDefaultsIfNotSet()
-//                                             ->children()
-//                                                 ->scalarNode( 'model' )->defaultValue( TaxonTranslation::class )->cannotBeEmpty()->end()
-//                                             ->end()
-//                                         ->end()
-//                                     ->end()
-//                                 ->end()
+                    
+                                ->arrayNode('translation')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->variableNode('options')->end()
+                                        ->arrayNode('classes')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('model')->defaultValue( TaxonTranslation::class )->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue( TaxonTranslationInterface::class )->cannotBeEmpty()->end()
+                                                ->scalarNode('controller')->defaultValue( ResourceController::class )->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('factory')->defaultValue( Factory::class )->end()
+                                                ->scalarNode('form')->defaultValue( TaxonTranslationType::class )->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                
                             ->end()
                         ->end()
                         ->arrayNode( 'translation' )

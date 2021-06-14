@@ -3,7 +3,6 @@
 use Sylius\Bundle\FixturesBundle\Listener\AbstractListener;
 use Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface;
 use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
-use Symfony\Component\Filesystem\Filesystem;
 
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +14,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
  * ========================================================
  * https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/custom_listener.md
  */
-final class SampleDataPurgerListener extends AbstractListener implements ListenerInterface
+final class SampleDataPurgerListener extends AbstractListener implements BeforeSuiteListenerInterface
 {
     /** @var ManagerRegistry */
     private $managerRegistry;

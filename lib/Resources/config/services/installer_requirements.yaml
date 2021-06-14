@@ -24,7 +24,7 @@ services:
     vs_app.requirements:
         class: VS\ApplicationBundle\Installer\Requirement\ApplicationRequirements
         arguments:
-            requirementCollections:
+            $requirementCollections:
                 - '@vs_app.requirements.settings_requirements'
                 - '@vs_app.requirements.extensions_requirements'
                 - '@vs_app.requirements.filesystem_requirements'

@@ -8,8 +8,6 @@ services:
         class: VS\ApplicationBundle\Installer\Checker\CommandDirectoryChecker
         arguments:
             - '@filesystem'
-        tags:
-            - 'console.command'
             
     vs_app.installer.checker.application_requirements:
         class: VS\ApplicationBundle\Installer\Checker\ApplicationRequirementsChecker

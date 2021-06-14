@@ -5,7 +5,7 @@ services:
         public: true
 
     vs_application.fixture.general_settings:
-        class: 
+        class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\GeneralSettingsFixture
         arguments:
             # - '@sylius.manager.product'
             - '@doctrine.orm.default_entity_manager'

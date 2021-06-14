@@ -1,3 +1,9 @@
+0.9.9	|	Release date: **14.06.2021**
+============================================
+* Bug-Fixes:
+  - Add Again TaxonTranslation Model but with fixed mapping.
+
+
 0.9.8	|	Release date: **14.06.2021**
 ============================================
 * Bug-Fixes:

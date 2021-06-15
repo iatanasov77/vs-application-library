@@ -22,7 +22,7 @@ services:
     vs_app.setup.locale:
         class: VS\ApplicationBundle\Installer\Setup\LocaleSetup
         arguments:
-            - '@sylius.repository.locale'
-            - '@sylius.factory.locale'
+            - '@vs_application.repository.locale'
+            - '@vs_application.factory.locale'
             - '%locale%'
 

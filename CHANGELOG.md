@@ -1,3 +1,9 @@
+0.10.7	|	Release date: **15.06.2021**
+============================================
+* Bug-Fixes:
+  - Workaround Bundle to find and load Installation Doctrine Migrations.
+
+
 0.10.6	|	Release date: **15.06.2021**
 ============================================
 * Bug-Fixes:

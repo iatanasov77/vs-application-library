@@ -44,7 +44,7 @@ EOT
         if ( null !== $suite ) {
             $parameters['--fixture-suite'] = $suite;
         }
-        $this->commandExecutor->runCommand( 'sylius:install:sample-data', $parameters, $output );
+        $this->commandExecutor->runCommand( 'vankosoft:install:sample-data', $parameters, $output );
 
         return 0;
     }

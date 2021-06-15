@@ -3,11 +3,6 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        
-    vs_app.command.install:
-        class: VS\ApplicationBundle\Command\InstallCommand
-        tags:
-            - 'console.command'
             
     vs_app.command.maintenance:
         class: VS\ApplicationBundle\Command\MaintenanceModeCommand
@@ -18,12 +13,14 @@ services:
         class: VS\ApplicationBundle\Command\BumpVersionCommand
         tags:
             - 'console.command'
+
     vs_app.command.assets.sources:
         class: VS\ApplicationBundle\Command\AssetsSourcesCommand
         arguments:
             - '@filesystem'
         tags:
             - 'console.command'
+
     vs_app.command.assets.dependencies:
         class: VS\ApplicationBundle\Command\CheckAssetDependenciesCommand
         arguments:

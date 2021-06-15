@@ -1,3 +1,11 @@
+0.10.4	|	Release date: **15.06.2021**
+============================================
+* Bug-Fixes:
+  - Add Installer Commands Services.
+  - Fix Installer AbstractInstallCommand
+  - Fix Install Command.
+
+
 0.10.3	|	Release date: **14.06.2021**
 ============================================
 * Bug-Fixes:

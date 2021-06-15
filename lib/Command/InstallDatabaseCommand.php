@@ -40,10 +40,9 @@ EOT
         $this->runCommands( $commands, $output );
         $outputStyle->newLine();
 
-        $parameters = [];
-        if ( null !== $suite ) {
-            $parameters['--fixture-suite'] = $suite;
-        }
+        $parameters = [
+            '--fixture-suite'   => $suite ?: 'vankosoft_sampledata_suite'
+        ];
         $this->commandExecutor->runCommand( 'vankosoft:install:sample-data', $parameters, $output );
 
         return 0;

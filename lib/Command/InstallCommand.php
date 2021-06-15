@@ -46,12 +46,14 @@ The <info>%command.name%</info> command installs VankoSoft Application.
 EOT
             )
             ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
+            ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
         ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $suite = $input->getOption( 'fixture-suite' );
+        $debug = $input->getOption( 'debug-commands' );
         
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( '<info>Installing VankoSoft Application...</info>' );
@@ -73,6 +75,9 @@ EOT
                 $parameters = [];
                 if ( 'database' === $command['command'] && null !== $suite ) {
                     $parameters['--fixture-suite']  = $suite;
+                }
+                if ( 'database' === $command['command'] && null !== $debug ) {
+                    $parameters['--debug-commands']  = $debug;
                 }
                 
                 $this->commandExecutor->runCommand( 'vankosoft:install:' . $command['command'], $parameters, $output );

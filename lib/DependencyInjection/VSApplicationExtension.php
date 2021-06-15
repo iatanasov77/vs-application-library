@@ -37,8 +37,6 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         $config = $container->getExtensionConfig( $this->getAlias() );
         $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
         
-        $this->prependSyliusThemeBundle( $container, $config['driver'] );
-        $this->prependHwiOauth( $container );
         $this->prependDoctrineMigrations( $container );
     }
     

@@ -1,3 +1,10 @@
+0.10.8	|	Release date: **15.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix First Doctrine Migration.
+  - Set Default Fixture Suite if not pass to Install Command.
+
+
 0.10.7	|	Release date: **15.06.2021**
 ============================================
 * Bug-Fixes:

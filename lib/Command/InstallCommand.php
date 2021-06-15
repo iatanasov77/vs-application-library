@@ -92,4 +92,39 @@ EOT
         
         return $errored ? 1 : 0;
     }
+    
+    private function getProperFinalMessage( bool $errored ): string
+    {
+        if ( $errored ) {
+            return 'Sylius has been installed, but some error occurred.';
+        }
+        
+        return 'Sylius has been successfully installed.';
+    }
+    
+    /**
+     * @EXAMPLE
+     */
+    private function getSyliusLogo(): string
+    {
+        return '
+           <info>,</info>
+         <info>,;:,</info>
+       <info>`;;;.:`</info>
+      <info>`::;`  :`</info>
+       <info>:::`   `</info>          .\'++:           \'\'.   \'.
+       <info>`:::</info>             :+\',;+\'          :+;  `+.
+        <info>::::</info>            +\'   :\'          `+;
+        <info>`:::,</info>           \'+`     ++    :+.`+; `++. ;+\'    \'\'  ,++++.
+         <info>,:::`</info>          `++\'.   .+:  `+\' `+;  .+,  ;+    +\'  +;  \'\'
+          <info>::::`</info>           ,+++.  \'+` :+. `+;  `+,  ;+    +\'  \'+.
+   <info>,.     .::::</info>             .++` `+: +\'  `+;  `+,  ;+    +\'  `;++;
+<info>`;;.:::`   :::::</info>             :+.  \'+,+.  `+;  `+,  ;+   `+\'     .++
+ <info>.;;;;;;::`.::::,</info>       +\'` `++   `++\'   `+;  `+:  :+. `++\'  \'.  ;+
+  <info>,;;;;;;;;;:::::</info>       .+++++`    ;+,    ++;  ++, `\'+++,\'+\' :++++,
+   <info>,;;;;;;;;;:::</info>`                  ;\'
+    <info>:;;;;;;;;;:,</info>                :.:+,
+     <info>;;;;;;;;;:</info>                 ;++,'
+            ;
+    }
 }

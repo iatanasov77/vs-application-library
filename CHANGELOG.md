@@ -1,3 +1,11 @@
+0.10.9	|	Release date: **15.06.2021**
+============================================
+* New Features:
+  - Add Debug Option of Some Install Commands.
+* Bug-Fixes:
+  - Fix Doctrine Migration Namespace.
+
+
 0.10.8	|	Release date: **15.06.2021**
 ============================================
 * Bug-Fixes:

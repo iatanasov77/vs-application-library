@@ -1,3 +1,11 @@
+0.10.5	|	Release date: **15.06.2021**
+============================================
+* New Features:
+  - Add Vankosoft Application Migrations.
+* Bug-Fixes:
+  - Fix Installer SetupLocale service arguments.
+
+
 0.10.4	|	Release date: **15.06.2021**
 ============================================
 * Bug-Fixes:

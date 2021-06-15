@@ -21,6 +21,11 @@ class VSApplicationBundle extends AbstractResourceBundle
         return new \VS\ApplicationBundle\DependencyInjection\VSApplicationExtension();
     }
     
+    public function boot(): void
+    {
+        parent::boot();
+    }
+    
     public function build( ContainerBuilder $container ): void
     {
         parent::build( $container );
@@ -34,5 +39,10 @@ class VSApplicationBundle extends AbstractResourceBundle
             //$container->addCompilerPass( DoctrineOrmMappingsPass::createYamlMappingDriver( $mappings ) );
             //$container->addCompilerPass( DoctrineOrmMappingsPass::createAnnotationMappingDriver( \array_values( $mappings ), \array_keys( $mappings ) ) );
         }
+    }
+    
+    protected function getModelNamespace(): string
+    {
+        return 'VS\ApplicationBundle\Model';
     }
 }

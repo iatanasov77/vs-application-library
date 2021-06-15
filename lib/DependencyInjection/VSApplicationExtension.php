@@ -21,6 +21,8 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
     public function load( array $config, ContainerBuilder $container )
     {
         $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        $this->prepend( $container );
+        
         $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
         $loader->load( 'services.yml' );
         
@@ -35,7 +37,7 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
     public function prepend( ContainerBuilder $container ): void
     {
         $config = $container->getExtensionConfig( $this->getAlias() );
-        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        $config = $this->processConfiguration( $this->getConfiguration( [], $container ), $config );
         
         $this->prependDoctrineMigrations( $container );
     }
@@ -53,5 +55,15 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [];
+    }
+    
+    private function debugExtensionConfig( ContainerBuilder $container, string $extension )
+    {
+        $debugArray = $container->getExtensionConfig( $extension );
+        
+        $fileLocator = new FileLocator( $container->getParameter( 'kernel.project_dir' ) );
+        $debugArray['MigrationsPath'] = $fileLocator->locate("@VSApplicationBundle/DoctrineMigrations");
+        
+        return $debugArray;
     }
 }

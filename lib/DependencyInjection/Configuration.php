@@ -60,7 +60,9 @@ class Configuration implements ConfigurationInterface
         
         // Main Config
         $rootNode
+            ->addDefaultsIfNotSet()
             ->children()
+                ->booleanNode( 'prepend_doctrine_migrations' )->defaultTrue()->end()
                 ->booleanNode( 'multi_site' )->defaultFalse()->end()
                 ->scalarNode( 'orm_driver' )->defaultValue( SyliusResourceBundle::DRIVER_DOCTRINE_ORM )->cannotBeEmpty()->end()
                 ->arrayNode( 'taxonomy' )

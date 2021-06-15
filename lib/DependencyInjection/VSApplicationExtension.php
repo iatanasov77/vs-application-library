@@ -4,14 +4,17 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class VSApplicationExtension extends AbstractResourceExtension
+class VSApplicationExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    use PrependDoctrineMigrationsTrait;
+    
     /**
      * {@inheritDoc}
      */
@@ -27,5 +30,30 @@ class VSApplicationExtension extends AbstractResourceExtension
         // Set values need to be accesible from controller
         $container->setParameter( 'vs_application.multi_site', $config[ 'multi_site' ] );
         $container->setParameter( 'vs_application.taxonomy', $config[ 'taxonomy' ] );
+    }
+    
+    public function prepend( ContainerBuilder $container ): void
+    {
+        $config = $container->getExtensionConfig( $this->getAlias() );
+        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        
+        $this->prependSyliusThemeBundle( $container, $config['driver'] );
+        $this->prependHwiOauth( $container );
+        $this->prependDoctrineMigrations( $container );
+    }
+    
+    protected function getMigrationsNamespace(): string
+    {
+        return 'VS\ApplicationBundle\DoctrineMigrations';
+    }
+    
+    protected function getMigrationsDirectory(): string
+    {
+        return '@VSApplicationBundle/DoctrineMigrations';
+    }
+    
+    protected function getNamespacesOfMigrationsExecutedBefore(): array
+    {
+        return [];
     }
 }

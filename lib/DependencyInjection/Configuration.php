@@ -9,7 +9,6 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
 
-use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use VS\ApplicationBundle\Model\Locale;
 
@@ -151,7 +150,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Taxon::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( TaxonInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->cannotBeEmpty()->end()
                                         //->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( TaxonRepository::class )->cannotBeEmpty()->end()
@@ -224,7 +223,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'controller' )->defaultValue( ResourceController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->end()
-                                        ->scalarNode( 'form' )->defaultValue( LocaleType::class )->cannotBeEmpty()->end()
+                                        //->scalarNode( 'form' )->defaultValue( LocaleType::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

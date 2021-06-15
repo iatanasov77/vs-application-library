@@ -1,3 +1,9 @@
+0.10.11	|	Release date: **16.06.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix and Improve InstallCommand.
+
+
 0.10.10	|	Release date: **15.06.2021**
 ============================================
 * Bug-Fixes:

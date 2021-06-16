@@ -19,6 +19,17 @@ sylius_fixtures:
 #                                 theme: 'TestTheme'
 #                                 site: 1
 #                                 maintenancePage: 0
+
+                pages_categories:
+                    name: page_categories
+                    options:
+                        custom:
+                            - title: 'Maintenance Pages'
+                              taxonomy_title: 'Page Categories'
+                              taxonomy_description: 'Page Categories'
+                              locale:  '%locale%'
+
+                                    
                         
                         
 #                 locale:

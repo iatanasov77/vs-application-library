@@ -18,7 +18,6 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     public function __construct( FactoryInterface $settingsFactory )
     {
         $this->settingsFactory = $settingsFactory;
-        
         $this->optionsResolver = new OptionsResolver();
         
         $this->configureOptions( $this->optionsResolver );
@@ -28,7 +27,6 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     {
         $options    = $this->optionsResolver->resolve( $options );
         
-        /** @var AdminUserInterface $user */
         $settingsEntity = $this->settingsFactory->createNew();
         
         $settingsEntity->setSite( $options['site'] );

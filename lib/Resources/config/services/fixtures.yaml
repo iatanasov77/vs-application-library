@@ -12,4 +12,12 @@ services:
             - '@vs_application.fixture.example_factory.general_settings'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.page_categories:
+        class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\PageCategoriesFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.general_settings'
+        tags:
+            - 'sylius_fixtures.fixture'
 

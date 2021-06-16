@@ -25,6 +25,7 @@ final class SetupCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT
             )
+            ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
         ;
     }
 
@@ -34,7 +35,7 @@ EOT
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
 
-        $parameters = [];
+        $parameters = ['multisite' => $input->getOption( 'multisite' )];
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
         
         return 0;

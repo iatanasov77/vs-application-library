@@ -19,35 +19,75 @@ final class InstallApplicationConfigurationCommand extends AbstractInstallComman
 The <info>%command.name%</info> command loads the sample data for VankoSoft Application.
 EOT
             )
+            ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
             ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
         ;
     }
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
+        $multisite  = $input->getOption( 'multisite' );
+        
+        if ( $multisite == false ) {
+            return $this->installSingleSiteApplicationConfiguration( $input, $output );
+        } else {
+            return $this->installMultiSiteApplicationConfiguration( $input, $output );
+        }
+    }
+    
+    private function installSingleSiteApplicationConfiguration( InputInterface $input, OutputInterface $output ): int
+    {
         $suite          = $input->getOption( 'fixture-suite' );
-
+        
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->newLine();
         $outputStyle->writeln( sprintf(
-            'Loading application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
+            'Loading singlesite application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
             $this->getEnvironment(),
             $suite ?? 'vankosoft_application_suite'
         ) );
         //$outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
-
+        
         $parameters = [
             'suite' => $suite ?: 'vankosoft_application_suite',
             '--no-interaction' => true,
         ];
-
+        
         $commands = [
             'sylius:fixtures:load' => $parameters,
         ];
-
+        
         $this->runCommands( $commands, $output );
         $outputStyle->newLine( 2 );
-
+        
+        return 0;
+    }
+    
+    private function installMultiSiteApplicationConfiguration( InputInterface $input, OutputInterface $output ): int
+    {
+        $suite          = $input->getOption( 'fixture-suite' );
+        
+        $outputStyle    = new SymfonyStyle( $input, $output );
+        $outputStyle->newLine();
+        $outputStyle->writeln( sprintf(
+            'Loading multisite application configuration data for environment <info>%s</info> from suite <info>%s</info>.',
+            $this->getEnvironment(),
+            $suite ?? 'vankosoft_multisite_application_suite'
+        ) );
+        //$outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
+        
+        $parameters = [
+            'suite' => $suite ?: 'vankosoft_multisite_application_suite',
+            '--no-interaction' => true,
+        ];
+        
+        $commands = [
+            'sylius:fixtures:load' => $parameters,
+        ];
+        
+        $this->runCommands( $commands, $output );
+        $outputStyle->newLine( 2 );
+        
         return 0;
     }
 }

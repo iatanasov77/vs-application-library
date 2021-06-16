@@ -1,3 +1,11 @@
+0.10.12	|	Release date: **16.06.2021**
+============================================
+* New Features and Improvements:
+  - Add Multisite Option in the InstallCommand.
+  - Add More Application Fixtures.
+  - Improve InstallApplicationConfigurationCommand. Create GeneralSettingsFixture.
+
+
 0.10.11	|	Release date: **16.06.2021**
 ============================================
 * Bug-Fixes and Improvements:

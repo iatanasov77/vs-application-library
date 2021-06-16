@@ -25,8 +25,6 @@ EOT
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper = $this->getHelper( 'question' );
         $suite          = $input->getOption( 'fixture-suite' );
 
         $outputStyle    = new SymfonyStyle( $input, $output );
@@ -36,27 +34,10 @@ EOT
             $this->getEnvironment(),
             $suite ?? 'vankosoft_application_suite'
         ) );
-        $outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
+        //$outputStyle->writeln( '<error>Warning! This action will erase your database.</error>' );
 
-        if ( ! $questionHelper->ask( $input, $output, new ConfirmationQuestion( 'Continue? (y/N) ', null !== $suite) ) ) {
-            $outputStyle->writeln( 'Cancelled loading application configuration data.' );
-
-            return 0;
-        }
-
-        try {
-            $publicDir = $this->getContainer()->getParameter( 'vs_application.public_dir' );
-
-            $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/', $output );
-            $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/media/image/', $output );
-        } catch ( \RuntimeException $exception ) {
-            $outputStyle->writeln( $exception->getMessage() );
-
-            return 1;
-        }
-        
         $parameters = [
-            'suite' => $suite,
+            'suite' => $suite ?: 'vankosoft_application_suite',
             '--no-interaction' => true,
         ];
 

@@ -7,13 +7,18 @@ sylius_fixtures:
     suites:
         vankosoft_application_suite:
             listeners:
-                orm_purger: ~
+                #orm_purger: ~
                 logger: ~
 
             fixtures:
                 general_settings:
+                    name: general_settings
                     options:
-                        maintenanceMode: 0
+                        custom:
+                            -   maintenanceMode: false
+#                                 theme: 'TestTheme'
+#                                 site: 1
+#                                 maintenancePage: 0
                         
                         
 #                 locale:
@@ -43,4 +48,5 @@ sylius_fixtures:
 #                                 first_name: 'Luke'
 #                                 last_name: 'Brushwood'
 #                                 api: true
-                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'
+#                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'
+#

@@ -14,9 +14,9 @@ final class GeneralSettingsFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->booleanNode( 'maintenanceMode' )->cannotBeEmpty()->end()
-                ->scalarNode( 'theme' )->end()
+                ->booleanNode( 'maintenanceMode' )->defaultFalse()->end()
                 
+                ->scalarNode( 'theme' )->end()
                 ->scalarNode( 'site' )->end()
                 ->scalarNode( 'maintenancePage' )->end()
         ;

@@ -4,6 +4,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
+use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
+use VS\CmsBundle\Model\PageInterface;
+
 class GeneralSettingsExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /** @var FactoryInterface */
@@ -40,16 +43,16 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     {
         $resolver
             ->setDefault( 'site', null )
-            ->setAllowedTypes( 'site', 'int' )
+            ->setAllowedTypes( 'site', ['null', SiteInterface::class] )
             
-            ->setDefault( 'maintenanceMode', 0 )
-            ->setAllowedTypes( 'maintenanceMode', 'int' )
+            ->setDefault( 'maintenanceMode', false )
+            ->setAllowedTypes( 'maintenanceMode', 'bool' )
             
             ->setDefault( 'maintenancePage', null )
-            ->setAllowedTypes( 'maintenancePage', 'int' )
+            ->setAllowedTypes( 'maintenancePage', ['null', PageInterface::class] )
             
             ->setDefault( 'theme', null )
-            ->setAllowedTypes( 'theme', 'string' )
+            ->setAllowedTypes( 'theme', ['null', 'string'] )
         ;
     }
     

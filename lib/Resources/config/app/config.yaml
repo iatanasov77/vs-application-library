@@ -1,3 +1,4 @@
 #Reference: @SyliusCoreBundle/Resources/config/app/config.yml
 imports:
-    - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yaml" }
+    - { resource: 'fixtures.yaml' }
+                                

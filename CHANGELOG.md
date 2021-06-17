@@ -1,3 +1,9 @@
+0.10.15	|	Release date: **17.06.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Many Fixture Fixes and Improvements.
+
+
 0.10.14	|	Release date: **17.06.2021**
 ============================================
 * Bug-Fixes:

@@ -1,3 +1,10 @@
+0.10.18	|	Release date: **17.06.2021**
+============================================
+* New Features:
+  - Add KnpTimeBundle Package.
+  - Update Sylius Packages.
+
+
 0.10.17	|	Release date: **17.06.2021**
 ============================================
 * Bug-Fixes:

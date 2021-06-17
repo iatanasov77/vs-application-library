@@ -1,3 +1,9 @@
+0.10.13	|	Release date: **17.06.2021**
+============================================
+* New Features and Litle Fix:
+  - Add More Fixtures and a Fix a Class File Name.
+
+
 0.10.12	|	Release date: **16.06.2021**
 ============================================
 * New Features and Improvements:

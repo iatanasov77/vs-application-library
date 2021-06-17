@@ -29,6 +29,7 @@ final class Version20210617123114 extends AbstractMigration
         $this->addSql('ALTER TABLE VSAPP_Settings ADD CONSTRAINT FK_4A491FD762596F6 FOREIGN KEY (site_id ) REFERENCES VSAPP_Sites (id)');
         $this->addSql('CREATE INDEX IDX_4A491FD507FAB6A ON VSAPP_Settings (maintenance_page_id )');
         $this->addSql('CREATE INDEX IDX_4A491FD762596F6 ON VSAPP_Settings (site_id )');
+        $this->addSql('ALTER TABLE VSAPP_Taxonomy ADD `code` VARCHAR(255) NOT NULL AFTER `id`');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_1CF3890577153098 ON VSAPP_Taxonomy (code)');
     }
 
@@ -45,5 +46,6 @@ final class Version20210617123114 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_4A491FD762596F6 ON VSAPP_Settings (site_id)');
         $this->addSql('CREATE INDEX IDX_4A491FD507FAB6A ON VSAPP_Settings (maintenance_page_id)');
         $this->addSql('DROP INDEX uniq_1cf3890577153098 ON VSAPP_Taxonomy');
+        $this->addSql('ALTER TABLE VSAPP_Taxonomy DROP `code`);;
     }
 }

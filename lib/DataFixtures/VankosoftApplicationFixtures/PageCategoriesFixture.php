@@ -7,7 +7,7 @@ final class PageCategoriesFixture extends AbstractResourceFixture
 {
     public function getName(): string
     {
-        return 'pages_categories';
+        return 'page_categories';
     }
     
     protected function configureResourceNode( ArrayNodeDefinition $resourceNode ): void

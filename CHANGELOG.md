@@ -1,3 +1,9 @@
+0.10.16	|	Release date: **17.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix Migration for Taxonomy Table.
+
+
 0.10.15	|	Release date: **17.06.2021**
 ============================================
 * Bug-Fixes and Improvements:

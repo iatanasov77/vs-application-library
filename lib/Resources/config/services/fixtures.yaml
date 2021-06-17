@@ -12,12 +12,28 @@ services:
             - '@vs_application.fixture.example_factory.general_settings'
         tags:
             - 'sylius_fixtures.fixture'
-            
+
+    vs_application.fixture.multisite_settings:
+        class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\MultiSiteSettingsFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.general_settings'
+        tags:
+            - 'sylius_fixtures.fixture'
+
     vs_application.fixture.page_categories:
         class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\PageCategoriesFixture
         arguments:
             - '@doctrine.orm.default_entity_manager'
-            - '@vs_application.fixture.example_factory.general_settings'
+            - '@vs_application.fixture.example_factory.page_categories'
+        tags:
+            - 'sylius_fixtures.fixture'
+
+    vs_application.fixture.application_site:
+        class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\ApplicationSiteFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.application_site'
         tags:
             - 'sylius_fixtures.fixture'
 

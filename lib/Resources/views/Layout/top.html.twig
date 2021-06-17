@@ -26,7 +26,7 @@
                                         <div class="notification-list-user-img"><img src="{{ asset( '/assets/build/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
                                         <div class="notification-list-user-block">
                                         	<span class="notification-list-user-name">Jeremy Rakestraw</span>{{ notification.notification }}
-                                            <div class="notification-date">{{ notification.date | time_diff }}</div>
+                                            <div class="notification-date">{{ time_diff( notification.date ) }}</div>
                                         </div>
                                     </div>
                                 </a>
@@ -87,13 +87,7 @@
         
             <li class="nav-item dropdown nav-user">
                 <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                	{% if app.user.info.profilePictureFilename and installedBundles.LiipImagineBundle is defined %}
-                		<img src="{{ asset('uploads/profile_pictures/' ~ app.user.info.profilePictureFilename) | imagine_filter('profile_form_thumb') }}" class="user-avatar-md rounded-circle" />
-                	{% else %}
-            			<img src="{{ asset( '/assets/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
-            		{% endif %}
-        
-                    {% if app.user.info.profilePictureFilename and installedBundles.LiipImagineBundle is defined %}
+                	{% if app.user.info and app.user.info.profilePictureFilename and installedBundles.LiipImagineBundle is defined %}
                 		<img src="{{ asset('uploads/profile_pictures/' ~ app.user.info.profilePictureFilename) | imagine_filter('profile_form_thumb') }}" class="user-avatar-md rounded-circle" />
                 	{% else %}
             			<img src="{{ asset( '/assets/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />

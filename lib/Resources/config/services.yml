@@ -19,6 +19,7 @@ parameters:
     vs_application.public_dir: "%kernel.project_dir%/public/admin_panel"
     vs_application.settings.site_id: null
     vs_application.supress_pdo_exception: false
+    vs_application.page_categories.taxonomy_code: 'page-categories'
 
 services:
     _defaults:

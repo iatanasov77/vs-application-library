@@ -1,3 +1,13 @@
+0.10.17	|	Release date: **17.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix SetupCommand to set role of Administrator User.
+  - Add Service Parameter for Pages Category Taxonomy.
+  - Fix Migration for Taxons Table.
+  - Fix Install Commands.
+  - Fix SyntaxError on Migration for Taxonomy Table.
+
+
 0.10.16	|	Release date: **17.06.2021**
 ============================================
 * Bug-Fixes:

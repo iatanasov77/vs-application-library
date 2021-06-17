@@ -16,8 +16,8 @@ final class PageCategoriesFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode( 'locale' )->end()
                 ->scalarNode( 'title' )->end()
-                ->scalarNode( 'taxonomy_title' )->end()
-                ->scalarNode( 'taxonomy_description' )->end()
+                ->scalarNode( 'description' )->end()
+                ->scalarNode( 'taxonomy_code' )->end()
         ;
     }
 }

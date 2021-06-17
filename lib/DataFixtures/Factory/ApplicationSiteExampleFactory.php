@@ -23,7 +23,7 @@ class ApplicationSiteExampleFactory extends AbstractExampleFactory implements Ex
         $this->configureOptions( $this->optionsResolver );
     }
     
-    public function create( array $options = [] ): SettingsInterface
+    public function create( array $options = [] ): SiteInterface
     {
         $options    = $this->optionsResolver->resolve( $options );
         $siteEntity = $this->sitesFactory->createNew();

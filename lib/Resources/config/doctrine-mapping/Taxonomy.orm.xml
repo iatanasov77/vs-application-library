@@ -10,6 +10,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <field name="code" column="code" type="string" unique="true" />
         
         <one-to-one field="rootTaxon" target-entity="VS\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="taxonomy" >
             <join-column name="root_taxon_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />

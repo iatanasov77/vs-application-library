@@ -2,15 +2,15 @@
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
-use VS\CmsBundle\Model\PageInterface;
+use VS\CmsBundle\Model\PageCategoryInterface;
+use VS\ApplicationBundle\Component\Slug;
 
 class PageCategoriesExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $taxonomyFactory;
+    /** @var RepositoryInterface */
+    private $taxonomyRepository;
     
     /** @var FactoryInterface */
     private $taxonFactory;
@@ -22,39 +22,36 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
     private $optionsResolver;
     
     public function __construct(
-        FactoryInterface $taxonomyFactory,
+        RepositoryInterface $taxonomyRepository,
         FactoryInterface $taxonFactory,
         FactoryInterface $pageCategoriesFactory
     ) {
-        $this->taxonomyFactory          = $taxonomyFactory;
+        $this->taxonomyRepository       = $taxonomyRepository;
         $this->taxonFactory             = $taxonFactory;
         $this->pageCategoriesFactory    = $pageCategoriesFactory;
         
         $this->optionsResolver          = new OptionsResolver();
-        
         $this->configureOptions( $this->optionsResolver );
     }
     
-    public function create( array $options = [] ): SettingsInterface
+    public function create( array $options = [] ): PageCategoryInterface
     {
-        $options    = $this->optionsResolver->resolve( $options );
+        $options                    = $this->optionsResolver->resolve( $options );
         
-        $taxonomyEntity             = $this->taxonomyFactory->createNew();
-        $taxonomyRootTaxonEntity    = $this->taxonFactory->createNew();
-        $taxonEntity                = $this->taxonFactory->createNew();
+        $taxonomyRootTaxonEntity    = $this->taxonomyRepository->findByCode( $options['taxonomy_code'] )->getRootTaxon();
         $pageCategoryEntity         = $this->pageCategoriesFactory->createNew();
         
-        $taxonomyRootTaxonEntity->setCurrentLocale( $options['locale'] );
-        $taxonomyRootTaxonEntity->getTranslation()->setName( 'Root taxon of Taxonomy: "' . $options['taxonomy_title'] );
-        $taxonomyRootTaxonEntity->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $options['taxonomy_title'] . '"' );
-        $taxonomyRootTaxonEntity->getTranslation()->setSlug( Slug::generate( $options['taxonomy_title'] ) );
-        $taxonomyRootTaxonEntity->getTranslation()->setTranslatable( $taxonomyRootTaxonEntity );
+        $taxonEntity                = $this->taxonFactory->createNew();
+        $slug                       = Slug::generate( $options['title'] );
         
-        $taxonomyEntity->setName( $options['taxonomy_title'] );
-        $taxonomyEntity->setDescription( $options['taxonomy_description'] );
-        $taxonomyEntity->setRootTaxon( $taxonomyRootTaxonEntity );
+        $taxonEntity->setCode( $slug );
+        $taxonEntity->setCurrentLocale( $options['locale'] );
+        $taxonEntity->getTranslation()->setName( $options['title'] );
+        $taxonEntity->getTranslation()->setDescription( $options['description'] );
+        $taxonEntity->getTranslation()->setSlug( $slug );
+        $taxonEntity->getTranslation()->setTranslatable( $taxonEntity );
         
-        $taxonEntity->setTitle( $options['title'] );
+        $taxonEntity->setParent( $taxonomyRootTaxonEntity );
         $pageCategoryEntity->setTaxon( $taxonEntity );
         
         return $pageCategoryEntity;
@@ -65,6 +62,15 @@ class PageCategoriesExampleFactory extends AbstractExampleFactory implements Exa
         $resolver
             ->setDefault( 'title', null )
             ->setAllowedTypes( 'title', ['string'] )
+            
+            ->setDefault( 'description', null )
+            ->setAllowedTypes( 'description', ['string'] )
+            
+            ->setDefault( 'locale', 'en_US' )
+            ->setAllowedTypes( 'locale', ['string'] )
+            
+            ->setDefault( 'taxonomy_code', null )
+            ->setAllowedTypes( 'taxonomy_code', ['string'] )
         ;
     }
     

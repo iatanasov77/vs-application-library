@@ -6,17 +6,17 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
-                application_site:
-                    name: application_site
-                    options:
-                        custom:
-                            - title: 'Application FrontOffice'
+#                 application_site:
+#                     name: application_site
+#                     options:
+#                         custom:
+#                             - title: 'Application FrontOffice'
                             
                 multisite_settings:
                     name: multisite_settings
                     options:
                         custom:
                             -   maintenanceMode: false
-                                site_id: 1
+                                siteTitle: 'Application FrontOffice'
 #                                 theme: 'TestTheme'
 #                                 maintenancePage: 0

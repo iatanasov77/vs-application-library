@@ -32,6 +32,7 @@ use VS\ApplicationBundle\Form\TaxonForm;
 //use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use VS\ApplicationBundle\Model\TaxonTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
+//use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 
 use VS\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;

@@ -8,16 +8,23 @@ services:
         class: VS\ApplicationBundle\DataFixtures\Factory\GeneralSettingsExampleFactory
         arguments:
             - '@vs_application.factory.settings'
+            - '@vs_application.factory.site'
             
     vs_application.fixture.example_factory.application_site:
         class: VS\ApplicationBundle\DataFixtures\Factory\ApplicationSiteExampleFactory
         arguments:
             - '@vs_application.factory.site'
-            
+    
+    vs_application.fixture.example_factory.taxonomy:
+        class: VS\ApplicationBundle\DataFixtures\Factory\TaxonomyExampleFactory
+        arguments:
+            - '@vs_application.factory.taxonomy'
+            - '@vs_application.factory.taxon'
+    
     vs_application.fixture.example_factory.page_categories:
         class: VS\ApplicationBundle\DataFixtures\Factory\PageCategoriesExampleFactory
         arguments:
-            - '@vs_application.factory.taxonomy'
+            - '@vs_application.repository.taxonomy'
             - '@vs_application.factory.taxon'
             - '@vs_cms.factory.page_categories'
 

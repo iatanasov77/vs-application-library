@@ -12,13 +12,17 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     /** @var FactoryInterface */
     private $settingsFactory;
     
+    /** @var FactoryInterface */
+    private $siteFactory;
+    
     /** @var OptionsResolver */
     private $optionsResolver;
     
-    public function __construct( FactoryInterface $settingsFactory )
+    public function __construct( FactoryInterface $settingsFactory,  FactoryInterface $siteFactory )
     {
-        $this->settingsFactory = $settingsFactory;
-        $this->optionsResolver = new OptionsResolver();
+        $this->settingsFactory  = $settingsFactory;
+        $this->siteFactory      = $siteFactory;
+        $this->optionsResolver  = new OptionsResolver();
         
         $this->configureOptions( $this->optionsResolver );
     }
@@ -29,7 +33,15 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
         
         $settingsEntity = $this->settingsFactory->createNew();
         
-        $settingsEntity->setSite( $options['site'] );
+        // Set Site If Passed
+        if ( isset( $options['siteTitle'] ) && $options['siteTitle'] ) {
+            $site   = $this->siteFactory->createNew();
+            $site->setTitle( $options['siteTitle'] );
+            $settingsEntity->setSite( $site );
+        } else {
+            $settingsEntity->setSite( null );
+        }
+        
         $settingsEntity->setMaintenanceMode( $options['maintenanceMode'] );
         $settingsEntity->setMaintenancePage( $options['maintenancePage'] );
         $settingsEntity->setTheme( $options['theme'] );
@@ -40,8 +52,8 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
     protected function configureOptions( OptionsResolver $resolver ): void
     {
         $resolver
-            ->setDefault( 'site', null )
-            ->setAllowedTypes( 'site', ['null', SiteInterface::class] )
+            ->setDefault( 'siteTitle', null )
+            ->setAllowedTypes( 'siteTitle', ['null', 'string'] )
             
             ->setDefault( 'maintenanceMode', false )
             ->setAllowedTypes( 'maintenanceMode', 'bool' )

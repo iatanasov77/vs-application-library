@@ -32,4 +32,3 @@ services:
     VS\ApplicationBundle\Controller\AuthController:
         tags: ['controller.service_arguments']
         autowire: false
-

@@ -8,6 +8,9 @@ class Taxonomy implements TaxonomyInterface
     protected $id;
     
     /** @var string */
+    protected $code;
+    
+    /** @var string */
     protected $name;
     
     /** @var string */
@@ -16,6 +19,18 @@ class Taxonomy implements TaxonomyInterface
     protected $rootTaxon;
     
     protected $locale;
+    
+    public function getCode()
+    {
+        return $this->code;
+    }
+    
+    public function setCode( $code )
+    {
+        $this->code = $code;
+        
+        return $this;
+    }
     
     public function getRootTaxon()
     {

@@ -16,17 +16,26 @@ sylius_fixtures:
                     options:
                         custom:
                             -   maintenanceMode: false
+#                                 siteTitle: 'Application FrontOffice'
 #                                 theme: 'TestTheme'
-#                                 site: 1
 #                                 maintenancePage: 0
+
+                taxonomy_page_categories:
+                    name: taxonomy
+                    options:
+                        custom:
+                            - code: 'page-categories'
+                              title: 'Page Categories'
+                              description: 'Page Categories'
+                              locale:  '%locale%'
 
                 pages_categories:
                     name: page_categories
                     options:
                         custom:
                             - title: 'Maintenance Pages'
-                              taxonomy_title: 'Page Categories'
-                              taxonomy_description: 'Page Categories'
+                              description: 'Maintenance Pages Description'
+                              taxonomy_code: 'page-categories'
                               locale:  '%locale%'
 
                                     

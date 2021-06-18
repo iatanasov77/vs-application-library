@@ -1,3 +1,10 @@
+0.11.1	|	Release date: **18.06.2021**
+============================================
+* Bug-Fixes:
+  - Add Controller Services.
+  - Fix Twig Templates.
+
+
 0.11.0	|	Release date: **18.06.2021**
 ============================================
 * Bug-Fixes and Improvements:

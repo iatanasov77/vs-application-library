@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="en">
 	<head>
-        <title>{% block title %}.:: {{ siteTitle }}{% endblock %}</title>
+        <title>{% block title %}.:: {{ siteTitle }} ( Admin Panel ){% endblock %}</title>
 
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% block head_meta %}
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% endblock %}
 
         {% block head_styles %}
+            {{ encore_entry_link_tags( 'css/global' ) }}
             {{ encore_entry_link_tags( 'js/app' ) }}
         {% endblock %}
 
@@ -15,6 +18,7 @@
     </head>
     <body>
         <div class="dashboard-main-wrapper">
+           
             <div class="dashboard-header">
                 {% include '@VSApplication/Layout/top.html.twig' %}
             </div>
@@ -27,15 +31,20 @@
             
             <div class="dashboard-wrapper">
             	{% block content %}{% endblock %}
-            	
-            	{% include '@VSApplication/Layout/footer.html.twig' %}
             </div>
+            
+            {% include '@VSApplication/Layout/footer.html.twig' %}
         </div>
+        
+        
         
         <!-- Modal Dialogs -->
         {% block modals %}{% endblock %}
         
         <!-- Optional JavaScript -->
-        {% block body_scripts %}{% endblock %}
+        {% block body_scripts %}
+            
+       	{% endblock %}
     </body>
 </html>
+                	

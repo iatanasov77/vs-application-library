@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 	<head>
-        <title>{% block title %}.:: {{ siteTitle }}{% endblock %}</title>
+        <title>{% block title %}.:: VankoSoft{% endblock %}</title>
 
         {% block head_meta %}
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         {% endblock %}
 
         {% block head_styles %}
-            {{ encore_entry_link_tags( 'js/app' ) }}
+            {{ encore_entry_link_tags( 'css/global' ) }}
         {% endblock %}
 
         {% block head_scripts %}
@@ -21,10 +21,6 @@
             	{% block content %}{% endblock %}
         	</div>
         </div>
-        
-        <!-- Optional JavaScript -->
-        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     </body>
 </html>
                 	

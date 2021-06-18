@@ -23,7 +23,7 @@
                             {% for notification in app.user.notifications %}         
                                 <a href="#" class="list-group-item list-group-item-action active">
                                     <div class="notification-info">
-                                        <div class="notification-list-user-img"><img src="{{ asset( '/assets/build/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
+                                        <div class="notification-list-user-img"><img src="{{ asset( '/build/images/avatar-2.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
                                         <div class="notification-list-user-block">
                                         	<span class="notification-list-user-name">Jeremy Rakestraw</span>{{ notification.notification }}
                                             <div class="notification-date">{{ time_diff( notification.date ) }}</div>
@@ -34,7 +34,7 @@
                            	<!--
                                 <a href="#" class="list-group-item list-group-item-action">
                                     <div class="notification-info">
-                                        <div class="notification-list-user-img"><img src="{{ asset( '/assets/build/images/avatar-3.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
+                                        <div class="notification-list-user-img"><img src="{{ asset( '/build/images/avatar-3.jpg' ) }}" alt="" class="user-avatar-md rounded-circle"></div>
                                         <div class="notification-list-user-block"><span class="notification-list-user-name">John Abraham</span>is now following you
                                             <div class="notification-date">2 days ago</div>
                                         </div>
@@ -90,7 +90,7 @@
                 	{% if app.user.info and app.user.info.profilePictureFilename and installedBundles.LiipImagineBundle is defined %}
                 		<img src="{{ asset('uploads/profile_pictures/' ~ app.user.info.profilePictureFilename) | imagine_filter('profile_form_thumb') }}" class="user-avatar-md rounded-circle" />
                 	{% else %}
-            			<img src="{{ asset( '/assets/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
+            			<img src="{{ asset( '/build/images/avatar-1.jpg' ) }}" alt="" class="user-avatar-md rounded-circle" />
             		{% endif %}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">

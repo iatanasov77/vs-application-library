@@ -20,7 +20,7 @@ class AuthController extends AbstractController
             'error'         => $error,
         );
         
-        return $this->render( '@VSApplication/login.html.twig', $tplVars );
+        return $this->render( '@VSApplication/Pages/login.html.twig', $tplVars );
     }
     
     public function logout()

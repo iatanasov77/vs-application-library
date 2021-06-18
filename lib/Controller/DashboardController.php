@@ -7,6 +7,6 @@ class DashboardController extends AbstractController
 {
     public function index()
     {
-        return $this->render( '@VSApplication/Dashboard/home.html.twig' );
+        return $this->render( '@VSApplication/Pages/Dashboard/home.html.twig' );
     }
 }

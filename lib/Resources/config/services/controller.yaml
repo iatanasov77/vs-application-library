@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+        
+    VS\ApplicationBundle\Controller\AuthController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        
+    VS\ApplicationBundle\Controller\DashboardController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        
+    VS\ApplicationBundle\Controller\SettingsExtController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        
+    VS\ApplicationBundle\Controller\TaxonomyTaxonsController:
+        tags: ['controller.service_arguments']
+        autowire: true
+

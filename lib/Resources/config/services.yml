@@ -1,4 +1,5 @@
 imports:
+    - { resource: services/controller.yaml }
     - { resource: services/settings.yaml }
     - { resource: services/form.yaml }
     - { resource: services/maintenance.yaml }
@@ -26,18 +27,3 @@ services:
         autoconfigure: true
         public: true
     
-    ##############################################################
-    # Controllers
-    ##############################################################
-    VS\ApplicationBundle\Controller\AuthController:
-        tags: ['controller.service_arguments']
-        autowire: true
-        calls:
-            - [setContainer, ['@service_container']]
-    
-    VS\ApplicationBundle\Controller\DashboardController:
-        tags: ['controller.service_arguments']
-        autowire: true
-        calls:
-            - [setContainer, ['@service_container']]
-

@@ -1,3 +1,10 @@
+0.11.0	|	Release date: **18.06.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Twig Templates.
+  - Fix Parameter 'vs_application.menu.config_file'.
+
+
 0.10.18	|	Release date: **17.06.2021**
 ============================================
 * New Features:

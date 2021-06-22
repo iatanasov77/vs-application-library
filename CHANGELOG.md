@@ -1,3 +1,9 @@
+0.11.2	|	Release date: **22.06.2021**
+============================================
+* New Features:
+  - Symfony 5 autowiring for Controllers.
+
+
 0.11.1	|	Release date: **18.06.2021**
 ============================================
 * Bug-Fixes:

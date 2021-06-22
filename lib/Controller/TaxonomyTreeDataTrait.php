@@ -2,6 +2,10 @@
 
 trait TaxonomyTreeDataTrait
 {
+    protected $taxonomyRepository;
+    
+    protected $taxonRepository;
+    
     protected function gtreeTableData( $taxonomyId, $parentId, $displayRootTaxon = false ) : array
     {
         $ertt       = $this->getTaxonRepository();
@@ -130,11 +134,13 @@ trait TaxonomyTreeDataTrait
     
     protected function getTaxonomyRepository()
     {
-        return $this->get( 'vs_application.repository.taxonomy' );
+        return $this->taxonomyRepository;
+        //return $this->get( 'vs_application.repository.taxonomy' );
     }
     
     protected function getTaxonRepository()
     {
-        return $this->get( 'vs_application.repository.taxon' );
+        return $this->taxonRepository;
+        //return $this->get( 'vs_application.repository.taxon' );
     }
 }

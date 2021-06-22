@@ -3,6 +3,10 @@ services:
         autowire: true
         autoconfigure: true
         public: true
+
+#     VS\ApplicationBundle\Controller\:
+#         resource: '../../Controller/'
+#         tags: ['controller.service_arguments', 'container.service_locator']
         
     VS\ApplicationBundle\Controller\AuthController:
         tags: ['controller.service_arguments']

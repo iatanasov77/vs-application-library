@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use VS\ApplicationBundle\Component\Slug;
 use VS\ApplicationBundle\Form\TaxonForm;
+use VS\ApplicationBundle\Repository\TaxonomyRepository;
 
 class TaxonomyTaxonsController extends AbstractController
 {
@@ -67,15 +68,18 @@ class TaxonomyTaxonsController extends AbstractController
         return new Response( 'The form is not submited properly !!!', 500 );
     }
     
-    public function gtreeTableSource( $taxonomyId, Request $request ): Response
+    public function gtreeTableSource( TaxonomyRepository $taxonomyRepository, $taxonomyId, Request $request ): Response
     {
-        $parentId       = (int)$request->query->get( 'parentTaxonId' );
+        $this->taxonomyRepository   = $taxonomyRepository;
+        $parentId                   = (int)$request->query->get( 'parentTaxonId' );
         
         return new JsonResponse( $this->gtreeTableData( $taxonomyId, $parentId ) );
     }
     
-    public function easyuiComboTreeSource( $taxonomyId, Request $request ): Response
+    public function easyuiComboTreeSource( TaxonomyRepository $taxonomyRepository, $taxonomyId, Request $request ): Response
     {
+        $this->taxonomyRepository   = $taxonomyRepository;
+        
         return new JsonResponse( $this->easyuiComboTreeData( $taxonomyId ) );
     }
 }

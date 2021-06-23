@@ -1,3 +1,9 @@
+0.11.3	|	Release date: **23.06.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Refactoring and Many Fixes.
+
+
 0.11.2	|	Release date: **22.06.2021**
 ============================================
 * New Features:

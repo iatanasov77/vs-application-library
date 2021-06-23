@@ -18,19 +18,38 @@
         <span class="custom-control-label">Maintenance Mode</span>
     </label>
 
-    {% set tree_data_options = "url:'" ~ path( 'vsorg_pages_tree' ) ~ "', required:true" %}
+    {% set comboDataSourceUrl  = path( 'vs_cms_pages_tree_combo_with_leafs', {'taxonomyId': pageCategoriesTaxonomyCode}) %}
+    {% set comboTreePlaceholder = 'vs_org.form.page_placeholder' | trans %}
+    {% set comboDataOptions    = "
+    		url:'" ~ comboDataSourceUrl ~ "',
+    		required: true,
+    		multiple: true,
+    		checkbox : true,
+    		onlyLeafCheck: true,
+    		prompt:'" ~ comboTreePlaceholder ~"',
+    		onCheck: function( node, checked ) {
+        		var cc = $(this).combotree( 'combo' );
+        		$( cc ).combotree( 'hidePanel' );
+        		$( cc ).combotree( 'setValue', checked?node.id:null );
+        	},
+    		onBeforeLoad: function( node ) {
+    		    //showSpiner
+    		},
+    		onLoadSuccess: function( node ) {
+    			//hideSpiner
+    		}
+    " %}
     <div class="form-group">
         {{ form_label(form.maintenancePage, null, {
             'label_attr': {'class': 'col-form-label'}
             }) 
         }}
         
-        {# 'data-value': item.maintenancePage #}
         {{ form_widget(form.maintenancePage, {
             'attr': {
                 'class': 'easyui-combotree',
-                'data-options': tree_data_options,
-                
+                'data-options': comboDataOptions,
+                'data-value': siteId,
             }
         }) }}
     </div>

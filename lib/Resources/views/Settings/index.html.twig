@@ -1,7 +1,9 @@
-{% extends "admin/layout.html.twig" %}
+{% extends "@VSApplication/layout.html.twig" %}
 
 {# Import Macros #}
+{#
 {% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
+#}
 
 {% block title %}{{ parent() }} :: General Settings{% endblock %}
 {% block pageTitle %}<i class="icon_genius"></i> General Settings{% endblock %}
@@ -17,7 +19,7 @@
                     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     <div class="page-breadcrumb">
                     	<nav aria-label="breadcrumb">
-                            {{ knp_menu_render('breadcrumbs', {'template': 'admin/menu/breadcrumb.html.twig'}) }}
+                            {{ knp_menu_render('breadcrumbs', {'template': '@VSApplication/Menu/breadcrumb.html.twig'}) }}
                         </nav>
                     </div>
                 </div>
@@ -39,7 +41,7 @@
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="card">
                             <div class="card-body">
-                               {% include 'admin/pages/Settings/forms/settings.html.twig' with { 'siteId': 0, 'form': forms.0} %}
+                               {% include '@VSApplication/Settings/forms/settings.html.twig' with { 'siteId': 0, 'form': forms.0} %}
                             
                             </div>
                             <div class="card-footer" id="imContainer">
@@ -101,21 +103,21 @@
 {% endblock %}
 
 {% block head_styles %}
-    {{ parent() }}
-    
-    {{ encore_entry_link_tags( 'pages/sites' ) }}
+	{{ parent() }}
+	
+	{{ encore_entry_link_tags( 'js/settings' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
-   
-    {{ encore_entry_script_tags( 'pages/sites' ) }}
+
+    {{ encore_entry_script_tags( 'js/settings' ) }}
 {% endblock %}
 
 {% block modals %}
     {{ parent() }}
     
-    {% include 'admin/pages/Settings/modals/site-settings.html.twig' %}
-    {% include 'admin/pages/Settings/modals/site-edit.html.twig' %}
-    {% include 'admin/pages/Settings/modals/site-delete.html.twig' %}
+    {% include '@VSApplication/Settings/modals/site-settings.html.twig' %}
+    {% include '@VSApplication/Settings/modals/site-edit.html.twig' %}
+    {% include '@VSApplication/Settings/modals/site-delete.html.twig' %}
 {% endblock %}

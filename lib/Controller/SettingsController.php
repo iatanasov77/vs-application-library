@@ -37,7 +37,7 @@ class SettingsController extends ResourceController
 //             return $this->redirect( $this->generateUrl( 'vs_application_settings' ) );
 //         }
         
-        return $this->render( '@VSApplication/Settings/index.html.twig', [
+        return $this->render( '@VSApplication/Pages/Settings/index.html.twig', [
             'forms'         => $forms,
             'sites'         => $sites
         ]);

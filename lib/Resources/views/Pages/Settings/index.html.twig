@@ -41,7 +41,7 @@
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="card">
                             <div class="card-body">
-                               {% include '@VSApplication/Settings/forms/settings.html.twig' with { 'siteId': 0, 'form': forms.0} %}
+                               {% include '@VSApplication/Pages/Settings/forms/settings.html.twig' with { 'siteId': 0, 'form': forms.0} %}
                             
                             </div>
                             <div class="card-footer" id="imContainer">
@@ -117,7 +117,7 @@
 {% block modals %}
     {{ parent() }}
     
-    {% include '@VSApplication/Settings/modals/site-settings.html.twig' %}
-    {% include '@VSApplication/Settings/modals/site-edit.html.twig' %}
-    {% include '@VSApplication/Settings/modals/site-delete.html.twig' %}
+    {% include '@VSApplication/Pages/Settings/modals/site-settings.html.twig' %}
+    {% include '@VSApplication/Pages/Settings/modals/site-edit.html.twig' %}
+    {% include '@VSApplication/Pages/Settings/modals/site-delete.html.twig' %}
 {% endblock %}

@@ -2,7 +2,7 @@ vs_application_taxonomy:
     resource: |
         alias: vs_application.taxonomy
         path: /taxonomy
-        templates: "@VSApplication/Taxonomy"
+        templates: "@VSApplication/Pages/Taxonomy"
     type: sylius.resource
 
 vs_application_taxon:

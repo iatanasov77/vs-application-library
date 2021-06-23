@@ -2,7 +2,7 @@ vs_application_settings:
     resource: |
         alias: vs_application.settings
         path: /settings
-        templates: "@VSApplication/Settings"
+        templates: "@VSApplication/Pages/Settings"
     type: sylius.resource
 
 vs_application_settings_edit:

@@ -1,3 +1,9 @@
+0.11.5	|	Release date: **24.06.2021**
+============================================
+* Bug-Fixes:
+  - Wiring needed services of the SettingsExtController.
+
+
 0.11.4	|	Release date: **24.06.2021**
 ============================================
 * Bug-Fixes:

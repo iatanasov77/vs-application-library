@@ -1,3 +1,11 @@
+0.11.4	|	Release date: **24.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix TaxonomyTaxonsController.
+  - Fix a Taxonomy update view.
+  - Fix a Settings Form Placeholder.
+
+
 0.11.3	|	Release date: **23.06.2021**
 ============================================
 * Bug-Fixes and Improvements:

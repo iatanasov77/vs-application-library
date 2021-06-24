@@ -6,8 +6,23 @@ use Symfony\Component\HttpFoundation\Response;
 
 use VS\ApplicationBundle\Form\SettingsForm;
 
+use VS\ApplicationBundle\Component\Settings\Settings as SettingsManager;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+
 class SettingsExtController extends AbstractController
 {
+    protected $settingsManager;
+    
+    protected $siteRepository;
+    
+    public function __construct(
+        SettingsManager $settingsManager,
+        EntityRepository $siteRepository
+    ) {
+        $this->settingsManager  = $settingsManager;
+        $this->siteRepository   = $siteRepository;
+    }
+    
     public function index( Request $request ): Response
     {
         die ( 'NOT IMPLEMENTED !!!' );
@@ -20,24 +35,19 @@ class SettingsExtController extends AbstractController
         if( $form->isSubmitted() && $form->isValid() ) {
             $entity = $form->getData();
             if ( $siteId && ( ! $entity->getSite() ) ) {
-                $entity->setSite( $this->getSiteRepository()->find( $siteId ) );
+                $entity->setSite( $this->siteRepository->find( $siteId ) );
             }
             
             $em = $this->getDoctrine()->getManager();
             $em->persist( $entity );
             $em->flush();
             
-            //$this->get( 'vs_app.settings_manager' )->clearCache( $siteId, true );
-            $this->get( 'vs_app.settings_manager' )->saveSettings( $siteId );
+            //$this->settingsManager->clearCache( $siteId, true );
+            $this->settingsManager->saveSettings( $siteId );
             
             return $this->redirect( $this->generateUrl( 'vs_application_settings_index' ) );
         }
         
         throw new \Exception( 'Settings Form Not Submited properly!' );
-    }
-    
-    protected function getSiteRepository()
-    {
-        return $this->get( 'vs_application.repository.site' );
     }
 }

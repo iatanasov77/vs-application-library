@@ -19,6 +19,9 @@ services:
     VS\ApplicationBundle\Controller\SettingsExtController:
         tags: ['controller.service_arguments']
         autowire: true
+        arguments:
+            - '@vs_app.settings_manager'
+            - '@vs_application.repository.site'
         
     VS\ApplicationBundle\Controller\TaxonomyTaxonsController:
         tags: ['controller.service_arguments']

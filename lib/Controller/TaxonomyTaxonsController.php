@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use VS\ApplicationBundle\Component\Slug;
 use VS\ApplicationBundle\Form\TaxonForm;
 use VS\ApplicationBundle\Repository\TaxonomyRepository;
+use VS\ApplicationBundle\Repository\TaxonRepository;
 
 class TaxonomyTaxonsController extends AbstractController
 {
@@ -18,12 +19,15 @@ class TaxonomyTaxonsController extends AbstractController
         return new Response( "NOT IMPLEMENTED !!!" );
     }
     
-    public function editTaxon( $taxonomyId, Request $request ): Response
+    public function editTaxon( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, $taxonomyId, Request $request ): Response
     {
-        $locale     = $request->getLocale();
-        $rootTaxon  = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
+        $this->taxonomyRepository   = $taxonomyRepository;
+        $this->taxonRepository      = $taxonRepository;
         
-        $oTaxon     = $this->get( 'vs_application.factory.taxon' )->createNew();
+        $locale                     = $request->getLocale();
+        $rootTaxon                  = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
+        
+        $oTaxon                     = $this->get( 'vs_application.factory.taxon' )->createNew();
         $oTaxon->setCurrentLocale( $locale );
         
         $form   = $this->createForm( TaxonForm::class, $oTaxon, [
@@ -38,10 +42,13 @@ class TaxonomyTaxonsController extends AbstractController
         ]);
     }
     
-    public function handleTaxon( Request $request ): Response
+    public function handleTaxon( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, Request $request ): Response
     {
-        $locale     = $request->getLocale();
-        $form       = $this->createForm( TaxonForm::class );
+        $this->taxonomyRepository   = $taxonomyRepository;
+        $this->taxonRepository      = $taxonRepository;
+        
+        $locale                     = $request->getLocale();
+        $form                       = $this->createForm( TaxonForm::class );
         
         if ( $request->isMethod( 'POST' ) ) {
             $parentTaxon    = $this->getTaxonRepository()->find( $_POST['taxon_form']['parentTaxon'] );
@@ -68,17 +75,20 @@ class TaxonomyTaxonsController extends AbstractController
         return new Response( 'The form is not submited properly !!!', 500 );
     }
     
-    public function gtreeTableSource( TaxonomyRepository $taxonomyRepository, $taxonomyId, Request $request ): Response
+    public function gtreeTableSource( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, $taxonomyId, Request $request ): Response
     {
         $this->taxonomyRepository   = $taxonomyRepository;
+        $this->taxonRepository      = $taxonRepository;
+        
         $parentId                   = (int)$request->query->get( 'parentTaxonId' );
         
         return new JsonResponse( $this->gtreeTableData( $taxonomyId, $parentId ) );
     }
     
-    public function easyuiComboTreeSource( TaxonomyRepository $taxonomyRepository, $taxonomyId, Request $request ): Response
+    public function easyuiComboTreeSource( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, $taxonomyId, Request $request ): Response
     {
         $this->taxonomyRepository   = $taxonomyRepository;
+        $this->taxonRepository      = $taxonRepository;
         
         return new JsonResponse( $this->easyuiComboTreeData( $taxonomyId ) );
     }

@@ -2,7 +2,9 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Site Settings</h5>
+                <h5 class="modal-title">
+					{{ 'vs_application.modal.site_settings.title' | trans( {},'VSApplicationBundle' ) }}: <span id="deleteSiteTitle"></span>
+				</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,8 +15,12 @@
                 </div>
             </div>
             <div class="modal-footer" id="imContainer">
-                <button type="button" class="btn btn-primary" id="btnSaveSettings">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnSaveSettings">
+					{{ 'vs_application.form.save' | trans( {},'VSApplicationBundle' ) }}
+				</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+					{{ 'vs_application.form.cancel' | trans( {},'VSApplicationBundle' ) }}
+				</button>
             </div>
         </div>
     </div>

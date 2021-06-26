@@ -6,7 +6,8 @@
             <button type="button" class="close close-sm" data-dismiss="alert">
                 <i class="icon-remove"></i>
             </button>
-            <strong>Error!</strong> {{ form_errors(form) }}
+            <strong>{{ 'vs_application.form.errors_title' | trans( {},'VSApplicationBundle' ) }}</strong>
+            {{ form_errors(form) }}
         </div>
     {% endif %}
     
@@ -15,7 +16,7 @@
             class="custom-control-input form-check-input"
             {% if form.vars.value.maintenanceMode %}checked="checked"{% endif %}
         />
-        <span class="custom-control-label">Maintenance Mode</span>
+        <span class="custom-control-label">{{ 'vs_application.form.maintenance_mode' | trans( {},'VSApplicationBundle' ) }}</span>
     </label>
 
     {% set comboDataSourceUrl  = path( 'vs_cms_pages_tree_combo_with_leafs', {'taxonomyId': pageCategoriesTaxonomyCode}) %}

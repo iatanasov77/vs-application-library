@@ -1,5 +1,6 @@
 vs_application:
     form:
+        errors_title: 'Грешка!'
         locale: 'Език'
         title: 'Име'
         name: 'Име'
@@ -13,3 +14,31 @@ vs_application:
         apply: 'Въведи'
         save: 'Запази'
         cancel: 'Отказ'
+        login:
+            remember_me: 'Запомни ме'
+            button_login: 'Влез'
+            button_register: 'Създай Акаунт'
+            button_forgot_password: 'Забравена Парола'
+    template:
+        button_view_all_notifications: 'Виж всички известия'
+        dashboard_header_title: 'Табло на Приложението'
+        dashboard_section_title: 'Табло'
+        dashboard_section_description: 'Описание на Таблото.'
+        general_settings_title: 'Основни Настройки'
+        taxonomy_index_title: 'Списък на Речниците'
+        taxonomy_update_title: 'Редакция на Таксономия'
+        taxonomy_create_title: 'Създаване на Нова Таксономия'
+        taxonomy_update_list_taxons_title: 'Таксони на Таксономия'
+        button_create_taxon: 'Добави Нов Таксон'
+    modal:
+        site_delete:
+            title: 'Изтриване на Сайт'
+            description_1: 'Това действие ще изтрие сайта и всички негови настройки.'
+            description_2: 'Ако сте сигурни, щракнете върху бутона "Изтрий", в противен случай кликнете върху "Отказ".'
+            button_delete: 'Изтрий'
+        site_edit:
+            title: 'Редактиране на Сайт'
+        site_settings:
+            title: 'Настройки на Сайт'
+        taxonomy_taxon_edit:
+            title: 'Създаване на Таксон'

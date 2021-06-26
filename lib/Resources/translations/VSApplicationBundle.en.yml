@@ -1,5 +1,6 @@
 vs_application:
     form:
+        errors_title: 'Error!'
         locale: 'Locale'
         title: 'Title'
         name: 'Name'
@@ -13,3 +14,31 @@ vs_application:
         apply: 'Apply'
         save: 'Save'
         cancel: 'Cancel'
+        login:
+            remember_me: 'Remember Me'
+            button_login: 'Login'
+            button_register: 'Create An Account'
+            button_forgot_password: 'Forgot Password'
+    template:
+        button_view_all_notifications: 'View all notifications'
+        dashboard_header_title: 'Application Dashboard'
+        dashboard_section_title: 'Dashboard'
+        dashboard_section_description: 'Dashboard description.'
+        general_settings_title: 'General Settings'
+        taxonomy_index_title: 'List Vocabularies'
+        taxonomy_update_title: 'Edit Taxonomy'
+        taxonomy_create_title: 'Create New Taxonomy'
+        taxonomy_update_list_taxons_title: 'Taxonomy Taxons'
+        button_create_taxon: 'Create New Taxon'
+    modal:
+        site_delete:
+            title: 'Delete Site'
+            description_1: 'This action will delete the site and all of its settings.'
+            description_2: 'If you sure click on "Delete" button otherwise click on "Cancel".'
+            button_delete: 'Delete'
+        site_edit:
+            title: 'Edit Site'
+        site_settings:
+            title: 'Site Settings'
+        taxonomy_taxon_edit:
+            title: 'Create Taxon'

@@ -7,8 +7,8 @@
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 {% from "@VSApplication/Macros/misc.html.twig" import pagination %}
 
-{% block title %}{{ parent() }} :: General Settings{% endblock %}
-{% block pageTitle %}<i class="icon_genius"></i> General Settings{% endblock %}
+{% block title %}{{ parent() }} :: {{ 'vs_application.template.general_settings_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
+{% block pageTitle %}<i class="icon_genius"></i> {{ 'vs_application.template.general_settings_title' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
 {% block content %}
     <div class="container-fluid  dashboard-content">
     	<!-- ============================================================== -->
@@ -47,7 +47,9 @@
                             
                             </div>
                             <div class="card-footer" id="imContainer">
-                                <button type="button" class="btn btn-primary" id="btnSaveGeneralSettings">Save</button>
+                                <button type="button" class="btn btn-primary" id="btnSaveGeneralSettings">
+									{{ 'vs_application.form.save' | trans( {},'VSApplicationBundle' ) }}
+								</button>
                             </div>
                         </div>
                     </div>

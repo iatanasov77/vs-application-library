@@ -1,9 +1,14 @@
 {% extends "@VSApplication/layout.html.twig" %}
 {% import "@VSApplication/Macros/form.html.twig" as vs_form %}
 
-{% block title %}{{ parent() }} :: Edit Taxonomy{% endblock %}
+{% if( item.id ) %}
+	{% set pageTitle = 'vs_application.template.taxonomy_update_title' | trans( {},'VSApplicationBundle' ) %}
+{% else %}
+	{% set pageTitle = 'vs_application.template.taxonomy_create_title' | trans( {},'VSApplicationBundle' ) %}
+{% endif %}
 
-{% block pageTitle %}<i class="icon_genius"></i> Edit Taxonomy{% endblock %}
+{% block title %}{{ parent() }} :: {{ pageTitle }}{% endblock %}
+{% block pageTitle %}<i class="icon_genius"></i> {{ pageTitle }}{% endblock %}
 
 {% block content %}
     <div class="container-fluid  dashboard-content">
@@ -13,7 +18,13 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">{% if( item.id ) %}Taxonomy Edit: {{ item.name }}{% else %}Create New Taxonomy{% endif %}</h2>
+                    <h2 class="pageheader-title">
+	                    {% if( item.id ) %}
+	                    	{{ pageTitle }}: {{ item.name }}
+	                    {% else %}
+	                    	{{ pageTitle }}
+	                    {% endif %}
+                    </h2>
                     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     <div class="page-breadcrumb">
                     	<nav aria-label="breadcrumb">
@@ -40,7 +51,7 @@
 			                    <button type="button" class="close close-sm" data-dismiss="alert">
 			                        <i class="icon-remove"></i>
 			                    </button>
-			                    <strong>Error!</strong> {{ form_errors(form) }}
+			                    <strong>{{ 'vs_application.form.errors_title' | trans( {},'VSApplicationBundle' ) }}</strong> {{ form_errors(form) }}
 			                </div>
 			            {% endif %}
 			            
@@ -87,7 +98,7 @@
                                 	data-url="{{ path('vs_application_taxonomy_taxon_edit', {'taxonomyId': item.id}) }}"
                                 	data-easyui-url="{{ path( 'vs_application_taxonomy_taxons_easyui_combotree', {'taxonomyId': item.id} ) }}"
                                 >
-                                    Create New Taxon
+                                	{{ 'vs_application.template.button_create_taxon' | trans( {},'VSApplicationBundle' ) }}
                                 </a>&nbsp;
                             </div>
                         </div>

@@ -1,3 +1,11 @@
+0.11.6	|	Release date: **26.06.2021**
+============================================
+* New Features and Improvements:
+  - Add All Template's Translations.
+  - Update Twig Template's Includes.
+  - Add Twig Macroses 'alerts' and 'misc'.
+
+
 0.11.5	|	Release date: **24.06.2021**
 ============================================
 * Bug-Fixes:

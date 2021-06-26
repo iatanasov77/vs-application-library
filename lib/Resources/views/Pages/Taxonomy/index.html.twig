@@ -1,4 +1,9 @@
 {% extends "@VSApplication/layout.html.twig" %}
+
+{# Import Macros #}
+{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
+{% from "@VSApplication/Macros/misc.html.twig" import pagination %}
+
 {% block title %}{{ parent() }} :: List Vocabularies{% endblock %}
 
 {% block pageTitle %}<i class="icon_genius"></i> List Vocabularies{% endblock %}

@@ -1,3 +1,9 @@
+0.11.8	|	Release date: **27.06.2021**
+============================================
+* New Features:
+  - Add UserRoles Checker into the MenuBuilder.
+
+
 0.11.6	|	Release date: **26.06.2021**
 ============================================
 * New Features and Improvements:

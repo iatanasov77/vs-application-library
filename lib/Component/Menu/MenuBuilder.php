@@ -12,6 +12,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
 
+use VS\ApplicationBundle\Component\Menu\PathRolesService;
+
 class MenuBuilder implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
@@ -27,19 +29,25 @@ class MenuBuilder implements ContainerAwareInterface
     // ContainerBuilder
     protected $cb;
     
+    // PathRolesService
+    protected $pathRolesService;
+    
     public function __construct(
         string $config_file,
         AuthorizationChecker $security,
+        PathRolesService $pathRolesService,
         RouterInterface $router,
         ParameterBagInterface $parameterBag
-    ) {
-        $config             = Yaml::parse( file_get_contents( $config_file ) );
-        $this->menuConfig   = $config['vs_application']['menu'];
-        
-        $this->security     = $security;
-        $this->router       = $router;
-        
-        $this->cb           = new ContainerBuilder( $parameterBag );
+        ) {
+            $config                 = Yaml::parse( file_get_contents( $config_file ) );
+            $this->menuConfig       = $config['vs_application']['menu'];
+            
+            $this->security         = $security;
+            $this->router           = $router;
+            
+            $this->cb               = new ContainerBuilder( $parameterBag );
+            
+            $this->pathRolesService = $pathRolesService;
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
@@ -100,6 +108,8 @@ class MenuBuilder implements ContainerAwareInterface
     protected function build( &$menu, $config )
     {
         foreach ( $config as $id => $mg ) {
+            $hasGrantedChild    = false;
+            
             $params = [
                 'id'                => $id,
                 'uri'               => isset( $mg['uri'] ) ? $mg['uri'] : null,
@@ -114,11 +124,26 @@ class MenuBuilder implements ContainerAwareInterface
             }
             
             if ( $params['route'] ) {
-                $path       = $this->router->generate( $params['route'], $params['routeParameters'], RouterInterface::ABSOLUTE_PATH );
-                if ( $this->security->isGranted( $path ) === VoterInterface::ACCESS_DENIED )
+                $path           = $this->router->generate( $params['route'], $params['routeParameters'], RouterInterface::ABSOLUTE_PATH );
+                $roles          = $this->pathRolesService->getRoles( $path );
+                $pathGranted    = false;
+                if ( is_array( $roles ) ) {
+                    foreach ( $roles as $pathRole ) {
+                        $pathGranted    = false;
+                        if ( $this->security->isGranted( $pathRole ) ) { // VoterInterface::ACCESS_ABSTAIN
+                                                                         //VoterInterface::ACCESS_DENIED
+                            $pathGranted        = true;
+                            $hasGrantedChild    = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if ( ! $pathGranted ) {
                     continue;
+                }
             }
-
+            
             if ( isset( $mg['routeParameters'] ) && is_array( $mg['routeParameters'] ) ) {
                 foreach( $mg['routeParameters'] as $rp => $type ) {
                     if ( $type == 'int' ) {
@@ -135,15 +160,18 @@ class MenuBuilder implements ContainerAwareInterface
             }
             
             if ( isset( $mg['childs'] ) && is_array( $mg['childs'] ) ) {
-                $this->build( $menu[$mg['name']], $mg['childs'] );
+                $isGranted  = $this->build( $menu[$mg['name']], $mg['childs'] );
+                $child->setDisplay( $isGranted );
             }
         }
+        
+        return $hasGrantedChild;
     }
     
     protected function routeAllowed( $route, $routeParams )
     {
         $security       = ['ROLE_ADMIN','ROLE_SUPPORT']; // can be empty array as well or security expression packed into an array
-        $rolesToCheck   = ['ROLE_USER', 'ROLE_EDITOR', 'ROLE_PEER', 'ROLE_SUPPORT', 'ROLE_ADMIN'];
+        $rolesToCheck   = ['ROLE_USER', 'ROLE_EDITOR', 'ROLE_AUTHOR', 'ROLE_PEER', 'ROLE_SUPPORT', 'ROLE_ADMIN'];
         
         $allowed_roles = $this->pathRoles->getRolesForRoute( $route, $routeParams, $rolesToCheck, $security );
     }

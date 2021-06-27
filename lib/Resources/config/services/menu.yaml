@@ -8,10 +8,19 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        
+    
+    vs_application.path_roles_service:
+        class: VS\ApplicationBundle\Component\Menu\PathRolesService
+        arguments: ['@security.access_map']
+
     vs_app.menu_builder:
         class: VS\ApplicationBundle\Component\Menu\MenuBuilder
-        arguments: ["%vs_application.menu.config_file%", "@security.authorization_checker", "@router", "@parameter_bag"]
+        arguments:
+            - "%vs_application.menu.config_file%"
+            - "@security.authorization_checker"
+            - "@vs_application.path_roles_service"
+            - "@router"
+            - "@parameter_bag"
         calls:
           - [ setContainer ]
             

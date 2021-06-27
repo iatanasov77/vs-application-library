@@ -1,3 +1,9 @@
+0.11.9	|	Release date: **27.06.2021**
+============================================
+* New Features:
+  - Add Links into the breadcrumb items.
+
+
 0.11.8	|	Release date: **27.06.2021**
 ============================================
 * New Features:

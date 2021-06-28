@@ -2,6 +2,7 @@
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 
@@ -10,13 +11,18 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var FactoryInterface */
     private $localesFactory;
     
+    /** @var RepositoryInterface */
+    private $localesRepository;
+    
     /** @var OptionsResolver */
     private $optionsResolver;
     
     public function __construct(
-        FactoryInterface $localesFactory
+        FactoryInterface $localesFactory,
+        RepositoryInterface $localesRepository
     ) {
-            $this->localesFactory   = $localesFactory;
+            $this->localesFactory       = $localesFactory;
+            $this->localesRepository    = $localesRepository;
             
             $this->optionsResolver  = new OptionsResolver();
             $this->configureOptions( $this->optionsResolver );
@@ -26,9 +32,12 @@ class LocalesExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $options    = $this->optionsResolver->resolve( $options );
         
-        $localeEntity = $this->localesFactory->createNew();
-        
-        $localeEntity->setCode( $options['code'] );
+        $localeEntity   = $this->localesRepository->findOneBy( ['code' => $options['code']]);
+        if ( ! $localeEntity ) {
+            $localeEntity = $this->localesFactory->createNew();
+            
+            $localeEntity->setCode( $options['code'] );
+        }
         
         return $localeEntity;
     }

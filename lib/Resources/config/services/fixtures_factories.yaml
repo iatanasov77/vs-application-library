@@ -38,3 +38,4 @@ services:
         class: VS\ApplicationBundle\DataFixtures\Factory\LocalesExampleFactory
         arguments:
             - '@vs_application.factory.locale'
+            - '@vs_application.repository.locale'

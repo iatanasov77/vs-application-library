@@ -14,8 +14,9 @@ sylius_fixtures:
                 locales:
                     options:
                         locales:
-                            - 'en_US'
-                            - 'bg_BG'
+                            custom:
+                                - code: 'en_US'
+                                - code: 'bg_BG'
                 
                 general_settings:
                     name: general_settings

@@ -28,3 +28,13 @@ services:
             - '@vs_application.factory.taxon'
             - '@vs_cms.factory.page_categories'
 
+    vs_application.fixture.example_factory.pages:
+        class: VS\ApplicationBundle\DataFixtures\Factory\PagesExampleFactory
+        arguments:
+            - '@vs_cms.repository.page_categories'
+            - '@vs_cms.factory.pages'
+            
+    vs_application.fixture.example_factory.locales:
+        class: VS\ApplicationBundle\DataFixtures\Factory\LocalesExampleFactory
+        arguments:
+            - '@vs_application.factory.locale'

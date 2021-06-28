@@ -11,6 +11,12 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
+                locales:
+                    options:
+                        locales:
+                            - 'en_US'
+                            - 'bg_BG'
+                
                 general_settings:
                     name: general_settings
                     options:
@@ -38,14 +44,16 @@ sylius_fixtures:
                               taxonomy_code: 'page-categories'
                               locale:  '%locale%'
 
-                                    
-                        
-                        
-#                 locale:
-#                     options:
-#                         locales:
-#                             - 'en_US'
-#                             - 'bg_BG'
+                pages:
+                    name: pages
+                    options:
+                        custom:
+                            - title: 'Under Construction'
+                              text: '<h1>Under Construction</h1>'
+                              published: true
+                              category_code: 'page-categories'
+                              locale:  '%locale%'
+
 
 #                 admin_user:
 #                     name: 'admin_user'

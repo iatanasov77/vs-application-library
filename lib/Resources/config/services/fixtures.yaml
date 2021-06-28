@@ -44,4 +44,19 @@ services:
             - '@vs_application.fixture.example_factory.application_site'
         tags:
             - 'sylius_fixtures.fixture'
+            
+    vs_application.fixture.pages:
+        class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\PagesFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.pages'
+        tags:
+            - 'sylius_fixtures.fixture'
 
+    vs_application.fixture.locales:
+        class: VS\ApplicationBundle\DataFixtures\VankosoftApplicationFixtures\LocalesFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@vs_application.fixture.example_factory.locales'
+        tags:
+            - 'sylius_fixtures.fixture'

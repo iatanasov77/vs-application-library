@@ -25,9 +25,9 @@ EOT
             $this->getEnvironment()
         ) );
 
+        $publicDir = $this->getContainer()->getParameter( 'vs_application.public_dir' );
+        
         try {
-            $publicDir = $this->getContainer()->getParameter( 'vs_application.public_dir' );
-
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/assets/', $output );
             $this->ensureDirectoryExistsAndIsWritable( $publicDir . '/bundles/', $output );
         } catch ( \RuntimeException $exception ) {

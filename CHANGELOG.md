@@ -1,3 +1,10 @@
+0.11.10	|	Release date: **28.06.2021**
+============================================
+* New Features:
+  - Add Installer Fixtures for Locales and Pages.
+  - Styling footer.
+
+
 0.11.9	|	Release date: **27.06.2021**
 ============================================
 * New Features:

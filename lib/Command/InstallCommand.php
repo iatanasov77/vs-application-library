@@ -59,6 +59,7 @@ EOT
         $outputStyle    = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( '<info>Installing VankoSoft Application...</info>' );
         //$outputStyle->writeln( $this->getSyliusLogo() );
+        $outputStyle->writeln( $this->getVankoSoftLogo() );
         
         $this->ensureDirectoryExistsAndIsWritable( (string) $this->getContainer()->getParameter( 'kernel.cache_dir' ), $output );
         
@@ -131,5 +132,22 @@ EOT
     <info>:;;;;;;;;;:,</info>                :.:+,
      <info>;;;;;;;;;:</info>                 ;++,'
             ;
+    }
+    
+    private function getVankoSoftLogo(): string
+    {
+        /*
+         * Generated Here: https://www.ascii-art-generator.org/
+         */
+        return '
+#     #                              #####                            #                                                               
+#     #   ##   #    # #    #  ####  #     #  ####  ###### #####      # #   #####  #####  #      #  ####    ##   ##### #  ####  #    # 
+#     #  #  #  ##   # #   #  #    # #       #    # #        #       #   #  #    # #    # #      # #    #  #  #    #   # #    # ##   # 
+#     # #    # # #  # ####   #    #  #####  #    # #####    #      #     # #    # #    # #      # #      #    #   #   # #    # # #  # 
+ #   #  ###### #  # # #  #   #    #       # #    # #        #      ####### #####  #####  #      # #      ######   #   # #    # #  # # 
+  # #   #    # #   ## #   #  #    # #     # #    # #        #      #     # #      #      #      # #    # #    #   #   # #    # #   ## 
+   #    #    # #    # #    #  ####   #####   ####  #        #      #     # #      #      ###### #  ####  #    #   #   #  ####  #    # 
+
+        ';
     }
 }

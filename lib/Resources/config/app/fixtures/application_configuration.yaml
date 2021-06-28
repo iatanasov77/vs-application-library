@@ -52,7 +52,7 @@ sylius_fixtures:
                             - title: 'Under Construction'
                               text: '<h1>Under Construction</h1>'
                               published: true
-                              category_code: 'page-categories'
+                              category_code: 'maintenance-pages'
                               locale:  '%locale%'
 
 

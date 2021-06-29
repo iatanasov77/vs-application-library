@@ -1,5 +1,7 @@
 <?php namespace VS\ApplicationBundle\Controller;
 
+use VS\ApplicationBundle\Component\Slug;
+
 trait TaxonomyHelperTrait
 {
     protected function createTaxon( $name, $locale, $parent, $taxonomyId )
@@ -8,6 +10,7 @@ trait TaxonomyHelperTrait
         
         $taxon->setCurrentLocale( $locale );
         $taxon->setName( $name );
+        $taxon->setCode( Slug::generate( $name ) );
         
         if ( ! $parent ) {
             $taxonomy   = $this->get( 'vs_application.repository.taxonomy' )->find( $taxonomyId );

@@ -1,3 +1,11 @@
+0.11.14	|	Release date: **29.06.2021**
+============================================
+* New Features:
+  - Create AsciiArt Logo for InstallCommand.
+* Bug-Fixes:
+  - Fix Controller/TaxonomyHelperTrait.
+
+
 0.11.13	|	Release date: **28.06.2021**
 ============================================
 * Bug-Fixes:

@@ -10,7 +10,10 @@ trait TaxonomyHelperTrait
         
         $taxon->setCurrentLocale( $locale );
         $taxon->setName( $name );
-        $taxon->setCode( Slug::generate( $name ) );
+        
+        $slug   = Slug::generate( $name );
+        $taxon->setCode( $slug );
+        $taxon->setSlug( $slug );
         
         if ( ! $parent ) {
             $taxonomy   = $this->get( 'vs_application.repository.taxonomy' )->find( $taxonomyId );

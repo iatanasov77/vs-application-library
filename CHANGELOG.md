@@ -1,3 +1,9 @@
+0.11.15	|	Release date: **29.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix Controller/TaxonomyHelperTrait to set Slug Taxon Translation.
+
+
 0.11.14	|	Release date: **29.06.2021**
 ============================================
 * New Features:

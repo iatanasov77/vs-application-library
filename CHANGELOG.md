@@ -1,3 +1,10 @@
+0.11.16	|	Release date: **30.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix TaxonomyController.
+  - Fix Twig Layout.
+
+
 0.11.15	|	Release date: **29.06.2021**
 ============================================
 * Bug-Fixes:

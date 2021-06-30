@@ -1,3 +1,9 @@
+0.11.19	|	Release date: **30.06.2021**
+============================================
+* New Features:
+  - Add DoctrineMigrations/ProjectVersionComparator to Order Migration Execution.
+
+
 0.11.18	|	Release date: **30.06.2021**
 ============================================
 * New Features:

@@ -1,3 +1,9 @@
+0.11.21	|	Release date: **30.06.2021**
+============================================
+* Bug-Fixes:
+  - Fix Migrations Loading - Add service DoctrineMigrations\ProjectVersionComparator.
+
+
 0.11.20	|	Release date: **30.06.2021**
 ============================================
 * New Features and Improvements:

@@ -8,6 +8,10 @@ class TaxonomyController extends AbstractCrudController
 { 
     protected function prepareEntity( &$entity, &$form, Request $request )
     {
+        $formData   = $request->request->get( 'taxonomy_form' );
+        
+        $entity->setCode( Slug::generate( $formData['name'] ) );
+        
         if ( ! $entity->getRootTaxon() ) {
             $entity->setRootTaxon( $this->createRootTaxon( $entity, $request->getLocale() ) );
         }

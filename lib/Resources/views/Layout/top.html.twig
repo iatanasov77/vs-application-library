@@ -11,6 +11,14 @@
                 </div>
             </li>
             
+        {% if ( isMultiSite is defined and isMultiSite ) %}
+            <li class="nav-item">
+                <a class="nav-link nav-icons" href="{{ webSiteUrl }}" title="Go to the Website" >
+                	<i class="fas fa-globe"></i>
+                </a>
+            </li>
+        {% endif %}
+            
         {% if app.user %}
             <li class="nav-item dropdown notification">
                 <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span class="indicator"></span></a>

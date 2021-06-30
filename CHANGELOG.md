@@ -1,3 +1,9 @@
+0.11.20	|	Release date: **30.06.2021**
+============================================
+* New Features and Improvements:
+  - Move DoctrineMigrations\ProjectVersionComparator to Component namespace.
+
+
 0.11.19	|	Release date: **30.06.2021**
 ============================================
 * New Features:

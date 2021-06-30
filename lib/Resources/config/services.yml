@@ -26,4 +26,7 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-    
+        
+    VS\ApplicationBundle\Component\DoctrineMigrations\ProjectVersionComparator:
+        autowire: true
+

@@ -1,3 +1,9 @@
+0.11.18	|	Release date: **30.06.2021**
+============================================
+* New Features:
+  - Add Link to The Site in the AdminPanel Layout.
+
+
 0.11.17	|	Release date: **30.06.2021**
 ============================================
 * Bug-Fixes:

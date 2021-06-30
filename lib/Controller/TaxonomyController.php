@@ -26,7 +26,11 @@ class TaxonomyController extends AbstractCrudController
         $rootTaxon->setCurrentLocale( $locale );
         $rootTaxon->getTranslation()->setName( $taxonomy->getName() );
         $rootTaxon->getTranslation()->setDescription( 'Root taxon of Taxonomy: "' . $taxonomy->getName() . '"' );
-        $rootTaxon->getTranslation()->setSlug( Slug::generate( $taxonomy->getName() ) );
+        
+        $slug   = Slug::generate( $taxonomy->getName() );
+        $rootTaxon->setCode( $slug );
+        $rootTaxon->getTranslation()->setSlug( $slug );
+        
         $rootTaxon->getTranslation()->setTranslatable( $rootTaxon );
         
         return $rootTaxon;

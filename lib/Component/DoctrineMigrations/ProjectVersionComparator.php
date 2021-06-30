@@ -1,4 +1,4 @@
-<?php namespace VS\ApplicationBundle\DoctrineMigrations;
+<?php namespace VS\ApplicationBundle\Component\DoctrineMigrations;
 
 use Doctrine\Migrations\Version\Comparator;
 use Doctrine\Migrations\Version\AlphabeticalComparator;

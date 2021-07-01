@@ -36,6 +36,8 @@ class MaintenanceListener
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
             ) {
+                $this->container->setParameter( 'vs_application.in_maintenance', true );
+                
                 $maintenancePage    = $settings['maintenancePage'] ?
                                         $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
                                         null;
@@ -47,8 +49,11 @@ class MaintenanceListener
                 
                 $event->stopPropagation();
             } else {
+                $this->container->setParameter( 'vs_application.in_maintenance', false );
                 Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
             }   
+        } else {
+            $this->container->setParameter( 'vs_application.in_maintenance', false );
         }
     }
     

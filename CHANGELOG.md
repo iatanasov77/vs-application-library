@@ -1,3 +1,9 @@
+0.11.26	|	Release date: **01.07.2021**
+============================================
+* Bug-Fixes:
+  - Impossible to call set() on a frozen ParameterBag.
+
+
 0.11.25	|	Release date: **01.07.2021**
 ============================================
 * Bug-Fixes:

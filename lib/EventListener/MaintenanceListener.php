@@ -11,15 +11,18 @@ use VS\ApplicationBundle\Twig\Alerts;
 class MaintenanceListener
 {
     protected $container;
-    protected $parameterBag;
     protected $user;
     protected $siteId;
+    protected $siteLayout;
     
-    public function __construct( ContainerInterface $container, ?ParameterBagInterface $parameterBag, int $siteId = null )
-    {
+    public function __construct(
+        ContainerInterface $container,
+        int $siteId = null,
+        string $siteLayout = '@VSApplication/layout.html.twig'
+    ) {
         $this->container    = $container;
-        $this->parameterBag = $parameterBag;
         $this->siteId       = $siteId;
+        $this->siteLayout   = $siteLayout;
         
         $token              = $this->container->get( 'security.token_storage' )->getToken();
         if ( $token ) {
@@ -39,11 +42,6 @@ class MaintenanceListener
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
                 ) {
-                    if ( $this->parameterBag ) {
-                        // Impossible to call set() on a frozen ParameterBag.
-                        // $this->parameterBag->set( 'vs_application.in_maintenance', true );
-                    }
-                    
                     $maintenancePage    = $settings['maintenancePage'] ?
                                             $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
                                             null;
@@ -55,17 +53,8 @@ class MaintenanceListener
                     
                     $event->stopPropagation();
                 } else {
-                    if ( $this->parameterBag ) {
-                        // Impossible to call set() on a frozen ParameterBag.
-                        // $this->parameterBag->set( 'vs_application.in_maintenance', false );
-                    }
                     Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
                 }
-        } else {
-            if ( $this->parameterBag ) {
-                // Impossible to call set() on a frozen ParameterBag.
-                // $this->parameterBag->set( 'vs_application.in_maintenance', false );
-            }
         }
     }
     
@@ -81,15 +70,12 @@ class MaintenanceListener
     
     private function renderMaintenancePage( $maintenancePage ): string
     {
-        $siteLayout = 'website/layout.html.twig';
-        
-        return $this->container->get( 'templating' )->render(
-            '@VSCms/Pages/show.html.twig',
+        return $this->container->get( 'templating' )->render( '@VSCms/Pages/show.html.twig',
             [
                 'page'          => $maintenancePage,
-                'layout'        => $siteLayout,
+                'siteLayout'    => $this->siteLayout,
                 'inMainenance'  => true,
             ]
-            );
+        );
     }
 }

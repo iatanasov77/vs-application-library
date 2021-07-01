@@ -1,3 +1,10 @@
+0.11.22	|	Release date: **01.07.2021**
+============================================
+* New Features:
+  - Set InMaintenace parameter in Maintenance Listener.
+  - Add Icon before Site Title.
+
+
 0.11.21	|	Release date: **30.06.2021**
 ============================================
 * Bug-Fixes:

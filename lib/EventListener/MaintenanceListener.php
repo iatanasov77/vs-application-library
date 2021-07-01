@@ -40,7 +40,8 @@ class MaintenanceListener
                 && ! $debug
                 ) {
                     if ( $this->parameterBag ) {
-                        $this->parameterBag->set( 'vs_application.in_maintenance', true );
+                        // Impossible to call set() on a frozen ParameterBag.
+                        // $this->parameterBag->set( 'vs_application.in_maintenance', true );
                     }
                     
                     $maintenancePage    = $settings['maintenancePage'] ?
@@ -55,13 +56,15 @@ class MaintenanceListener
                     $event->stopPropagation();
                 } else {
                     if ( $this->parameterBag ) {
-                        $this->parameterBag->set( 'vs_application.in_maintenance', false );
+                        // Impossible to call set() on a frozen ParameterBag.
+                        // $this->parameterBag->set( 'vs_application.in_maintenance', false );
                     }
                     Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
                 }
         } else {
             if ( $this->parameterBag ) {
-                $this->parameterBag->set( 'vs_application.in_maintenance', false );
+                // Impossible to call set() on a frozen ParameterBag.
+                // $this->parameterBag->set( 'vs_application.in_maintenance', false );
             }
         }
     }

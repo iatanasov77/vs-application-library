@@ -8,6 +8,7 @@ services:
         class: VS\ApplicationBundle\EventListener\MaintenanceListener
         arguments: 
             - '@service_container'
+            - '@parameter_bag'
             - '%vs_application.settings.site_id%'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }

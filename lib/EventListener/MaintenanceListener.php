@@ -15,7 +15,7 @@ class MaintenanceListener
     protected $user;
     protected $siteId;
     
-    public function __construct( ContainerInterface $container, ParameterBagInterface $parameterBag, int $siteId = null )
+    public function __construct( ContainerInterface $container, ?ParameterBagInterface $parameterBag, int $siteId = null )
     {
         $this->container    = $container;
         $this->parameterBag = $parameterBag;
@@ -39,11 +39,13 @@ class MaintenanceListener
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
                 ) {
-                    $this->parameterBag->set( 'vs_application.in_maintenance', true );
+                    if ( $this->parameterBag ) {
+                        $this->parameterBag->set( 'vs_application.in_maintenance', true );
+                    }
                     
                     $maintenancePage    = $settings['maintenancePage'] ?
-                    $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
-                    null;
+                                            $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
+                                            null;
                     if ( $maintenancePage ) {
                         $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
                     } else {
@@ -52,11 +54,15 @@ class MaintenanceListener
                     
                     $event->stopPropagation();
                 } else {
-                    $this->parameterBag->set( 'vs_application.in_maintenance', false );
+                    if ( $this->parameterBag ) {
+                        $this->parameterBag->set( 'vs_application.in_maintenance', false );
+                    }
                     Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
                 }
         } else {
-            $this->parameterBag->set( 'vs_application.in_maintenance', false );
+            if ( $this->parameterBag ) {
+                $this->parameterBag->set( 'vs_application.in_maintenance', false );
+            }
         }
     }
     

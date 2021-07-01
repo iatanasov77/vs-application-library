@@ -73,7 +73,7 @@ class MaintenanceListener
         return $this->container->get( 'templating' )->render( '@VSCms/Pages/show.html.twig',
             [
                 'page'          => $maintenancePage,
-                'siteLayout'    => $this->siteLayout,
+                'siteLayout'    => $this->siteLayout ?: '@VSApplication/layout.html.twig',
                 'inMainenance'  => true,
             ]
         );

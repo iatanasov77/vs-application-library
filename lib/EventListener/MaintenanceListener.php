@@ -18,7 +18,7 @@ class MaintenanceListener
     public function __construct(
         ContainerInterface $container,
         int $siteId = null,
-        string $siteLayout = '@VSApplication/layout.html.twig'
+        ?string $siteLayout
     ) {
         $this->container    = $container;
         $this->siteId       = $siteId;

@@ -3,6 +3,7 @@
 //use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use VS\ApplicationBundle\Twig\Alerts;
@@ -10,12 +11,14 @@ use VS\ApplicationBundle\Twig\Alerts;
 class MaintenanceListener
 {
     protected $container;
+    protected $parameterBag;
     protected $user;
     protected $siteId;
     
-    public function __construct( ContainerInterface $container, int $siteId = null )
+    public function __construct( ContainerInterface $container, ParameterBagInterface $parameterBag, int $siteId = null )
     {
         $this->container    = $container;
+        $this->parameterBag = $parameterBag;
         $this->siteId       = $siteId;
         
         $token              = $this->container->get( 'security.token_storage' )->getToken();
@@ -35,25 +38,25 @@ class MaintenanceListener
             if (
                 ( ! is_object( $this->user ) || ! $this->user->hasRole( 'ROLE_ADMIN' ) )
                 && ! $debug
-            ) {
-                $this->container->setParameter( 'vs_application.in_maintenance', true );
-                
-                $maintenancePage    = $settings['maintenancePage'] ?
-                                        $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
-                                        null;
-                if ( $maintenancePage ) {
-                    $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
+                ) {
+                    $this->parameterBag->set( 'vs_application.in_maintenance', true );
+                    
+                    $maintenancePage    = $settings['maintenancePage'] ?
+                    $this->getPagesRepository()->find( $settings['maintenancePage'] ) :
+                    null;
+                    if ( $maintenancePage ) {
+                        $event->setResponse( new Response( $this->renderMaintenancePage( $maintenancePage ), 503 ) );
+                    } else {
+                        $event->setResponse( new Response( 'The System is in Maintenance Mode !', 503 ) );
+                    }
+                    
+                    $event->stopPropagation();
                 } else {
-                    $event->setResponse( new Response( 'The System is in Maintenance Mode !', 503 ) );
+                    $this->parameterBag->set( 'vs_application.in_maintenance', false );
+                    Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
                 }
-                
-                $event->stopPropagation();
-            } else {
-                $this->container->setParameter( 'vs_application.in_maintenance', false );
-                Alerts::$WARNINGS[]   = 'The System is in Maintenance Mode !';
-            }   
         } else {
-            $this->container->setParameter( 'vs_application.in_maintenance', false );
+            $this->parameterBag->set( 'vs_application.in_maintenance', false );
         }
     }
     
@@ -78,6 +81,6 @@ class MaintenanceListener
                 'layout'        => $siteLayout,
                 'inMainenance'  => true,
             ]
-        );
+            );
     }
 }

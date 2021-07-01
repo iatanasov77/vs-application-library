@@ -1,3 +1,5 @@
+parameters:
+    vs_application.in_maintenance: false
 services:
     vs_app.twig.alerts:
         class: VS\ApplicationBundle\Twig\Alerts

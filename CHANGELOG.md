@@ -1,3 +1,10 @@
+0.12.2	|	Release date: **03.07.2021**
+============================================
+* New Features:
+  - Disable NotLeafs Items on ComboTree.
+  - Doctrine Migration for CMS TOC Pages.
+
+
 0.12.1	|	Release date: **02.07.2021**
 ============================================
 * New Features:

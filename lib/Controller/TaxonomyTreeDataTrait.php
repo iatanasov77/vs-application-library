@@ -43,9 +43,9 @@ trait TaxonomyTreeDataTrait
                 'children'  => []
             ];
             
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'], $selectedValues, $leafs );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'], $selectedValues, $leafs, empty( $leafs ) );
         } else {
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues, $leafs );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues, $leafs, empty( $leafs) );
         }
         
         return $data;
@@ -66,25 +66,26 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues, array $leafs )
+    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues, array $leafs, $notLeafs )
     {
         $key    = 0;
         foreach( $tree as $node ) {
             $data[$key]   = [
                 'id'        => $node->getId(),
                 'text'      => $node->getName(),
-                'children'  => []
+                'children'  => [],
+                'disabled'  => ! $notLeafs
             ];
             if ( in_array( $node->getId(), $selectedValues ) ) {
                 $data[$key]['checked'] = true;
             }
             
             if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues, $leafs );
+                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues, $leafs, $notLeafs );
             }
             
             if ( array_key_exists( $node->getId(), $leafs ) ) {
-                $this->buildEasyuiCombotreeData( $leafs[$node->getId()], $data[$key]['children'], $selectedValues, $leafs );
+                $this->buildEasyuiCombotreeData( $leafs[$node->getId()], $data[$key]['children'], $selectedValues, $leafs, false );
             }
             
             $key++;

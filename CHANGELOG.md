@@ -1,3 +1,9 @@
+0.12.3	|	Release date: **05.07.2021**
+============================================
+* New Features:
+  - Add New Doctrine Migrations abaot CMS TOC.
+
+
 0.12.2	|	Release date: **03.07.2021**
 ============================================
 * New Features:

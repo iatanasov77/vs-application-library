@@ -33,8 +33,6 @@ final class Version20210707064607 extends AbstractMigration
         $this->addSql('ALTER TABLE VSCMS_MultiPageToc ADD CONSTRAINT FK_B262621CF80DCA0D FOREIGN KEY (main_page_id) REFERENCES VSCMS_Pages (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_B262621CF80DCA0D ON VSCMS_MultiPageToc (main_page_id)');
         $this->addSql('ALTER TABLE VSCMS_Pages ADD description VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE VSORG_Projects ADD CONSTRAINT FK_C95D72D2E24B3F6 FOREIGN KEY (multipage_toc_id) REFERENCES VSCMS_MultiPageToc (id)');
-        $this->addSql('CREATE INDEX IDX_C95D72D2E24B3F6 ON VSORG_Projects (multipage_toc_id)');
     }
 
     public function down(Schema $schema): void
@@ -53,7 +51,5 @@ final class Version20210707064607 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_B262621CF80DCA0D ON VSCMS_MultiPageToc');
         $this->addSql('ALTER TABLE VSCMS_MultiPageToc DROP main_page_id');
         $this->addSql('ALTER TABLE VSCMS_Pages DROP description');
-        $this->addSql('ALTER TABLE VSORG_Projects DROP FOREIGN KEY FK_C95D72D2E24B3F6');
-        $this->addSql('DROP INDEX IDX_C95D72D2E24B3F6 ON VSORG_Projects');
     }
 }

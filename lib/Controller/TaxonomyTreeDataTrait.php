@@ -80,12 +80,13 @@ trait TaxonomyTreeDataTrait
                 $data[$key]['checked'] = true;
             }
             
-            if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues, $leafs, $notLeafs );
-            }
-            
             if ( array_key_exists( $node->getId(), $leafs ) ) {
                 $this->buildEasyuiCombotreeData( $leafs[$node->getId()], $data[$key]['children'], $selectedValues, $leafs, false );
+            }
+            
+            // Buld Child Categories After Leafs because Leafs override children keys
+            if ( $node->getChildren()->count() ) {
+                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues, $leafs, $notLeafs );
             }
             
             $key++;

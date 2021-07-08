@@ -1,3 +1,11 @@
+0.12.5	|	Release date: **08.07.2021**
+============================================
+* Bug-Fixes:
+  - Fix EasyUI Data With SubCategory Leafs
+  - Fix Doctrine Migration.
+
+
+
 0.12.4	|	Release date: **07.07.2021**
 ============================================
 * New Features:

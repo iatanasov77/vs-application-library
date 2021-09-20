@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    VS\ApplicationBundle\DataCollector\VsApplicationCollector:
+        tags:
+            -
+                name: data_collector
+                # must match the value returned by the getName() method
+                id: 'VS\ApplicationBundle\DataCollector\VsApplicationCollector'
+                # optional template (it has more priority than the value returned by getTemplate())
+                template: '@VSApplication/DataCollector/vs_application.html.twig'
+                # optional priority (positive or negative integer; default = 0)
+                # priority: 300

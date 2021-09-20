@@ -14,6 +14,8 @@ imports:
     - { resource: services/fixtures_factories.yaml }
     - { resource: services/fixtures_listeners.yaml }
     - { resource: services/fixtures.yaml }
+    - { resource: services/web_profiler.yaml }
+    
 
 parameters:
     vs_application.public_dir: "%kernel.project_dir%/public/admin_panel"

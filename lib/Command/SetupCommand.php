@@ -8,11 +8,16 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Webmozart\Assert\Assert;
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+
 use VS\UsersBundle\Model\UserInterface;
 use VS\UsersBundle\Repository\UsersRepositoryInterface;
+use VS\ApplicationBundle\Component\Slug;
 
 final class SetupCommand extends AbstractInstallCommand
 {
@@ -21,13 +26,13 @@ final class SetupCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-        ->setDescription( 'VankoSoft Application configuration setup.' )
-        ->setHelp(<<<EOT
+            ->setDescription( 'VankoSoft Application configuration setup.' )
+            ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT
             )
             ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
-            ;
+        ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
@@ -35,6 +40,7 @@ EOT
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
+        $this->setupApplicationDirectories( $input, $output );
         
         $parameters = ['--multisite' => $input->getOption( 'multisite' )];
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
@@ -67,48 +73,78 @@ EOT
         $outputStyle->newLine();
     }
     
+    protected function setupApplicationDirectories( InputInterface $input, OutputInterface $output ): void
+    {
+        $filesystem         = new Filesystem();
+        $zip                = new \ZipArchive;
+        $applicationDirs    = getApplicationDirectories( $input, $output );
+        
+        $outputStyle        = new SymfonyStyle( $input, $output );
+        $outputStyle->writeln( 'Create Application Directories.' );
+        try {
+            foreach ( $applicationDirs as $key => $dir ) {
+//                 $filesystem->mkdir( $dir, 0777 );
+//                 $filesystem->chown( $dir, 'vagrant', true );
+//                 $filesystem->chgrp( $dir, 'vagrant', true );
+                
+                $dirArchive = $this->getContainer()->get( 'kernel' )
+                                    ->locateResource( '@VSApplicationBundle/application/' . $key . '.zip' );
+                                    
+                $res = $zip->open( $dirArchive );
+                if ( $res === TRUE ) {
+                    $zip->extractTo( $dir );
+                    $zip->close();
+                }
+            }
+        } catch ( IOExceptionInterface $exception ) {
+            echo "An error occurred while creating your directory at " . $exception->getPath();
+        }
+        $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
+        $outputStyle->newLine();
+    }
+    
     private function configureNewUser(
         $userManager,
         InputInterface $input,
         OutputInterface $output
-        ): UserInterface {
-            /** @var UsersRepositoryInterface $userRepository */
-            $userRepository = $this->getUserRepository();
-            
-            if ( $input->getOption( 'no-interaction' ) ) {
-                Assert::null( $userRepository->findOneByEmail( 'vankosoft@example.com' ) );
-                $user   = $userManager->createUser( 'admin', 'vankosoft@example.com', 'admin' );
-                
-                return $user;
-            }
-            
-            $email          = $this->getAdministratorEmail( $input, $output );
-            $username       = $this->getAdministratorUsername( $input, $output, $email );
-            $plainPassword  = $this->getAdministratorPassword( $input, $output );
-            $user   = $userManager->createUser( $username, $email, $plainPassword );
+    ): UserInterface {
+        /** @var UsersRepositoryInterface $userRepository */
+        $userRepository = $this->getUserRepository();
+        
+        if ( $input->getOption( 'no-interaction' ) ) {
+            Assert::null( $userRepository->findOneByEmail( 'vankosoft@example.com' ) );
+            $user   = $userManager->createUser( 'admin', 'vankosoft@example.com', 'admin' );
             
             return $user;
+        }
+        
+        $email          = $this->getAdministratorEmail( $input, $output );
+        $username       = $this->getAdministratorUsername( $input, $output, $email );
+        $plainPassword  = $this->getAdministratorPassword( $input, $output );
+        $user   = $userManager->createUser( $username, $email, $plainPassword );
+        
+        return $user;
     }
     
     private function createEmailQuestion(): Question
     {
         return ( new Question( 'E-mail: ' ) )
-        ->setValidator(
-            /**
-             * @param mixed $value
-             */
-            function ( $value ): string {
-                /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Email(), new NotBlank()] );
-                foreach ( $errors as $error ) {
-                    throw new \DomainException( $error->getMessage() );
+            ->setValidator(
+                /**
+                 * @param mixed $value
+                 */
+                function ( $value ): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Email(), new NotBlank()] );
+                    foreach ( $errors as $error ) {
+                        throw new \DomainException( $error->getMessage() );
+                    }
+                    
+                    return $value;
                 }
-                
-                return $value;
-            }
             )
             ->setMaxAttempts( 3 )
-            ;
+        ;
     }
     
     private function getAdministratorEmail( InputInterface $input, OutputInterface $output ): string
@@ -175,31 +211,72 @@ EOT
     private function getPasswordQuestionValidator(): \Closure
     {
         return
-        /** @param mixed $value */
-        function ( $value ): string {
-            /** @var ConstraintViolationListInterface $errors */
-            $errors     = $this->getContainer()->get( 'validator' )->validate( $value, [new NotBlank()] );
-            foreach ( $errors as $error ) {
-                throw new \DomainException( $error->getMessage() );
+            /** @param mixed $value */
+            function ( $value ): string {
+                /** @var ConstraintViolationListInterface $errors */
+                $errors     = $this->getContainer()->get( 'validator' )->validate( $value, [new NotBlank()] );
+                foreach ( $errors as $error ) {
+                    throw new \DomainException( $error->getMessage() );
+                }
+                
+                return $value;
             }
-            
-            return $value;
-        }
         ;
     }
     
     private function createPasswordQuestion( string $message, \Closure $validator ): Question
     {
         return ( new Question( $message ) )
-        ->setValidator( $validator )
-        ->setMaxAttempts( 3 )
-        ->setHidden( true )
-        ->setHiddenFallback( false )
+            ->setValidator( $validator )
+            ->setMaxAttempts( 3 )
+            ->setHidden( true )
+            ->setHiddenFallback( false )
         ;
     }
     
     private function getUserRepository(): UsersRepositoryInterface
     {
         return $this->getContainer()->get( 'vs_users.repository.users' );
+    }
+    
+    private function createApplicationNameQuestion(): Question
+    {
+        return ( new Question( 'Application Name: ' ) )
+            ->setValidator(
+                function ( $value ): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->getContainer()->get( 'validator' )->validate( (string) $value, [new Length([
+                        'min' => 3,
+                        'max' => 50,
+                        'minMessage' => 'Your application name must be at least {{ limit }} characters long',
+                        'maxMessage' => 'Your application name cannot be longer than {{ limit }} characters',
+                    ])]);
+                    foreach ( $errors as $error ) {
+                        throw new \DomainException( $error->getMessage() );
+                    }
+                    
+                    return $value;
+                }
+            )
+            ->setMaxAttempts( 3 )
+        ;
+    }
+    
+    private function getApplicationDirectories( InputInterface $input, OutputInterface $output ): array
+    {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper     = $this->getHelper( 'question' );
+        
+        $question           = $this->createApplicationNameQuestion();
+        $applicationName    = $questionHelper->ask( $input, $output, $question );
+        $applicationSlug    = Slug::generate( $applicationName ); // For Directory Names
+        $projectRootDir     = $this->getContainer()->get( 'kernel' )->getProjectDir();
+        $applicationDirs    = [
+            'public'    => $projectRootDir . '/public/' . $applicationSlug,
+            'templates' => $projectRootDir . '/templates/' . $applicationSlug,
+            'assets'    => $projectRootDir . '/assets/' . $applicationSlug,
+        ];
+        
+        return $applicationDirs;
     }
 }

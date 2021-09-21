@@ -77,7 +77,7 @@ EOT
     {
         $filesystem         = new Filesystem();
         $zip                = new \ZipArchive;
-        $applicationDirs    = getApplicationDirectories( $input, $output );
+        $applicationDirs    = $this->getApplicationDirectories( $input, $output );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create Application Directories.' );
@@ -88,7 +88,7 @@ EOT
 //                 $filesystem->chgrp( $dir, 'vagrant', true );
                 
                 $dirArchive = $this->getContainer()->get( 'kernel' )
-                                    ->locateResource( '@VSApplicationBundle/application/' . $key . '.zip' );
+                                    ->locateResource( '@VSApplicationBundle/Resources/application/' . $key . '.zip' );
                                     
                 $res = $zip->open( $dirArchive );
                 if ( $res === TRUE ) {

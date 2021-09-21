@@ -30,8 +30,6 @@ final class Version20210705031111 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_4A491FD507FAB6A ON VSAPP_Settings (maintenance_page_id )');
         $this->addSql('CREATE INDEX IDX_4A491FD762596F6 ON VSAPP_Settings (site_id )');
         $this->addSql('ALTER TABLE VSCMS_MultiPageToc DROP FOREIGN KEY FK_69A01BB5B4CE9742');
-        $this->addSql('DROP INDEX idx_69a01bb5b4ce9742 ON VSCMS_MultiPageToc');
-        $this->addSql('CREATE INDEX IDX_B262621CB4CE9742 ON VSCMS_MultiPageToc (toc_root_page_id)');
         $this->addSql('ALTER TABLE VSCMS_MultiPageToc ADD CONSTRAINT FK_69A01BB5B4CE9742 FOREIGN KEY (toc_root_page_id) REFERENCES VSCMS_TocPage (id) ON UPDATE NO ACTION ON DELETE CASCADE');
         $this->addSql('ALTER TABLE VSCMS_Pages DROP FOREIGN KEY FK_345A075AE24B3F6');
         $this->addSql('DROP INDEX IDX_345A075AE24B3F6 ON VSCMS_Pages');
@@ -39,12 +37,6 @@ final class Version20210705031111 extends AbstractMigration
         $this->addSql('ALTER TABLE VSCMS_TocPage DROP FOREIGN KEY FK_F8BA64CA727ACA70');
         $this->addSql('ALTER TABLE VSCMS_TocPage DROP FOREIGN KEY FK_F8BA64CAA977936C');
         $this->addSql('ALTER TABLE VSCMS_TocPage DROP FOREIGN KEY FK_F8BA64CAC4663E4');
-        $this->addSql('DROP INDEX idx_f8ba64cac4663e4 ON VSCMS_TocPage');
-        $this->addSql('CREATE INDEX IDX_6B1FF241C4663E4 ON VSCMS_TocPage (page_id)');
-        $this->addSql('DROP INDEX idx_f8ba64caa977936c ON VSCMS_TocPage');
-        $this->addSql('CREATE INDEX IDX_6B1FF241A977936C ON VSCMS_TocPage (tree_root)');
-        $this->addSql('DROP INDEX idx_f8ba64ca727aca70 ON VSCMS_TocPage');
-        $this->addSql('CREATE INDEX IDX_6B1FF241727ACA70 ON VSCMS_TocPage (parent_id)');
         $this->addSql('ALTER TABLE VSCMS_TocPage ADD CONSTRAINT FK_F8BA64CA727ACA70 FOREIGN KEY (parent_id) REFERENCES VSCMS_TocPage (id) ON UPDATE NO ACTION ON DELETE CASCADE');
         $this->addSql('ALTER TABLE VSCMS_TocPage ADD CONSTRAINT FK_F8BA64CAA977936C FOREIGN KEY (tree_root) REFERENCES VSCMS_TocPage (id) ON UPDATE NO ACTION ON DELETE CASCADE');
         $this->addSql('ALTER TABLE VSCMS_TocPage ADD CONSTRAINT FK_F8BA64CAC4663E4 FOREIGN KEY (page_id) REFERENCES VSCMS_Pages (id) ON UPDATE NO ACTION ON DELETE CASCADE');

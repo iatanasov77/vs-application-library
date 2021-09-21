@@ -15,6 +15,7 @@ imports:
     - { resource: services/fixtures_listeners.yaml }
     - { resource: services/fixtures.yaml }
     - { resource: services/web_profiler.yaml }
+    - { resource: services/application.yaml }
     
 
 parameters:

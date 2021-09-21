@@ -12,12 +12,8 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Webmozart\Assert\Assert;
 
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-
 use VS\UsersBundle\Model\UserInterface;
 use VS\UsersBundle\Repository\UsersRepositoryInterface;
-use VS\ApplicationBundle\Component\Slug;
 
 final class SetupCommand extends AbstractInstallCommand
 {
@@ -40,7 +36,7 @@ EOT
         $locale = $this->getContainer()->get( 'vs_app.setup.locale' )->setup( $input, $output, $this->getHelper( 'question' ) );
         //$this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
-        $this->setupApplicationDirectories( $input, $output );
+        $this->setupApplication( $input, $output );
         
         $parameters = ['--multisite' => $input->getOption( 'multisite' )];
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
@@ -73,32 +69,21 @@ EOT
         $outputStyle->newLine();
     }
     
-    protected function setupApplicationDirectories( InputInterface $input, OutputInterface $output ): void
+    protected function setupApplication( InputInterface $input, OutputInterface $output ): void
     {
-        $filesystem         = new Filesystem();
-        $zip                = new \ZipArchive;
-        $applicationDirs    = $this->getApplicationDirectories( $input, $output );
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper     = $this->getHelper( 'question' );
+        
+        $question           = $this->createApplicationNameQuestion();
+        $applicationName    = $questionHelper->ask( $input, $output, $question );
+        
+        $appSetup           = $this->getContainer()->get( 'vs_application.application.setup_application' );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
         $outputStyle->writeln( 'Create Application Directories.' );
-        try {
-            foreach ( $applicationDirs as $key => $dir ) {
-//                 $filesystem->mkdir( $dir, 0777 );
-//                 $filesystem->chown( $dir, 'vagrant', true );
-//                 $filesystem->chgrp( $dir, 'vagrant', true );
-                
-                $dirArchive = $this->getContainer()->get( 'kernel' )
-                                    ->locateResource( '@VSApplicationBundle/Resources/application/' . $key . '.zip' );
-                                    
-                $res = $zip->open( $dirArchive );
-                if ( $res === TRUE ) {
-                    $zip->extractTo( $dir );
-                    $zip->close();
-                }
-            }
-        } catch ( IOExceptionInterface $exception ) {
-            echo "An error occurred while creating your directory at " . $exception->getPath();
-        }
+        
+        $appSetup->setupApplication( $applicationName );
+        
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
         $outputStyle->newLine();
     }
@@ -260,23 +245,5 @@ EOT
             )
             ->setMaxAttempts( 3 )
         ;
-    }
-    
-    private function getApplicationDirectories( InputInterface $input, OutputInterface $output ): array
-    {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper     = $this->getHelper( 'question' );
-        
-        $question           = $this->createApplicationNameQuestion();
-        $applicationName    = $questionHelper->ask( $input, $output, $question );
-        $applicationSlug    = Slug::generate( $applicationName ); // For Directory Names
-        $projectRootDir     = $this->getContainer()->get( 'kernel' )->getProjectDir();
-        $applicationDirs    = [
-            'public'    => $projectRootDir . '/public/' . $applicationSlug,
-            'templates' => $projectRootDir . '/templates/' . $applicationSlug,
-            'assets'    => $projectRootDir . '/assets/' . $applicationSlug,
-        ];
-        
-        return $applicationDirs;
     }
 }

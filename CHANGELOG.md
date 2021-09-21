@@ -1,3 +1,9 @@
+1.0.2	|	Release date: **21.09.2021**
+============================================
+* New Features:
+  - Setup Home Page of the Application on SetupApplication Command.
+
+
 1.0.1	|	Release date: **21.09.2021**
 ============================================
 * New Features:

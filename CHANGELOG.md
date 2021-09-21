@@ -1,3 +1,9 @@
+1.0.3	|	Release date: **21.09.2021**
+============================================
+* New Features:
+  - Setup Application Controller on Installation.
+
+
 1.0.2	|	Release date: **21.09.2021**
 ============================================
 * New Features:

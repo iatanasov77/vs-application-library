@@ -34,7 +34,7 @@ class SetupApplication
         $this->applicationName  = $applicationName;
         $this->applicationSlug  = Slug::generate( $applicationName ); // For Directory Names
         
-        $projectRootDir         = $this->getContainer()->get( 'kernel' )->getProjectDir();
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
         $applicationDirs        = [
             'configs'   => $projectRootDir . '/config/sites/' . $this->applicationSlug,
             'public'    => $projectRootDir . '/public/' . $this->applicationSlug,
@@ -44,7 +44,6 @@ class SetupApplication
         
         // Setup The Application
         $this->setupApplicationDirectories( $applicationDirs );
-        $this->setupConfigs();
         $this->setupKernel();
     }
     
@@ -60,7 +59,7 @@ class SetupApplication
                 //                 $filesystem->chgrp( $dir, 'vagrant', true );
                 
                 try {
-                    $dirArchive = $this->getContainer()->get( 'kernel' )
+                    $dirArchive = $this->container->get( 'kernel' )
                                         ->locateResource( '@VSApplicationBundle/Resources/application/' . $key . '.zip' );
                     
                     $res = $zip->open( $dirArchive );
@@ -79,13 +78,24 @@ class SetupApplication
         }
     }
     
-    private function setupConfigs()
-    {
-        
-    }
-    
     private function setupKernel()
     {
+        $filesystem         = new Filesystem();
+        $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
+        $twig               = $this->container->get( 'templating' );
+        $kernelClass        = preg_replace( '/\s+/', '', $this->applicationName );
         
+        // Write Application Kernel
+        $applicationKernel  = $twig->render( '@VSApplicationBundle/Application/Kernel.php.twig', [
+            'kernelClass'       => $kernelClass,
+            'applicationSlug'   => $this->applicationSlug,
+        ]);
+        $filesystem->dumpFile( $projectRootDir . '/src/' . $kernelClass . '.php', $applicationKernel );
+        
+        // Write Application Entry Point
+        $applicationIndex  = $twig->render( '@VSApplicationBundle/Application/index.php.twig', [
+            'kernelClass'       => $kernelClass,
+        ]);
+        $filesystem->dumpFile( $projectRootDir . '/public/' . $this->applicationSlug . '/index.php', $applicationIndex );
     }
 }

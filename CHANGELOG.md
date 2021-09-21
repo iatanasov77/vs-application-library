@@ -1,3 +1,14 @@
+1.0.1	|	Release date: **21.09.2021**
+============================================
+* New Features:
+  - Setup Kernel of the Application on SetupApplication Command.
+  - Add Application Configs on Installation.
+* Bug-Fixes and Refactoring:
+  - Refactoring SetupApplication in SetupCommand.
+  - Fix Migrations.
+  - Fix Setup Command.
+
+
 1.0.0	|	Release date: **21.09.2021**
 ============================================
 * New Features:

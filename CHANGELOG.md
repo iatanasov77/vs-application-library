@@ -1,3 +1,10 @@
+1.0.0	|	Release date: **21.09.2021**
+============================================
+* New Features:
+  - Create a custom application beside admin panel on installation process.
+  - Add WebProfiler DataCollector for VsApplication.
+
+
 0.12.5	|	Release date: **08.07.2021**
 ============================================
 * Bug-Fixes:

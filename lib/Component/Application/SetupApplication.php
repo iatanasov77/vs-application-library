@@ -47,6 +47,7 @@ class SetupApplication
         $this->setupApplicationDirectories( $applicationDirs );
         $this->setupApplicationKernel();
         $this->setupApplicationHomePage();
+        $this->setupApplicationConfigs();
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
@@ -121,5 +122,27 @@ class SetupApplication
                                         file_get_contents( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php' )
                                     );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php', $applicationHomeController );
+    }
+    
+    private function setupApplicationConfigs()
+    {
+        $filesystem     = new Filesystem();
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        
+        // Setup Services and Parameters
+        $configServices = str_replace(
+                            ["__application_name__", "__application_slug__"],
+                            [$this->applicationName, $this->applicationSlug],
+                            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/services.yaml' )
+                        );
+        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/services.yaml', $configServices );
+        
+        // Setup Webpack Encore
+        $configWebpackEncore    = str_replace(
+            ["__application_slug__"],
+            [$this->applicationSlug],
+            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
     }
 }

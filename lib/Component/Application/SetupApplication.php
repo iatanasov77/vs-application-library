@@ -36,10 +36,11 @@ class SetupApplication
         
         $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
         $applicationDirs        = [
-            'configs'   => $projectRootDir . '/config/sites/' . $this->applicationSlug,
-            'public'    => $projectRootDir . '/public/' . $this->applicationSlug,
-            'templates' => $projectRootDir . '/templates/' . $this->applicationSlug,
-            'assets'    => $projectRootDir . '/assets/' . $this->applicationSlug,
+            'configs'       => $projectRootDir . '/config/sites/' . $this->applicationSlug,
+            'public'        => $projectRootDir . '/public/' . $this->applicationSlug,
+            'templates'     => $projectRootDir . '/templates/' . $this->applicationSlug,
+            'assets'        => $projectRootDir . '/assets/' . $this->applicationSlug,
+            'controller'    => $projectRootDir . '/src/Controller/' . preg_replace( '/\s+/', '', $this->applicationName ),
         ];
         
         // Setup The Application
@@ -61,7 +62,7 @@ class SetupApplication
                 
                 try {
                     $dirArchive = $this->container->get( 'kernel' )
-                    ->locateResource( '@VSApplicationBundle/Resources/application/' . $key . '.zip' );
+                                        ->locateResource( '@VSApplicationBundle/Resources/application/' . $key . '.zip' );
                     
                     $res = $zip->open( $dirArchive );
                     if ( $res === TRUE ) {
@@ -113,10 +114,12 @@ class SetupApplication
         $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/home.html.twig', $applicationHomePage );
         
         // Write Application Home Controller
+        $applicationName            = preg_replace( '/\s+/', '', $this->applicationName );
         $applicationHomeController  = str_replace(
-                                        "__application_slug__", $this->applicationSlug,
-                                        file_get_contents( $projectRootDir . '/src/Controller/Application/DefaultController.php' )
+                                        ["__application_name__", "__application_slug__"],
+                                        [$applicationName, $this->applicationSlug],
+                                        file_get_contents( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php' )
                                     );
-        $filesystem->dumpFile( $projectRootDir . '/src/Controller/Application/DefaultController.php', $applicationHomeController );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php', $applicationHomeController );
     }
 }

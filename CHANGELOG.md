@@ -1,3 +1,9 @@
+1.0.7	|	Release date: **22.09.2021**
+============================================
+* Bug-Fixes:
+  - Fix Commands Services.
+
+
 1.0.6	|	Release date: **22.09.2021**
 ============================================
 * New Features and Refactoring:

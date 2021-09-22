@@ -3,7 +3,12 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-            
+    
+    vs_app.command.clear_install:
+        class: VS\ApplicationBundle\Command\ClearInstallCommand
+        tags:
+            - 'console.command'
+
     vs_app.command.maintenance:
         class: VS\ApplicationBundle\Command\MaintenanceModeCommand
         tags:

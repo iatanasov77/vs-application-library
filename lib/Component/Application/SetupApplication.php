@@ -41,7 +41,7 @@ class SetupApplication
         
         $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
         $applicationDirs            = [
-            'configs'       => $projectRootDir . '/config/sites/' . $this->applicationSlug,
+            'configs'       => $projectRootDir . '/config/applications/' . $this->applicationSlug,
             'public'        => $projectRootDir . '/public/' . $this->applicationSlug,
             'templates'     => $projectRootDir . '/templates/' . $this->applicationSlug,
             'assets'        => $projectRootDir . '/assets/' . $this->applicationSlug,
@@ -144,32 +144,32 @@ class SetupApplication
         $configPreload  = str_replace(
             ["__application_slug__"],
             [$this->applicationSlug],
-            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/preload.php' )
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/preload.php' )
             );
-        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/preload.php', $configPreload );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/preload.php', $configPreload );
         
         // Setup Routes
         $configRoutes   = str_replace(
             ["__application_name__"],
             [$this->applicationNamespace],
-            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/routes.yaml' )
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml' )
             );
-        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/routes.yaml', $configRoutes );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml', $configRoutes );
         
         // Setup Services and Parameters
         $configServices = str_replace(
                             ["__application_name__", "__application_slug__"],
                             [$this->applicationName, $this->applicationSlug],
-                            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/services.yaml' )
+                            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
                         );
-        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/services.yaml', $configServices );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
         
         // Setup Webpack Encore
         $configWebpackEncore    = str_replace(
             ["__application_slug__"],
             [$this->applicationSlug],
-            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
         );
-        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
     }
 }

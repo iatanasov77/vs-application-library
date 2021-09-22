@@ -17,7 +17,7 @@ class {{ kernelClass }} extends BaseKernel
     
     public function registerBundles(): iterable
     {
-        $contents = require $this->getProjectDir().'/config/sites/{{ applicationSlug }}/bundles.php';
+        $contents = require $this->getProjectDir().'/config/applications/{{ applicationSlug }}/bundles.php';
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
                 yield new $class();
@@ -54,9 +54,9 @@ class {{ kernelClass }} extends BaseKernel
     
     protected function configureContainer( ContainerBuilder $container, LoaderInterface $loader ): void
     {
-        $container->addResource(new FileResource($this->getProjectDir().'/config/sites/{{ applicationSlug }}/bundles.php'));
+        $container->addResource(new FileResource($this->getProjectDir().'/config/applications/{{ applicationSlug }}/bundles.php'));
         $container->setParameter('container.dumper.inline_class_loader', true);
-        $confDir = $this->getProjectDir().'/config/sites/{{ applicationSlug }}';
+        $confDir = $this->getProjectDir().'/config/applications/{{ applicationSlug }}';
         
         $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, 'glob');
@@ -66,7 +66,7 @@ class {{ kernelClass }} extends BaseKernel
     
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
-        $confDir = $this->getProjectDir().'/config/sites/{{ applicationSlug }}';
+        $confDir = $this->getProjectDir().'/config/applications/{{ applicationSlug }}';
         
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');

@@ -1,12 +1,11 @@
 <?php namespace VS\ApplicationBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
 
-final class ClearInstallCommand extends Command
+final class ClearInstallCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'vankosoft:clear-install';
     

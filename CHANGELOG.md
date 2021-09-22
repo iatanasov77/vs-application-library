@@ -1,3 +1,9 @@
+1.0.6	|	Release date: **22.09.2021**
+============================================
+* New Features and Refactoring:
+  - Add Command ClearInstall and Refactor the Application Configs.
+
+
 1.0.5	|	Release date: **21.09.2021**
 ============================================
 * Bug-Fixes:

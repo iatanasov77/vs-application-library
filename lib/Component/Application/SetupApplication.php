@@ -23,28 +23,40 @@ class SetupApplication
      */
     private $applicationName;
     
+    /**
+     * @var string $applicationNamespace
+     */
+    private $applicationNamespace;
+    
     public function __construct( ContainerInterface $container )
     {
         $this->container    = $container;
-        
     }
     
-    public function setupApplication( $applicationName )
+    public function getApplicationDirectories( $applicationName )
     {
-        $this->applicationName  = $applicationName;
-        $this->applicationSlug  = Slug::generate( $applicationName ); // For Directory Names
+        $this->applicationName      = $applicationName;
+        $this->applicationNamespace = preg_replace( '/\s+/', '', $applicationName );
+        $this->applicationSlug      = Slug::generate( $applicationName ); // For Directory Names
         
-        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
-        $applicationDirs        = [
+        $projectRootDir             = $this->container->get( 'kernel' )->getProjectDir();
+        $applicationDirs            = [
             'configs'       => $projectRootDir . '/config/sites/' . $this->applicationSlug,
             'public'        => $projectRootDir . '/public/' . $this->applicationSlug,
             'templates'     => $projectRootDir . '/templates/' . $this->applicationSlug,
             'assets'        => $projectRootDir . '/assets/' . $this->applicationSlug,
-            'controller'    => $projectRootDir . '/src/Controller/' . preg_replace( '/\s+/', '', $this->applicationName ),
+            'controller'    => $projectRootDir . '/src/Controller/' . $this->applicationNamespace,
         ];
         
+        return $applicationDirs;
+    }
+    
+    public function setupApplication( $applicationName )
+    {
+        $applicationDirs    = $this->getApplicationDirectories( $applicationName );
+        
         // Setup The Application
-        $this->setupApplicationDirectories( $applicationDirs );
+        $this->setupApplicationDirectories( $applicationDirs  );
         $this->setupApplicationKernel();
         $this->setupApplicationHomePage();
         $this->setupApplicationConfigs();
@@ -86,7 +98,7 @@ class SetupApplication
         $filesystem         = new Filesystem();
         $projectRootDir     = $this->container->get( 'kernel' )->getProjectDir();
         $twig               = $this->container->get( 'twig' );
-        $kernelClass        = preg_replace( '/\s+/', '', $this->applicationName ) . 'Kernel';
+        $kernelClass        = $this->applicationNamespace . 'Kernel';
         
         // Write Application Kernel
         $applicationKernel  = $twig->render( '@VSApplication/Application/Kernel.php.twig', [
@@ -115,10 +127,9 @@ class SetupApplication
         $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/home.html.twig', $applicationHomePage );
         
         // Write Application Home Controller
-        $applicationName            = preg_replace( '/\s+/', '', $this->applicationName );
         $applicationHomeController  = str_replace(
                                         ["__application_name__", "__application_slug__"],
-                                        [$applicationName, $this->applicationSlug],
+                                        [$this->applicationNamespace, $this->applicationSlug],
                                         file_get_contents( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php' )
                                     );
         $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php', $applicationHomeController );
@@ -128,6 +139,22 @@ class SetupApplication
     {
         $filesystem     = new Filesystem();
         $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        
+        // Setup Cache Preloader
+        $configPreload  = str_replace(
+            ["__application_slug__"],
+            [$this->applicationSlug],
+            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/preload.php' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/preload.php', $configPreload );
+        
+        // Setup Routes
+        $configRoutes   = str_replace(
+            ["__application_name__"],
+            [$this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/routes.yaml' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/sites/' . $this->applicationSlug . '/routes.yaml', $configRoutes );
         
         // Setup Services and Parameters
         $configServices = str_replace(

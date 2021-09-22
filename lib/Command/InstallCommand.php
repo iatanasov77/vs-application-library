@@ -40,15 +40,15 @@ final class InstallCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-        ->setDescription( 'Installs VankoSoft Application in your preferred environment.' )
-        ->setHelp(<<<EOT
+            ->setDescription( 'Installs VankoSoft Application in your preferred environment.' )
+            ->setHelp(<<<EOT
 The <info>%command.name%</info> command installs VankoSoft Application.
 EOT
             )
             ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
             ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
             ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
-            ;
+        ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output ): int

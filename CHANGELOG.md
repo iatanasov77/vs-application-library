@@ -1,3 +1,9 @@
+1.0.11	|	Release date: **23.09.2021**
+============================================
+* New Features:
+  - Open Modal with Application Settings Form.
+
+
 1.0.10	|	Release date: **23.09.2021**
 ============================================
 * New Features and Improvements:

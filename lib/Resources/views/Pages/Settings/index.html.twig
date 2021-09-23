@@ -80,7 +80,7 @@
                                             <td>{{ item.title }}</td>
                                             <td width="30">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-primary btnSettings" title="Settings" href="javascript:void(0);" {#data-url="{{ path('app_settings_sites_settings', {'id': item.id}) }}"#}>
+                                                    <a class="btn btn-primary btnSettings" title="Settings" href="javascript:void(0);" data-url="{{ path('vs_application_settings_form', {'siteId': item.id}) }}">
                                                         <i class="fas fa-cogs"></i>
                                                     </a>&nbsp;
                                                     <a class="btn btn-primary btnEdit" title="Edit" href="javascript:void(0);" {#data-url="{{ path('app_settings_sites_edit', {'id': item.id}) }}"#}>

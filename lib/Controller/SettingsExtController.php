@@ -8,6 +8,7 @@ use VS\ApplicationBundle\Form\SettingsForm;
 
 use VS\ApplicationBundle\Component\Settings\Settings as SettingsManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Factory\Factory;
 
 class SettingsExtController extends AbstractController
 {
@@ -15,17 +16,32 @@ class SettingsExtController extends AbstractController
     
     protected $siteRepository;
     
+    protected $settingsRepository;
+    
+    protected $settingsFactory;
+    
     public function __construct(
         SettingsManager $settingsManager,
-        EntityRepository $siteRepository
+        EntityRepository $siteRepository,
+        EntityRepository $settingsRepository,
+        Factory $settingsFactory
     ) {
-        $this->settingsManager  = $settingsManager;
-        $this->siteRepository   = $siteRepository;
+        $this->settingsManager      = $settingsManager;
+        $this->siteRepository       = $siteRepository;
+        $this->settingsRepository   = $settingsRepository;
+        $this->settingsFactory      = $settingsFactory;
     }
     
-    public function index( Request $request ): Response
+    public function index( int $siteId, Request $request ): Response
     {
-        die ( 'NOT IMPLEMENTED !!!' );
+        $site       = $this->siteRepository->find( $siteId );
+        $settings   = $this->settingsRepository->getSettings( $site );
+        $form       = $this->createForm( SettingsForm::class, $settings ?: $this->settingsFactory->createNew() );
+        
+        return $this->render( '@VSApplication/Pages/Settings/forms/settings.html.twig', [
+            'siteId'    => $siteId,
+            'form'      => $form->createView(),
+        ]);
     }
     
     public function handle( int $siteId, Request $request ): Response

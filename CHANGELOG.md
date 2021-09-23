@@ -1,3 +1,9 @@
+1.0.10	|	Release date: **23.09.2021**
+============================================
+* New Features and Improvements:
+  - Many Fixes, Improvements and Additions.
+
+
 1.0.9	|	Release date: **22.09.2021**
 ============================================
 * New Features and Refactoring:

@@ -25,6 +25,8 @@ vs_application:
         dashboard_section_title: 'Dashboard'
         dashboard_section_description: 'Dashboard description.'
         general_settings_title: 'General Settings'
+        global_settings_title: 'Global Settings'
+        applications_settings_title: 'Applications'
         taxonomy_index_title: 'List Vocabularies'
         taxonomy_update_title: 'Edit Taxonomy'
         taxonomy_create_title: 'Create New Taxonomy'

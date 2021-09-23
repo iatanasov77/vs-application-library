@@ -45,7 +45,6 @@ final class InstallCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command installs VankoSoft Application.
 EOT
             )
-            ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
             ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
             ->addOption( 'debug-commands', 'd', InputOption::VALUE_OPTIONAL, 'Debug Executed Commands', null )
         ;
@@ -72,7 +71,7 @@ EOT
                     $step + 1,
                     count( $this->commands ),
                     $command['message']
-                    ));
+                ));
                 
                 $parameters = [];
                 if ( 'database' === $command['command'] && null !== $suite ) {
@@ -80,10 +79,6 @@ EOT
                 }
                 if ( 'database' === $command['command'] && null !== $debug ) {
                     $parameters['--debug-commands']  = $debug;
-                }
-                
-                if ( 'setup' === $command['command'] ) {
-                    $parameters['--multisite']  = $input->getOption( 'multisite' );
                 }
                 
                 $this->commandExecutor->runCommand( 'vankosoft:install:' . $command['command'], $parameters, $output );

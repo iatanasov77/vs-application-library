@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Console\Input\ArrayInput;
 use Webmozart\Assert\Assert;
 
 use VS\UsersBundle\Model\UserInterface;
@@ -27,7 +28,6 @@ final class SetupCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command allows user to configure basic VankoSoft Application data.
 EOT
             )
-            ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
         ;
     }
     
@@ -38,7 +38,8 @@ EOT
         $this->setupAdministratorUser( $input, $output, $locale->getCode() );
         $this->setupApplication( $input, $output );
         
-        $parameters = ['--multisite' => $input->getOption( 'multisite' )];
+        //$parameters = ['--multisite' => $input->getOption( 'multisite' )];
+        $parameters = [];
         $this->commandExecutor->runCommand( 'vankosoft:install:application-configuration', $parameters, $output );
         
         return 0;
@@ -76,15 +77,24 @@ EOT
         
         $question           = $this->createApplicationNameQuestion();
         $applicationName    = $questionHelper->ask( $input, $output, $question );
-        
         $appSetup           = $this->getContainer()->get( 'vs_application.application.setup_application' );
-        
         $outputStyle        = new SymfonyStyle( $input, $output );
+        
+        // Create Directories
         $outputStyle->writeln( 'Create Application Directories.' );
-        
         $appSetup->setupApplication( $applicationName );
-        
         $outputStyle->writeln( '<info>Application Directories successfully created.</info>' );
+        
+        // Add Database Records
+        $outputStyle->writeln( 'Create Application Database Records.' );
+        // bin/console doctrine:query:sql "INSERT INTO VSAPP_Sites(title) VALUES('Test Site')"
+        $command    = $this->getApplication()->find( 'doctrine:query:sql' );
+        $returnCode = $command->run( 
+            new ArrayInput( ['sql' =>"INSERT INTO VSAPP_Sites(title) VALUES('{$applicationName}')"] ),
+            $output 
+        );
+        $outputStyle->writeln( '<info>Application Database Records successfully created.</info>' );
+        
         $outputStyle->newLine();
     }
     

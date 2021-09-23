@@ -19,20 +19,14 @@ final class InstallApplicationConfigurationCommand extends AbstractInstallComman
 The <info>%command.name%</info> command loads the sample data for VankoSoft Application.
 EOT
             )
-            ->addOption( 'multisite', 'm', InputOption::VALUE_OPTIONAL, 'Load Multisite Application Configuration', false )
             ->addOption( 'fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null )
         ;
     }
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $multisite  = $input->getOption( 'multisite' );
-        
-        if ( $multisite == false ) {
-            return $this->installSingleSiteApplicationConfiguration( $input, $output );
-        } else {
-            return $this->installMultiSiteApplicationConfiguration( $input, $output );
-        }
+        return $this->installSingleSiteApplicationConfiguration( $input, $output );
+        //return $this->installMultiSiteApplicationConfiguration( $input, $output );
     }
     
     private function installSingleSiteApplicationConfiguration( InputInterface $input, OutputInterface $output ): int

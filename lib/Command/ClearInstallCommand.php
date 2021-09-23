@@ -4,6 +4,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\ArrayInput;
 
 final class ClearInstallCommand extends ContainerAwareCommand
 {
@@ -27,13 +28,20 @@ EOT
         $appSetup           = $this->getContainer()->get( 'vs_application.application.setup_application' );
         
         $outputStyle        = new SymfonyStyle( $input, $output );
-        $outputStyle->writeln( '<info>Clear Installation of VankoSoft Application...</info>' );
         
+        // Clear Directories
+        $outputStyle->writeln( '<info>Clear Directories Created from Installation of VankoSoft Application...</info>' );
         foreach ( $appSetup->getApplicationDirectories( $applicationName ) as $dir ) {
             exec( 'rm -rf ' . $dir );
         }
-        
         $outputStyle->writeln( '<info>Application Directories successfully cleared.</info>' );
+        
+        // Drop Database
+        $outputStyle->writeln( '<info>Drop Database Created from Installation of VankoSoft Application...</info>' );
+        $command    = $this->getApplication()->find( 'doctrine:schema:drop' );
+        $returnCode = $command->run( new ArrayInput( ['--force' => true] ), $output );
+        $outputStyle->writeln( '<info>Database successfully dropped.</info>' );
+        
         $outputStyle->newLine();
         
         return 0;

@@ -55,4 +55,19 @@
         }) }}
     </div>
 
+{% if siteId %}
+	<div class="form-group">
+        {{ form_label(form.theme, null, {
+            'label_attr': {'class': 'col-form-label'}
+            }) 
+        }}
+        
+        {{ form_widget(form.theme, {
+            'attr': {
+                'class': 'form-control',
+            }
+        }) }}
+    </div>
+{% endif %}
+
 {{ form_end(form, {'render_rest': false}) }}

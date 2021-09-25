@@ -1,3 +1,9 @@
+1.0.14	|	Release date: **25.09.2021**
+============================================
+* Bug-Fixes:
+  - Fix SettingsExtController to Open Form Prroperly.
+
+
 1.0.13	|	Release date: **25.09.2021**
 ============================================
 * Bug-Fixes:

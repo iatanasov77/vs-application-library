@@ -19,7 +19,7 @@
         <span class="custom-control-label">{{ 'vs_application.form.maintenance_mode' | trans( {},'VSApplicationBundle' ) }}</span>
     </label>
 
-    {% set comboDataSourceUrl  = path( 'vs_cms_pages_tree_combo_with_leafs', {'taxonomyId': taxonomyId}) %}
+    {% set comboDataSourceUrl  = path( 'vs_cms_pages_tree_combo_with_leafs', {'taxonomyId': pcTaxonomyId}) %}
     {% set comboTreePlaceholder = 'vs_application.form.maintenance_page_placeholder' | trans( {},'VSApplicationBundle' ) %}
     {% set comboDataOptions    = "
     		url:'" ~ comboDataSourceUrl ~ "',

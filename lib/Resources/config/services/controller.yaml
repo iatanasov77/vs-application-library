@@ -24,6 +24,7 @@ services:
             - '@vs_application.repository.site'
             - '@vs_application.repository.settings'
             - '@vs_application.factory.settings'
+            - '@vs_application.repository.taxonomy'
         
     VS\ApplicationBundle\Controller\TaxonomyTaxonsController:
         tags: ['controller.service_arguments']

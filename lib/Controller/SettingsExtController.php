@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use VS\ApplicationBundle\Form\SettingsForm;
-
+use VS\ApplicationBundle\Repository\TaxonomyRepository;
 use VS\ApplicationBundle\Component\Settings\Settings as SettingsManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
@@ -20,27 +20,37 @@ class SettingsExtController extends AbstractController
     
     protected $settingsFactory;
     
+    /** @var TaxonomyRepository */
+    protected $taxonomyRepository;
+    
     public function __construct(
         SettingsManager $settingsManager,
         EntityRepository $siteRepository,
         EntityRepository $settingsRepository,
-        Factory $settingsFactory
+        Factory $settingsFactory,
+        TaxonomyRepository $taxonomyRepository
     ) {
         $this->settingsManager      = $settingsManager;
         $this->siteRepository       = $siteRepository;
         $this->settingsRepository   = $settingsRepository;
         $this->settingsFactory      = $settingsFactory;
+        $this->taxonomyRepository   = $taxonomyRepository;
     }
     
     public function index( int $siteId, Request $request ): Response
     {
-        $site       = $this->siteRepository->find( $siteId );
-        $settings   = $this->settingsRepository->getSettings( $site );
-        $form       = $this->createForm( SettingsForm::class, $settings ?: $this->settingsFactory->createNew() );
+        $site                       = $this->siteRepository->find( $siteId );
+        $settings                   = $this->settingsRepository->getSettings( $site );
+        $form                       = $this->createForm( SettingsForm::class, $settings ?: 
+                                            $this->settingsFactory->createNew() );
+        $taxonomyPagesCategories    = $this->taxonomyRepository->findByCode(
+                                            $this->getParameter( 'vs_application.page_categories.taxonomy_code' )
+                                        );
         
-        return $this->render( '@VSApplication/Pages/Settings/forms/settings.html.twig', [
-            'siteId'    => $siteId,
-            'form'      => $form->createView(),
+        return $this->render( '@VSApplication/Pages/Settings/partial/settings-form.html.twig', [
+            'siteId'        => $siteId,
+            'form'          => $form->createView(),
+            'pcTaxonomyId'  => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
         ]);
     }
     

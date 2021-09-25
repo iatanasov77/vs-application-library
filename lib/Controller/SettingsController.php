@@ -43,7 +43,7 @@ class SettingsController extends ResourceController
         return $this->render( '@VSApplication/Pages/Settings/index.html.twig', [
             'forms'         => $forms,
             'sites'         => $sites,
-            'taxonomyId'    => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
+            'pcTaxonomyId'  => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
         ]);
     }
     

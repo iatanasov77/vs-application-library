@@ -37,9 +37,13 @@ class SettingsController extends ResourceController
 //             return $this->redirect( $this->generateUrl( 'vs_application_settings' ) );
 //         }
         
+        $taxonomyPagesCategories    = $this->get( 'vs_application.repository.taxonomy' )->findByCode(
+                                            $this->getParameter( 'vs_application.page_categories.taxonomy_code' )
+                                        );
         return $this->render( '@VSApplication/Pages/Settings/index.html.twig', [
             'forms'         => $forms,
-            'sites'         => $sites
+            'sites'         => $sites,
+            'taxonomyId'    => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
         ]);
     }
     

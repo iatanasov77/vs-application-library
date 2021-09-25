@@ -1,3 +1,10 @@
+1.0.12	|	Release date: **25.09.2021**
+============================================
+* New Features and Improvements:
+  - Initialize Taxonomy Repositories in Controller Constructor.
+  - Add Theme Combo in the Application Settings Form.
+
+
 1.0.11	|	Release date: **23.09.2021**
 ============================================
 * New Features:

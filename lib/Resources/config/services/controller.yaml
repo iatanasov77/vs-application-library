@@ -28,4 +28,7 @@ services:
     VS\ApplicationBundle\Controller\TaxonomyTaxonsController:
         tags: ['controller.service_arguments']
         autowire: true
+        arguments:
+            - '@vs_application.repository.taxonomy'
+            - '@vs_application.repository.taxon'
 

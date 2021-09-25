@@ -14,16 +14,21 @@ class TaxonomyTaxonsController extends AbstractController
 {
     use TaxonomyTreeDataTrait;
     
+    public function __construct(
+        TaxonomyRepository $taxonomyRepository,
+        TaxonRepository $taxonRepository
+    ) {
+        $this->taxonomyRepository   = $taxonomyRepository;
+        $this->taxonRepository      = $taxonRepository;
+    }
+    
     public function index( Request $request ): Response
     {
         return new Response( "NOT IMPLEMENTED !!!" );
     }
     
-    public function editTaxon( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, $taxonomyId, Request $request ): Response
+    public function editTaxon( $taxonomyId, Request $request ): Response
     {
-        $this->taxonomyRepository   = $taxonomyRepository;
-        $this->taxonRepository      = $taxonRepository;
-        
         $locale                     = $request->getLocale();
         $rootTaxon                  = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         
@@ -42,11 +47,8 @@ class TaxonomyTaxonsController extends AbstractController
         ]);
     }
     
-    public function handleTaxon( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, Request $request ): Response
-    {
-        $this->taxonomyRepository   = $taxonomyRepository;
-        $this->taxonRepository      = $taxonRepository;
-        
+    public function handleTaxon( Request $request ): Response
+    {        
         $locale                     = $request->getLocale();
         $form                       = $this->createForm( TaxonForm::class );
         
@@ -75,21 +77,15 @@ class TaxonomyTaxonsController extends AbstractController
         return new Response( 'The form is not submited properly !!!', 500 );
     }
     
-    public function gtreeTableSource( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, $taxonomyId, Request $request ): Response
+    public function gtreeTableSource( $taxonomyId, Request $request ): Response
     {
-        $this->taxonomyRepository   = $taxonomyRepository;
-        $this->taxonRepository      = $taxonRepository;
-        
-        $parentId                   = (int)$request->query->get( 'parentTaxonId' );
+        $parentId   = (int)$request->query->get( 'parentTaxonId' );
         
         return new JsonResponse( $this->gtreeTableData( $taxonomyId, $parentId ) );
     }
     
-    public function easyuiComboTreeSource( TaxonomyRepository $taxonomyRepository, TaxonRepository $taxonRepository, $taxonomyId, Request $request ): Response
+    public function easyuiComboTreeSource( $taxonomyId, Request $request ): Response
     {
-        $this->taxonomyRepository   = $taxonomyRepository;
-        $this->taxonRepository      = $taxonRepository;
-        
         return new JsonResponse( $this->easyuiComboTreeData( $taxonomyId ) );
     }
 }

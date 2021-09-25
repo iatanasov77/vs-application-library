@@ -1,3 +1,9 @@
+1.0.15	|	Release date: **25.09.2021**
+============================================
+* Bug-Fixes:
+  - Add Application Title on Application Settings Modal.
+
+
 1.0.14	|	Release date: **25.09.2021**
 ============================================
 * Bug-Fixes:

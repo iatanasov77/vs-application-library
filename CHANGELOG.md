@@ -1,3 +1,9 @@
+1.0.13	|	Release date: **25.09.2021**
+============================================
+* Bug-Fixes:
+  - Use taxonomyId for comboDataSourceUrl.
+
+
 1.0.12	|	Release date: **25.09.2021**
 ============================================
 * New Features and Improvements:

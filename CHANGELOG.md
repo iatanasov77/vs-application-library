@@ -1,3 +1,10 @@
+1.0.16	|	Release date: **28.09.2021**
+============================================
+* New Features:
+  - Add DividerItem to the MenuBuilder.
+  - Update Translations of Modal Templates.
+
+
 1.0.15	|	Release date: **25.09.2021**
 ============================================
 * Bug-Fixes:

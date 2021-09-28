@@ -13,6 +13,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\Matcher\Voter\RouteVoter;
 
 use VS\ApplicationBundle\Component\Menu\PathRolesService;
+use VS\ApplicationBundle\Component\Menu\Item\DividerMenuItem;
 
 class MenuBuilder implements ContainerAwareInterface
 {
@@ -31,6 +32,8 @@ class MenuBuilder implements ContainerAwareInterface
     
     // PathRolesService
     protected $pathRolesService;
+    
+    protected FactoryInterface $factory;
     
     public function __construct(
         string $config_file,
@@ -52,6 +55,7 @@ class MenuBuilder implements ContainerAwareInterface
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
     {
+        $this->factory  = $factory;
         $this->request  = $this->container->get( 'request_stack' )->getCurrentRequest();
         $menu           = $factory->createItem( 'root' );
         
@@ -65,6 +69,7 @@ class MenuBuilder implements ContainerAwareInterface
     
     public function profileMenu( FactoryInterface $factory )
     {
+        $this->factory  = $factory;
         $menu = $factory->createItem( 'root' );
         
         if ( ! isset( $this->menuConfig['profileMenu'] ) ) {
@@ -77,6 +82,7 @@ class MenuBuilder implements ContainerAwareInterface
     
     public function breadcrumbsMenu( FactoryInterface $factory, array $menus )
     {
+        $this->factory  = $factory;
         foreach ( $menus as $menuAlias ) {
             $bcmenu     = $this->mainMenu( $factory, $menuAlias );
             $breadcrumb = $this->getCurrentMenuItem( $bcmenu );
@@ -116,7 +122,13 @@ class MenuBuilder implements ContainerAwareInterface
                 'route'             => isset( $mg['route'] ) ? $mg['route'] : null,
                 'routeParameters'   => isset( $mg['routeParameters'] ) ? $mg['routeParameters'] : [],
                 'attributes'        => isset( $mg['attributes'] ) ? $mg['attributes'] : [],
+                'isDivider'         => isset( $mg['isDivider'] ) ? $mg['isDivider'] : false,
             ];
+            
+            if ( $params['isDivider'] ) {
+                $menu->addChild( new DividerMenuItem( $id, $this->factory ) );
+                continue;
+            }
             
             //@NOTE Resolve ENV['HOST'] in the uri's
             if ( $params['uri'] ) {

@@ -153,14 +153,6 @@ class SetupApplication
                             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
-        
-        // Setup Webpack Encore
-        $configWebpackEncore    = str_replace(
-            ["__application_slug__"],
-            [$this->applicationSlug],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
     }
     
     private function setupApplicationAssets()
@@ -175,6 +167,13 @@ class SetupApplication
             file_get_contents( $projectRootDir . '/webpack.config.js' )
         );
         $filesystem->dumpFile( $projectRootDir . '/webpack.config.js', $configWebpackEncore );
+        
+        $configWebpackEncore    = str_replace(
+            ["__application_slug__"],
+            [$this->applicationSlug],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
     }
     
     private function setupApplicationLoginPage()

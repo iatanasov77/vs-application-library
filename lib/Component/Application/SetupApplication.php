@@ -128,9 +128,9 @@ class SetupApplication
         $applicationHomeController  = str_replace(
                                         ["__application_name__", "__application_slug__"],
                                         [$this->applicationNamespace, $this->applicationSlug],
-                                        file_get_contents( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php' )
+                                        file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/DefaultController.php' )
                                     );
-        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $applicationName . '/DefaultController.php', $applicationHomeController );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/DefaultController.php', $applicationHomeController );
     }
     
     private function setupApplicationConfigs()
@@ -190,11 +190,11 @@ class SetupApplication
         
         // Write Application Home Controller
         $applicationAuthController  = str_replace(
-            ["__application_name__", "__application_slug__"],
-            [$this->applicationNamespace, $this->applicationSlug],
-            file_get_contents( $projectRootDir . '/src/Controller/' . $applicationName . '/AuthController.php' )
-        );
-        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $applicationName . '/AuthController.php', $applicationAuthController );
+                                        ["__application_name__", "__application_slug__"],
+                                        [$this->applicationNamespace, $this->applicationSlug],
+                                        file_get_contents( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/AuthController.php' )
+                                    );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $this->applicationNamespace . '/AuthController.php', $applicationAuthController );
     }
     
     private function setupApplicationRoutes()

@@ -1,3 +1,9 @@
+1.0.17	|	Release date: **29.09.2021**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve Application Installer.
+
+
 1.0.16	|	Release date: **28.09.2021**
 ============================================
 * New Features:

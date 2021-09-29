@@ -1,3 +1,10 @@
+1.0.18	|	Release date: **29.09.2021**
+============================================
+* Bug-Fixes and Refactoring:
+  - Fix Component SetupApplication
+  - Litle Refactoring.
+
+
 1.0.17	|	Release date: **29.09.2021**
 ============================================
 * Bug-Fixes and Improvements:

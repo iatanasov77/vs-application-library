@@ -1,3 +1,9 @@
+1.0.19	|	Release date: **29.09.2021**
+============================================
+* Bug-Fixes:
+  - Fix Application Instalator.
+
+
 1.0.18	|	Release date: **29.09.2021**
 ============================================
 * Bug-Fixes and Refactoring:

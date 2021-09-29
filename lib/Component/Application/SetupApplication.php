@@ -59,20 +59,18 @@ class SetupApplication
         $this->setupApplicationDirectories( $applicationDirs  );
         $this->setupApplicationKernel();
         $this->setupApplicationHomePage();
+        $this->setupApplicationLoginPage();
         $this->setupApplicationConfigs();
+        $this->setupApplicationRoutes();
+        $this->setupApplicationAssets();
     }
     
     private function setupApplicationDirectories( $applicationDirs ): void
     {
-        $filesystem         = new Filesystem();
         $zip                = new \ZipArchive;
         
         try {
-            foreach ( $applicationDirs as $key => $dir ) {
-                //                 $filesystem->mkdir( $dir, 0777 );
-                //                 $filesystem->chown( $dir, 'vagrant', true );
-                //                 $filesystem->chgrp( $dir, 'vagrant', true );
-                
+            foreach ( $applicationDirs as $key => $dir ) {                
                 try {
                     $dirArchive = $this->container->get( 'kernel' )
                                         ->locateResource( '@VSApplicationBundle/Resources/application/' . $key . '.zip' );
@@ -145,23 +143,15 @@ class SetupApplication
             ["__application_slug__"],
             [$this->applicationSlug],
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/preload.php' )
-            );
+        );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/preload.php', $configPreload );
-        
-        // Setup Routes
-        $configRoutes   = str_replace(
-            ["__application_name__"],
-            [$this->applicationNamespace],
-            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml' )
-            );
-        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml', $configRoutes );
         
         // Setup Services and Parameters
         $configServices = str_replace(
                             ["__application_name__", "__application_slug__"],
                             [$this->applicationName, $this->applicationSlug],
                             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml' )
-                        );
+        );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/services.yaml', $configServices );
         
         // Setup Webpack Encore
@@ -171,5 +161,60 @@ class SetupApplication
             file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml' )
         );
         $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/packages/webpack_encore.yaml', $configWebpackEncore );
+    }
+    
+    private function setupApplicationAssets()
+    {
+        $filesystem     = new Filesystem();
+        $projectRootDir = $this->container->get( 'kernel' )->getProjectDir();
+        
+        // Setup Webpack Encore
+        $configWebpackEncore    = str_replace(
+            ["__application_slug__"],
+            [$this->applicationSlug],
+            file_get_contents( $projectRootDir . '/webpack.config.js' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/webpack.config.js', $configWebpackEncore );
+    }
+    
+    private function setupApplicationLoginPage()
+    {
+        $filesystem             = new Filesystem();
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
+        
+        // Write Application Login Page
+        $applicationLoginPage    = str_replace(
+            "__application_slug__", $this->applicationSlug,
+            file_get_contents( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/login.html.twig' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/templates/' . $this->applicationSlug . '/pages/login.html.twig', $applicationLoginPage );
+        
+        // Write Application Home Controller
+        $applicationAuthController  = str_replace(
+            ["__application_name__", "__application_slug__"],
+            [$this->applicationNamespace, $this->applicationSlug],
+            file_get_contents( $projectRootDir . '/src/Controller/' . $applicationName . '/AuthController.php' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/src/Controller/' . $applicationName . '/AuthController.php', $applicationAuthController );
+    }
+    
+    private function setupApplicationRoutes()
+    {
+        $filesystem             = new Filesystem();
+        $projectRootDir         = $this->container->get( 'kernel' )->getProjectDir();
+        
+        $configRoutes   = str_replace(
+            ["__application_name__"],
+            [$this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml' )
+        );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes.yaml', $configRoutes );
+        
+        $configRoutes   = str_replace(
+            ["__application_name__"],
+            [$this->applicationNamespace],
+            file_get_contents( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml' )
+            );
+        $filesystem->dumpFile( $projectRootDir . '/config/applications/' . $this->applicationSlug . '/routes/vs_users.yaml', $configRoutes );
     }
 }

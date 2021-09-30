@@ -89,7 +89,7 @@ EOT
         
         $outputStyle->newLine( 2 );
         $outputStyle->success( $this->getProperFinalMessage( $errored ) );
-        $outputStyle->writeln( 'You can now open your store at the following path under the website root: /' );
+        $outputStyle->writeln( 'Configure your application document root at public/{application-name} and admin panel at public/admin_panel .' );
         
         return $errored ? 1 : 0;
     }
@@ -97,10 +97,10 @@ EOT
     private function getProperFinalMessage( bool $errored ): string
     {
         if ( $errored ) {
-            return 'Sylius has been installed, but some error occurred.';
+            return 'VankoSoft Application has been installed, but some error occurred.';
         }
         
-        return 'Sylius has been successfully installed.';
+        return 'VankoSoft Application has been successfully installed.';
     }
     
     /**

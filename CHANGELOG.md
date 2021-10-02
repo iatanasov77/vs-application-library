@@ -1,3 +1,11 @@
+1.0.20	|	Release date: **02.10.2021**
+============================================
+* New Features and Refactoring:
+  - Move Instalator Components to Separate Bundle.
+  - Change Insralltor Success Messages.
+  - Refactoring Application Installation Packages.
+
+
 1.0.19	|	Release date: **29.09.2021**
 ============================================
 * Bug-Fixes:

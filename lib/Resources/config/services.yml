@@ -8,15 +8,7 @@ imports:
     - { resource: services/i18n.yaml }
     - { resource: services/doctrine_extensions.yaml }
     - { resource: services/commands.yaml }
-    - { resource: services/commands_installer.yaml }
-    - { resource: services/installer.yaml }
-    - { resource: services/installer_requirements.yaml }
-    - { resource: services/fixtures_factories.yaml }
-    - { resource: services/fixtures_listeners.yaml }
-    - { resource: services/fixtures.yaml }
     - { resource: services/web_profiler.yaml }
-    - { resource: services/application.yaml }
-    
 
 parameters:
     vs_application.public_dir: "%kernel.project_dir%/public/admin_panel"

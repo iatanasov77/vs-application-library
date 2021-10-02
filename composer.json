@@ -23,7 +23,6 @@
         
         "marcj/topsort": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.1",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "stof/doctrine-extensions-bundle": "^1.6",
         
         "knplabs/knp-menu-bundle": "^3.1",
@@ -34,7 +33,8 @@
         "sylius/taxonomy": "^1.9",
         "sylius/locale": "^1.9",
        	"sylius/theme-bundle": "^2.2",
-       	"sylius/fixtures-bundle": "^1.7"
+       	
+       	"vankosoft/application-instalator-bundle": "^1.0"
     },
     "suggest": {
         "symfony/debug-bundle": "Allows developement debugging",

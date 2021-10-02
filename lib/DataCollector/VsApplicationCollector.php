@@ -1,36 +1,36 @@
 <?php namespace VS\ApplicationBundle\DataCollector;
 
-use Symfony\Bundle\FrameworkBundle\DataCollector\AbstractDataCollector;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html
- *
+ * Example: Sylius\Bundle\CoreBundle\Collector\SyliusCollector
  */
-class VsApplicationCollector extends AbstractDataCollector
+final class VsApplicationCollector extends DataCollector
 {
-    /** KernelInterface $appKernel */
-    private $appKernel;
-    
-    public function __construct( KernelInterface $appKernel )
-    {
-        $this->appKernel = $appKernel;
-    }
-    
-    public function collect( Request $request, Response $response, \Throwable $exception = null )
-    {
+    public function __construct(
+        string $projectDir,
+        array $bundles,
+        string $defaultLocaleCode
+    ) {
         $this->data = [
-            'version'       => file_get_contents( $this->appKernel->getProjectDir() . '/VERSION' ),
-            'dependencies'  => [],
+            //'version'               => Kernel::VERSION,
+            'version'               => file_get_contents( $projectDir . '/VSAPP_VERSION' ),
+            'default_locale_code'   => $defaultLocaleCode,
+            'locale_code'           => null,
+            'extensions'            => [
+                'VSUsersSubscriptionsBundle'    => ['name' => 'Subscription', 'enabled' => false],
+                'VSPaymentBundle'               => ['name' => 'Payment', 'enabled' => false],
+            ],
         ];
-    }
-    
-    public static function getTemplate(): ?string
-    {
-        return '@VSApplication/DataCollector/vs_application.html.twig';
+        
+        foreach ( array_keys( $this->data['extensions'] ) as $bundleName ) {
+            if ( isset( $bundles[$bundleName] ) ) {
+                $this->data['extensions'][$bundleName]['enabled']   = true;
+            }
+        }
     }
     
     public function getVersion()
@@ -38,8 +38,39 @@ class VsApplicationCollector extends AbstractDataCollector
         return $this->data['version'];
     }
     
-    public function getDependencies()
+    public function getExtensions(): array
     {
-        return $this->data['dependencies'];
+        return $this->data['extensions'];
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocaleCode(): ?string
+    {
+        return $this->data['locale_code'];
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDefaultLocaleCode(): ?string
+    {
+        return $this->data['default_locale_code'];
+    }
+    
+    public function collect( Request $request, Response $response, \Throwable $exception = null )
+    {
+        
+    }
+    
+    public function reset(): void
+    {
+        $this->data['locale_code'] = null;
+    }
+    
+    public function getName(): string
+    {
+        return 'vs_application_data_collector_core';
     }
 }

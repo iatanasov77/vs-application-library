@@ -4,12 +4,17 @@ services:
         autoconfigure: true
         public: true
 
-    VS\ApplicationBundle\DataCollector\VsApplicationCollector:
+    vs_application.data_collector.core:
+        class: VS\ApplicationBundle\DataCollector\VsApplicationCollector
+        arguments:
+            - '%kernel.project_dir%'
+            - '%kernel.bundles%'
+            - '%locale%'
         tags:
             -
                 name: data_collector
                 # must match the value returned by the getName() method
-                id: 'VS\ApplicationBundle\DataCollector\VsApplicationCollector'
+                id: 'vs_application_data_collector_core'
                 # optional template (it has more priority than the value returned by getTemplate())
                 template: '@VSApplication/DataCollector/vs_application.html.twig'
                 # optional priority (positive or negative integer; default = 0)

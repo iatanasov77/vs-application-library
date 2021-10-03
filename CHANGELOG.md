@@ -1,3 +1,9 @@
+1.1.0	|	Release date: **03.10.2021**
+============================================
+* New Features:
+  - Update Applcation Installator Version.
+
+
 1.0.20	|	Release date: **02.10.2021**
 ============================================
 * New Features and Refactoring:

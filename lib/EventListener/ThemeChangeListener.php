@@ -11,23 +11,23 @@ class ThemeChangeListener
     protected $themeContext;
     protected $themeRepository;
     protected $settingsRepository;
-    protected $siteId;
+    protected $applicationId;
     
     public function __construct(
         ThemeContextInterface $themeContext,
         ThemeRepositoryInterface $themeRepository,
         SettingsRepositoryInterface $settingsRepository,
-        int $siteId = null
+        int $applicationId = null
     ) {
         $this->themeContext         = $themeContext;
         $this->themeRepository      = $themeRepository;
         $this->settingsRepository   = $settingsRepository;
-        $this->siteId               = $siteId;
+        $this->applicationId        = $applicationId;
     }
     
     public function onKernelRequest( RequestEvent $event )
     {
-        $settings   = $this->settingsRepository->getSettings( $this->siteId );
+        $settings   = $this->settingsRepository->getSettings( $this->applicationId );
 
         if( $settings && $settings->getTheme() ) {
             $theme      = $this->themeRepository->findOneByName( $settings->getTheme() );

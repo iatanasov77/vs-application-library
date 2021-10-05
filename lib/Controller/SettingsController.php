@@ -11,7 +11,7 @@ class SettingsController extends ResourceController
     public function indexAction( Request $request ): Response
     {
         $forms          = [];
-        $sites          = $this->getSiteRepository()->findAll();
+        $applications    = $this->getApplicationRepository()->findAll();
         
         $configuration  = $this->requestConfigurationFactory->create( $this->metadata, $request );
         
@@ -22,8 +22,8 @@ class SettingsController extends ResourceController
         $oSettings      = $settings ?: $factory->createNew();
         $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         
-        foreach( $sites as $site ) {
-            $settings       = $er->getSettings( $site );
+        foreach( $applications as $app ) {
+            $settings       = $er->getSettings( $app );
             $oSettings      = $settings ?: $factory->createNew();
             $forms[]        = $this->resourceFormFactory->create( $configuration, $oSettings )->createView();
         }
@@ -42,7 +42,7 @@ class SettingsController extends ResourceController
                                         );
         return $this->render( '@VSApplication/Pages/Settings/index.html.twig', [
             'forms'         => $forms,
-            'sites'         => $sites,
+            'applications'  => $applications,
             'pcTaxonomyId'  => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
         ]);
     }
@@ -57,8 +57,8 @@ class SettingsController extends ResourceController
         return $this->get( 'vs_application.factory.settings' );
     }
     
-    protected function getSiteRepository()
+    protected function getApplicationRepository()
     {
-        return $this->get( 'vs_application.repository.site' );
+        return $this->get( 'vs_application.repository.application' );
     }
 }

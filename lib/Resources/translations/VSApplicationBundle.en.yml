@@ -33,14 +33,14 @@ vs_application:
         taxonomy_update_list_taxons_title: 'Taxonomy Taxons'
         button_create_taxon: 'Create New Taxon'
     modal:
-        site_delete:
+        application_delete:
             title: 'Delete Application'
             description_1: 'This action will delete the application and all of its settings.'
             description_2: 'If you sure click on "Delete" button otherwise click on "Cancel".'
             button_delete: 'Delete'
-        site_edit:
+        application_edit:
             title: 'Edit Application'
-        site_settings:
+        application_settings:
             title: 'Application Settings'
         taxonomy_taxon_edit:
             title: 'Create Taxon'

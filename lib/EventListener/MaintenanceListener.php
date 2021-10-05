@@ -12,17 +12,17 @@ class MaintenanceListener
 {
     protected $container;
     protected $user;
-    protected $siteId;
-    protected $siteLayout;
+    protected $applicationId;
+    protected $applicationLayout;
     
     public function __construct(
         ContainerInterface $container,
-        int $siteId = null,
-        ?string $siteLayout
+        int $applicationId = null,
+        ?string $applicationLayout
     ) {
-        $this->container    = $container;
-        $this->siteId       = $siteId;
-        $this->siteLayout   = $siteLayout;
+        $this->container            = $container;
+        $this->applicationId        = $applicationId;
+        $this->applicationLayout    = $applicationLayout;
         
         $token              = $this->container->get( 'security.token_storage' )->getToken();
         if ( $token ) {
@@ -34,7 +34,7 @@ class MaintenanceListener
     public function onKernelRequest( RequestEvent $event )
     {
         $debug              = in_array( $this->container->get('kernel')->getEnvironment(), ['dev'] );
-        $settings           = $this->getSettingsManager()->getSettings( $this->siteId );
+        $settings           = $this->getSettingsManager()->getSettings( $this->applicationId );
         
         // If maintenance is active and in prod or test  environment and user is not admin
         if ( $settings['maintenanceMode'] ) {
@@ -72,9 +72,9 @@ class MaintenanceListener
     {
         return $this->container->get( 'templating' )->render( '@VSCms/Pages/show.html.twig',
             [
-                'page'          => $maintenancePage,
-                'siteLayout'    => $this->siteLayout ?: '@VSApplication/layout.html.twig',
-                'inMainenance'  => true,
+                'page'              => $maintenancePage,
+                'applicationLayout' => $this->applicationLayout ?: '@VSApplication/layout.html.twig',
+                'inMainenance'      => true,
             ]
         );
     }

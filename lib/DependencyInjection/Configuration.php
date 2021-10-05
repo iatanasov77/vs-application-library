@@ -12,8 +12,8 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use VS\ApplicationBundle\Model\Locale;
 
-use VS\ApplicationBundle\Model\SiteSettings;
-use VS\ApplicationBundle\Form\SiteForm;
+use VS\ApplicationBundle\Model\ApplicationSettings;
+use VS\ApplicationBundle\Form\ApplicationForm;
 
 use VS\ApplicationBundle\Repository\SettingsRepository;
 use VS\ApplicationBundle\Model\Settings;
@@ -38,7 +38,7 @@ use VS\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use VS\ApplicationBundle\Model\Site;
+use VS\ApplicationBundle\Model\Application;
 
 use VS\ApplicationBundle\Model\LogEntry;
 use VS\ApplicationBundle\Repository\LogEntryRepository;
@@ -91,14 +91,14 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode( 'resources' )
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode( 'site' )
+                        ->arrayNode( 'application' )
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode( 'options' )->end()
                                 ->arrayNode( 'classes' )
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode( 'model' )->defaultValue( Site::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'model' )->defaultValue( Application::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()

@@ -1,4 +1,5 @@
-{{ form_start(form, { 'action': path('vs_application_settings_handle', {'siteId': siteId}), 'attr': {'id': 'formSettings_' ~ siteId, 'class': 'form-horizontal '} }) }}
+
+{{ form_start(form, { 'action': path('vs_application_settings_handle', {'applicationId': applicationId}), 'attr': {'id': 'formSettings_' ~ applicationId, 'class': 'form-horizontal '} }) }}
     {{ form_widget(form._token) }}
     
     {% if form_errors(form) is not empty %}
@@ -50,12 +51,12 @@
             'attr': {
                 'class': 'easyui-combotree',
                 'data-options': comboDataOptions,
-                'data-value': siteId,
+                'data-value': applicationId,
             }
         }) }}
     </div>
 
-{% if siteId %}
+{% if applicationId %}
 	<div class="form-group">
         {{ form_label(form.theme, null, {
             'label_attr': {'class': 'col-form-label'}

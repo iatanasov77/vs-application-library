@@ -1,10 +1,10 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Site implements SiteInterface
+class Application implements ApplicationInterface
 {   
     /** @var integer */
     protected $id;
@@ -35,7 +35,7 @@ class Site implements SiteInterface
         return $this->title;
     }
     
-    public function setTitle($title): self
+    public function setTitle( $title ) : self
     {
         $this->title = $title;
         

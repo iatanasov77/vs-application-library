@@ -8,12 +8,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-class SettingsSiteForm extends AbstractType
+class SettingsApplicationForm extends AbstractType
 {
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add( 'title', TextType::class, ['label' => 'Site'] )
+            ->add( 'title', TextType::class, ['label' => 'Application'] )
             
             ->add( 'btnSave', SubmitType::class, ['label' => 'Save'] )
             ->add( 'btnCancel', ButtonType::class, ['label' => 'Cancel'] )

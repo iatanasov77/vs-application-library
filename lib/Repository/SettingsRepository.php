@@ -10,7 +10,7 @@ class SettingsRepository extends EntityRepository implements SettingsRepositoryI
 {
     use ContainerAwareTrait;
     
-    public function getSettings( $site = null ): ?SettingsInterface
+    public function getSettings( $application = null ): ?SettingsInterface
     {
         /**
          * @NOTE $this->container is NULL i dont know why and i cannot use it for now
@@ -21,10 +21,10 @@ class SettingsRepository extends EntityRepository implements SettingsRepositoryI
                 ->setMaxResults( 1 )
                 ->setFirstResult( 0 )
         ;
-        if ( $site ) {
-            $qb->where( 's.site = :site' )->setParameter( 'site', $site );
+        if ( $application ) {
+            $qb->where( 's.application = :application' )->setParameter( 'application', $application );
         } else {
-            $qb->where( 's.site IS NULL' );
+            $qb->where( 's.application IS NULL' );
         }
         $result = $qb->getQuery()->getResult();
         

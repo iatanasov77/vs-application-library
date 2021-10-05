@@ -53,13 +53,13 @@ class Settings
         );
     }
     
-    public function getSettings( $siteId )
+    public function getSettings( $applicationId )
     {
-        $cacheId    = $siteId ? "settings_site_{$siteId}" : 'settings_general';
+        $cacheId    = $applicationId ? "settings_application_{$applicationId}" : 'settings_general';
         
         $settingsCache  = $this->cache->getItem( $cacheId );
         if ( ! $settingsCache->isHit() ) {
-            $settings   = $siteId ? $this->generalizeSettings( $siteId ) : $this->generalSettings();
+            $settings   = $applicationId ? $this->generalizeSettings( $applicationId ) : $this->generalSettings();
             
             $this->cache->warmUp( [$cacheId => json_encode( $settings )] );
         } else {
@@ -69,35 +69,35 @@ class Settings
         return $settings;
     }
     
-    public function saveSettings( $siteId )
+    public function saveSettings( $applicationId )
     {
         $allSettings    = [];
         
-        // Sites Settings
-        $sites  = $this->getSiteRepository()->findAll();
-        foreach ( $sites as $site ) {
-            $settings   = ( $siteId == $site->getId() ) ? $this->generalizeSettings( $siteId ) : $this->getSettings( $site->getId() );
-            $allSettings["settings_site_{$site->getId()}"]  = json_encode( $settings );
+        // Applications Settings
+        $applications  = $this->getApplicationRepository()->findAll();
+        foreach ( $applications as $app ) {
+            $settings   = ( $applicationId == $app->getId() ) ? $this->generalizeSettings( $applicationId ) : $this->getSettings( $app->getId() );
+            $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
         }
         
         // General Settings
-        $settings   = ( $siteId == null ) ? $this->generalSettings() : $this->getSettings( null );
+        $settings   = ( $applicationId == null ) ? $this->generalSettings() : $this->getSettings( null );
         $allSettings['settings_general']    = json_encode( $settings );
         
         $this->cache->warmUp( $allSettings );
     }
     
-    public function clearCache( $siteId, $all = false )
+    public function clearCache( $applicationId, $all = false )
     {
         if ( $all ) {
-            $sites  = $this->getSiteRepository()->findAll();
-            foreach ( $sites as $site ) {
-                $this->cache->deleteItem( "settings_site_{$site->getId()}" );
+            $applications  = $this->getApplicationRepository()->findAll();
+            foreach ( $applications as $app ) {
+                $this->cache->deleteItem( "settings_application_{$app->getId()}" );
             }
             
             $this->cache->deleteItem( 'settings_general' );
         } else {
-            $cacheId    = $siteId ? "settings_site_{$siteId}" : 'settings_general';
+            $cacheId    = $applicationId ? "settings_application_{$applicationId}" : 'settings_general';
             
             $this->cache->deleteItem( $cacheId );
         }
@@ -107,13 +107,13 @@ class Settings
     {
         $allSettings    = [];
         
-        // Sites Settings
-        $sites  = $this->getSiteRepository()->findAll();
-        foreach ( $sites as $site ) {
-            $settings                                       = $this->getSettings( $site->getId() );
+        // Applications Settings
+        $applications  = $this->getApplicationRepository()->findAll();
+        foreach ( $applications as $app ) {
+            $settings                                       = $this->getSettings( $app->getId() );
             $settings['maintenanceMode']                    = $maintenanceMode;
             
-            $allSettings["settings_site_{$site->getId()}"]  = json_encode( $settings );
+            $allSettings["settings_application_{$app->getId()}"]  = json_encode( $settings );
         }
         
         // General Settings
@@ -127,30 +127,30 @@ class Settings
     // Used For Dump/Debug
     public function getAllSettings()
     {
-        $sites      = $this->getSiteRepository()->findAll();
+        $applications      = $this->getApplicationRepository()->findAll();
         $settings   = [];
-        foreach ( $sites as $site ) {
-            $settings["settings_site_{$site->getId()}"]   = $this->getSettings( $site->getId() );
+        foreach ( $applications as $app ) {
+            $settings["settings_application_{$app->getId()}"]   = $this->getSettings( $app->getId() );
         }
         $settings['settings_general']   = $this->getSettings( null );
         
         return $settings;
     }
     
-    private function generalizeSettings( $siteId ) : array
+    private function generalizeSettings( $applicationId ) : array
     {
-        $site   = $this->getSiteRepository()->find( $siteId );
-        if ( ! $site ) {
-            throw new SettingsException( "Site With ID:{$siteId} Not Exists!" );
+        $application   = $this->getApplicationRepository()->find( $applicationId );
+        if ( ! $application ) {
+            throw new SettingsException( "Application With ID:{$applicationId} Not Exists!" );
         }
         
-        $generalSettings    = $this->getSettingsRepository()->getSettings();
-        $siteSettings       = $this->getSettingsRepository()->getSettings( $site );
+        $generalSettings        = $this->getSettingsRepository()->getSettings();
+        $applicationSettings    = $this->getSettingsRepository()->getSettings( $application );
         //var_dump( $generalSettings ); die;
         
         $generalizedSettings    = [];
         foreach( $this->settingsKeys as $key ) {
-            $value  = $siteSettings ? $this->propertyAccessor->getValue( $siteSettings, $key ) : null;
+            $value  = $applicationSettings ? $this->propertyAccessor->getValue( $applicationSettings, $key ) : null;
             if ( $value === null ) {
                 $value  = $this->propertyAccessor->getValue( $generalSettings, $key );
             }
@@ -175,9 +175,9 @@ class Settings
         return $settings;
     }
     
-    private function getSiteRepository()
+    private function getApplicationRepository()
     {
-        return $this->container->get( 'vs_application.repository.site' );
+        return $this->container->get( 'vs_application.repository.application' );
     }
     
     private function getSettingsRepository()

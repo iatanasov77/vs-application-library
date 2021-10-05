@@ -14,7 +14,7 @@ class SettingsExtController extends AbstractController
 {
     protected $settingsManager;
     
-    protected $siteRepository;
+    protected $applicationRepository;
     
     protected $settingsRepository;
     
@@ -25,22 +25,22 @@ class SettingsExtController extends AbstractController
     
     public function __construct(
         SettingsManager $settingsManager,
-        EntityRepository $siteRepository,
+        EntityRepository $applicationRepository,
         EntityRepository $settingsRepository,
         Factory $settingsFactory,
         TaxonomyRepository $taxonomyRepository
     ) {
-        $this->settingsManager      = $settingsManager;
-        $this->siteRepository       = $siteRepository;
-        $this->settingsRepository   = $settingsRepository;
-        $this->settingsFactory      = $settingsFactory;
-        $this->taxonomyRepository   = $taxonomyRepository;
+        $this->settingsManager          = $settingsManager;
+        $this->applicationRepository    = $applicationRepository;
+        $this->settingsRepository       = $settingsRepository;
+        $this->settingsFactory          = $settingsFactory;
+        $this->taxonomyRepository       = $taxonomyRepository;
     }
     
-    public function index( int $siteId, Request $request ): Response
+    public function index( int $applicationId, Request $request ): Response
     {
-        $site                       = $this->siteRepository->find( $siteId );
-        $settings                   = $this->settingsRepository->getSettings( $site );
+        $application                = $this->applicationRepository->find( $applicationId );
+        $settings                   = $this->settingsRepository->getSettings( $application );
         $form                       = $this->createForm( SettingsForm::class, $settings ?: 
                                             $this->settingsFactory->createNew() );
         $taxonomyPagesCategories    = $this->taxonomyRepository->findByCode(
@@ -48,28 +48,28 @@ class SettingsExtController extends AbstractController
                                         );
         
         return $this->render( '@VSApplication/Pages/Settings/partial/settings-form.html.twig', [
-            'siteId'        => $siteId,
+            'applicationId' => $applicationId,
             'form'          => $form->createView(),
             'pcTaxonomyId'  => $taxonomyPagesCategories ? $taxonomyPagesCategories->getId() : 0,
         ]);
     }
     
-    public function handle( int $siteId, Request $request ): Response
+    public function handle( int $applicationId, Request $request ): Response
     {
         $form   = $this->createForm( SettingsForm::class );
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $entity = $form->getData();
-            if ( $siteId && ( ! $entity->getSite() ) ) {
-                $entity->setSite( $this->siteRepository->find( $siteId ) );
+            if ( $applicationId && ( ! $entity->getApplication() ) ) {
+                $entity->setApplication( $this->applicationRepository->find( $applicationId ) );
             }
             
             $em = $this->getDoctrine()->getManager();
             $em->persist( $entity );
             $em->flush();
             
-            //$this->settingsManager->clearCache( $siteId, true );
-            $this->settingsManager->saveSettings( $siteId );
+            //$this->settingsManager->clearCache( $applicationId, true );
+            $this->settingsManager->saveSettings( $applicationId );
             
             return $this->redirect( $this->generateUrl( 'vs_application_settings_index' ) );
         }

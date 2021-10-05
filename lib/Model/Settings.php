@@ -1,7 +1,7 @@
 <?php namespace VS\ApplicationBundle\Model;
 
 use VS\ApplicationBundle\Model\Interfaces\SettingsInterface;
-use VS\ApplicationBundle\Model\Interfaces\SiteInterface;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use VS\CmsBundle\Model\PageInterface;
 
 class Settings implements SettingsInterface
@@ -18,17 +18,17 @@ class Settings implements SettingsInterface
     /** @var string */
     protected $theme;
     
-    /** @var SiteInterface */
-    protected $site;
+    /** @var ApplicationInterface */
+    protected $application;
     
     public function getId()
     {
         return $this->id;
     }
   
-    public function setMaintenanceMode($maintenanceMode)
+    public function setMaintenanceMode( $maintenanceMode )
     {
-        $this->maintenanceMode = $maintenanceMode;
+        $this->maintenanceMode  = $maintenanceMode;
 
         return $this;
     }
@@ -38,21 +38,21 @@ class Settings implements SettingsInterface
         return $this->maintenanceMode;
     }
     
-    public function getMaintenancePage(): ?PageInterface
+    public function getMaintenancePage() : ?PageInterface
     {
         return $this->maintenancePage;
     }
     
-    public function setMaintenancePage(?PageInterface $maintenancePage): self
+    public function setMaintenancePage( ?PageInterface $maintenancePage ) : self
     {
-        $this->maintenancePage = $maintenancePage;
+        $this->maintenancePage  = $maintenancePage;
         
         return $this;
     }
     
-    public function setTheme($theme)
+    public function setTheme( $theme )
     {
-        $this->theme = $theme;
+        $this->theme    = $theme;
         
         return $this;
     }
@@ -62,14 +62,14 @@ class Settings implements SettingsInterface
         return $this->theme;
     }
     
-    public function getSite()
+    public function getApplication()
     {
-        return $this->site;
+        return $this->application;
     }
     
-    public function setSite($site): self
+    public function setApplication( $application ) : self
     {
-        $this->site = $site;
+        $this->application  = $application;
         
         return $this;
     }

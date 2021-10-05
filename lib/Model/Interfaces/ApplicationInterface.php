@@ -2,7 +2,7 @@
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface SiteInterface extends ResourceInterface
+interface ApplicationInterface extends ResourceInterface
 {
     public function getId();
     public function getTitle();

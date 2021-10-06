@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
-class SettingsApplicationForm extends AbstractType
+class ApplicationForm extends AbstractType
 {
     public function buildForm( FormBuilderInterface $builder, array $options )
     {

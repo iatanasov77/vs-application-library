@@ -5,6 +5,18 @@ vs_application_settings:
         templates: "@VSApplication/Pages/Settings"
     type: sylius.resource
 
+vs_application_application_form:
+    path: /application-edit/form-{applicationId}
+    controller: VS\ApplicationBundle\Controller\ApplicationExtController::index
+    
+vs_application_application_handle:
+    path: /application-edit/handle-{applicationId}
+    controller: VS\ApplicationBundle\Controller\ApplicationExtController::handle
+    
+vs_application_application_remove:
+    path: /application-edit/remove-{applicationId}
+    controller: VS\ApplicationBundle\Controller\ApplicationExtController::remove
+
 vs_application_settings_form:
     path: /settings-edit/form-{applicationId}
     controller: VS\ApplicationBundle\Controller\SettingsExtController::index

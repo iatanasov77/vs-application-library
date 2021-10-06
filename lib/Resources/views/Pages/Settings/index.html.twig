@@ -87,16 +87,16 @@
                                                         <i class="fas fa-cogs"></i>
                                                     </a>&nbsp;
                                                     <a class="btn btn-primary btnEdit" title="Edit" href="javascript:void(0);"
-                                                    	{#data-url="{{ path('app_settings_sites_edit', {'id': item.id}) }}"#}
+                                                    	data-url="{{ path('vs_application_application_form', {'applicationId': item.id}) }}"
                                                     	data-application_title="{{ item.title }}"
                                                     >
                                                         <i class="fas fa-edit"></i>
                                                     </a>&nbsp;
                                                     <a class="btn btn-danger btnDelete" title="Delete" href="javascript:void(0);" 
-                                                        data-toggle="modal" 
+                                                        data-toggle="modal"
                                                         data-target="#application-delete-modal"
                                                         data-title="{{ item.title }}"
-                                                        {#data-url="{{ path('app_settings_sites_delete', {'id': item.id}) }}"#}
+                                                        data-url="{{ path('vs_application_application_remove', {'applicationId': item.id}) }}"
                                                     >
                                                         <i class="icon_close_alt2"></i>
                                                     </a>

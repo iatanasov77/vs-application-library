@@ -1,12 +1,18 @@
 services:
-    #vs_application.form.type.settings:
+    vs_application.resources.application.form:
+        public: true
+        class: VS\ApplicationBundle\Form\ApplicationForm
+        tags:
+            - { name: form.type }
+        arguments: ['%vs_application.model.application.class%']
+
     vs_application.resources.settings.form:
         public: true
         class: VS\ApplicationBundle\Form\SettingsForm
         tags:
             - { name: form.type }
         arguments: ['%vs_application.model.settings.class%', '%vs_cms.model.pages.class%']
-        
+
     vs_application.resources.taxonomy.form:
         public: true
         class: VS\ApplicationBundle\Form\TaxonomyForm

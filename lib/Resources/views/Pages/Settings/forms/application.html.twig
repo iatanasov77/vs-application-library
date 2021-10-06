@@ -1,5 +1,7 @@
 <div>
     {{ form_start(form, { 'action': path('vs_application_application_handle', {'applicationId': applicationId}), 'attr': {'id': 'formApplicationEdit', 'class': 'form-horizontal '} }) }}
+        {{ form_widget(form._token) }}
+        
         <div class="formFields">
             <div class="form-group">
                 {{ form_label(form.title, null, {

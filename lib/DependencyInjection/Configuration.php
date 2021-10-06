@@ -8,11 +8,12 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Factory\Factory;
-
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Model\LocaleInterface;
+
 use VS\ApplicationBundle\Model\Locale;
 
-use VS\ApplicationBundle\Model\ApplicationSettings;
+use VS\ApplicationBundle\Model\Application;
 use VS\ApplicationBundle\Form\ApplicationForm;
 
 use VS\ApplicationBundle\Repository\SettingsRepository;
@@ -36,9 +37,6 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 use VS\ApplicationBundle\Model\Translation;
 use Gedmo\Translatable\Entity\Repository\TranslationRepository;
-
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use VS\ApplicationBundle\Model\Application;
 
 use VS\ApplicationBundle\Model\LogEntry;
 use VS\ApplicationBundle\Repository\LogEntryRepository;
@@ -102,6 +100,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( ApplicationForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

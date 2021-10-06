@@ -3,11 +3,13 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 
 use VS\ApplicationBundle\Form\ApplicationForm;
+use VS\ApplicationBundle\Component\Status;
 
 class ApplicationExtController extends AbstractController
 {
@@ -38,7 +40,8 @@ class ApplicationExtController extends AbstractController
     
     public function handle( int $applicationId, Request $request ): Response
     {
-        $form   = $this->createForm( ApplicationForm::class );
+        $application    = $this->applicationRepository->find( $applicationId );
+        $form           = $this->createForm( ApplicationForm::class, $application );
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $entity = $form->getData();
@@ -55,14 +58,14 @@ class ApplicationExtController extends AbstractController
     
     public function remove( int $applicationId, Request $request ): Response
     {
-        $em         = $this->getDoctrine()->getManager();
-        $category   = $this->pagesCategoriesRepository->findOneBy( ['taxon' => $taxonId] );
+        $application    = $this->applicationRepository->find( $applicationId );
+        $em             = $this->getDoctrine()->getManager();
         
-        $em->remove( $category );
+        $em->remove( $application );
         $em->flush();
         
         return new JsonResponse([
-            'status'   => 'SUCCESS'
+            'status'    => Status::STATUS_OK
         ]);
     }
 }

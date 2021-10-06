@@ -1,5 +1,4 @@
 <div>
-    {% if application.id %}{% set applicationId = application.id %}{% else %}{% set applicationId = 0 %}{% endif %}
     {{ form_start(form, { 'action': path('vs_application_application_handle', {'applicationId': applicationId}), 'attr': {'id': 'formApplicationEdit', 'class': 'form-horizontal '} }) }}
         <div class="formFields">
             <div class="form-group">

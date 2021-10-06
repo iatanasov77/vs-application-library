@@ -31,6 +31,7 @@ class ApplicationExtController extends AbstractController
         $form           = $this->createForm( ApplicationForm::class, $application ?: $this->applicationFactory->createNew() );
         
         return $this->render( '@VSApplication/Pages/Settings/partial/application-form.html.twig', [
+            'applicationId' => $applicationId,
             'form'          => $form->createView(),
         ]);
     }

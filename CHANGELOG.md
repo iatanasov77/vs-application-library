@@ -1,3 +1,10 @@
+1.2.1	|	Release date: **06.10.2021**
+============================================
+* New Features:
+  - Editing/Removing an Application into the Settings Page.
+  - Add New Database Migration.
+
+
 1.2.0	|	Release date: **05.10.2021**
 ============================================
 * Bug-Fixes and Refactoring:

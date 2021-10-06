@@ -1,3 +1,9 @@
+1.2.2	|	Release date: **06.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Settings Application Form.
+
+
 1.2.1	|	Release date: **06.10.2021**
 ============================================
 * New Features:

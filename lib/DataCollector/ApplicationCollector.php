@@ -71,7 +71,7 @@ final class ApplicationCollector extends DataCollector
     private function pluckApplication( ApplicationInterface $application ) : array
     {
         return [
-            'name'      => $application->getName(),
+            'name'      => $application->getTitle(),
             'hostname'  => $application->getHostname(),
             'code'      => $application->getCode(),
         ];

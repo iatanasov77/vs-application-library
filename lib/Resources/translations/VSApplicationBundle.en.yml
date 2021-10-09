@@ -1,9 +1,11 @@
 vs_application:
     form:
         errors_title: 'Error!'
+        enabled: 'Enabled'
         locale: 'Locale'
         title: 'Title'
         name: 'Name'
+        hostname: 'Hostname'
         description: 'Description'
         parent: 'Parent'
         maintenance_mode: 'Maintenance Mode'

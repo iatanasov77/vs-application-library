@@ -3,6 +3,7 @@
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ApplicationForm extends AbstractForm
@@ -12,7 +13,9 @@ class ApplicationForm extends AbstractForm
         parent::buildForm( $builder, $options );
         
         $builder
-            ->add( 'title', TextType::class, ['label' => 'Application'] )
+            ->add( 'enabled', CheckboxType::class, ['label' => 'vs_application.form.enabled', 'translation_domain' => 'VSApplicationBundle'] )
+            ->add( 'title', TextType::class, ['label' => 'vs_application.form.title', 'translation_domain' => 'VSApplicationBundle'] )
+            ->add( 'hostname', TextType::class, ['label' => 'vs_application.form.hostname', 'translation_domain' => 'VSApplicationBundle'] )
         ;
     }
     

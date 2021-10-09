@@ -1,9 +1,11 @@
 vs_application:
     form:
         errors_title: 'Грешка!'
+        enabled: 'Разрешен'
         locale: 'Език'
         title: 'Име'
         name: 'Име'
+        hostname: 'Име на Хост'
         description: 'Описание'
         parent: 'Родител'
         maintenance_mode: 'В режим на поддръжка'

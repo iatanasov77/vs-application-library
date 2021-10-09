@@ -1,3 +1,10 @@
+1.2.5	|	Release date: **09.10.2021**
+============================================
+* New Features:
+  - Create Application Data Collector.
+  - Create Application Context/Service.
+
+
 1.2.4	|	Release date: **06.10.2021**
 ============================================
 * Bug-Fixes:

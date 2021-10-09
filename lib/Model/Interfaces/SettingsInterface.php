@@ -5,6 +5,7 @@ use VS\CmsBundle\Model\PageInterface;
 
 interface SettingsInterface extends ResourceInterface
 {
+    public function getApplication();
     public function getMaintenanceMode();
     public function getMaintenancePage(): ?PageInterface;
     public function getTheme();

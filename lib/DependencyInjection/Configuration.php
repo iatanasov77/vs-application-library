@@ -13,6 +13,8 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 
 use VS\ApplicationBundle\Model\Locale;
 
+use VS\ApplicationBundle\Repository\ApplicationRepository;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use VS\ApplicationBundle\Model\Application;
 use VS\ApplicationBundle\Form\ApplicationForm;
 
@@ -97,8 +99,8 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( Application::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'interface' )->defaultValue( ResourceInterface::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'interface' )->defaultValue( ApplicationInterface::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( ApplicationRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( ApplicationForm::class )->cannotBeEmpty()->end()
                                     ->end()

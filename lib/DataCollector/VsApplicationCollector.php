@@ -71,6 +71,6 @@ final class VsApplicationCollector extends DataCollector
     
     public function getName(): string
     {
-        return 'vs_application_data_collector_core';
+        return 'vs_application.core_collector';
     }
 }

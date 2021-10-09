@@ -1,11 +1,15 @@
 <?php namespace VS\ApplicationBundle\Model;
 
-use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 class Application implements ApplicationInterface
-{   
+{
+    use TimestampableTrait, ToggleableTrait;
+    
     /** @var integer */
     protected $id;
     
@@ -14,6 +18,12 @@ class Application implements ApplicationInterface
     
     /** @var string */
     protected $title;
+    
+    /** @var string */
+    protected $hostname;
+    
+    /** @var string */
+    protected $code;
     
     public function __construct()
     {
@@ -38,6 +48,31 @@ class Application implements ApplicationInterface
     public function setTitle( $title ) : self
     {
         $this->title = $title;
+        
+        return $this;
+    }
+    
+    public function getHostname()
+    {
+        return $this->hostname;
+    }
+    
+    public function setHostname( $hostname ) : self
+    {
+        $this->hostname = $hostname;
+        
+        return $this;
+    }
+    
+    
+    public function getCode()
+    {
+        return $this->code;
+    }
+    
+    public function setCode( $code ) : self
+    {
+        $this->code = $code;
         
         return $this;
     }

@@ -14,8 +14,23 @@ services:
             -
                 name: data_collector
                 # must match the value returned by the getName() method
-                id: 'vs_application_data_collector_core'
+                id: 'vs_application.core_collector'
                 # optional template (it has more priority than the value returned by getTemplate())
                 template: '@VSApplication/DataCollector/vs_application.html.twig'
                 # optional priority (positive or negative integer; default = 0)
                 # priority: 300
+    
+    vs_application.data_collector.application:
+        class: VS\ApplicationBundle\DataCollector\ApplicationCollector
+        arguments:
+            - '%kernel.project_dir%'
+            - '%kernel.bundles%'
+            - '%locale%'
+        tags:
+            -
+                name: data_collector
+                id: 'vs_application.application_collector'
+                template: '@VSApplication/DataCollector/application.html.twig'
+    
+    
+    

@@ -1,3 +1,10 @@
+1.2.7	|	Release date: **09.10.2021**
+============================================
+* New Features:
+  - Add ApplicationRelationTrait and ApplicationRelationInterface.
+  - Update ApplicationInterface.
+
+
 1.2.6	|	Release date: **09.10.2021**
 ============================================
 * New Features:

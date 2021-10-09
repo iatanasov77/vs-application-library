@@ -2,54 +2,52 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Channel\Model\ChannelInterface;
+use VS\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
-final class ApplicationContext implements ChannelContextInterface
+final class ApplicationContext implements ApplicationContextInterface
 {
     private RequestResolverInterface $requestResolver;
-
+    
     private RequestStack $requestStack;
-
-    public function __construct(RequestResolverInterface $requestResolver, RequestStack $requestStack)
+    
+    public function __construct( RequestResolverInterface $requestResolver, RequestStack $requestStack )
     {
-        $this->requestResolver = $requestResolver;
-        $this->requestStack = $requestStack;
+        $this->requestResolver  = $requestResolver;
+        $this->requestStack     = $requestStack;
     }
-
-    public function getChannel(): ChannelInterface
+    
+    public function getApplication() : ApplicationInterface
     {
         try {
-            return $this->getChannelForRequest($this->getMasterRequest());
-        } catch (\UnexpectedValueException $exception) {
-            throw new ChannelNotFoundException(null, $exception);
+            return $this->getApplicationForRequest( $this->getMasterRequest() );
+        } catch ( \UnexpectedValueException $exception ) {
+            throw new ApplicationNotFoundException( null, $exception );
         }
     }
-
-    private function getChannelForRequest(Request $request): ChannelInterface
+    
+    private function getApplicationForRequest( Request $request ): ApplicationInterface
     {
-        $channel = $this->requestResolver->findChannel($request);
-
-        $this->assertChannelWasFound($channel);
-
-        return $channel;
+        $application    = $this->requestResolver->findApplication( $request );
+        
+        $this->assertApplicationWasFound( $application );
+        
+        return $application;
     }
-
+    
     private function getMasterRequest(): Request
     {
         $masterRequest = $this->requestStack->getMasterRequest();
-        if (null === $masterRequest) {
-            throw new \UnexpectedValueException('There are not any requests on request stack');
+        if ( null === $masterRequest ) {
+            throw new \UnexpectedValueException( 'There are not any requests on request stack' );
         }
-
+        
         return $masterRequest;
     }
-
-    private function assertChannelWasFound(?ChannelInterface $channel): void
+    
+    private function assertApplicationWasFound( ?ApplicationInterface $application ): void
     {
-        if (null === $channel) {
-            throw new \UnexpectedValueException('Channel was not found for given request');
+        if ( null === $application ) {
+            throw new \UnexpectedValueException( 'Application was not found for given request' );
         }
     }
 }

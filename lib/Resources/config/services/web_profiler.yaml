@@ -23,9 +23,8 @@ services:
     vs_application.data_collector.application:
         class: VS\ApplicationBundle\DataCollector\ApplicationCollector
         arguments:
-            - '%kernel.project_dir%'
-            - '%kernel.bundles%'
-            - '%locale%'
+            - '@vs_application.repository.application'
+            - '@vs_application.context.application'
         tags:
             -
                 name: data_collector

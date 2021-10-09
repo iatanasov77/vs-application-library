@@ -1,3 +1,12 @@
+1.2.6	|	Release date: **09.10.2021**
+============================================
+* New Features:
+  - Update Application Form with New Application Model Fields.
+  - Add New Migration.
+* Bug-Fixes:
+  - Fixing Application Context and ApplicationDataCollector.
+
+
 1.2.5	|	Release date: **09.10.2021**
 ============================================
 * New Features:

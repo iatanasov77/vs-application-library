@@ -1,3 +1,10 @@
+1.3.1	|	Release date: **10.10.2021**
+============================================
+* New Features:
+  - Add ApplicationRelationRepository/ApplicationRelationRepository Interface and Trait for Using With Application Custom Resources.
+  - Update Installator Version.
+
+
 1.3.0	|	Release date: **10.10.2021**
 ============================================
 * Bug-Fixes:

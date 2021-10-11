@@ -13,8 +13,12 @@ class AbstractCrudController extends ResourceController
 {
     protected $classInfo;
     
+    protected $currentRequest;
+    
     public function indexAction( Request $request ) : Response
     {
+        $this->currentRequest = $request;
+        
         $this->classInfo( $request );   // call this for every controller action
         $configuration = $this->requestConfigurationFactory->create( $this->metadata, $request );
         

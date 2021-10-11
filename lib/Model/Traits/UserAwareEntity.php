@@ -1,19 +1,32 @@
 <?php namespace VS\ApplicationBundle\Model\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
 use VS\UsersBundle\Model\UserInterface;
 
 /**
  * @see \VS\ApplicationBundle\Model\Interfaces\UserAwareInterface
  */
-trait UserAwareTrait
+trait UserAwareEntity
 {
-    /** @var \VS\UsersBundle\Model\UserInterface */
+    /**
+     * @var \VS\UsersBundle\Model\UserInterface
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
+     */
     protected $createdBy;
     
-    /** @var \VS\UsersBundle\Model\UserInterface */
+    /**
+     * @var \VS\UsersBundle\Model\UserInterface
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
+     */
     protected $updatedBy;
     
-    /** @var \VS\UsersBundle\Model\UserInterface */
+    /**
+     * @var \VS\UsersBundle\Model\UserInterface
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
+     */
     protected $deletedBy;
     
     public function getCreatedBy()

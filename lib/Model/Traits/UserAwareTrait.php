@@ -16,7 +16,7 @@ trait UserAwareTrait
     /** @var \VS\UsersBundle\Model\UserInterface */
     protected $deletedBy;
     
-    public function getCreatedBy()
+    public function getCreatedBy() : ?UserInterface
     {
         return $this->createdBy;
     }
@@ -28,7 +28,7 @@ trait UserAwareTrait
         return $this;
     }
     
-    public function getUpdatedBy()
+    public function getUpdatedBy() : ?UserInterface
     {
         return $this->updatedBy;
     }
@@ -40,7 +40,7 @@ trait UserAwareTrait
         return $this;
     }
     
-    public function getDeletedBy()
+    public function getDeletedBy() : ?UserInterface
     {
         return $this->deletedBy;
     }

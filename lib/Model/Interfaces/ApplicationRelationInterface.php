@@ -4,5 +4,5 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ApplicationRelationInterface extends ResourceInterface
 {
-    public function getApplication();
+    public function getApplication() : ?ApplicationInterface;
 }

@@ -29,7 +29,7 @@ trait UserAwareEntity
      */
     protected $deletedBy;
     
-    public function getCreatedBy()
+    public function getCreatedBy() : ?UserInterface
     {
         return $this->createdBy;
     }
@@ -41,7 +41,7 @@ trait UserAwareEntity
         return $this;
     }
     
-    public function getUpdatedBy()
+    public function getUpdatedBy() : ?UserInterface
     {
         return $this->updatedBy;
     }
@@ -53,7 +53,7 @@ trait UserAwareEntity
         return $this;
     }
     
-    public function getDeletedBy()
+    public function getDeletedBy() : ?UserInterface
     {
         return $this->deletedBy;
     }

@@ -1,3 +1,9 @@
+1.3.5	|	Release date: **11.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix Model Awared Interfaces and Traits.
+
+
 1.3.4	|	Release date: **11.10.2021**
 ============================================
 * Bug-Fixes:

@@ -1,3 +1,9 @@
+1.3.3	|	Release date: **11.10.2021**
+============================================
+* New Features:
+  - Add ApplicationRelationEntity and UserAwareEntity .
+
+
 1.3.2	|	Release date: **11.10.2021**
 ============================================
 * New Features:

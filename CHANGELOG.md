@@ -1,3 +1,9 @@
+1.3.2	|	Release date: **11.10.2021**
+============================================
+* New Features:
+  - Add UserAware Trait and Interface to be used for user awared entities.
+
+
 1.3.1	|	Release date: **10.10.2021**
 ============================================
 * New Features:

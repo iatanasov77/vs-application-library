@@ -1,3 +1,9 @@
+1.3.6	|	Release date: **11.10.2021**
+============================================
+* New Features:
+  - Create property currentRequest of the AbstractCrudController .
+
+
 1.3.5	|	Release date: **11.10.2021**
 ============================================
 * Bug-Fixes:

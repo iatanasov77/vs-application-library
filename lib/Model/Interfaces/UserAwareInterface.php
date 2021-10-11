@@ -5,5 +5,7 @@ use VS\UsersBundle\Model\UserInterface;
 
 interface UserAwareInterface extends ResourceInterface
 {
-    public function getUser() : ?UserInterface;
+    public function getCreatedBy() : ?UserInterface;
+    public function getUpdatedBy() : ?UserInterface;
+    public function getDeletedBy() : ?UserInterface;
 }

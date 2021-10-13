@@ -21,7 +21,6 @@
         
         "twig/extra-bundle": "^3.3",
         
-        "marcj/topsort": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "stof/doctrine-extensions-bundle": "^1.6",
         
@@ -29,6 +28,7 @@
         "knplabs/knp-paginator-bundle": "^5.5",
         "knplabs/knp-time-bundle": "^1.16",
         
+        "sylius-labs/doctrine-migrations-extra-bundle" : "^0.1.4",
         "sylius/resource-bundle": "^1.8",
         "sylius/taxonomy": "^1.9",
         "sylius/locale": "^1.9",

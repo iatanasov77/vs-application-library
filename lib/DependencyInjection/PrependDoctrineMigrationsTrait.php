@@ -8,7 +8,7 @@ trait PrependDoctrineMigrationsTrait
     {
         if (
             ! $container->hasExtension( 'doctrine_migrations' )
-            //|| ! $container->hasExtension( 'vankosoft_application_doctrine_migrations_extra' )
+            || ! $container->hasExtension( 'sylius_labs_doctrine_migrations_extra' )
         ) {
             return;
         }
@@ -27,7 +27,7 @@ trait PrependDoctrineMigrationsTrait
             ]),
         ]);
         
-        $container->prependExtensionConfig( 'vankosoft_application_doctrine_migrations_extra', [
+        $container->prependExtensionConfig( 'sylius_labs_doctrine_migrations_extra', [
             'migrations' => [
                 $this->getMigrationsNamespace() => $this->getNamespacesOfMigrationsExecutedBefore(),
             ],

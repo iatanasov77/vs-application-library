@@ -1,3 +1,9 @@
+1.3.7	|	Release date: **13.10.2021**
+============================================
+* New Features:
+  - Remove DoctrineMigrations/ProjectVersionComparator and Add sylius-labs/doctrine-migrations-extra-bundle instead.
+
+
 1.3.6	|	Release date: **11.10.2021**
 ============================================
 * New Features:

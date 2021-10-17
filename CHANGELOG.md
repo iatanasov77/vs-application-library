@@ -1,3 +1,10 @@
+1.3.8	|	Release date: **17.10.2021**
+============================================
+* New Features:
+  - Update login template.
+  - Add Abstract Http Kernel.
+
+
 1.3.7	|	Release date: **13.10.2021**
 ============================================
 * New Features:

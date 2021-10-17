@@ -4,6 +4,8 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use VS\ApplicationBundle\Component\Application\Kernel;
+
 /**
  * Tutorial: https://symfony.com/doc/current/profiler/data_collector.html
  * Example: Sylius\Bundle\CoreBundle\Collector\SyliusCollector
@@ -16,8 +18,8 @@ final class VsApplicationCollector extends DataCollector
         string $defaultLocaleCode
     ) {
         $this->data = [
-            //'version'               => Kernel::VERSION,
-            'version'               => file_get_contents( $projectDir . '/VSAPP_VERSION' ),
+            'version'               => Kernel::VERSION,
+            //'version'               => file_get_contents( $projectDir . '/VSAPP_VERSION' ),
             'default_locale_code'   => $defaultLocaleCode,
             'locale_code'           => null,
             'extensions'            => [

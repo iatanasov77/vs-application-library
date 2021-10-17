@@ -7,6 +7,7 @@ services:
     vs_application.data_collector.core:
         class: VS\ApplicationBundle\DataCollector\VsApplicationCollector
         arguments:
+            - '%vs_application.version%'
             - '%kernel.project_dir%'
             - '%kernel.bundles%'
             - '%locale%'

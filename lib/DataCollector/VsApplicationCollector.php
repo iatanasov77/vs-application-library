@@ -13,13 +13,13 @@ use VS\ApplicationBundle\Component\Application\Kernel;
 final class VsApplicationCollector extends DataCollector
 {
     public function __construct(
+        string $version,
         string $projectDir,
         array $bundles,
         string $defaultLocaleCode
     ) {
         $this->data = [
-            'version'               => Kernel::VERSION,
-            //'version'               => file_get_contents( $projectDir . '/VSAPP_VERSION' ),
+            'version'               => $version,
             'default_locale_code'   => $defaultLocaleCode,
             'locale_code'           => null,
             'extensions'            => [

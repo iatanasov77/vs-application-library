@@ -1,3 +1,9 @@
+1.3.9	|	Release date: **17.10.2021**
+============================================
+* New Features:
+  - Set Application Version as Parameter.
+
+
 1.3.8	|	Release date: **17.10.2021**
 ============================================
 * New Features:

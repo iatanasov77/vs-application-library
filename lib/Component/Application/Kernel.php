@@ -32,13 +32,13 @@ abstract class Kernel extends HttpKernel
     
     public function getCacheDir()
     {
-        return $this->getVarDir() . '/' . self::APP_ID . '/cache/' . $this->environment;
+        return $this->getVarDir() . '/' . static::APP_ID . '/cache/' . $this->environment;
         //return parent::getCacheDir();
     }
     
     public function getLogDir()
     {
-        return $this->getVarDir() . '/' . self::APP_ID . '/log';
+        return $this->getVarDir() . '/' . static::APP_ID . '/log';
         //return parent::getLogDir();
     }
     

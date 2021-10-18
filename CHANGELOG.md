@@ -1,3 +1,9 @@
+1.3.10	|	Release date: **18.10.2021**
+============================================
+* Bug-Fixes:
+  - Fix using of APP_ID constant in the base Kernel class.
+
+
 1.3.9	|	Release date: **17.10.2021**
 ============================================
 * New Features:

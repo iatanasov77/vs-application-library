@@ -1,3 +1,21 @@
+1.12.0	|	Release date: **01.01.2025**
+============================================
+* New Features:
+  - Update ChangeSubtree Branches Manual.
+  - Remove Component: ApplicationBundle
+  - Squashed 'src/Vankosoft/ApplicationBundle/' content from commit 7e0c45f4
+  - Merge commit 'cad9043bfbdf66f8279e488f169855de78b8c3a9' as 'src/Vankosoft/ApplicationBundle'
+  - Remove Component: ApplicationInstalatorBundle
+  - Squashed 'src/Vankosoft/ApplicationInstalatorBundle/' content from commit daf9cb53
+  - Merge commit 'bee7f77d2e4ae83ec9d7fd42165a09757e30694e' as 'src/Vankosoft/ApplicationInstalatorBundle'
+  - Remove Component: CmsBundle
+  - Squashed 'src/Vankosoft/CmsBundle/' content from commit d096c5b0
+  - Merge commit '63acd85b834336834329ffea0364a895a495d9ca' as 'src/Vankosoft/CmsBundle'
+  - Remove Component: UsersBundle
+  - Squashed 'src/Vankosoft/UsersBundle/' content from commit ca7f86cb
+  - Merge commit 'fb454b796de729af7be2594163f757dc448e9fae' as 'src/Vankosoft/UsersBundle'
+
+
 1.11.14	|	Release date: **21.12.2024**
 ============================================
 * Bug-Fixes:

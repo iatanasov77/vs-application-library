@@ -8,7 +8,7 @@ const usersSubscriptionsAssetsPath  = './vendor/vankosoft/users-subscriptions-bu
 const paymentAssetsPath             = './vendor/vankosoft/payment-bundle/lib/Resources/themes/default/assets';
 const catalogAssetsPath             = './vendor/vankosoft/catalog-bundle/lib/Resources/themes/default/assets';
 
-const addCKEditor = require( './vendor/daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor-webpack-entry' );
+const addCKEditor = require( '../../../../../../../../daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor-webpack-entry' );
 
 /** Encore, sourceMap **/
 addCKEditor( Encore, true );

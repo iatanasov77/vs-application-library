@@ -8,6 +8,11 @@ const usersSubscriptionsAssetsPath  = './vendor/vankosoft/users-subscriptions-bu
 const paymentAssetsPath             = './vendor/vankosoft/payment-bundle/lib/Resources/themes/default/assets';
 const catalogAssetsPath             = './vendor/vankosoft/catalog-bundle/lib/Resources/themes/default/assets';
 
+const addCKEditor = require( './vendor/daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor-webpack-entry' );
+
+/** Encore, sourceMap **/
+addCKEditor( Encore, true );
+
 Encore
     .setOutputPath( 'public/admin-panel/build/default/' )
     .setPublicPath( '/build/default/' )
@@ -62,6 +67,23 @@ Encore
     //////////////////////////////////////////////////////////////////
     // ASSETS
     //////////////////////////////////////////////////////////////////
+    
+    // Add an entry for CKEditor 5
+    .addEntry( 'ckeditor5', './vendor/daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor5.js' )
+    .configureSplitChunks( splitChunks => {
+        splitChunks.chunks = 'all';
+        splitChunks.name = false;
+        splitChunks.cacheGroups = {
+            styles: {
+                name: false,
+                test: /\.css$/,
+                chunks: 'all',
+                enforce: true,
+            }
+        };
+    })
+    
+    // Global Assets
     .addEntry( 'js/app', applicationAssetsPath + '/js/app.js' )
     .addStyleEntry( 'css/global', applicationAssetsPath + '/css/main.scss' )
     

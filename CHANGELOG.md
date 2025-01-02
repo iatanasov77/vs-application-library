@@ -1,3 +1,13 @@
+1.12.1	|	Release date: **02.01.2025**
+============================================
+* New Features:
+  - Add a Service Parameter about Which CkEditor Version to Use.
+  - Add a CkEditor 5 Webpack Encore Entry for Default Admin Panel Theme.
+  - Add a Service Parameter for CkEditor5 Config.
+  - Add CkEditor5 into Application Installator Configs.
+  - Add a Conditional Use of CkEditor Version in All Forms.
+
+
 1.12.0	|	Release date: **01.01.2025**
 ============================================
 * New Features:

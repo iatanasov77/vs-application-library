@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
@@ -18,6 +19,27 @@ class ProjectIssueForm extends AbstractType
 {
     use FosCKEditor4Config;
     
+    /**
+     * Which CkEditor Version to Use
+     * ------------------------
+     * CkEditor 4 provided by FOSCKEditorBundle OR
+     * CkEditor 5 provided by
+     *
+     * @var string
+     */
+    protected $useCkEditor;
+    
+    /** @var string */
+    protected $ckeditor5Editor;
+    
+    public function __construct(
+        string $useCkEditor,
+        string $ckeditor5Editor
+    ) {
+        $this->useCkEditor          = $useCkEditor;
+        $this->ckeditor5Editor      = $ckeditor5Editor;
+    }
+    
     public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
        $builder
@@ -25,13 +47,6 @@ class ProjectIssueForm extends AbstractType
                 'label'                 => 'vs_application.form.project_issue.title',
                 'translation_domain'    => 'VSApplicationBundle',
                 'required'              => true
-            ])
-            
-            ->add( 'description', CKEditorType::class, [
-                'label'                 => 'vs_application.form.project_issue.description',
-                'translation_domain'    => 'VSApplicationBundle',
-                'required'              => false,
-                'config'                => $this->ckEditorConfig( $options ),
             ])
             
             ->add( 'status', ChoiceType::class, [
@@ -53,6 +68,25 @@ class ProjectIssueForm extends AbstractType
             ->add( 'btnApply', SubmitType::class, ['label' => 'vs_application.form.apply', 'translation_domain' => 'VSApplicationBundle',] )
             ->add( 'btnSave', SubmitType::class, ['label' => 'vs_application.form.save', 'translation_domain' => 'VSApplicationBundle',] )
         ;
+            
+        if ( $this->useCkEditor == '5' ) {
+            $builder->add( 'description', Ckeditor5TextareaType::class, [
+                'label'                 => 'vs_application.form.project_issue.description',
+                'translation_domain'    => 'VSApplicationBundle',
+                'required'              => false,
+                
+                'attr' => [
+                    'data-ckeditor5-config' => $this->ckeditor5Editor
+                ],
+            ]);
+        } else {
+            $builder->add( 'description', CKEditorType::class, [
+                'label'                 => 'vs_application.form.project_issue.description',
+                'translation_domain'    => 'VSApplicationBundle',
+                'required'              => false,
+                'config'                => $this->ckEditorConfig( $options ),
+            ]);
+        }
     }
     
     public function configureOptions( OptionsResolver $resolver ): void

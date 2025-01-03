@@ -1,3 +1,10 @@
+1.12.2	|	Release date: **03.01.2025**
+============================================
+* New Features:
+  - Use Confitional CkEditor Version in Project Issues Form.
+  - Add ComposerInfo Component to Use for Getting Vendor Packages Info.
+
+
 1.12.1	|	Release date: **02.01.2025**
 ============================================
 * New Features:

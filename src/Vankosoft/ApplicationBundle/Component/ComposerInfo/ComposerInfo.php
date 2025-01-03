@@ -46,6 +46,10 @@ class ComposerInfo
         $installedPackages = array();
 
         foreach ( $installedData as $installedDataOfPackage ) {
+            if ( ! isset( $installedDataOfPackage['name'] ) ) {
+                continue;
+            }
+            
             $packageInfo = new PackageInfo( $installedDataOfPackage );
             $installedPackages[$packageInfo->getName()] = $packageInfo;
         }

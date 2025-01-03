@@ -67,6 +67,7 @@ EOT
         $versionData    = $versionInfo->getData();
         $outputStyle->writeln( \sprintf( '<info>Current Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] ) );
         $outputStyle->writeln( \sprintf( '<info>Current Migration: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION] ) );
+        $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION] ) );
         
         return Command::SUCCESS;
     }
@@ -84,8 +85,9 @@ EOT
         
         $versionInfo    = $this->getVersionInfo( $currentVersion );
         $versionData        = [
-            InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION      => $currentVersion,
-            InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION   => $this->getCurrentDoctrineMigration(),
+            InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION                  => $currentVersion,
+            InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION               => $this->getCurrentDoctrineMigration(),
+            InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION    => $this->getVankosoftApplicationLibraryVersion(),
         ];
         $versionInfo->setData( $versionData );
         
@@ -136,5 +138,18 @@ EOT
         $currentMigration   = $output->fetch();
         
         return $currentMigration;
+    }
+    
+    private function getVankosoftApplicationLibraryVersion(): string
+    {
+        $composerInfo   = $this->get( 'vs_application.composer_info' )->getInstalledPackagesInfo();
+        //var_dump( \array_keys( $composerInfo ) ); exit;
+        
+        return $composerInfo['vankosoft/application']->getRawVersion();
+    }
+    
+    private function getVankosoftApplicationExtensionCatalogVersion(): string
+    {
+        return '';
     }
 }

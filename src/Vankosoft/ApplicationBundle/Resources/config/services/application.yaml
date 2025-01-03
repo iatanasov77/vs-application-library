@@ -49,4 +49,7 @@ services:
         arguments:
             - '%vs_application.doctrine_dbal_cache_dsn%'
 
-
+    vs_application.composer_info:
+        class: Vankosoft\ApplicationBundle\Component\ComposerInfo\ComposerInfo
+        arguments:
+            - '%kernel.project_dir%'

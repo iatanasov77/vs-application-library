@@ -80,6 +80,7 @@ class ProjectApiClient implements ProjectApiClientInterface
     private function _doLogin(): ResponseInterface
     {
         $apiLoginUrl        = $this->apiConnection['host'] . '/login_check';
+        //echo '<pre>'; var_dump( $apiLoginUrl ); die;
         
         try {
             $response       = $this->httpClient->request( 'POST', $apiLoginUrl, [

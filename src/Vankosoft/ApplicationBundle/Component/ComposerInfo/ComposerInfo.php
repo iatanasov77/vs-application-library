@@ -24,6 +24,8 @@ class ComposerInfo
      */
     public function getInstalledPackagesInfo()
     {
+        var_dump( $this->projectDir . '/vendor/composer/installed.json' ); die;
+        
         if ( null === $this->installedPackages ) {
             $this->installedPackages = $this->parseInstalledPackages( $this->projectDir . '/vendor/composer/installed.json' );
         }

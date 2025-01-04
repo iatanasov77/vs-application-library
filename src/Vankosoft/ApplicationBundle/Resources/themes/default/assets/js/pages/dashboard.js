@@ -2,6 +2,8 @@ import ApexCharts from 'apexcharts'
 
 $( function()
 {
+    var linechartcustomerColors = getChartColorsArray( "customer_impression_charts" );
+    
     var options = {
         series:[
             {
@@ -93,3 +95,19 @@ $( function()
     var chart = new ApexCharts( document.querySelector( '#customer_impression_charts' ), options );
     chart.render();
 });
+
+function getChartColorsArray( e )
+{
+    if( null !== document.getElementById( e ) ) {
+        var t = document.getElementById( e ).getAttribute( "data-colors" );
+        if ( t )
+            return ( t = JSON.parse( t ) ).map( function( e ) {
+                var t = e.replace( " ","" );
+                return-1 === t.indexOf( "," ) ? getComputedStyle( document.documentElement ).getPropertyValue( t ) ||
+                        t : 2 == ( e = e.split( "," ) ).length ? 
+                            "rgba( " + getComputedStyle( document.documentElement ).getPropertyValue( e[0]) + "," +e[1] + ")" : t
+                }
+            );
+        console.warn( "data-colors atributes not found on",e )
+    }
+}

@@ -221,6 +221,9 @@ vs_application:
         default: Основен
         button_view_all_notifications: 'Виж всички известия'
         about_header_title: 'За Проекта'
+        project_version: Project Version
+        doctrine_migration: Last Doctrine Migration
+        application_library_version: VS Application Library Version
         dashboard_header_title: 'Табло на Приложението'
         dashboard_section_title: 'Табло'
         dashboard_section_description: 'Описание на Таблото.'

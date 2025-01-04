@@ -221,6 +221,9 @@ vs_application:
         default: Default
         button_view_all_notifications: 'View all notifications'
         about_header_title: 'Project About'
+        project_version: Project Version
+        doctrine_migration: Last Doctrine Migration
+        application_library_version: VS Application Library Version
         dashboard_header_title: 'Application Dashboard'
         dashboard_section_title: 'Dashboard'
         dashboard_section_description: 'Dashboard description.'

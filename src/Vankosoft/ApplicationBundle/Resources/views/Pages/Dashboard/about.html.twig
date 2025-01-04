@@ -8,5 +8,12 @@
 {% endblock %}
 
 {% block content %}
-
+    {% if versionData %}
+        <p>{{ 'vs_application.template.project_version' | trans( {},'VSApplicationBundle' ) }}: {{ versionData.project_version }}</p>
+        <p>{{ 'vs_application.template.doctrine_migration' | trans( {},'VSApplicationBundle' ) }}: {{ versionData.doctrine_migration }}</p>
+        
+        {% if versionData.vankosoft_application_library_version %}
+            <p>{{ 'vs_application.template.application_library_version' | trans( {},'VSApplicationBundle' ) }}: {{ versionData.vankosoft_application_library_version }}</p>
+        {% endif %}
+    {% endif %}
 {% endblock %}

@@ -53,3 +53,10 @@ services:
         class: Vankosoft\ApplicationBundle\Component\ComposerInfo\ComposerInfo
         arguments:
             - '%kernel.project_dir%'
+    
+    vs_application.version_info:
+        class: Vankosoft\ApplicationBundle\Component\Application\VersionInfo
+        arguments:
+            - '@vs_application_instalator.repository.instalation_info'
+            - '@vs_application_instalator.factory.instalation_info'
+            - '%kernel.project_dir%'

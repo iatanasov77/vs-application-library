@@ -1,3 +1,7 @@
+vs_application_about:
+    path: /about
+    controller: Vankosoft\ApplicationBundle\Controller\AboutController::index
+
 vs_application_dashboard:
     path: /dashboard
     controller: Vankosoft\ApplicationBundle\Controller\DashboardController::index

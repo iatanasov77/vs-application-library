@@ -220,6 +220,7 @@ vs_application:
         there_are_no_items_to_display: There are no items to display 
         default: Default
         button_view_all_notifications: 'View all notifications'
+        about_header_title: 'Project About'
         dashboard_header_title: 'Application Dashboard'
         dashboard_section_title: 'Dashboard'
         dashboard_section_description: 'Dashboard description.'

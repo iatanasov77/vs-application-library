@@ -220,6 +220,7 @@ vs_application:
         there_are_no_items_to_display: Няма елементи за показване
         default: Основен
         button_view_all_notifications: 'Виж всички известия'
+        about_header_title: 'За Проекта'
         dashboard_header_title: 'Табло на Приложението'
         dashboard_section_title: 'Табло'
         dashboard_section_description: 'Описание на Таблото.'

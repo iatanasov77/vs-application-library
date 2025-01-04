@@ -89,6 +89,7 @@ Encore
     
     .addEntry( 'js/resource-delete', applicationAssetsPath + '/js/pages/resource-delete.js' )
     
+    .addEntry( 'js/dashboard', applicationAssetsPath + '/js/pages/dashboard.js' )
     .addEntry( 'js/settings', applicationAssetsPath + '/js/pages/settings.js' )
     .addEntry( 'js/applications', applicationAssetsPath + '/js/pages/applications.js' )
     .addEntry( 'js/profile', applicationAssetsPath + '/js/pages/profile.js' )

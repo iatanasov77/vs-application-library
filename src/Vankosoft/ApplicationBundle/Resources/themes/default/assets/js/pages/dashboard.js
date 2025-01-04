@@ -1,4 +1,5 @@
 import ApexCharts from 'apexcharts'
+require( 'apexcharts/dist/apexcharts.css' );
 
 $( function()
 {

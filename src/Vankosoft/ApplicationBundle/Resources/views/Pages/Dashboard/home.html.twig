@@ -17,21 +17,35 @@
         </div>
     </div>
     
-    {% if app_environment == 'dev' %}
-        <fieldset class="border border-dark rounded p-3">
-            <legend class="w-auto float-none ps-2 pe-2">{{ 'vs_application.template.test_widgets' | trans( {},'VSApplicationBundle' ) }}</legend>
-            
-            <p class="lead">
-                Widgets are inspired form <a href="https://github.com/cesurapp/pd-widget">https://github.com/cesurapp/pd-widget</a>
-            </p>
-            
-            # Render all 'admin' widget groups
-            {{ vs_widget_render( 'admin-profile-page' ) }}
-            
-            # Render selected widgets in 'admin' group
-            {{ vs_widget_render( 'admin-profile-page', ['user-info'] ) }}
-        </fieldset>
-    {% endif %}
-
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-installation-tab" data-bs-toggle="tab" data-bs-target="#nav-installation" href="#nav-installation" role="tab" aria-controls="nav-installation" aria-selected="true">
+                        {{ 'vs_application.template.dashboard_installation_title' | trans( {},'VSApplicationBundle' ) }}
+                    </a>
+                    <a class="nav-item nav-link" id="nav-test-widgets-tab" data-bs-toggle="tab" data-bs-target="#nav-test-widgets" href="#nav-test-widgets" role="tab" aria-controls="nav-test-widgets" aria-selected="false">
+                        {{ 'vs_application.template.dashboard_test_widgets_title' | trans( {},'VSApplicationBundle' ) }}
+                    </a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-installation" role="tabpanel" aria-labelledby="nav-installation-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            {% include '@VSApplication/Pages/Dashboard/partial/installation.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-test-widgets" role="tabpanel" aria-labelledby="nav-test-widgets-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            {% include '@VSApplication/Pages/Dashboard/partial/test_widgets.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

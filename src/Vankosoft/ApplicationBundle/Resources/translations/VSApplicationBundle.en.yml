@@ -227,6 +227,8 @@ vs_application:
         dashboard_header_title: 'Application Dashboard'
         dashboard_section_title: 'Dashboard'
         dashboard_section_description: 'Dashboard description.'
+        dashboard_installation_title: Installation
+        dashboard_test_widgets_title: Test Widgets
         general_settings_title: 'General Settings'
         preferences_title: 'Preferences'
         global_settings_title: 'Global Settings'

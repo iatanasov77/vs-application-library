@@ -1,3 +1,13 @@
+1.12.3	|	Release date: **04.01.2025**
+============================================
+* New Features and Improvements:
+  - Improve InstallationInfoCommand .
+  - Create an About Project Page.
+  - Improve AdminPanel Dashboard Page.
+  - Create Installation Charts on Dashboard Page.
+  - Create Test Apex  Charts on Dashboard Page.
+
+
 1.12.2	|	Release date: **03.01.2025**
 ============================================
 * New Features:

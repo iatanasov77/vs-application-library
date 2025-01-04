@@ -229,6 +229,7 @@ vs_application:
         dashboard_section_description: 'Описание на Таблото.'
         dashboard_installation_title: Installation
         dashboard_test_widgets_title: Test Widgets
+        dashboard_test_charts_title: Test  Charts
         general_settings_title: 'Основни Настройки'
         preferences_title: 'Предпочитания'
         global_settings_title: 'Глобални Настройки'

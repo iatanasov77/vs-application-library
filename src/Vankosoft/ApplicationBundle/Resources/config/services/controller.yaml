@@ -23,7 +23,13 @@ services:
         autowire: true
         arguments:
             - '@vs_users.security_bridge'
-        
+    
+    Vankosoft\ApplicationBundle\Controller\AboutController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        arguments:
+            - '@vs_application.version_info'
+    
     Vankosoft\ApplicationBundle\Controller\DashboardController:
         tags: ['controller.service_arguments']
         autowire: true

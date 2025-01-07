@@ -10,6 +10,7 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 use Vankosoft\ApplicationBundle\Component\Application\Project;
+use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
 
 use Vankosoft\ApplicationBundle\Model\Locale;
 use Vankosoft\ApplicationBundle\Controller\LocalesController;
@@ -97,7 +98,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode( 'enabled' )->defaultFalse()->end()
-                        ->scalarNode( 'project' )->defaultValue( 'not_defined' )->cannotBeEmpty()->end()
+                        ->scalarNode( 'project' )->defaultValue( ProjectIssue::PROJECT_UNDEFINED )->cannotBeEmpty()->end()
                         ->arrayNode( 'connection' )
                             ->addDefaultsIfNotSet()
                             ->children()

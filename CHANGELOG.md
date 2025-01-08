@@ -1,3 +1,13 @@
+1.12.4	|	Release date: **08.01.2025**
+============================================
+* New Features:
+  - Update Application Installator Configs.
+  - Improve VankoSoft API Project Issues Controller.
+  - Update Webpack Encore Bundle and Sylius Theme Bundle requirement Constraints.
+* Bug-Fixes:
+  - Fix a Default Theme Directory Path.
+
+
 1.12.3	|	Release date: **04.01.2025**
 ============================================
 * New Features and Improvements:

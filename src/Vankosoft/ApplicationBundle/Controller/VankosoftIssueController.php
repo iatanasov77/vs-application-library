@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
 use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
 
@@ -22,6 +23,17 @@ class VankosoftIssueController extends AbstractController
     
     public function indexAction( Request $request ): Response
     {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiProject = $this->getParameter( 'vs_application.vankosoft_api.project' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiProject === ProjectIssue::PROJECT_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Project Slug is NOT Enabled !!!' );
+        }
+        
         $issues = $this->vsProject->getIssues();
         //echo '<pre>'; var_dump( $issues ); die;
         

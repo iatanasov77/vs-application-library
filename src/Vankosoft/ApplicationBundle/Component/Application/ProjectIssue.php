@@ -6,6 +6,8 @@ use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 
 final class ProjectIssue extends ProjectApiClient
 {
+    const PROJECT_UNDEFINED = 'not_defined';
+    
     const ISSUE_OPENED      = 'opened';
     const ISSUE_CLOSED      = 'closed';
     const ISSUE_COMPLETED   = 'completed';

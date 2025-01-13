@@ -3,7 +3,7 @@
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository as BaseRepository;
 use Gedmo\Tool\Wrapper\EntityWrapper;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepositoryTrait;
 
 /**

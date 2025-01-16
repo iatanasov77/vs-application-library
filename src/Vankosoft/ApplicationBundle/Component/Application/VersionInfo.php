@@ -1,7 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\Application;
 
 use Symfony\Component\Filesystem\Filesystem;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 

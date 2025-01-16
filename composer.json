@@ -54,7 +54,7 @@
         "pagerfanta\/twig": "^4.3",
         "oneup\/uploader-bundle": "^4.0",
         "oneup\/flysystem-bundle": "^4.11",
-        "vankosoft\/agent-bundle": "^0.1"
+        "vankosoft\/agent-bundle": "^1.0"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",

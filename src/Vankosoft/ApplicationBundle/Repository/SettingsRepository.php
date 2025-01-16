@@ -2,7 +2,6 @@
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Vankosoft\ApplicationBundle\Repository\Interfaces\SettingsRepositoryInterface;
-
 use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
 class SettingsRepository extends EntityRepository implements SettingsRepositoryInterface

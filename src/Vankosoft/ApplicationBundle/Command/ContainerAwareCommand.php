@@ -1,8 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-//use Symfony\Component\DependencyInjection\ContainerInterface;
 use Psr\Container\ContainerInterface;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -11,7 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @link https://github.com/symfony/symfony/blob/v4.4.18/src/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.php
  */
-abstract class ContainerAwareCommand extends Command implements ContainerAwareInterface
+abstract class ContainerAwareCommand extends Command
 {
     /** @var ContainerInterface */
     private $container;

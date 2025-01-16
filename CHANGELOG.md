@@ -1,3 +1,10 @@
+1.12.6	|	Release date: **16.01.2025**
+============================================
+* New Features and Improvements:
+  - Update Application Installator Configs.
+  - Change Imports of Sylius Repository Interface Namespace.
+
+
 1.12.5	|	Release date: **08.01.2025**
 ============================================
 * Bug-Fixes:

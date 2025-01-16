@@ -61,7 +61,7 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         $debugArray = $container->getExtensionConfig( $extension );
         
         $fileLocator = new FileLocator( $container->getParameter( 'kernel.project_dir' ) );
-        $debugArray['MigrationsPath'] = $fileLocator->locate("@VSApplicationBundle/DoctrineMigrations");
+        $debugArray['MigrationsPath'] = $fileLocator->locate( "@VSApplicationBundle/DoctrineMigrations" );
         
         return $debugArray;
     }

@@ -59,7 +59,7 @@ trait UserPasswordTrait
         return $this->passwordRequestedAt;
     }
     
-    public function setPasswordRequestedAt( \DateTime $date = null )
+    public function setPasswordRequestedAt( ?\DateTime $date = null )
     {
         $this->passwordRequestedAt = $date;
         

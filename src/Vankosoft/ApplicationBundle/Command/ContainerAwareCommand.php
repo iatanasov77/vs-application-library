@@ -36,7 +36,7 @@ abstract class ContainerAwareCommand extends Command
     /**
      * {@inheritdoc}
      */
-    public function setContainer( ContainerInterface $container = null )
+    public function setContainer( ?ContainerInterface $container = null )
     {
         $this->container    = $container;
     }

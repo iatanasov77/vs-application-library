@@ -166,7 +166,7 @@ class User implements UserInterface, Comparable
         return $this->lastLogin;
     }
     
-    public function setLastLogin( \DateTime $time = null ): self
+    public function setLastLogin( ?\DateTime $time = null ): self
     {
         $this->lastLogin = $time;
         

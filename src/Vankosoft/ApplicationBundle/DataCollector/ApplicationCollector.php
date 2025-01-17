@@ -52,7 +52,7 @@ final class ApplicationCollector extends DataCollector
         return $this->data['application_change_support'];
     }
     
-    public function collect( Request $request, Response $response, \Throwable $exception = null ): void
+    public function collect( Request $request, Response $response, ?\Throwable $exception = null ): void
     {
         try {
             $application    = $this->pluckApplication( $this->applicationContext->getApplication() );

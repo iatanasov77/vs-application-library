@@ -22,7 +22,7 @@ vs_application_project_issues_delete:
     methods: DELETE
 
 vs_application_project_issues_kanbanboard_show:
-    path: /project-issues
+    path: /project-issues-board
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showAction
 
 vs_application_banner_rotator_banners_for_place:

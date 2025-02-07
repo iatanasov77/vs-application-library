@@ -21,6 +21,11 @@ services:
         arguments:
             - '@vs_application.project_issues'
     
+    Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController:
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@vs_application.project_issues'
+    
     Vankosoft\ApplicationBundle\Form\ProjectIssueForm:
         tags:
             - { name: form.type }

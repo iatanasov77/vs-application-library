@@ -95,6 +95,7 @@ vs_application:
         
         project_issues: Проблеми в Проекта
         create_issue: Създай Нов Проблем
+        kanbanboard_show: Канбанбоард
         
         test_mercure: Test Mercure
         mercure_dashboard: Mercure Dashboard
@@ -325,6 +326,7 @@ vs_application:
             labels: Етиткети
             status: Статус
             projects: Проекти
+            kanbanboard: Канбанбоард
         
     modal:
         application_delete:

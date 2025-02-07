@@ -95,6 +95,7 @@ vs_application:
         
         project_issues: Project Issues
         create_issue: Create Issue
+        kanbanboard_show: Kanbanboard
         
         test_mercure: Test Mercure
         mercure_dashboard: Mercure Dashboard
@@ -325,6 +326,7 @@ vs_application:
             labels: Labels
             status: Status
             projects: Projects
+            kanbanboard: Kanbanboard
         
     modal:
         application_delete:

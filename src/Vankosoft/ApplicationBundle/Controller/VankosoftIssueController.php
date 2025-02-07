@@ -31,7 +31,7 @@ class VankosoftIssueController extends AbstractController
         }
         
         if ( $apiProject === ProjectIssue::PROJECT_UNDEFINED ) {
-            throw new VankosoftApiException( 'VankoSoft API Project Slug is NOT Enabled !!!' );
+            throw new VankosoftApiException( 'VankoSoft API Project Slug is NOT Defined !!!' );
         }
         
         $issues = $this->vsProject->getIssues();

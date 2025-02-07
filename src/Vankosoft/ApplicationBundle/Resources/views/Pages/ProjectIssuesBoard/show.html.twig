@@ -1,0 +1,21 @@
+{% extends "@VSApplication/layout.html.twig" %}
+
+{# Override Blocs #}
+{% block title %}{{ parent() }} :: {{ 'vs_application.template.project_issues.kanbanboard' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
+{% block pageTitle %}{{ 'vs_application.template.project_issues.kanbanboard' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block head_styles %}
+    {{ parent() }}
+    
+    {{ encore_entry_link_tags( 'js/project-issues' ) }}
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    
+    {{ encore_entry_script_tags( 'js/project-issues' ) }}
+{% endblock %}

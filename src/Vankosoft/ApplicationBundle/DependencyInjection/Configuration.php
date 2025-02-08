@@ -99,6 +99,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->booleanNode( 'enabled' )->defaultFalse()->end()
                         ->scalarNode( 'project' )->defaultValue( ProjectIssue::PROJECT_UNDEFINED )->cannotBeEmpty()->end()
+                        ->scalarNode( 'kanbanboard' )->defaultValue( ProjectIssue::BOARD_UNDEFINED )->cannotBeEmpty()->end()
                         ->arrayNode( 'connection' )
                             ->addDefaultsIfNotSet()
                             ->children()

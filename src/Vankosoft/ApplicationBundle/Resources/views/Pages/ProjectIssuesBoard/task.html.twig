@@ -1,0 +1,38 @@
+{% extends "@VSApplication/layout.html.twig" %}
+
+{# Import Macros #}
+{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
+
+{# Override Blocs #}
+{% block title %}{{ parent() }} :: {{ 'vankosoft_org.template.page_title_kanbanboard_index' | trans( {},'VankoSoftOrg' ) }} :: {{ resource.title }}{% endblock %}
+{% block pageTitle %}
+    <h4 class="pageheader-title">
+        <i class="fas fa-bug"></i> 
+        {{ 'vankosoft_org.template.page_title_kanbanboard_show' | trans( {},'VankoSoftOrg' ) }}: {{ resource.title }}
+    </h4>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block modals %}
+    {{ parent() }}
+    
+    {#
+    {% include 'Pages/KanbanBoardTasks/modal/assign_to_member.html.twig' %}
+    {% include 'Pages/KanbanBoardTasks/modal/add_attachment.html.twig' %}
+    #}
+{% endblock %}
+
+{% block head_styles %} 
+    {{ parent() }}
+    
+    {{ encore_entry_link_tags( 'js/project-issues-board-task' ) }}
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    
+    {{ encore_entry_script_tags( 'js/project-issues-board-task' ) }}
+{% endblock %}

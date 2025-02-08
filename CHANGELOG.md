@@ -1,3 +1,14 @@
+1.12.7	|	Release date: **08.02.2025**
+============================================
+* New Features:
+  - Add a Kanbanboard Controller for Vankosoft Application Projects.
+  - Add Default Theme Assets for New Project Issues Pages Features.
+  - Add New Features into Vankosoft Issues.
+  - Create Vankosoft Issues Kanbanboard Page.
+  - Create Vankosoft Issues Kanbanboard Task Page.
+  - Add More Vankosoft Issues Kanbanboard Features.
+
+
 1.12.6	|	Release date: **16.01.2025**
 ============================================
 * New Features and Improvements:

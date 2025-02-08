@@ -6,7 +6,8 @@ use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 
 final class ProjectIssue extends ProjectApiClient
 {
-    const PROJECT_UNDEFINED = 'not_defined';
+    const PROJECT_UNDEFINED = 'not-defined';
+    const BOARD_UNDEFINED   = 'not-defined';
     
     const ISSUE_OPENED      = 'opened';
     const ISSUE_CLOSED      = 'closed';
@@ -110,6 +111,23 @@ final class ProjectIssue extends ProjectApiClient
         $response       = $this->httpClient->request( 'GET', $issuesEndpoint, [
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function getKanbanboard( string $boardSlug ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/kanbanboards/1';
+        
+        $response       = $this->httpClient->request( 'GET', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'query'      => [
+                'slug' => $boardSlug
             ],
         ]);
         

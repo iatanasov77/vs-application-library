@@ -10,7 +10,7 @@ use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
 use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
 
-class VankosoftIssueController extends AbstractController
+class VankosoftIssueCommentController extends AbstractController
 {
     /** @var ProjectIssue */
     private $vsProject;

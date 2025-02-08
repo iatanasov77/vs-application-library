@@ -142,6 +142,7 @@ Encore
     .addEntry( 'js/project-issues-edit', applicationAssetsPath + '/js/pages/project-issues-edit.js' )
     .addEntry( 'js/project-issue-comments-edit', applicationAssetsPath + '/js/pages/project-issue-comments-edit.js' )
     .addEntry( 'js/project-issue-tasks-edit', applicationAssetsPath + '/js/pages/project-issue-tasks-edit.js' )
+    .addEntry( 'js/project-issues-board', applicationAssetsPath + '/js/pages/project-issues-board.js' )
 ;
 
 //////////////////////////////////////////////////////////////////

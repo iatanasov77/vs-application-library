@@ -117,6 +117,23 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function getKanbanboard( string $boardSlug ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/kanbanboards/1';
+        
+        $response       = $this->httpClient->request( 'GET', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'query'      => [
+                'slug' => $boardSlug
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     private function processApiResponse( ResponseInterface $response ): array
     {
         try {

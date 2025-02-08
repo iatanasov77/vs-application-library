@@ -5,17 +5,251 @@
 {% block pageTitle %}{{ 'vs_application.template.project_issues.kanbanboard' | trans( {},'VSApplicationBundle' ) }}{% endblock %}
 
 {% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-2">
+            
+                {#
+                <div class="col-lg-auto">
+                    <div class="hstack gap-2">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Board</button>
+                    </div>
+                </div>
+                <!--end col-->
+                <div class="col-lg-3 col-auto">
+                    <div class="search-box">
+                        <input type="text" class="form-control search" id="search-task-options" placeholder="Search for project, tasks...">
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                </div>
+                #}
+                
+                <div class="col-auto ms-sm-auto">
+                    <div class="avatar-group" id="newMembar">
+                        
+                        {% for member in board.members %}
+                            <a href="javascript: void(0);"
+                                class="avatar-group-item"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                data-bs-placement="top"
+                                title="{{ member.name }}"
+                            >
+                                <img src="{{ member.photoPath | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                    alt="{{ member.name }}"
+                                    class="rounded-circle avatar-xs"
+                                >
+                            </a>
+                        {% endfor %}
+                        
+                        {# Create Member Button #}
+                        <a href="#addmemberModal" data-bs-toggle="modal" class="avatar-group-item">
+                            <div class="avatar-xs">
+                                <div class="avatar-title rounded-circle">
+                                    +
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end card-body-->
+    </div>
+    <!--end card-->
+    
+    <div class="tasks-board mb-3" id="kanbanboard">
+        {% for pipeline in board.pipelines %}
+            <div class="tasks-list">
+                <div class="d-flex mb-3">
+                    <div class="flex-grow-1">
+                        <h6 class="fs-14 text-uppercase fw-semibold mb-0">
+                            {{ pipeline.name }} 
+                            <small class="badge bg-success align-bottom ms-1 totaltask-badge">{{ pipeline.tasks | length }}</small>
+                        </h6>
+                    </div>
+                    <div class="flex-shrink-0">
+                        {#
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fw-medium text-muted fs-12">Priority<i class="mdi mdi-chevron-down ms-1"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Priority</a>
+                                <a class="dropdown-item" href="#">Date Added</a>
+                            </div>
+                        </div>
+                        #}
+                    </div>
+                </div>
+                <div data-simplebar class="tasks-wrapper px-3 mx-n3">
+                    <div id="{{ pipeline.slug }}" class="tasks">
+                        
+                        {% for task in pipeline.tasks %}
+                            <div class="card tasks-box" id="{{ task.slug }}">
+                                <div class="card-body">
+                                    <div class="d-flex mb-2">
+                                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title">
+                                            <a href="{{ path( 'vsorg_kanbanboard_task_show', {'id': task.id} ) }}" class="d-block">
+                                                {{ task.title }}
+                                            </a>
+                                        </h6>
+                                        <div class="dropdown">
+                                            <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ path( 'vsorg_kanbanboard_task_show', {'id': task.id} ) }}">
+                                                        <i class="ri-eye-fill align-bottom me-2 text-muted"></i> 
+                                                        {{ 'vankosoft_org.form.kanbanboard.view'  | trans( {},'VankoSoftOrg' ) }}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="ri-edit-2-line align-bottom me-2 text-muted"></i> 
+                                                        {{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal">
+                                                        <i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> 
+                                                        {{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" data-bs-toggle="modal" href="#inviteMembersModal">
+                                                        <i class="ri-share-line me-1 align-bottom me-2 text-muted"></i> 
+                                                        Assign Member
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    {% set taskDescription = task.description | length > 100 ? task.description | slice( 0, 100 ) ~ '...' : task.description %}
+                                    <p class="text-muted">{{ taskDescription | raw | striptags }}</p>
+                                    
+                                    {# Complete Progress Bar
+                                    <div class="mb-3">
+                                        <div class="d-flex mb-1">
+                                            <div class="flex-grow-1">
+                                                <h6 class="text-muted mb-0"><span class="text-secondary">15%</span> of 100%</h6>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <span class="text-muted">03 Jan, 2022</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress rounded-3 progress-sm">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    #}
+                                    
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1">
+                                            {% for label in task.labels %}
+                                                <span class="badge bg-primary-subtle text-primary">{{ label }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar-group">
+                                                {% for member in task.assignedTo %}
+                                                    <a href="javascript: void(0);" class="avatar-group-item"
+                                                        data-bs-toggle="tooltip"
+                                                        data-bs-trigger="hover"
+                                                        data-bs-placement="top"
+                                                        title="{{ member.name }}"
+                                                    >
+                                                        <img src="{{ member.photoPath | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                                            alt="{{ member.name }}"
+                                                            class="rounded-circle avatar-xxs"
+                                                        >
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="card-footer border-top-dashed">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <h6 class="text-muted mb-0">{{ task.number }}</h6>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <ul class="link-inline mb-0">
+                                                <li class="list-inline-item">
+                                                    <a href="javascript:void(0)" class="text-muted">
+                                                        <i class="ri-eye-line align-bottom"></i> 
+                                                        04
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="javascript:void(0)" class="text-muted">
+                                                        <i class="ri-question-answer-line align-bottom"></i> 
+                                                        {{ task.comments | length }}
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="javascript:void(0)" class="text-muted">
+                                                        <i class="ri-attachment-2 align-bottom"></i> 
+                                                        {{ task.attachments | length }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end card-body-->
+                            </div>
+                            <!--end card-->
+                        {% endfor %}
+                    </div>
+                    <!--end tasks-->
+                </div>
+                
+                {# Create Task Button #}
+                {#
+                data-bs-toggle="modal"
+                data-bs-target="#creatertaskModal"
+                #}
+                <div class="my-3">
+                    <button class="btn btn-soft-info w-100 btnCreateTask"
+                        data-pipelineId="{{ pipeline.id }}"
+                    >
+                        Add More
+                    </button>
+                </div>
+                 
+            </div>
+            <!--end tasks-list-->
+        {% endfor %}
+    </div>
+    <!--end task-board-->
+{% endblock %}
 
+{% block modals %}
+    {{ parent() }}
+    
+    {#
+    {% include 'Pages/KanbanBoards/modal/create_member.html.twig' %}
+    {% include 'Pages/KanbanBoards/modal/create_task.html.twig' %}
+    
+    {% include 'Pages/KanbanBoardTasks/modal/assign_to_member.html.twig' %}
+    #}
 {% endblock %}
 
 {% block head_styles %}
     {{ parent() }}
     
-    {{ encore_entry_link_tags( 'js/project-issues' ) }}
+    {{ encore_entry_link_tags( 'js/project-issues-board' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
-    {{ encore_entry_script_tags( 'js/project-issues' ) }}
+    {{ encore_entry_script_tags( 'js/project-issues-board' ) }}
 {% endblock %}

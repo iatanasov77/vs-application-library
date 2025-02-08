@@ -34,8 +34,11 @@ class VankosoftIssueBoardController extends AbstractController
             throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
         }
         
+        $board = $this->vsProject->getKanbanboard( $apiBoard );
+        //echo '<pre>'; var_dump( $issues ); die;
+        
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/show.html.twig', [
-            
+            'board' => $board
         ]);
     }
 }

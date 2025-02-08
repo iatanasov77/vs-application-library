@@ -1,0 +1,5 @@
+@import '~dragula/dist/dragula.css';
+
+.tasks {
+    min-height: 285px !important;
+}

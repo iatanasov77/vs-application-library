@@ -95,6 +95,7 @@ vs_application:
         
         project_issues: Project Issues
         create_issue: Create Issue
+        update_issue: Update Issue
         kanbanboard_show: Kanbanboard
         
         test_mercure: Test Mercure

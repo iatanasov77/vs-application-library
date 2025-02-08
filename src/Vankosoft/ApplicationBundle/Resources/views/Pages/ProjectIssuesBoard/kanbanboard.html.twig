@@ -35,7 +35,7 @@
                                 data-bs-placement="top"
                                 title="{{ member.name }}"
                             >
-                                <img src="{{ member.photoPath | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                <img src="{{ member.photoPath }}"
                                     alt="{{ member.name }}"
                                     class="rounded-circle avatar-xs"
                                 >
@@ -163,7 +163,7 @@
                                                         data-bs-placement="top"
                                                         title="{{ member.name }}"
                                                     >
-                                                        <img src="{{ member.photoPath | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                                        <img src="{{ member.photoPath }}"
                                                             alt="{{ member.name }}"
                                                             class="rounded-circle avatar-xxs"
                                                         >

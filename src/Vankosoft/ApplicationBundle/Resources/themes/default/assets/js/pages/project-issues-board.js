@@ -13,7 +13,7 @@ function moveTask( taskId, pipelineId )
 {
     $.ajax({
         type: "GET",
-        url: VsPath( 'vsorg_kanbanboard_pipeline_move_task', {'taskId': taskId, 'pipelineId': pipelineId } ),
+        url: VsPath( 'vs_application_project_issues_kanbanboard_task_move', {'taskId': taskId, 'pipelineId': pipelineId } ),
         success: function( response )
         {
             document.location = document.location
@@ -217,7 +217,7 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vsorg_kanbanboard_task_assign_member', {'taskId': taskId, 'memberId': memberId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_assign_member', {'taskId': taskId, 'memberId': memberId } ),
             success: function( response )
             {
                 document.location = document.location
@@ -235,7 +235,7 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vsorg_kanbanboard_pipeline_create_task', {'pipelineId': pipelineId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_pipeline_create_task', {'pipelineId': pipelineId } ),
             success: function( response )
             {
                 //$( '#modalPipelineTask > div.card-body' ).html( response );

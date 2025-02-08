@@ -56,7 +56,7 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vsorg_kanbanboard_task_assign_member', {'taskId': taskId, 'memberId': memberId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_assign_member', {'taskId': taskId, 'memberId': memberId } ),
             success: function( response )
             {
                 document.location = document.location
@@ -74,7 +74,7 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vsorg_kanbanboard_task_get_attachment_form', { 'taskId': taskId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_get_attachment_form', { 'taskId': taskId } ),
             success: function( response )
             {
                 $( '#modalAttachment > div.card-body' ).html( response );

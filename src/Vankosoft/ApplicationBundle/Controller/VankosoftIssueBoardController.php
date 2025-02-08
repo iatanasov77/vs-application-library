@@ -62,4 +62,88 @@ class VankosoftIssueBoardController extends AbstractController
             'board' => $board
         ]);
     }
+    
+    public function moveTaskAction( $taskId, $pipelineId, Request $request ): Response
+    {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
+        $board = $this->vsProject->getKanbanboard( $apiBoard );
+        //echo '<pre>'; var_dump( $issues ); die;
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+            'board' => $board
+        ]);
+    }
+    
+    public function assignMemberAction( $taskId, $memberId, Request $request ): Response
+    {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
+        $board = $this->vsProject->getKanbanboard( $apiBoard );
+        //echo '<pre>'; var_dump( $issues ); die;
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+            'board' => $board
+        ]);
+    }
+    
+    public function createTaskAction( $pipelineId, Request $request ): Response
+    {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
+        $board = $this->vsProject->getKanbanboard( $apiBoard );
+        //echo '<pre>'; var_dump( $issues ); die;
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+            'board' => $board
+        ]);
+    }
+    
+    public function getAttachmentFormAction( $taskId, Request $request ): Response
+    {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
+        $board = $this->vsProject->getKanbanboard( $apiBoard );
+        //echo '<pre>'; var_dump( $issues ); die;
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+            'board' => $board
+        ]);
+    }
 }

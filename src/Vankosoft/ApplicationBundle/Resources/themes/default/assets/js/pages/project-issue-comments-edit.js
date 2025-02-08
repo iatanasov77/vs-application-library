@@ -1,7 +1,7 @@
 require( '@kanety/jquery-simple-tree-table/dist/jquery-simple-tree-table.js' );
 
-import { VsTranslator, VsLoadTranslations } from '@/js/includes/bazinga_js_translations.js';
-VsLoadTranslations(['VSApplicationBundle', 'VankoSoftOrg']);
+import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
+VsLoadTranslations(['VSApplicationBundle']);
 window.commentIsSubmited   = false;
 
 $( function()
@@ -19,8 +19,8 @@ $( function()
             success: function( response )
             {
                 let modalTitle  = commentId == '0' ?
-                                    _Translator.trans( 'vankosoft_org.template.create_issue_comment_modal_title' ) :
-                                    _Translator.trans( 'vankosoft_org.template.edit_issue_comment_modal_title' );
+                                    _Translator.trans( 'vs_application.template.project_issues.create_issue_comment_modal_title' ) :
+                                    _Translator.trans( 'vs_application.template.project_issues.edit_issue_comment_modal_title' );
                                     
                 $( '#ProjectIssueCommentModalTitle' ).text( modalTitle );
                 $( '#IssueCommentBody> div.card-body' ).html( response );

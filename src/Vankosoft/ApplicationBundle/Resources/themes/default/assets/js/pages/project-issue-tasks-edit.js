@@ -1,7 +1,7 @@
 require( '@/js/includes/resource-delete.js' );
 
-import { VsTranslator, VsLoadTranslations } from '@/js/includes/bazinga_js_translations.js';
-VsLoadTranslations(['VSApplicationBundle', 'VankoSoftOrg']);
+import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
+VsLoadTranslations(['VSApplicationBundle']);
 
 $( function()
 {
@@ -18,8 +18,8 @@ $( function()
             success: function( response )
             {
                 let modalTitle  = taskId == '0' ?
-                                    _Translator.trans( 'vankosoft_org.template.create_issue_task_modal_title' ) :
-                                    _Translator.trans( 'vankosoft_org.template.edit_issue_task_modal_title' );
+                                    _Translator.trans( 'vs_application.template.project_issues.create_issue_task_modal_title' ) :
+                                    _Translator.trans( 'vs_application.template.project_issues.edit_issue_task_modal_title' );
                                     
                 $( '#ProjectIssueTaskModalTitle' ).text( modalTitle );
                 $( '#IssueTaskBody> div.card-body' ).html( response );

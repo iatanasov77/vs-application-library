@@ -78,4 +78,8 @@ vs_application_project_issue_tasks_delete:
 ############################################################################################
 vs_application_project_issues_kanbanboard_show:
     path: /project-issues-board
-    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showAction
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showKanbanboardAction
+
+vs_application_project_issues_kanbanboard_task_show:
+    path: /project-issues-board/{taskId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showTaskAction

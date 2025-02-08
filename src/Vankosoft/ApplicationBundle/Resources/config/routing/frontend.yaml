@@ -2,6 +2,14 @@ vs_application_cookie_consent_translations:
     path: /cookie-consent-translations
     controller: Vankosoft\ApplicationBundle\Controller\CookieConsentTranslationsExtController::getCookieConsentTranslationsAction
 
+vs_application_banner_rotator_banners_for_place:
+    path: /banner-rotator/{place}
+    controller: Vankosoft\ApplicationBundle\Controller\BannersRotatorController::getBannersForPlaceAction
+    methods: GET
+
+############################################################################################
+# Vankosoft Issues Routes
+############################################################################################
 vs_application_project_issues_index:
     path: /project-issues
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::indexAction
@@ -20,12 +28,54 @@ vs_application_project_issues_delete:
     path: /project-issues/{id}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueController::deleteAction
     methods: DELETE
+    
+############################################################################################
+# Vankosoft Issue Comments Routes
+############################################################################################
+vs_application_project_issue_comments_index:
+    path: /project-issues
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueCommentController::indexAction
+    
+vs_application_project_issue_comments_create:
+    path: /project-issues/{issueId}/{parentCommentId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueCommentController::createAction
+    methods: GET|POST
+    
+vs_application_project_issue_comments_update:
+    path: /project-issues/{issueId}/{parentCommentId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueCommentController::updateAction
+    methods: GET|PUT
+    
+vs_application_project_issue_comments_delete:
+    path: /project-issues/{id}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueCommentController::deleteAction
+    methods: DELETE
 
+############################################################################################
+# Vankosoft Issue Tasks Routes
+############################################################################################
+vs_application_project_issue_tasks_index:
+    path: /project-issues
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueTaskController::indexAction
+    
+vs_application_project_issue_tasks_create:
+    path: /project-issues/new
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueTaskController::createAction
+    methods: GET|POST
+    
+vs_application_project_issue_tasks_update:
+    path: /project-issues/{id}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueTaskController::updateAction
+    methods: GET|PUT
+    
+vs_application_project_issue_tasks_delete:
+    path: /project-issues/{id}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueTaskController::deleteAction
+    methods: DELETE
+    
+############################################################################################
+# Vankosoft Issues Kanbanboard Routes
+############################################################################################
 vs_application_project_issues_kanbanboard_show:
     path: /project-issues-board
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showAction
-
-vs_application_banner_rotator_banners_for_place:
-    path: /banner-rotator/{place}
-    controller: Vankosoft\ApplicationBundle\Controller\BannersRotatorController::getBannersForPlaceAction
-    methods: GET

@@ -94,7 +94,7 @@ class ProjectIssueForm extends AbstractType
         parent::configureOptions( $resolver );
         
         $resolver->setDefaults( ['csrf_protection'   => false] );
-        $this->onfigureCkEditorOptions( $resolver );
+        $this->configureCkEditorOptions( $resolver );
     }
     
     public function getName()

@@ -95,7 +95,7 @@ abstract class Kernel extends HttpKernel
     {
         //return ( getenv( 'HOME' ) === '/home/vagrant' || getenv( 'VAGRANT' ) === 'VAGRANT' ) && is_dir( '/dev/shm' );
         //return is_dir( '/home/vagrant' ) && is_dir( '/dev/shm' );
-        return (bool)shell_exec( 'id -u vagrant 2>/dev/null' ) && is_dir( '/dev/shm' );
+        return (bool)\shell_exec( 'id -u vagrant 2>/dev/null' ) && is_dir( '/dev/shm' );
     }
     
     abstract protected function __getConfigDir(): string;

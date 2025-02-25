@@ -1,3 +1,12 @@
+1.12.8	|	Release date: **25.02.2025**
+============================================
+* New Features:
+  - Update Version of FOS CkEditor Bundle.
+  - Add Staging ENV Configs Into Application Installator.
+* Bug-Fixes:
+  - Fix Some Typo*.
+
+
 1.12.7	|	Release date: **08.02.2025**
 ============================================
 * New Features:

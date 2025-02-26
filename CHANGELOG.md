@@ -1,3 +1,9 @@
+1.12.9	|	Release date: **26.02.2025**
+============================================
+* New Features:
+  - Update Version Constraints of Uploader Required Bundles.
+
+
 1.12.8	|	Release date: **25.02.2025**
 ============================================
 * New Features:

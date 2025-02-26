@@ -52,8 +52,8 @@
         "hackzilla\/password-generator-bundle": "^6.0",
         "pagerfanta\/doctrine-orm-adapter": "^4.3",
         "pagerfanta\/twig": "^4.3",
-        "oneup\/uploader-bundle": "^4.0",
-        "oneup\/flysystem-bundle": "^4.11",
+        "oneup\/uploader-bundle": "^5.0",
+        "oneup\/flysystem-bundle": "^4.12",
         "vankosoft\/agent-bundle": "^0.1"
     },
     "replace": {

@@ -1,3 +1,16 @@
+1.12.10	|	Release date: **03.03.2025**
+============================================
+* New Features:
+  - Add Requirement For Flysystem StreamWrapper.
+  - Make User Model Timestampable.
+  - Create a Command to Remove NOT Verified Users.
+  - Move All Uploaders to League Flysystem and Onup Filesystem Bundel.
+  - Update Application Installator Configs with Changed Gafrette Filesystem with Oneup Filesystem.
+* Bug-Fixes:
+  - Remove Dependency of Gaufrette Filesystem because already is not active maintened.
+  - Fix Add User Avatar Image From Admin Panel.
+
+
 1.12.9	|	Release date: **26.02.2025**
 ============================================
 * New Features:

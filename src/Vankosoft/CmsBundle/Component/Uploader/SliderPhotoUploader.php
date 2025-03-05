@@ -49,7 +49,7 @@ class SliderPhotoUploader implements FileUploaderInterface
         
         do {
             $path = $this->filePathGenerator->generate( $sliderPhoto );
-        } while ( $this->isAdBlockingProne( $path ) || $this->filesystem->has( $path ) );
+        } while ( $this->isAdBlockingProne( $path ) || $this->has( $path ) );
         
         $sliderPhoto->setPath( $path );
         
@@ -58,14 +58,12 @@ class SliderPhotoUploader implements FileUploaderInterface
             file_get_contents( $sliderPhoto->getFile()->getPathname() )
         );
         
-        if ( method_exists ( $this->filesystem->getAdapter(), 'mimeType' ) ) {
-            $sliderPhoto->setType( $this->filesystem->getAdapter()->mimeType( $sliderPhoto->getPath() ) );
-        }
+        $sliderPhoto->setType( $this->filesystem->mimeType( $sliderPhoto->getPath() ) );
     }
     
     public function remove( string $path ): bool
     {
-        if ( $this->filesystem->has( $path ) ) {
+        if ( $this->has( $path ) ) {
             return $this->filesystem->delete( $path );
         }
         
@@ -74,7 +72,7 @@ class SliderPhotoUploader implements FileUploaderInterface
     
     private function has( string $path ): bool
     {
-        return $this->filesystem->has( $path );
+        return $this->filesystem->fileExists( $path );
     }
     
     /**

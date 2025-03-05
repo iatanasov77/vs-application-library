@@ -1,3 +1,9 @@
+1.12.12	|	Release date: **05.03.2025**
+============================================
+* Bug-Fixes:
+  - Fix Uploader Components because changed to use League Flyssytem .
+
+
 1.12.11	|	Release date: **05.03.2025**
 ============================================
 * New Features:

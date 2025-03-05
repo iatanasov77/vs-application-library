@@ -9,6 +9,8 @@ require( '@kanety/jquery-simple-tree-table/dist/jquery-simple-tree-table.js' );
 
 import { VsPath } from '../includes/fos_js_routes.js';
 import { VsFormSubmit } from '../includes/vs_form.js';
+import { GetCkEditorData } from '../includes/ckeditor.js';
+
 import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
 VsLoadTranslations(['VSCmsBundle']);
 
@@ -122,7 +124,7 @@ $( function ()
         //var redirectUrl = submitUrl;
         var redirectUrl = VsPath( 'vs_cms_document_update', {'id': documentId} );
         
-        var pageText    = CKEDITOR.instances.toc_page_form_text.getData();
+        var pageText    = GetCkEditorData( 'toc_page_form_text' );
         formData.set( "toc_page_form[text]", pageText );
         
         VsFormSubmit( formData, submitUrl, redirectUrl );

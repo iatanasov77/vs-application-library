@@ -15,6 +15,10 @@
         {% endblock %}
 
         {% block head_scripts %}
+            <script type="text/javascript">
+                const useCkEditor   = {{ useCkEditor }};
+                window.useCkEditor  = useCkEditor;
+            </script>
             {% include '@VSApplication/Layout/head-scripts.html.twig' %}
         {% endblock %}
     </head>

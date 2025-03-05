@@ -89,3 +89,7 @@
     {% endif %}
     
 {{ form_end(form, {'render_rest': false}) }}
+
+{% if isAjaxRequest is defined and isAjaxRequest and useCkEditor == 5 %}
+    {{ encore_entry_script_tags( 'ckeditor5' ) }}
+{% endif %}

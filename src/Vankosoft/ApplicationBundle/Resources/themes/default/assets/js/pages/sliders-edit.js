@@ -6,6 +6,7 @@ import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_transla
 VsLoadTranslations(['VSCmsBundle']);
 
 import { VsFormSubmit } from '../includes/vs_form.js';
+import { GetCkEditorData } from '../includes/ckeditor.js';
 
 import VsSortable from '../includes/sortable';
 const siSortable  = new VsSortable( 'vs_cms_slider_item_ext_sort_action' );
@@ -124,7 +125,7 @@ $( function()
         var submitUrl   = $( '#FormSliderItem' ).attr( 'action' );
         var redirectUrl = VsPath( 'vs_cms_slider_update', {'id': sliderId} );
         
-        var description = CKEDITOR.instances.slider_item_form_description.getData();
+        var description = GetCkEditorData( 'slider_item_form_description' );
         formData.set( "slider_item_form[description]", description );
         
         VsFormSubmit( formData, submitUrl, redirectUrl );

@@ -1,3 +1,13 @@
+1.12.11	|	Release date: **05.03.2025**
+============================================
+* New Features:
+  - Set useCkEditor constant in JavaScript on AdminPanel Layout.
+  - Add CkEditor JS Helper.
+  - Use CkEditor JS Helper.
+  - Load CkEditor5 Asset in Some Pages That used It.
+  - Load CkEditor5 in SliderItem Form if it is configured in ENV.
+
+
 1.12.10	|	Release date: **03.03.2025**
 ============================================
 * New Features:

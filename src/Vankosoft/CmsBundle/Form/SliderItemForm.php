@@ -109,14 +109,14 @@ class SliderItemForm extends AbstractForm
                 
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize'   => $options['sliderPhotoMaxSize'],
                         'mimeTypes' => [
                             'image/gif',
                             'image/jpeg',
                             'image/png',
                             'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid Photo',
+                        'mimeTypesMessage'  => 'Please upload a valid Photo',
                     ])
                 ],
             ])
@@ -146,9 +146,14 @@ class SliderItemForm extends AbstractForm
         
         $resolver
             ->setDefaults([
-                'csrf_protection'               => false,
-                'slider'                        => null,
+                'csrf_protection'       => false,
+                'slider'                => null,
+                
+                'sliderPhotoMaxSize'    => '1024k',
             ])
+            
+            ->setDefined( ['sliderPhotoMaxSize'] )
+            ->setAllowedTypes( 'sliderPhotoMaxSize', 'string' )
         ;
             
         $this->configureCkEditorOptions( $resolver );

@@ -62,7 +62,7 @@ class ProjectApiClient implements ProjectApiClientInterface
             } catch ( \JsonException $e ) {
                 throw new VankosoftApiException( 'Invalid JSON Payload !!!' );
             } catch ( TransportException $e ) {
-                //throw new VankosoftApiException( 'Symfony TransportException: ' . $e->getMessage() );
+                throw new VankosoftApiException( 'Symfony TransportException: ' . $e->getMessage() );
             }
             
             $jsonPayload   = \json_encode( $payload );

@@ -18,7 +18,7 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
     /**
      * {@inheritDoc}
      */
-    public function load( array $config, ContainerBuilder $container )
+    public function load( array $config, ContainerBuilder $container ): void
     {
         $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
         $this->prepend( $container );

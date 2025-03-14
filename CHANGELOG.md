@@ -1,3 +1,15 @@
+1.12.15	|	Release date: **14.03.2025**
+============================================
+* Bug-Fixes and Improvements:
+  - Try to Fix Vankosoft API Transport Exception.
+  - Update Application Installator Configs.
+  - Fix some deprecations for LoggableListener .
+  - Fix Loading CkEditor 5 in Some Templates.
+  - Fix Some Deprecations.
+  - Remove Using ContainerAwareInterface and Trait , because is deprecated.
+  - Fix More Deprecations.
+
+
 1.12.14	|	Release date: **06.03.2025**
 ============================================
 * Bug-Fixes:

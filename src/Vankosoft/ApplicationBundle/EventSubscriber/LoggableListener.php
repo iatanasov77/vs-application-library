@@ -18,7 +18,10 @@ class LoggableListener extends BaseLoggableListener
     /** @var TranslatableOrmAdapter $transEa */
     private $transEa;
     
-    public function __construct( $defaultLocale )
+    /** @var LoggableOrmAdapter $logEa */
+    private $logEa;
+    
+    public function __construct( string $defaultLocale )
     {
         $this->defaultLocale    = $defaultLocale;
         

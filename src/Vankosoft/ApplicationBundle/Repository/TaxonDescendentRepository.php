@@ -1,7 +1,5 @@
 <?php namespace Vankosoft\ApplicationBundle\Repository;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Vankosoft\ApplicationBundle\Repository\Interfaces\TaxonDescendentRepositoryInterface;
 use Vankosoft\ApplicationBundle\Repository\Traits\TaxonRepositoryTrait;
@@ -20,8 +18,7 @@ use Vankosoft\ApplicationBundle\Repository\Traits\TaxonRepositoryTrait;
  *     calls:
  *         - [ setContainer, [ '@service_container' ] ]
  */
-class TaxonDescendentRepository extends EntityRepository implements TaxonDescendentRepositoryInterface, ContainerAwareInterface
+class TaxonDescendentRepository extends EntityRepository implements TaxonDescendentRepositoryInterface
 {
-    use ContainerAwareTrait;
     use TaxonRepositoryTrait;
 }

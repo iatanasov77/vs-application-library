@@ -1,22 +1,14 @@
 <?php namespace Vankosoft\ApplicationBundle\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Vankosoft\ApplicationBundle\Repository\Interfaces\SettingsRepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Model\Interfaces\SettingsInterface;
 
-class SettingsRepository extends EntityRepository implements SettingsRepositoryInterface, ContainerAwareInterface
+class SettingsRepository extends EntityRepository implements SettingsRepositoryInterface
 {
-    use ContainerAwareTrait;
-    
     public function getSettings( $application = null ): ?SettingsInterface
     {
-        /**
-         * @NOTE $this->container is NULL i dont know why and i cannot use it for now
-         */
-        
         $qb = $this->createQueryBuilder( 's' )
                 ->orderBy( 's.id', 'DESC' )
                 ->setMaxResults( 1 )

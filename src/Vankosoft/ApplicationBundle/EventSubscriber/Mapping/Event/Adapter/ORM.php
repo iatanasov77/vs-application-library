@@ -24,7 +24,7 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     /**
      * {@inheritDoc}
      */
-    public function getDefaultLogEntryClass()
+    public function getDefaultLogEntryClass(): string
     {
         return 'Gedmo\\Loggable\\Entity\\LogEntry';
     }
@@ -32,7 +32,7 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     /**
      * {@inheritDoc}
      */
-    public function isPostInsertGenerator($meta)
+    public function isPostInsertGenerator( $meta ): bool
     {
         return $meta->idGenerator->isPostInsertGenerator();
     }

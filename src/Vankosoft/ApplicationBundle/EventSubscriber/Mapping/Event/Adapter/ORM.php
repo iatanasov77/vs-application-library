@@ -16,7 +16,7 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
         $this->locale   = $locale;
     }
     
-    public function setLocale( $locale )
+    public function setLocale( $locale ): void
     {
         $this->locale   = $locale;
     }
@@ -40,24 +40,24 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     /**
      * {@inheritDoc}
      */
-    public function getNewVersion($meta, $object)
+    public function getNewVersion( $meta, $object ): int
     {
         $em = $this->getObjectManager();
-        $objectMeta = $em->getClassMetadata(get_class($object));
-        $identifierField = $this->getSingleIdentifierFieldName($objectMeta);
-        $objectId = (string) $objectMeta->getReflectionProperty($identifierField)->getValue($object);
+        $objectMeta = $em->getClassMetadata( \get_class( $object ) );
+        $identifierField = $this->getSingleIdentifierFieldName( $objectMeta );
+        $objectId = (string) $objectMeta->getReflectionProperty( $identifierField )->getValue( $object );
         
         $dql = "SELECT MAX(log.version) FROM {$meta->name} log";
         $dql .= " WHERE log.objectId = :objectId";
         $dql .= " AND log.objectClass = :objectClass";
         $dql .= " AND log.locale = :locale";
         
-        $q = $em->createQuery($dql);
-        $q->setParameters(array(
-            'objectId' => $objectId,
-            'objectClass' => $objectMeta->name,
-            'locale' => $this->locale
-        ));
+        $q = $em->createQuery( $dql );
+        $q->setParameters([
+            'objectId'      => $objectId,
+            'objectClass'   => $objectMeta->name,
+            'locale'        => $this->locale
+        ]);
         
         return $q->getSingleScalarResult() + 1;
     }

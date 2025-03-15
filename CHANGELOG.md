@@ -1,3 +1,11 @@
+1.12.16	|	Release date: **15.03.2025**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix More Deprecations.
+  - Fix More Deprecations for Extended Gedmo Loggable Adapter.
+  - Update VankoSOft Agent Version Constraint.
+
+
 1.12.15	|	Release date: **14.03.2025**
 ============================================
 * Bug-Fixes and Improvements:

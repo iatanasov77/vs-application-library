@@ -345,6 +345,10 @@ vs_application:
             edit_issue_task_modal_title: Edit Kanbanboard Task
         
     modal:
+        are_you_sure: Are you sure ?
+        are_you_sure_remove_these_items: Are you sure you want to remove these Items ?
+        yes_delete_it: Yes, Delete It!
+        
         application_delete:
             title: 'Изтриване на Приложение'
             description_1: 'Това действие ще изтрие приложението и всички негови настройки.'

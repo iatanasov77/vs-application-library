@@ -216,6 +216,11 @@ vs_application:
         save_tags: 'Save Tags'
             
     template:
+        new: New
+        new_plural: New
+        select: Select
+        results: Results
+        remove: Remove
         about_application: About Application
         vankosoft_application: VankoSoft Application
         super_admin_panel: SuperAdmin Panel

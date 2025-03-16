@@ -216,6 +216,11 @@ vs_application:
         save_tags: 'Запази Таговете'
             
     template:
+        new: Нов
+        new_plural: Нови
+        select: Избрани
+        results: Резултата
+        remove: Премахни
         about_application: За Приложението
         vankosoft_application: ВанкоСофт Приложение
         super_admin_panel: Админ Панел

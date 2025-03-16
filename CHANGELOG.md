@@ -1,3 +1,11 @@
+1.12.17	|	Release date: **16.03.2025**
+============================================
+* New Features and Improvements:
+  - Add some translations.
+  - Improfile 'profile.js taht loaded in User Profile Show Page.'
+  - Make a Controller action to Remove User Notifications from Json Array.
+
+
 1.12.16	|	Release date: **15.03.2025**
 ============================================
 * Bug-Fixes and Improvements:

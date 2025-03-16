@@ -15,10 +15,10 @@ $( function()
     var hash = location.hash.replace( /^#/, '' );
     if ( hash ) {
         var someVarName = $( '.nav-tabs a[href="#' + hash + '"]' );
-        alert( hash );
-        alert( someVarName );
-        var tab         = new bootstrap.Tab( someVarName );
-        tab.show();
+        if ( someVarName.length ) {
+            var tab         = new bootstrap.Tab( someVarName );
+            tab.show();
+        }
     }
     
     $( '.nav-tabs a' ).on( 'shown.bs.tab', function ( e )

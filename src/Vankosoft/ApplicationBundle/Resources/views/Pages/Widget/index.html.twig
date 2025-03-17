@@ -24,6 +24,7 @@
                         <th>{{ 'vs_application.template.items_index_row_code' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th>{{ 'vs_application.template.items_index_row_name' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.form.allowed_roles_label' | trans( {},'VSApplicationBundle' ) }}</th>
+                        <th>{{ 'vs_application.form.allow_anonymous' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th>{{ 'vs_application.template.items_index_row_active' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th>{{ 'vs_application.template.items_index_row_translations' | trans( {},'VSApplicationBundle' ) }}</th>
                         <th width="150">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
@@ -36,7 +37,14 @@
                         <td>{{ item.group.code }}</td>
                         <td>{{ item.code }}</td>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.allowedRoles | join( ' , ' ) }}</td>
+                        <td>{{ item.allowedRoles | join( ' ' ) }}</td>
+                        <td>
+                            {% if item.allowAnonymous %}
+                                <i class="fas fa-check" style="color: #82c91e;">
+                            {% else %}
+                                <i class="fas fa-times" style="color: #ff1e1e;"></i>
+                            {% endif %}
+                        </td>
                         <td>
                             {% if item.active %}
                                 <i class="fas fa-check" style="color: #82c91e;">

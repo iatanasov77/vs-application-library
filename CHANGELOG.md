@@ -1,3 +1,24 @@
+1.12.18	|	Release date: **18.03.2025**
+============================================
+* New Features and Improvements:
+  - Improve Users Roles Index Page.
+  - Improve Widgets Index Page.
+  - Add a Allowed Roles field into User model to use when need to restrict User to Concrete Roles Only.
+  - add Allowed Roles field into User Form.
+  - Add a Controller Action To Get User Allowed Roles for ComboTree Box.
+  - Improve the Route that get User Roles For Users Crud.
+  - When Creating User if Current User is not Super Admin Add Current User Allowed Roles on New Created User.
+  - Add Some Filter on UsersCrud Index Page.
+  - Create a Twig Function that check wich users to show in Users Crud Index Page.
+  - Update Sylius Packages Versions.
+  - Update Forms That Extend UserFormType .
+  - Update Application Installator Configs.
+* Bug-Fixes:
+  - Fix User Roles Doctrine Mapping.
+  - Fix All ManyToOne Doctrine Mappings to Delete Child Entities
+  - Fix UserRolesController to Save Description on Role.
+
+
 1.12.17	|	Release date: **16.03.2025**
 ============================================
 * New Features and Improvements:

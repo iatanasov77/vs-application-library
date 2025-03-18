@@ -1,3 +1,10 @@
+1.12.19	|	Release date: **18.03.2025**
+============================================
+* Bug-Fixes and Improvements:
+  - Restrict Some Columns in UsersCrud Index Page Only for Super Admins.
+  - Fix WidgetsExtController with new parameter added into method of UserRolesAwareTrait .
+
+
 1.12.18	|	Release date: **18.03.2025**
 ============================================
 * New Features and Improvements:

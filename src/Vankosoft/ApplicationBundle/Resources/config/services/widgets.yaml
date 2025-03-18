@@ -64,6 +64,7 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
         arguments:
+            - '@vs_users.security_bridge'
             - '@vs_application.repository.widget'
             - '@vs_users.repository.user_roles'
             

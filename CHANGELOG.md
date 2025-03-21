@@ -1,3 +1,10 @@
+1.12.20	|	Release date: **21.03.2025**
+============================================
+* Bug-Fixes:
+  - Fix Wrong Paths to UsersBundle Model Interfaces.
+  - Fix Profile Avatar Uploader Component.
+
+
 1.12.19	|	Release date: **18.03.2025**
 ============================================
 * Bug-Fixes and Improvements:

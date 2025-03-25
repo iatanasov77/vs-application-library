@@ -1,3 +1,11 @@
+1.12.21	|	Release date: **25.03.2025**
+============================================
+* New Features:
+  - Create VankosoftIssueBoard Show Task Page.
+  - Create ProjectIssue Components in Different Components Namespace.
+  - Create a Twig Extension for Kanbanboard Task Twig Functions.
+
+
 1.12.20	|	Release date: **21.03.2025**
 ============================================
 * Bug-Fixes:

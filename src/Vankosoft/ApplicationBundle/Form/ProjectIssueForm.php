@@ -12,7 +12,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
+use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\CmsBundle\Form\Traits\FosCKEditor4Config;
 
 class ProjectIssueForm extends AbstractType

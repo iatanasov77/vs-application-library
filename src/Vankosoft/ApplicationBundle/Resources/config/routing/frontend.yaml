@@ -81,7 +81,7 @@ vs_application_project_issues_kanbanboard_show:
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showKanbanboardAction
 
 vs_application_project_issues_kanbanboard_task_show:
-    path: /project-issues-board/{taskId}
+    path: /project-issues-board/tasks/{pipelineId}/{taskId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::showTaskAction
 
 vs_application_project_issues_kanbanboard_task_move:

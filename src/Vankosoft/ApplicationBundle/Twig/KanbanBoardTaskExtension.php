@@ -1,4 +1,4 @@
-<?php namespace App\Twig;
+<?php namespace Vankosoft\ApplicationBundle\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;

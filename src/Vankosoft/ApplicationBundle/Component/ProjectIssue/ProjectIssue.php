@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\Component\ProjectIssue;
 
 use Symfony\Contracts\HttpClient\ResponseInterface;
+use Vankosoft\ApplicationBundle\Component\Application\ProjectApiClient;
 use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 

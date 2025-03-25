@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
@@ -15,10 +16,20 @@ class VankosoftIssueBoardController extends AbstractController
     /** @var ProjectIssue */
     private $vsProject;
     
+    /** @var RepositoryInterface */
+    private $pipelinesRepository;
+    
+    /** @var FactoryInterface */
+    private $tasksFactory;
+    
     public function __construct(
-        ProjectIssue $vsProject
+        ProjectIssue $vsProject,
+        RepositoryInterface $pipelinesRepository,
+        FactoryInterface $tasksFactory
     ) {
-        $this->vsProject    = $vsProject;
+        $this->vsProject            = $vsProject;
+        $this->pipelinesRepository  = $pipelinesRepository;
+        $this->tasksFactory         = $tasksFactory;
     }
     
     public function showKanbanboardAction( Request $request ): Response
@@ -42,7 +53,7 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
-    public function showTaskAction( $taskId, Request $request ): Response
+    public function showTaskAction( $pipelineId, $taskId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
         $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
@@ -59,7 +70,9 @@ class VankosoftIssueBoardController extends AbstractController
         //echo '<pre>'; var_dump( $issues ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
-            'board' => $board
+            'board'         => $board,
+            'pipelineId'    => $pipelineId,
+            'taskId'        => $taskId,
         ]);
     }
     
@@ -119,10 +132,21 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $board = $this->vsProject->getKanbanboard( $apiBoard );
-        //echo '<pre>'; var_dump( $issues ); die;
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
-            'board' => $board
+        $pipeline   = $this->pipelinesRepository->find( $pipelineId );
+        $task       = $this->tasksFactory->createNew();
+        $task->setPipeline( $pipeline );
+        
+        $form   = $this->createForm( KanbanBoardCreateTaskForm::class, $task, [
+            'action'    => $this->generateUrl( 'vsorg_kanbanboard_pipeline_create_task', [
+                'pipelineId'    => $pipelineId,
+            ]),
+            'method'    => 'POST',
+        ]);
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
+            'form'          => $form,
+            'boardMembers'  => $board['members'],
         ]);
     }
     

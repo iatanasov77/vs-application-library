@@ -4,11 +4,11 @@
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 
 {# Override Blocs #}
-{% block title %}{{ parent() }} :: {{ 'vankosoft_org.template.page_title_kanbanboard_index' | trans( {},'VankoSoftOrg' ) }} :: {{ resource.title }}{% endblock %}
+{% block title %}{{ parent() }} :: {{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }} :: {{ board.name }}{% endblock %}
 {% block pageTitle %}
     <h4 class="pageheader-title">
         <i class="fas fa-bug"></i> 
-        {{ 'vankosoft_org.template.page_title_kanbanboard_show' | trans( {},'VankoSoftOrg' ) }}: {{ resource.title }}
+{{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }}: {{ board.name }}
     </h4>
 {% endblock %}
 

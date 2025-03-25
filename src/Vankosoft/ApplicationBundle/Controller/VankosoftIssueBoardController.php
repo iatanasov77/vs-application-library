@@ -8,7 +8,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
-use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
+use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
 
 class VankosoftIssueBoardController extends AbstractController
@@ -69,8 +69,9 @@ class VankosoftIssueBoardController extends AbstractController
         $board = $this->vsProject->getKanbanboard( $apiBoard );
         //echo '<pre>'; var_dump( $issues ); die;
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board'         => $board,
+            'task'          => $board['pipelines'][$pipelineId]['tasks'][$taskId],
             'pipelineId'    => $pipelineId,
             'taskId'        => $taskId,
         ]);
@@ -92,7 +93,7 @@ class VankosoftIssueBoardController extends AbstractController
         $board = $this->vsProject->getKanbanboard( $apiBoard );
         //echo '<pre>'; var_dump( $issues ); die;
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board' => $board
         ]);
     }
@@ -113,7 +114,7 @@ class VankosoftIssueBoardController extends AbstractController
         $board = $this->vsProject->getKanbanboard( $apiBoard );
         //echo '<pre>'; var_dump( $issues ); die;
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board' => $board
         ]);
     }
@@ -166,7 +167,7 @@ class VankosoftIssueBoardController extends AbstractController
         $board = $this->vsProject->getKanbanboard( $apiBoard );
         //echo '<pre>'; var_dump( $issues ); die;
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/task.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board' => $board
         ]);
     }

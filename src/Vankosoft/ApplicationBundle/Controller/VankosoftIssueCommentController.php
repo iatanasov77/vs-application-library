@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
-use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
+use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
 
 class VankosoftIssueCommentController extends AbstractController

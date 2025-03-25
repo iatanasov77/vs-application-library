@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\Component\Application;
+<?php namespace Vankosoft\ApplicationBundle\Component\ProjectIssue;
 
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Vankosoft\ApplicationBundle\Component\Status;

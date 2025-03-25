@@ -10,7 +10,7 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 use Vankosoft\ApplicationBundle\Component\Application\Project;
-use Vankosoft\ApplicationBundle\Component\Application\ProjectIssue;
+use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 
 use Vankosoft\ApplicationBundle\Model\Locale;
 use Vankosoft\ApplicationBundle\Controller\LocalesController;

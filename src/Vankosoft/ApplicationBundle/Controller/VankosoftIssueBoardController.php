@@ -23,13 +23,13 @@ class VankosoftIssueBoardController extends AbstractController
     private $tasksFactory;
     
     public function __construct(
-        ProjectIssue $vsProject,
-        RepositoryInterface $pipelinesRepository,
-        FactoryInterface $tasksFactory
+        ProjectIssue $vsProject
+//         RepositoryInterface $pipelinesRepository,
+//         FactoryInterface $tasksFactory
     ) {
         $this->vsProject            = $vsProject;
-        $this->pipelinesRepository  = $pipelinesRepository;
-        $this->tasksFactory         = $tasksFactory;
+//         $this->pipelinesRepository  = $pipelinesRepository;
+//         $this->tasksFactory         = $tasksFactory;
     }
     
     public function showKanbanboardAction( Request $request ): Response

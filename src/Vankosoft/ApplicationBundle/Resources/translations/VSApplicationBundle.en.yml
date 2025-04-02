@@ -205,8 +205,8 @@ vs_application:
         project_issue:
             title: Title
             description: 'Description'
-            projects: 'Projects'
-            projects_placeholder: '-- Choose Projects --'
+            project: 'Project'
+            project_placeholder: '-- Choose a Project --'
             labels: Labels
             status: 'Issue Status'
             status_opened: Opened

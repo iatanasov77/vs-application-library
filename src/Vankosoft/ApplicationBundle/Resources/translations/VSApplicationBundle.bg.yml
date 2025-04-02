@@ -205,8 +205,8 @@ vs_application:
         project_issue:
             title: Заглавие
             description: 'Описание'
-            projects: 'Проекти'
-            projects_placeholder: '-- Избери Проекти --'
+            project: 'Проект'
+            project_placeholder: '-- Избери Проект --'
             labels: Етикети
             status: 'Статус на Проблема'
             status_opened: Отворен

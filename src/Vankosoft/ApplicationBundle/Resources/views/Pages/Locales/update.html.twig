@@ -34,9 +34,9 @@
                     {{ form_start(form, { 'attr': {'class': 'form-horizontal '}, 'method': method }) }}
                 		{% if item.code != defaultLocale %}
                     		<label class="custom-control custom-checkbox">
-                                <input type="checkbox" id="locale_form_enabled" name="locale_form[enabled]" 
+                                <input type="checkbox" id="locale_form_active" name="locale_form[active]" 
                                     class="custom-control-input form-check-input"
-                                    {% if form.vars.value.enabled %}checked="checked"{% endif %}
+                                    {% if form.vars.value.active %}checked="checked"{% endif %}
                                 />
                                 <span class="custom-control-label">{{ 'vs_application.form.active' | trans( {},'VSApplicationBundle' ) }}</span>
                             </label>
@@ -67,7 +67,7 @@
                         </div>
                         
                         {{ vs_form.buttons( form, metadata ) }}
-                    {{ form_end(form) }}
+                    {{ form_end(form, {'render_rest': false}) }}
         		</div>
 			</div>
 		</div>

@@ -30,7 +30,7 @@ class LocaleForm extends AbstractForm
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
         $builder
-            ->add( 'enabled', CheckboxType::class, [
+            ->add( 'active', CheckboxType::class, [
                 'label'                 => 'vs_application.form.active',
                 'translation_domain'    => 'VSApplicationBundle',
             ])

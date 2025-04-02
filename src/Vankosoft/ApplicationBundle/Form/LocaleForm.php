@@ -5,6 +5,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -29,6 +30,11 @@ class LocaleForm extends AbstractForm
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
         $builder
+            ->add( 'enabled', CheckboxType::class, [
+                'label'                 => 'vs_application.form.active',
+                'translation_domain'    => 'VSApplicationBundle',
+            ])
+        
             ->add( 'locale', ChoiceType::class, [
                 'label'                 => 'vs_application.form.translatable_locale',
                 'translation_domain'    => 'VSApplicationBundle',

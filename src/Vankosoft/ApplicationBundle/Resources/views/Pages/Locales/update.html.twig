@@ -32,6 +32,16 @@
 		            
                     {% if(item.id) %}{% set method = "PUT" %}{% else %}{% set method = "POST" %}{% endif %}
                     {{ form_start(form, { 'attr': {'class': 'form-horizontal '}, 'method': method }) }}
+                		{% if item.code != defaultLocale %}
+                    		<label class="custom-control custom-checkbox">
+                                <input type="checkbox" id="locale_form_enabled" name="locale_form[enabled]" 
+                                    class="custom-control-input form-check-input"
+                                    {% if form.vars.value.enabled %}checked="checked"{% endif %}
+                                />
+                                <span class="custom-control-label">{{ 'vs_application.form.active' | trans( {},'VSApplicationBundle' ) }}</span>
+                            </label>
+                        {% endif %}
+                		
                 		<div class="form-group">
                         	{{ form_label(form.locale, null, {
                                 'label_attr': {'class': 'col-form-label'}
@@ -39,6 +49,7 @@
                             }}
                             {{ form_widget(form.locale, {'attr': {'class': 'form-control' }}) }}
                         </div>
+                        
                         <div class="form-group">
                         	{{ form_label(form.code, null, {
                                 'label_attr': {'class': 'col-form-label'}
@@ -46,6 +57,7 @@
                             }}
                             {{ form_widget(form.code, {'attr': {'class': 'form-control' }}) }}
                         </div>
+                        
                         <div class="form-group">
                         	{{ form_label(form.title, null, {
                                 'label_attr': {'class': 'col-form-label'}

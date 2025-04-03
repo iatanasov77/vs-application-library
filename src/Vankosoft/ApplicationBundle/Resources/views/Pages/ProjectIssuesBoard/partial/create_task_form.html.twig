@@ -43,10 +43,7 @@
                                     for="kanban_board_create_task_form_assignedTo_{{ member.id }}"
                                 >
                                     <span class="flex-shrink-0">
-                                        <img src="{{ member.photo.path | imagine_filter( 'users_crud_index_thumb' ) }}"
-                                            alt="{{ member.name }}"
-                                            class="avatar-xxs rounded-circle"
-                                        />
+                                        <img src="{{ member.photoPath }}" alt="{{ member.name }}" class="avatar-xxs rounded-circle" />
                                     </span>
                                     <span class="flex-grow-1 ms-2">
                                         {{ member.name }}

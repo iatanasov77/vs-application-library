@@ -212,7 +212,17 @@ vs_application:
             status_opened: Отворен
             status_closed: Затворен като Незавършен
             status_completed: Затворен като Завършен
-            
+        
+        kanbanboard_task:
+            project_issue: Project Issue
+            project_issue_placeholder: '- Select a Project Issue --'
+            members: Add Team Member
+            attachment: Attachment file
+            issue_type: Issue Type
+            priority: Priority
+            status: Status
+            due_date: Due Date
+        
         save_tags: 'Запази Таговете'
             
     template:

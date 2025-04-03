@@ -20,9 +20,9 @@ class KanbanboardTaskForm extends AbstractType
            ])
            
            ->add( 'issue', ChoiceType::class, [
-               'label'                 => 'vankosoft_org.form.kanbanboard_task.project_issue',
-               'placeholder'           => 'vankosoft_org.form.kanbanboard_task.project_issue_placeholder',
-               'translation_domain'    => 'VankoSoftOrg',
+               'label'                 => 'vs_application.form.kanbanboard_task.project_issue',
+               'placeholder'           => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
+               'translation_domain'    => 'VSApplicationBundle',
                'choices'               => [],
                
            ])
@@ -30,35 +30,35 @@ class KanbanboardTaskForm extends AbstractType
            ->add( 'issueType', ChoiceType::class, [
                'required'              => true,
                'choices'               => \array_flip( VsKanbanboardTask::ISSUE_TYPES ),
-               'label'                 => 'vankosoft_org.form.kanbanboard_task.issue_type',
-               'translation_domain'    => 'VankoSoftOrg',
+               'label'                 => 'vs_application.form.kanbanboard_task.issue_type',
+               'translation_domain'    => 'VSApplicationBundle',
            ])
            
            ->add( 'priority', ChoiceType::class, [
                'required'              => true,
                'choices'               => \array_flip( VsKanbanboardTask::TASK_PRIORITIES ),
-               'label'                 => 'vankosoft_org.form.kanbanboard_task.priority',
-               'translation_domain'    => 'VankoSoftOrg',
+               'label'                 => 'vs_application.form.kanbanboard_task.priority',
+               'translation_domain'    => 'VSApplicationBundle',
            ])
            
            ->add( 'status', ChoiceType::class, [
                'required'              => true,
                'choices'               => \array_flip( VsKanbanboardTask::TASK_STATUSES ),
-               'label'                 => 'vankosoft_org.form.kanbanboard_task.status',
-               'translation_domain'    => 'VankoSoftOrg',
+               'label'                 => 'vs_application.form.kanbanboard_task.status',
+               'translation_domain'    => 'VSApplicationBundle',
            ])
            
            ->add( 'dueDate', DateType::class, [
-               'label'                 => 'vankosoft_org.form.kanbanboard_task.due_date',
-               'translation_domain'    => 'VankoSoftOrg',
+               'label'                 => 'vs_application.form.kanbanboard_task.due_date',
+               'translation_domain'    => 'VSApplicationBundle',
                'widget'                => 'single_text',
                'html5'                 => false,
                'required'              => false,
            ])
            
            ->add( 'assignedTo', ChoiceType::class, [
-               'label'                 => 'vankosoft_org.form.kanbanboard_task.members',
-               'translation_domain'    => 'VankoSoftOrg',
+               'label'                 => 'vs_application.form.kanbanboard_task.members',
+               'translation_domain'    => 'VSApplicationBundle',
                'choices'               => [],
                'multiple'              => true,
                'expanded'              => true,

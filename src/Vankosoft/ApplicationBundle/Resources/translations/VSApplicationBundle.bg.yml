@@ -226,6 +226,7 @@ vs_application:
             priority: Priority
             status: Status
             due_date: Due Date
+            add_task: Add Task
         
         save_tags: 'Запази Таговете'
             

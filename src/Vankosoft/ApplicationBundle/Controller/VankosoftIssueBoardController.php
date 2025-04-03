@@ -3,6 +3,7 @@
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\FormInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -80,12 +81,10 @@ class VankosoftIssueBoardController extends AbstractController
             throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
         }
         
-        $board = $this->vsProject->getKanbanboard();
+        $response = $this->vsProject->moveKanbanboardTask( $taskId, $pipelineId );
         //echo '<pre>'; var_dump( $issues ); die;
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
-            'board' => $board
-        ]);
+        return new JsonResponse( $response );
     }
     
     public function assignMemberAction( $taskId, $memberId, Request $request ): Response

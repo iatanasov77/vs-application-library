@@ -172,6 +172,20 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function moveKanbanboardTask( $taskId, $pipelineId ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = \sprintf( '%s/pipeline-task-move/%s/%s', $this->apiConnection['host'], $taskId, $pipelineId );
+        
+        $response       = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     private function processApiResponse( ResponseInterface $response ): array
     {
         try {

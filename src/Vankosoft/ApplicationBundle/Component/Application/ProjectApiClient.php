@@ -21,16 +21,21 @@ class ProjectApiClient implements ProjectApiClientInterface
     /** @var string */
     protected $projectSlug;
     
+    /** @var string */
+    protected $kanbanboardSlug;
+    
     public function __construct(
         HttpClientInterface $httpClient,
         CacheItemPoolInterface $cache,
         array $apiConnection,
-        string $projectSlug
+        string $projectSlug,
+        string $kanbanboardSlug
     ) {
         $this->httpClient       = $httpClient;
         $this->cache            = $cache;
         $this->apiConnection    = $apiConnection;
         $this->projectSlug      = $projectSlug;
+        $this->kanbanboardSlug  = $kanbanboardSlug;
     }
     
     /**

@@ -1,0 +1,107 @@
+{{ form_start(form, { 'attr': { 'class': 'form-horizontal' } }) }}
+    {{ form_widget( form.pipeline ) }}
+    
+    <div class="row g-3">
+        <div class="col-lg-12">
+            {{ form_label(form.issue, null, {
+                'label_attr': {'class': 'form-label'}
+                }) 
+            }}
+            
+            {{ form_widget(form.issue, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <!--end col-->
+        
+        <div class="col-lg-12">
+            {{ form_label(form.issueType, null, {
+                'label_attr': {'class': 'form-label'}
+                }) 
+            }}
+            
+            {{ form_widget(form.issueType, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <!--end col-->
+        
+        <div class="col-lg-12">
+            {{ form_label(form.assignedTo, null, {
+                'label_attr': {'class': 'form-label'}
+                }) 
+            }}
+            
+            <div data-simplebar style="height: 95px;">
+                <ul class="list-unstyled vstack gap-2 mb-0">
+                    {% for member in boardMembers %}
+                        <li>
+                            <div class="form-check d-flex align-items-center">
+                                <input type="checkbox"
+                                    id="kanban_board_create_task_form_assignedTo_{{ member.id }}"
+                                    name="kanban_board_create_task_form[assignedTo][]"
+                                    class="form-check-input me-3"
+                                    value="{{ member.id }}"
+                                >
+                                <label class="form-check-label d-flex align-items-center"
+                                    for="kanban_board_create_task_form_assignedTo_{{ member.id }}"
+                                >
+                                    <span class="flex-shrink-0">
+                                        <img src="{{ member.photo.path | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                            alt="{{ member.name }}"
+                                            class="avatar-xxs rounded-circle"
+                                        />
+                                    </span>
+                                    <span class="flex-grow-1 ms-2">
+                                        {{ member.name }}
+                                    </span>
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!--end col-->
+        
+        <div class="col-lg-4">
+            {{ form_label(form.priority, null, {
+                'label_attr': {'class': 'form-label'}
+                }) 
+            }}
+            
+            {{ form_widget(form.priority, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <!--end col-->
+        
+        <div class="col-lg-4">
+            {{ form_label(form.status, null, {
+                'label_attr': {'class': 'form-label'}
+                }) 
+            }}
+            
+            {{ form_widget(form.status, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <!--end col-->
+        
+        <div class="col-lg-4">
+            {{ form_label(form.dueDate, null, {
+                'label_attr': {'class': 'form-label'}
+                }) 
+            }}
+            
+            {{ form_widget(form.dueDate, {'attr': {
+                    'class': 'form-control',
+                    'data-provider': 'flatpickr',
+                    'placeholder': 'Select date'
+                }}
+            ) }}
+        </div>
+        <!--end col-->
+        
+        <div class="mt-4">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                {{ form_widget( form.btnSave, { 'attr': { 'class': 'btn btn-success' } } ) }}
+            </div>
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
+{{ form_end(form, {'render_rest': false}) }}

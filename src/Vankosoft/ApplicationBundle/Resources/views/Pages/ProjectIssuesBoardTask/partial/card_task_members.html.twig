@@ -1,0 +1,62 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex mb-3">
+            <h6 class="card-title mb-0 flex-grow-1">Assigned To</h6>
+            <div class="flex-shrink-0">
+                <button type="button" class="btn btn-soft-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#inviteMembersModal"
+                >
+                    <i class="ri-share-line me-1 align-bottom"></i> 
+                    Assign Member
+                </button>
+            </div>
+        </div>
+        <ul class="list-unstyled vstack gap-3 mb-0">
+            {% for member in task.assignedTo %}
+                <li>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <img src="{{ member.photo.path | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                alt="{{ member.name }}"
+                                class="avatar-xs rounded-circle"
+                            >
+                        </div>
+                        <div class="flex-grow-1 ms-2">
+                            <h6 class="mb-1"><a href="pages-profile.html">{{ member.name }}</a></h6>
+                            <p class="text-muted mb-0">{{ designations[member.designation] }}</p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <div class="dropdown">
+                                <button class="btn btn-icon btn-sm fs-16 text-muted dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ri-more-fill"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="ri-eye-fill text-muted me-2 align-bottom"></i>
+                                            View
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="ri-star-fill text-muted me-2 align-bottom"></i>
+                                            Favorite
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="ri-delete-bin-5-fill text-muted me-2 align-bottom"></i>
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<!--end card-->

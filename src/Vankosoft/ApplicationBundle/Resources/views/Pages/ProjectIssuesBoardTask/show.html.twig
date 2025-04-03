@@ -1,0 +1,129 @@
+{% extends "@VSApplication/layout.html.twig" %}
+
+{# Import Macros #}
+{% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
+
+{# Override Blocs #}
+{% block title %}{{ parent() }} :: {{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }} :: {{ board.pipelines[pipelineId]['tasks'][taskId]['title'] }}{% endblock %}
+{% block pageTitle %}
+    <h4 class="pageheader-title">
+        <i class="fas fa-bug"></i> 
+        {{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }}: {{ board.pipelines[pipelineId]['tasks'][taskId]['title'] }}
+    </h4>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xxl-3">
+            {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+                {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_time_tracking.html.twig' %}
+            {% endif %}
+            
+            {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_details.html.twig' %}
+            {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_members.html.twig' %}
+            {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_attachments.html.twig' %}
+        </div>
+        <!---end col-->
+        
+        <div class="col-xxl-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-muted">
+                        <h6 class="mb-3 fw-semibold text-uppercase">Summary</h6>
+                        {{ task.summary | raw }}
+                        
+                        {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+                            <h6 class="mb-3 fw-semibold text-uppercase">Sub-tasks</h6>
+                            <ul class="ps-3 list-unstyled vstack gap-2">
+                                {% for task in allTasks %}
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="productTask">
+                                            <label class="form-check-label" for="productTask">
+                                                Product Design, Figma (Software), Prototype
+                                            </label>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        
+                        <div class="pt-3 border-top border-top-dashed mt-4">
+                            <h6 class="mb-3 fw-semibold text-uppercase">Tasks Tags</h6>
+                            <div class="hstack flex-wrap gap-2 fs-15">
+                                {% for label in task.labels %}
+                                    <div class="badge fw-medium bg-info-subtle text-info">{{ label }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end card-->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                    Comments ({{ task.comments | length }})
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">
+                                    Attachments ({{ task.attachments | length }})
+                                </a>
+                            </li>
+                            {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">
+                                        Time Entries (9 hrs 13 min)
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <!--end nav-->
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="tab-content">
+                        {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/tab_task_comments.html.twig' %}
+                        {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/tab_task_attachments.html.twig' %}
+                        
+                        {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+                            {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/tab_task_time_entries.html.twig' %}
+                        {% endif %}
+
+                    </div>
+                    <!--end tab-content-->
+                </div>
+                {# #}
+            </div>
+            <!--end card-->
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
+{% endblock %}
+
+{% block modals %}
+    {{ parent() }}
+    
+    {#
+    {% include 'Pages/KanbanBoardTasks/modal/assign_to_member.html.twig' %}
+    {% include 'Pages/KanbanBoardTasks/modal/add_attachment.html.twig' %}
+    #}
+{% endblock %}
+
+{% block head_styles %} 
+    {{ parent() }}
+    
+    {{ encore_entry_link_tags( 'js/project-issues-board-task', null, 'VelzonTheme' ) }}
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    
+    {{ encore_entry_script_tags( 'js/project-issues-board-task', null, 'VelzonTheme' ) }}
+{% endblock %}

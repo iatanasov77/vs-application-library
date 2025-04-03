@@ -1,0 +1,45 @@
+<div class="tab-pane active" id="home-1" role="tabpanel">
+    <h5 class="card-title mb-4">Comments</h5>
+    
+    <div data-simplebar class="px-3 mx-n3 mb-2">
+        {% for comment in task.comments %}
+            <div class="d-flex mb-4">
+                <div class="flex-shrink-0">
+                    <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-xs rounded-circle" />
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h5 class="fs-13"><a href="pages-profile.html">Joseph Parker</a> <small class="text-muted">20 Dec 2021 - 05:47AM</small></h5>
+                    <p class="text-muted">I am getting message from customers that when they place order always get error message .</p>
+                    <a href="javascript: void(0);" class="badge text-muted bg-light"><i class="mdi mdi-reply"></i> Reply</a>
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0">
+                            <img src="assets/images/users/avatar-10.jpg" alt="" class="avatar-xs rounded-circle" />
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="fs-13"><a href="pages-profile.html">Tonya Noble</a> <small class="text-muted">22 Dec 2021 - 02:32PM</small></h5>
+                            <p class="text-muted">Please be sure to check your Spam mailbox to see if your email filters have identified the email from Dell as spam.</p>
+                            <a href="javascript: void(0);" class="badge text-muted bg-light"><i class="mdi mdi-reply"></i> Reply</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <form class="mt-4">
+        <div class="row g-3">
+            <div class="col-lg-12">
+                <label for="exampleFormControlTextarea1" class="form-label">Leave a Comments</label>
+                <textarea class="form-control bg-light border-light" id="exampleFormControlTextarea1" rows="3" placeholder="Enter comments"></textarea>
+            </div>
+            <!--end col-->
+            <div class="col-12 text-end">
+                <button type="button" class="btn btn-ghost-secondary btn-icon waves-effect me-1"><i class="ri-attachment-line fs-16"></i></button>
+                <a href="javascript:void(0);" class="btn btn-success">Post Comments</a>
+            </div>
+        </div>
+        <!--end row-->
+    </form>
+    
+</div>
+<!--end tab-pane-->

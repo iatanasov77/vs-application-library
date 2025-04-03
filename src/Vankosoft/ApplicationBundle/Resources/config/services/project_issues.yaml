@@ -15,6 +15,7 @@ services:
                 password: '%vs_application.vankosoft_api.password%',
             }
             - '%vs_application.vankosoft_api.project%'
+            - '%vs_application.vankosoft_api.kanbanboard%'
     
     Vankosoft\ApplicationBundle\Controller\VankosoftIssueController:
         tags: ['controller.service_arguments']
@@ -32,3 +33,7 @@ services:
         arguments:
             - '%vs_cms.form.use_ckeditor%'
             - '%vs_cms.form.decription_field.ckeditor5_editor%'
+    
+    Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm:
+        tags:
+            - { name: form.type }

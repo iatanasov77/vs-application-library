@@ -23,7 +23,7 @@ class KanbanboardTaskForm extends AbstractType
                'label'                 => 'vs_application.form.kanbanboard_task.project_issue',
                'placeholder'           => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
                'translation_domain'    => 'VSApplicationBundle',
-               'choices'               => [],
+               'choices'               => $options['projectIssues'],
                
            ])
            
@@ -78,6 +78,7 @@ class KanbanboardTaskForm extends AbstractType
         $resolver->setDefaults([
             'csrf_protection'   => false,
             'pipeline_id'       => 0,
+            'projectIssues'     => [],
         ]);
     }
     

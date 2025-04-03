@@ -241,9 +241,9 @@ $( function ()
                 //$( '#modalPipelineTask > div.card-body' ).html( response );
                 $( '#modalPipelineTask' ).html( response );
                 
-                flatpickr( "#kanban_board_create_task_form_dueDate", {
+                flatpickr( "#kanbanboard_task_form_dueDate", {
                     dateFormat: "d M, Y",
-                    defaultDate: $( "#kanban_board_create_task_form_dueDate" ).val(),
+                    defaultDate: $( "#kanbanboard_task_form_dueDate" ).val(),
                 });
                 
                 /** Bootstrap 5 Modal Toggle */

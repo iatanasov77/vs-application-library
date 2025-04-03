@@ -5,14 +5,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
-use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
 
 class KanbanboardTaskForm extends AbstractType

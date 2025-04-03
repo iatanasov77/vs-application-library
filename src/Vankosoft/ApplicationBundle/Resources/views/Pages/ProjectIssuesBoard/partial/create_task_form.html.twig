@@ -94,7 +94,9 @@
         
         <div class="mt-4">
             <div class="hstack gap-2 justify-content-end">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    {{ 'vs_application.form.close' | trans( {},'VSApplicationBundle' ) }}
+                </button>
                 {{ form_widget( form.btnSave, { 'attr': { 'class': 'btn btn-success' } } ) }}
             </div>
         </div>

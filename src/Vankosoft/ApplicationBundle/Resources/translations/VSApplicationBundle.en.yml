@@ -214,6 +214,10 @@ vs_application:
             status_completed: Closed as Completed
         
         kanbanboard_task:
+            view: View
+            assign_member: Assign Member
+            add_more: Add More
+            create_new_task: Create New Task
             project_issue: Project Issue
             project_issue_placeholder: '- Select a Project Issue --'
             members: Add Team Member

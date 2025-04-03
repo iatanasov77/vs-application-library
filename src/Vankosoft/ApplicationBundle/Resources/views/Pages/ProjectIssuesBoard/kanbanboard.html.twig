@@ -103,7 +103,7 @@
                                                 <li>
                                                     <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': task.id} ) }}">
                                                         <i class="ri-eye-fill align-bottom me-2 text-muted"></i> 
-                                                        {{ 'vankosoft_org.form.kanbanboard.view'  | trans( {},'VankoSoftOrg' ) }}
+                                                        {{ 'vs_application.form.kanbanboard_task.view'  | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                                 <li>
@@ -121,7 +121,7 @@
                                                 <li>
                                                     <a class="dropdown-item" data-bs-toggle="modal" href="#inviteMembersModal">
                                                         <i class="ri-share-line me-1 align-bottom me-2 text-muted"></i> 
-                                                        Assign Member
+                                                        {{ 'vs_application.form.kanbanboard_task.assign_member' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                             </ul>
@@ -220,7 +220,7 @@
                     <button class="btn btn-soft-info w-100 btnCreateTask"
                         data-pipelineId="{{ pipeline.id }}"
                     >
-                        Add More
+                        {{ 'vs_application.form.kanbanboard_task.add_more' | trans( {},'VSApplicationBundle' ) }}
                     </button>
                 </div>
                  

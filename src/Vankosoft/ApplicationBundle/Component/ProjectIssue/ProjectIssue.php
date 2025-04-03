@@ -160,9 +160,8 @@ final class ProjectIssue extends ProjectApiClient
     public function createKanbanboardTask( array $formData ): array
     {
         $apiToken       = $this->login();
-        $boardsEndpoint = $this->apiConnection['host'] . '/kanbanboards/1';
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/new';
         
-        $formData['projectSlug']    = $this->projectSlug;
         $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,

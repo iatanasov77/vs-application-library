@@ -63,6 +63,7 @@ class VankosoftIssueBoardController extends AbstractController
             'task'          => $board['pipelines'][$pipelineId]['tasks'][$taskId],
             'pipelineId'    => $pipelineId,
             'taskId'        => $taskId,
+            'pipelineSlug'  => $board['pipelines'][$pipelineId]['slug'],
         ]);
     }
     

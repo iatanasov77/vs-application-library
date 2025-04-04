@@ -1,7 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { VsPath } from '@/js/includes/fos_js_routes.js';
+import { VsPath } from '../includes/fos_js_routes.js';
+import { VsFormSubmit } from '../includes/vs_form.js';
 
 /**
  * Kanbanboard Helper Functions
@@ -23,5 +24,17 @@ export function moveTask( taskId, pipelineId, redirectPath )
             alert( "SYSTEM ERROR!!!" );
         }
     });
+}
+
+export function saveAttachment()
+{
+    var formData    = new FormData();
+    
+    formData.set( "attachmentId", window.UploadedResources["VsOrg_KanbanBoardTaskAttachment"] );
+    
+    var submitUrl   = $( '#TaskAttachmentForm' ).attr( 'action' );
+    var redirectUrl = VsPath( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': $( '#FileOwnerId' ).val() } );
+    
+    VsFormSubmit( formData, submitUrl, redirectUrl );
 }
  

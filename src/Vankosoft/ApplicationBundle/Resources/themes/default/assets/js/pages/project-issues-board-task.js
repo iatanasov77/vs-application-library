@@ -12,6 +12,8 @@ import { VsPath } from '../includes/fos_js_routes.js';
 import { VsFormSubmit } from '../includes/vs_form.js';
 import { InitOneUpFileUpload, TestUploadProgressBar } from '../includes/OneUpFileUpload/OneUpFileUpload_jQueryUiProgressbar.js';
 
+import { moveTask } from '../includes/kanbanboard.js';
+
 window.FileSaved            = false;
 window.UploadedResources    = {};
 
@@ -31,6 +33,13 @@ function saveFile()
 
 $( function ()
 {
+    $( '#SelectBoxPipeline' ).on( 'change', function ( e ) {
+        let taskId      = $( this ).attr( 'data-taskId' );
+        let pipelineId  = $( this ).val();
+        
+        moveTask( taskId, pipelineId );
+    });
+    
     $( 'div.card-file-icon' ).each( function( index )
     {
         $( this ).children( ":first" ).addClass( mimetype2fa( $( this ).attr( 'data-MimeType') ) );

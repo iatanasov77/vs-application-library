@@ -1,8 +1,10 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="mb-4">
-            <select class="form-control" name="choices-single-default" data-choices data-choices-search-false>
-                <option value="">Select Task board</option>
+            <select class="form-control" name="choices-single-default" data-choices data-choices-search-false
+                id="SelectBoxPipeline"
+                data-taskId="{{ taskId }}"
+            >
                 {% for pipeline in board.pipelines %}
                     <option value="{{ pipeline.id }}" {% if pipeline.id == pipelineId %}selected="selected"{% endif %}>{{ pipeline.name }}</option>
                 {% endfor %}

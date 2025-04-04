@@ -37,7 +37,8 @@ $( function ()
         let taskId      = $( this ).attr( 'data-taskId' );
         let pipelineId  = $( this ).val();
         
-        moveTask( taskId, pipelineId );
+        var redirectPath = VsPath( 'vs_application_project_issues_kanbanboard_show' );
+        moveTask( taskId, pipelineId, redirectPath );
     });
     
     $( 'div.card-file-icon' ).each( function( index )

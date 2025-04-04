@@ -73,7 +73,7 @@ $( function ()
             var pipelineId  = $( el ).closest( 'div.tasks' ).attr( 'id' );
             //alert( pipelineId );
             
-            moveTask( taskId, pipelineId );
+            moveTask( taskId, pipelineId, document.location );
             
         }).on( 'over', function ( el, container ) {
             container.className += ' ex-over';

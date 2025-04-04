@@ -6,7 +6,7 @@ import { VsPath } from '@/js/includes/fos_js_routes.js';
 /**
  * Kanbanboard Helper Functions
  */
-export function moveTask( taskId, pipelineId )
+export function moveTask( taskId, pipelineId, redirectPath )
 {
     var url = VsPath( 'vs_application_project_issues_kanbanboard_task_move', {'taskId': taskId, 'pipelineId': pipelineId } );
     //alert( url ); return;
@@ -16,7 +16,7 @@ export function moveTask( taskId, pipelineId )
         url: url,
         success: function( response )
         {
-            document.location = document.location
+            document.location = redirectPath
         },
         error: function()
         {

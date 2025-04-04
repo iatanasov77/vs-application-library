@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header p-3 ps-4 bg-success-subtle">
-                <h5 class="modal-title" id="inviteMembersModalLabel">Team Members</h5>
+                <h5 class="modal-title" id="inviteMembersModalLabel">{{ 'vs_application.template.project_issues.task_members' | trans( {},'VSApplicationBundle' ) }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4">
@@ -13,10 +13,12 @@
 
                 <div class="mb-4 d-flex align-items-center">
                     <div class="me-2">
-                        <h5 class="mb-0 fs-13">Members :</h5>
+                        <h5 class="mb-0 fs-13">{{ 'vs_application.template.project_issues.members' | trans( {},'VSApplicationBundle' ) }} :</h5>
                     </div>
                     <div class="avatar-group justify-content-center">
-                        {% for member in resource.assignedTo %}
+                        {% set memberIds = [] %}
+                        {% for member in task.assignedTo %}
+                            {% set memberIds = memberIds | merge( [member.id] ) %}
                             <a href="javascript: void(0);" class="avatar-group-item"
                                 data-bs-toggle="tooltip"
                                 data-bs-trigger="hover"
@@ -24,7 +26,7 @@
                                 title="{{ member.name }}"
                             >
                                 <div class="avatar-xs">
-                                    <img src="{{ member.photo.path | imagine_filter( 'users_crud_index_thumb' ) }}"
+                                    <img src="{{ member.photoPath }}"
                                         alt="{{ member.name }}"
                                         class="rounded-circle img-fluid"
                                     >
@@ -36,29 +38,31 @@
                 <div class="mx-n4 px-4" data-simplebar style="max-height: 225px;">
                     <div class="vstack gap-3">
                         
-                        {% for boardMember in resource.board.members %}
-                            <div class="d-flex align-items-center">
-                                <div class="avatar-xs flex-shrink-0 me-3">
-                                    <img src="{{ boardMember.photo.path | imagine_filter( 'users_crud_index_thumb' ) }}" alt="" class="img-fluid rounded-circle">
+                        {% for boardMember in board.members %}
+                            {% if boardMember.id not in memberIds %}
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-xs flex-shrink-0 me-3">
+                                        <img src="{{ boardMember.photoPath }}" alt="" class="img-fluid rounded-circle">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="fs-13 mb-0">
+                                            <a href="javascript:void(0);" class="text-body d-block">
+                                                {{ boardMember.name }}
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <button type="button" class="btn btn-light btn-sm"
+                                            id="btnAssignMember"
+                                            data-taskId="{{ task.id }}"
+                                            data-memberId="{{ boardMember.id }}"
+                                        >
+                                            {{ 'vs_application.form.add' | trans( {},'VSApplicationBundle' ) }}
+                                         </button>
+                                    </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    <h5 class="fs-13 mb-0">
-                                        <a href="javascript:void(0);" class="text-body d-block">
-                                            {{ boardMember.name }}
-                                        </a>
-                                    </h5>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <button type="button" class="btn btn-light btn-sm"
-                                        id="btnAssignMember"
-                                        data-taskId="{{ resource.id }}"
-                                        data-memberId="{{ boardMember.id }}"
-                                    >
-                                        Add
-                                     </button>
-                                </div>
-                            </div>
-                            <!-- end member item -->
+                                <!-- end member item -->
+                            {% endif %}
                         {% endfor %}
                         
                     </div>
@@ -67,7 +71,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light w-xs" data-bs-dismiss="modal">
-                    Close
+                    {{ 'vs_application.form.close' | trans( {},'VSApplicationBundle' ) }}
                 </button>
             </div>
         </div>

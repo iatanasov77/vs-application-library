@@ -142,6 +142,7 @@ vs_application:
         save: 'Save'
         cancel: 'Cancel'
         close: 'Close'
+        add: Add
         
         search: Search
         clear_filter: Clear Filter
@@ -358,6 +359,8 @@ vs_application:
             
             assigned_to: Assigned To
             assign_member: Assign Member
+            task_members: Task Members
+            members: Members
             
             summary: Summary
             sub_tasks: Sub-tasks

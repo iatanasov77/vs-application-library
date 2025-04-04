@@ -142,6 +142,7 @@ vs_application:
         save: 'Запази'
         cancel: 'Отказ'
         close: 'Затвори'
+        add: Добави
         
         search: Търси
         clear_filter: Изчисти Филтъра

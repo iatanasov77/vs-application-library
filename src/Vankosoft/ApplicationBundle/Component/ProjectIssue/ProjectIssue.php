@@ -190,6 +190,24 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function assignKanbanboardTaskMember( $taskId, $memberId ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/assign-memmber';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => [
+                'taskId'    => $taskId,
+                'memberId'  => $memberId,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     private function processApiResponse( ResponseInterface $response ): array
     {
         try {

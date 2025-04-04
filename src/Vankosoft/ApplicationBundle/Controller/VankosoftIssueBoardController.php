@@ -102,11 +102,9 @@ class VankosoftIssueBoardController extends AbstractController
             throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
         }
         
-        $board = $this->vsProject->getKanbanboard();
+        $response = $this->vsProject->assignKanbanboardTaskMember( $taskId, $memberId );
         
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
-            'board' => $board
-        ]);
+        return new JsonResponse( $response );
     }
     
     public function createTaskAction( $pipelineId, Request $request ): Response

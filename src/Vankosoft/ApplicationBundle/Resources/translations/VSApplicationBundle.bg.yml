@@ -356,6 +356,9 @@ vs_application:
             priority: Priority
             due_date: Due Date
             
+            assigned_to: Assigned To
+            assign_member: Assign Member
+            
             summary: Summary
             sub_tasks: Sub-tasks
             tasks_tags: Tasks Tags

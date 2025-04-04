@@ -349,6 +349,13 @@ vs_application:
             projects: Projects
             kanbanboard: Kanbanboard
             
+            pipeline: Pipeline
+            task_no: Task No
+            task_title: Task Title
+            project_name: Project Name
+            priority: Priority
+            due_date: Due Date
+            
             summary: Summary
             sub_tasks: Sub-tasks
             tasks_tags: Tasks Tags

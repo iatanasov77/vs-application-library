@@ -1,7 +1,8 @@
 <div class="card mb-3">
     <div class="card-body">
-        <div class="mb-4">
-            <select class="form-control" name="choices-single-default" data-choices data-choices-search-false
+        <div class="form-group mb-4">
+            <label for="SelectBoxPipeline">{{ 'vs_application.template.project_issues.pipeline' | trans( {},'VSApplicationBundle' ) }}</label>
+            <select class="form-control" name="choices-single-default"{# data-choices data-choices-search-false#}
                 id="SelectBoxPipeline"
                 data-taskId="{{ task.slug }}"
             >
@@ -14,29 +15,31 @@
             <table class="table mb-0">
                 <tbody>
                     <tr>
-                        <td class="fw-medium">Tasks No</td>
+                        <td class="fw-medium">{{ 'vs_application.template.project_issues.task_no' | trans( {},'VSApplicationBundle' ) }}</td>
                         <td>{{ task.number }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-medium">Tasks Title</td>
+                        <td class="fw-medium">{{ 'vs_application.template.project_issues.task_title' | trans( {},'VSApplicationBundle' ) }}</td>
                         <td>{{ task.title }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-medium">Project Name</td>
+                        <td class="fw-medium">{{ 'vs_application.template.project_issues.project_name' | trans( {},'VSApplicationBundle' ) }}</td>
                         <td>{{ task.projectTitle }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-medium">Priority</td>
+                        <td class="fw-medium">{{ 'vs_application.template.project_issues.priority' | trans( {},'VSApplicationBundle' ) }}</td>
                         <td>{{ task.priority | vs_kanbanboard_task_priority }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-medium">Status</td>
+                        <td class="fw-medium">{{ 'vs_application.template.project_issues.status' | trans( {},'VSApplicationBundle' ) }}</td>
                         <td>{{ task.status | vs_kanbanboard_task_status }}</td>
                     </tr>
-                    <tr>
-                        <td class="fw-medium">Due Date</td>
-                        <td>{{ task.dueDate | date( 'd.m.Y' ) }}</td>
-                    </tr>
+                    {% if task.dueDate %}
+                        <tr>
+                            <td class="fw-medium">{{ 'vs_application.template.project_issues.due_date' | trans( {},'VSApplicationBundle' ) }}</td>
+                            <td>{{ task.dueDate | date( 'd.m.Y' ) }}</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
             <!--end table-->

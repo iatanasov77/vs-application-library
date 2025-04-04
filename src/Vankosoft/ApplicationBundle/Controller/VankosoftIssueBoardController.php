@@ -10,6 +10,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
+use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
 use Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm;
 
 class VankosoftIssueBoardController extends AbstractController
@@ -57,9 +58,11 @@ class VankosoftIssueBoardController extends AbstractController
             throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
         }
         
-        $board = $this->vsProject->getKanbanboard();
+        $board          = $this->vsProject->getKanbanboard();
+        $designations   = VsKanbanboardTask::BOARD_MEMBER_DESIGNATIONS;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
+            'designations'  => $designations,
             'board'         => $board,
             'task'          => $board['pipelines'][$pipelineId]['tasks'][$taskId],
             'pipelineId'    => $pipelineId,

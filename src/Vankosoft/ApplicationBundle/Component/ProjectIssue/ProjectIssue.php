@@ -175,11 +175,15 @@ final class ProjectIssue extends ProjectApiClient
     public function moveKanbanboardTask( $taskId, $pipelineId ): array
     {
         $apiToken       = $this->login();
-        $issuesEndpoint = \sprintf( '%s/pipeline-task-move/%s/%s', $this->apiConnection['host'], $taskId, $pipelineId );
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/move';
         
-        $response       = $this->httpClient->request( 'GET', $issuesEndpoint, [
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => [
+                'taskId'        => $taskId,
+                'pipelineId'    => $pipelineId,
             ],
         ]);
         

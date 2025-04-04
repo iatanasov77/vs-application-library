@@ -39,7 +39,8 @@ class VankosoftIssueBoardController extends AbstractController
         $board = $this->vsProject->getKanbanboard();
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/kanbanboard.html.twig', [
-            'board' => $board
+            'board'         => $board,
+            'addMembers'    => false,
         ]);
     }
     

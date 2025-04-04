@@ -9,21 +9,6 @@
         <div class="card-body">
             <div class="row g-2">
             
-                {#
-                <div class="col-lg-auto">
-                    <div class="hstack gap-2">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Board</button>
-                    </div>
-                </div>
-                <!--end col-->
-                <div class="col-lg-3 col-auto">
-                    <div class="search-box">
-                        <input type="text" class="form-control search" id="search-task-options" placeholder="Search for project, tasks...">
-                        <i class="ri-search-line search-icon"></i>
-                    </div>
-                </div>
-                #}
-                
                 <div class="col-auto ms-sm-auto">
                     <div class="avatar-group" id="newMembar">
                         
@@ -42,14 +27,14 @@
                             </a>
                         {% endfor %}
                         
-                        {# Create Member Button #}
-                        <a href="#addmemberModal" data-bs-toggle="modal" class="avatar-group-item">
-                            <div class="avatar-xs">
-                                <div class="avatar-title rounded-circle">
-                                    +
+                        {% if addMembers %}
+                            {# Create Member Button #}
+                            <a href="#addmemberModal" data-bs-toggle="modal" class="avatar-group-item">
+                                <div class="avatar-xs">
+                                    <div class="avatar-title rounded-circle">+</div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        {% endif %}
                         
                     </div>
                 </div>

@@ -5,12 +5,7 @@
 
 {# Override Blocs #}
 {% block title %}{{ parent() }} :: {{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }} :: {{ board.pipelines[pipelineId]['tasks'][taskId]['title'] }}{% endblock %}
-{% block pageTitle %}
-    <h4 class="pageheader-title">
-        <i class="fas fa-bug"></i> 
-        {{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }}: {{ board.pipelines[pipelineId]['tasks'][taskId]['title'] }}
-    </h4>
-{% endblock %}
+{% block pageTitle %}{{ 'vs_application.menu.kanbanboard_show' | trans( {},'VSApplicationBundle' ) }}: {{ board.pipelines[pipelineId]['tasks'][taskId]['title'] }}{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -29,11 +24,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-muted">
-                        <h6 class="mb-3 fw-semibold text-uppercase">Summary</h6>
+                        <h6 class="mb-3 fw-semibold text-uppercase">{{ 'vs_application.template.project_issues.summary' | trans( {},'VSApplicationBundle' ) }}</h6>
                         {{ task.summary | raw }}
                         
                         {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
-                            <h6 class="mb-3 fw-semibold text-uppercase">Sub-tasks</h6>
+                            <h6 class="mb-3 fw-semibold text-uppercase">{{ 'vs_application.template.project_issues.sub_tasks' | trans( {},'VSApplicationBundle' ) }}</h6>
                             <ul class="ps-3 list-unstyled vstack gap-2">
                                 {% for task in allTasks %}
                                     <li>
@@ -49,7 +44,7 @@
                         {% endif %}
                         
                         <div class="pt-3 border-top border-top-dashed mt-4">
-                            <h6 class="mb-3 fw-semibold text-uppercase">Tasks Tags</h6>
+                            <h6 class="mb-3 fw-semibold text-uppercase">{{ 'vs_application.template.project_issues.tasks_tags' | trans( {},'VSApplicationBundle' ) }}</h6>
                             <div class="hstack flex-wrap gap-2 fs-15">
                                 {% for label in task.labels %}
                                     <div class="badge fw-medium bg-info-subtle text-info">{{ label }}</div>
@@ -66,18 +61,18 @@
                         <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                    Comments ({{ task.comments | length }})
+                                    {{ 'vs_application.template.project_issues.project_issue_comments_tab' | trans( {},'VSApplicationBundle' ) }} ({{ task.comments | length }})
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">
-                                    Attachments ({{ task.attachments | length }})
+                                    {{ 'vs_application.template.project_issues.project_issue_attachments_tab' | trans( {},'VSApplicationBundle' ) }} ({{ task.attachments | length }})
                                 </a>
                             </li>
                             {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">
-                                        Time Entries (9 hrs 13 min)
+                                        {{ 'vs_application.template.project_issues.project_issue_timeentries_tab' | trans( {},'VSApplicationBundle' ) }} (9 hrs 13 min)
                                     </a>
                                 </li>
                             {% endif %}

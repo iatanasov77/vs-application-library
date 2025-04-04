@@ -37,7 +37,6 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $board = $this->vsProject->getKanbanboard();
-        //echo '<pre>'; var_dump( $issues ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/kanbanboard.html.twig', [
             'board' => $board
@@ -58,7 +57,6 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $board = $this->vsProject->getKanbanboard();
-        //echo '<pre>'; var_dump( $issues ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board'         => $board,
@@ -82,7 +80,6 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $response = $this->vsProject->moveKanbanboardTask( $taskId, $pipelineId );
-        //echo '<pre>'; var_dump( $issues ); die;
         
         return new JsonResponse( $response );
     }
@@ -101,7 +98,6 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $board = $this->vsProject->getKanbanboard();
-        //echo '<pre>'; var_dump( $issues ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board' => $board
@@ -163,7 +159,6 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $board = $this->vsProject->getKanbanboard();
-        //echo '<pre>'; var_dump( $issues ); die;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'board' => $board

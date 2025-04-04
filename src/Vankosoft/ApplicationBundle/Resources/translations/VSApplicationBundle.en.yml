@@ -349,6 +349,13 @@ vs_application:
             projects: Projects
             kanbanboard: Kanbanboard
             
+            summary: Summary
+            sub_tasks: Sub-tasks
+            tasks_tags: Tasks Tags
+            project_issue_comments_tab: Comments
+            project_issue_attachments_tab: Attachments
+            project_issue_timeentries_tab: Time Entries
+            
             project_issue_comments_title: Issue Comments
             button_create_issue_comment: Create New Comment
             create_issue_comment_modal_title: Create New Comment

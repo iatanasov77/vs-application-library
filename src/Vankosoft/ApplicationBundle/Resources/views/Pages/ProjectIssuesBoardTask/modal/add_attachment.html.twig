@@ -1,0 +1,31 @@
+<div class="modal fade" id="addAttachmentModal" tabindex="-1" aria-labelledby="addAttachmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header p-3 ps-4 bg-success-subtle">
+                <h5 class="modal-title" id="addAttachmentModalLabel">Add Attachment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div  id="modalAttachment">
+                    <div class="card-body"></div>
+                </div>
+                
+                <div id="FileUploadProgressbar" style="display: none;">
+                    <div class="progressInfo"><span class="caption"></span></div>
+                </div>
+                <div id="OneUpFileUpload"
+                    data-endpoint="{{ oneup_uploader_endpoint( 'kanbanboard_task_attachments' ) }}"
+                ></div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light w-xs" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success w-xs" id="btnAddAttachment">Add Attachment</button>
+            </div>
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>
+<!-- end modal -->

@@ -143,6 +143,7 @@ vs_application:
         cancel: 'Отказ'
         close: 'Затвори'
         add: Добави
+        choose_file: Choose File
         
         search: Търси
         clear_filter: Изчисти Филтъра
@@ -359,6 +360,11 @@ vs_application:
             
             assigned_to: Assigned To
             assign_member: Assign Member
+            task_members: Task Members
+            members: Members
+            
+            task_attachments: Attachments
+            add_attachment: Add Attachment
             
             summary: Summary
             sub_tasks: Sub-tasks

@@ -1,7 +1,9 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex mb-3">
-            <h6 class="card-title mb-0 flex-grow-1">Attachments</h6>
+            <h6 class="card-title mb-0 flex-grow-1">
+                {{ 'vs_application.template.project_issues.task_attachments' | trans( {},'VSApplicationBundle' ) }}
+            </h6>
             <div class="flex-shrink-0">
                 
                 <!--
@@ -12,7 +14,7 @@
                     data-taskId="{{ task.id }}"
                 >
                     <i class="ri-attachment-2 align-bottom"></i> 
-                    Add Attachment
+                    {{ 'vs_application.template.project_issues.add_attachment' | trans( {},'VSApplicationBundle' ) }}
                 </button>
             </div>
         </div>
@@ -55,12 +57,14 @@
                                         <i class="ri-more-fill"></i>
                                     </button>
                                     <ul class="dropdown-menu">
+                                        {#
                                         <li>
                                             <a class="dropdown-item" href="javascript:void(0);">
                                                 <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> 
                                                 Rename
                                             </a>
                                         </li>
+                                        #}
                                         <li>
                                             <a class="dropdown-item"
                                                 href="{{ path( 'vsorg_kanbanboard_task_attachment_delete', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
@@ -78,9 +82,11 @@
                 </div>
             {% endfor %}
             
+            {#
             <div class="mt-2 text-center">
                 <button type="button" class="btn btn-success">View more</button>
             </div>
+            #}
         </div>
     </div>
 </div>

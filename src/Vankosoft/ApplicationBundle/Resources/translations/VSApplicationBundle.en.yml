@@ -143,6 +143,7 @@ vs_application:
         cancel: 'Cancel'
         close: 'Close'
         add: Add
+        choose_file: Choose File
         
         search: Search
         clear_filter: Clear Filter
@@ -361,6 +362,10 @@ vs_application:
             assign_member: Assign Member
             task_members: Task Members
             members: Members
+            
+            task_attachments: Attachments
+            task_attachment: Attachment
+            add_attachment: Add Attachment
             
             summary: Summary
             sub_tasks: Sub-tasks

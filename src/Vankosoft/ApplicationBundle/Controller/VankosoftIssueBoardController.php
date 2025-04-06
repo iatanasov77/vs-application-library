@@ -8,10 +8,12 @@ use Symfony\Component\Form\FormInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
 use Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm;
+use Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm;
 
 class VankosoftIssueBoardController extends AbstractController
 {
@@ -150,21 +152,47 @@ class VankosoftIssueBoardController extends AbstractController
     
     public function getAttachmentFormAction( $taskId, Request $request ): Response
     {
-        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
-        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        $attachmentId   = 0;
+        $formOptions    = [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_save_attachment', [
+                'taskId'        => $taskId,
+                'attachmentId'  => $attachmentId,
+            ]),
+            'method'    => 'POST',
+            'taskId'    => $taskId,
+            'fileId'    => $attachmentId,
+        ];
+        $form   = $this->createForm( KanbanBoardTaskAttachmentForm::class, null, $formOptions );
         
-        if( ! $apiEnabled ) {
-            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/attach_file_form.html.twig', [
+            'form'      => $form,
+            'fileId'    => $attachmentId,
+        ]);
+    }
+    
+    public function saveTaskAttachment( $taskId, $attachmentId, Request $request ): Response
+    {
+        if ( $request->isMethod( 'POST' ) ) {
+            $em     = $this->doctrine->getManager();
+            
+            $id     = \intval( $request->request->get( 'attachmentId' ) );
+            $entity = $this->attachmentsRepository->find( $id );
+            
+            
+            $task   = $this->tasksRepository->find( $taskId );
+            $entity->setTask( $task );
+            
+            $em->persist( $entity );
+            $em->flush();
+            
+            return new JsonResponse([
+                'status'   => Status::STATUS_OK
+            ]);
         }
         
-        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
-            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
-        }
-        
-        $board = $this->vsProject->getKanbanboard();
-        
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
-            'board' => $board
+        return new JsonResponse([
+            'status'    => Status::STATUS_ERROR,
+            'message'   => 'Form NOT Submitted Properly !',
         ]);
     }
 }

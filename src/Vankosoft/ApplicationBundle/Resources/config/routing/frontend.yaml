@@ -97,5 +97,9 @@ vs_application_project_issues_kanbanboard_pipeline_create_task:
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::createTaskAction
 
 vs_application_project_issues_kanbanboard_task_get_attachment_form:
-    path: /project-issues-board/task-attachment/{taskId}
+    path: /project-issues-board/task-attachment/{taskId}/get-attachment-form
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::getAttachmentFormAction
+
+vs_application_project_issues_kanbanboard_task_save_attachment:
+    path: /project-issues-board/task-attachment/{taskId}/save-attachment/{attachmentId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::saveTaskAttachment

@@ -1,3 +1,20 @@
+1.12.22	|	Release date: **06.04.2025**
+============================================
+* New Features:
+  - Add an Enabled Flag on Locale Resource.
+  - Use Active Flag for Locales Resource in Application Installator.
+  - Update Some Translations.
+  - Create Kanbanboard Task From ProjectIssueBoard Page.
+  - Add Some Kanboard Forms Translations.
+  - Create Move Action for Kanbanboard Tasks.
+  - Improve Using Includes in JS Assets.
+  - Remove with condition 'Add Members' button on Kanbanboard Page.
+  - In All Forms That Used Locale Choices Add Only Enabled Locales.
+  - Improve Kanbaboard Task Edit Page.
+  - Add Kanbanboard Task Attachment Form.
+  - Add Flysystem FTP and SFTP Adapters needed for Kanbanboard Task Attachment Uploads.
+
+
 1.12.21	|	Release date: **25.03.2025**
 ============================================
 * New Features:

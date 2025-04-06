@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.12.21",
+    "version": "v1.12.22",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -53,8 +53,8 @@
         "pagerfanta\/twig": "^4.3",
         "oneup\/uploader-bundle": "^5.0",
         "oneup\/flysystem-bundle": "^4.12",
-        "league/flysystem-ftp": "^3.29",
-        "league/flysystem-sftp-v3": "^3.29",
+        "league\/flysystem-ftp": "^3.29",
+        "league\/flysystem-sftp-v3": "^3.29",
         "m2mtech\/flysystem-stream-wrapper": "^1.4",
         "vankosoft\/agent-bundle": "^1.0"
     },

@@ -68,7 +68,7 @@
                                     #}
                                     <li>
                                         <a class="dropdown-item"
-                                            href="{{ path( 'vsorg_kanbanboard_task_attachment_download', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
+                                            href="{{ path( 'vs_application_project_issues_kanbanboard_task_download_attachment', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
                                             title="{{ 'vs_application.template.items_index_row_action_download' | trans( {},'VSApplicationBundle' ) }}"
                                         >
                                             <i class="ri-download-2-fill me-2 align-middle text-muted"></i>
@@ -78,7 +78,7 @@
                                     <li class="dropdown-divider"></li>
                                     <li>
                                         <a class="dropdown-item"
-                                            href="{{ path( 'vsorg_kanbanboard_task_attachment_delete', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
+                                            href="{{ path( 'vs_application_project_issues_kanbanboard_task_delete_attachment', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
                                             title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
                                         >
                                             <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>

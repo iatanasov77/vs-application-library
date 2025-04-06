@@ -195,4 +195,20 @@ class VankosoftIssueBoardController extends AbstractController
             'message'   => 'Form NOT Submitted Properly !',
         ]);
     }
+    
+    public function downloadTaskAttachment( $taskId, $attachmentId, Request $request ): Response
+    {
+        return new JsonResponse([
+            'status'    => Status::STATUS_ERROR,
+            'message'   => 'Action NOT Implemented !!!',
+        ]);
+    }
+    
+    public function deleteTaskAttachment( $taskId, $attachmentId, Request $request ): Response
+    {
+        return new JsonResponse([
+            'status'    => Status::STATUS_ERROR,
+            'message'   => 'Action NOT Implemented !!!',
+        ]);
+    }
 }

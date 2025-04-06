@@ -45,7 +45,7 @@
                         <div class="flex-shrink-0 ms-2">
                             <div class="d-flex gap-1">
                                 <a class="btn btn-icon text-muted btn-sm fs-18"
-                                    href="{{ path( 'vsorg_kanbanboard_task_attachment_download', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
+                                    href="{{ path( 'vs_application_project_issues_kanbanboard_task_download_attachment', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
                                     title="{{ 'vs_application.template.items_index_row_action_download' | trans( {},'VSApplicationBundle' ) }}"
                                 >
                                     <i class="ri-download-2-line"></i>
@@ -67,7 +67,7 @@
                                         #}
                                         <li>
                                             <a class="dropdown-item"
-                                                href="{{ path( 'vsorg_kanbanboard_task_attachment_delete', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
+                                                href="{{ path( 'vs_application_project_issues_kanbanboard_task_delete_attachment', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
                                                 title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
                                             >
                                                 <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> 

@@ -103,3 +103,11 @@ vs_application_project_issues_kanbanboard_task_get_attachment_form:
 vs_application_project_issues_kanbanboard_task_save_attachment:
     path: /project-issues-board/task-attachment/{taskId}/save-attachment/{attachmentId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::saveTaskAttachment
+
+vs_application_project_issues_kanbanboard_task_download_attachment:
+    path: /project-issues-board/task-attachment/{taskId}/download-attachment/{attachmentId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::downloadTaskAttachment
+
+vs_application_project_issues_kanbanboard_task_delete_attachment:
+    path: /project-issues-board/task-attachment/{taskId}/delete-attachment/{attachmentId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::deleteTaskAttachment

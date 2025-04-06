@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class KanbanBoardTaskAttachmentForm extends AbstractForm
+class KanbanBoardTaskAttachmentForm extends AbstractType
 {
     public function buildForm( FormBuilderInterface $builder, array $options ): void
     {

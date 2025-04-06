@@ -37,3 +37,7 @@ services:
     Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm:
         tags:
             - { name: form.type }
+    
+    Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm:
+        tags:
+            - { name: form.type }

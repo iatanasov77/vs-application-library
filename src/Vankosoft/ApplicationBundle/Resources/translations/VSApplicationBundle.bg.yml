@@ -364,7 +364,11 @@ vs_application:
             members: Members
             
             task_attachments: Attachments
+            task_attachment: Attachment
             add_attachment: Add Attachment
+            file_name: File Name
+            attachment_type: Type
+            attachment_size: Size
             
             summary: Summary
             sub_tasks: Sub-tasks

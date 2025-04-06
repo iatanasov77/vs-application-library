@@ -1,6 +1,8 @@
 <div class="tab-pane" id="messages-1" role="tabpanel">
     <div class="d-flex mb-4">
-        <h6 class="card-title mb-0 flex-grow-1">Attachments</h6>
+        <h6 class="card-title mb-0 flex-grow-1">
+            {{ 'vs_application.template.project_issues.task_attachments' | trans( {},'VSApplicationBundle' ) }}
+        </h6>
         <div class="flex-shrink-0">
             
             <!--
@@ -11,7 +13,7 @@
                 data-taskId="{{ task.id }}"
             >
                 <i class="ri-attachment-2"></i> 
-                Add Attachment
+                {{ 'vs_application.template.project_issues.add_attachment' | trans( {},'VSApplicationBundle' ) }}
             </button>
             
         </div>
@@ -21,10 +23,10 @@
         <table class="table table-borderless align-middle mb-0">
             <thead class="table-light text-muted">
                 <tr>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">{{ 'vs_application.template.project_issues.file_name' | trans( {},'VSApplicationBundle' ) }}</th>
+                    <th scope="col">{{ 'vs_application.template.project_issues.attachment_type' | trans( {},'VSApplicationBundle' ) }}</th>
+                    <th scope="col">{{ 'vs_application.template.project_issues.attachment_size' | trans( {},'VSApplicationBundle' ) }}</th>
+                    <th scope="col">{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,19 +51,21 @@
                             </div>
                         </td>
                         <td>{{ attachment.type }}</td>
-                        <td>{{ fileManager.fileSize( attachment ) | readable_filesize }}</td>
+                        <td>{{ attachment.size | readable_filesize }}</td>
                         <td>
                             <div class="dropdown">
                                 <a href="javascript:void(0);" class="btn btn-light btn-icon" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="true">
                                     <i class="ri-equalizer-fill"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink1" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 23px);">
+                                    {#
                                     <li>
                                         <a class="dropdown-item" href="javascript:void(0);">
                                             <i class="ri-eye-fill me-2 align-middle text-muted"></i>
                                             View
                                         </a>
                                     </li>
+                                    #}
                                     <li>
                                         <a class="dropdown-item"
                                             href="{{ path( 'vsorg_kanbanboard_task_attachment_download', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"

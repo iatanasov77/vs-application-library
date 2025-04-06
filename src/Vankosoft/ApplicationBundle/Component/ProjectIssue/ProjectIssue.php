@@ -118,7 +118,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function getKanbanboard( string $boardSlug ): array
+    public function getKanbanboard(): array
     {
         $apiToken       = $this->login();
         $boardsEndpoint = $this->apiConnection['host'] . '/kanbanboards/1';
@@ -128,7 +128,80 @@ final class ProjectIssue extends ProjectApiClient
                 'Authorization' => 'Bearer ' . $apiToken,
             ],
             'query'      => [
-                'slug' => $boardSlug
+                'slug' => $this->kanbanboardSlug
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    /**
+     * Options for Kanbanboard Create Task Form
+     *
+     * @return array
+     */
+    public function getPipelineTaskFormData(): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task-form-data';
+        
+        $response       = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'query'      => [
+                'board' => $this->kanbanboardSlug
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function createKanbanboardTask( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/new';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function moveKanbanboardTask( $taskId, $pipelineId ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/move';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => [
+                'taskId'        => $taskId,
+                'pipelineId'    => $pipelineId,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function assignKanbanboardTaskMember( $taskId, $memberId ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/assign-memmber';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => [
+                'taskId'    => $taskId,
+                'memberId'  => $memberId,
             ],
         ]);
         

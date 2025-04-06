@@ -1,5 +1,5 @@
 // Using My Path Alias
-require( '@/js/includes/bootstrap-5/file-input.js' );
+require( '../includes/bootstrap-5/file-input.js' );
 
 import lottie from "lottie-web";
 import { defineElement } from "@lordicon/element";
@@ -8,29 +8,25 @@ import { defineElement } from "@lordicon/element";
 // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { VsPath } from '../includes/fos_js_routes.js';
-
-import { VsFormSubmit } from '../includes/vs_form.js';
 import { InitOneUpFileUpload, TestUploadProgressBar } from '../includes/OneUpFileUpload/OneUpFileUpload_jQueryUiProgressbar.js';
+
+import { moveTask, saveAttachment } from '../includes/kanbanboard.js';
 
 window.FileSaved            = false;
 window.UploadedResources    = {};
 
 var mimetype2fa = require( 'mimetype-to-fontawesome' )( { prefix: 'fa-' } );
 
-function saveFile()
-{
-    var formData    = new FormData();
-    
-    formData.set( "attachmentId", window.UploadedResources["VsOrg_KanbanBoardTaskAttachment"] );
-    
-    var submitUrl   = $( '#TaskAttachmentForm' ).attr( 'action' );
-    var redirectUrl = VsPath( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': $( '#FileOwnerId' ).val() } );
-    
-    VsFormSubmit( formData, submitUrl, redirectUrl );
-}
-
 $( function ()
 {
+    $( '#SelectBoxPipeline' ).on( 'change', function ( e ) {
+        let taskId      = $( this ).attr( 'data-taskId' );
+        let pipelineId  = $( this ).val();
+        
+        var redirectPath = VsPath( 'vs_application_project_issues_kanbanboard_show' );
+        moveTask( taskId, pipelineId, redirectPath );
+    });
+    
     $( 'div.card-file-icon' ).each( function( index )
     {
         $( this ).children( ":first" ).addClass( mimetype2fa( $( this ).attr( 'data-MimeType') ) );
@@ -121,7 +117,7 @@ $( function ()
             window.UploadedResources["VsOrg_KanbanBoardTaskAttachment"] &&
             ! window.FileSaved
         ) {
-            saveFile();
+            saveAttachment();
             window.FileSaved   = true;
         }
     });

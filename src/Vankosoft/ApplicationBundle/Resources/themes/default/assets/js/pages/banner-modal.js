@@ -9,7 +9,7 @@ VsLoadTranslations(['VSCmsBundle']);
 
 
 import { EasyuiCombobox } from 'jquery-easyui-extensions/EasyuiCombobox.js';
-import { VsRemoveDuplicates } from '@/js/includes/vs_remove_duplicates.js';
+import { VsRemoveDuplicates } from '../includes/vs_remove_duplicates.js';
 require( 'jquery-easyui-extensions/EasyuiCombobox.css' );
 
 // WORKAROUND: Prevent Double Submiting

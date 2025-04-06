@@ -1,4 +1,4 @@
-require( '@/js/includes/resource-delete.js' );
+require( '../includes/resource-delete.js' );
 
 import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
 VsLoadTranslations(['VSApplicationBundle']);

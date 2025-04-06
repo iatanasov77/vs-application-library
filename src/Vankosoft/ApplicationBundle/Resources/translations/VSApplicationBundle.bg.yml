@@ -142,6 +142,8 @@ vs_application:
         save: 'Запази'
         cancel: 'Отказ'
         close: 'Затвори'
+        add: Добави
+        choose_file: Choose File
         
         search: Търси
         clear_filter: Изчисти Филтъра
@@ -205,14 +207,29 @@ vs_application:
         project_issue:
             title: Заглавие
             description: 'Описание'
-            projects: 'Проекти'
-            projects_placeholder: '-- Избери Проекти --'
+            project: 'Проект'
+            project_placeholder: '-- Избери Проект --'
             labels: Етикети
             status: 'Статус на Проблема'
             status_opened: Отворен
             status_closed: Затворен като Незавършен
             status_completed: Затворен като Завършен
-            
+        
+        kanbanboard_task:
+            view: View
+            assign_member: Assign Member
+            add_more: Add More
+            create_new_task: Create New Task
+            project_issue: Project Issue
+            project_issue_placeholder: '- Select a Project Issue --'
+            members: Add Team Member
+            attachment: Attachment file
+            issue_type: Issue Type
+            priority: Priority
+            status: Status
+            due_date: Due Date
+            add_task: Add Task
+        
         save_tags: 'Запази Таговете'
             
     template:
@@ -333,6 +350,28 @@ vs_application:
             status: Статус
             projects: Проекти
             kanbanboard: Канбанбоард
+            
+            pipeline: Pipeline
+            task_no: Task No
+            task_title: Task Title
+            project_name: Project Name
+            priority: Priority
+            due_date: Due Date
+            
+            assigned_to: Assigned To
+            assign_member: Assign Member
+            task_members: Task Members
+            members: Members
+            
+            task_attachments: Attachments
+            add_attachment: Add Attachment
+            
+            summary: Summary
+            sub_tasks: Sub-tasks
+            task_tags: Task Tags
+            project_issue_comments_tab: Comments
+            project_issue_attachments_tab: Attachments
+            project_issue_timeentries_tab: Time Entries
             
             project_issue_comments_title: Issue Comments
             button_create_issue_comment: Create New Comment

@@ -1,0 +1,38 @@
+{% if fileId and form.vars.value %}
+    {% set originalName = file.originalName %}
+{% else %}
+    {% set originalName = 'vs_application.form.choose_file' | trans( {},'VSApplicationBundle' ) %}
+{% endif %}
+
+{{ form_start(form, { 'attr': {
+    'class': 'form-horizontal',
+    'id': 'TaskAttachmentForm'
+} }) }}
+    {# Hidden Fields Needed For OneUp Uploader #}
+    {{ form_widget( form.id ) }}
+    {{ form_widget( form.fileId, { 'id': 'FileResourceId' } ) }}
+    {{ form_widget( form.ownerId, { 'id': 'FileOwnerId' } ) }}
+    {#
+    {{ form_widget( form.fileClass, { 'id': 'FileResourceClass' } ) }}
+    {{ form_widget( form.ownerClass, { 'id': 'FileOwnerClass' } ) }}
+    #}
+    
+    {# Main Entity Fields #}
+    <div class="form-group">
+        {{ form_label(form.attachment, null, {
+            'label_attr': {'class': 'form-label'}
+            }) 
+        }}
+        
+        <div class="input-group form-field-file">
+            {{ form_widget(form.attachment, {'attr': {'class': 'form-control'}}) }}
+            <label class="input-group-text"
+                id="kanban_board_task_attachment_form_attachment_custom_label"
+                for="kanban_board_task_attachment_form_attachment"
+            >
+                {{ originalName }}
+            </label>
+        </div>
+        
+    </div>
+{{ form_end(form, {'render_rest': false}) }}

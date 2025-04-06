@@ -7,23 +7,8 @@ var tasks_list = [];
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { VsPath } from '@/js/includes/fos_js_routes.js';
-
-function moveTask( taskId, pipelineId )
-{
-    $.ajax({
-        type: "GET",
-        url: VsPath( 'vs_application_project_issues_kanbanboard_task_move', {'taskId': taskId, 'pipelineId': pipelineId } ),
-        success: function( response )
-        {
-            document.location = document.location
-        },
-        error: function()
-        {
-            alert( "SYSTEM ERROR!!!" );
-        }
-    });
-}
+import { VsPath } from '../includes/fos_js_routes.js';
+import { moveTask } from '../includes/kanbanboard.js';
 
 $( function ()
 {
@@ -88,7 +73,7 @@ $( function ()
             var pipelineId  = $( el ).closest( 'div.tasks' ).attr( 'id' );
             //alert( pipelineId );
             
-            moveTask( taskId, pipelineId );
+            moveTask( taskId, pipelineId, document.location );
             
         }).on( 'over', function ( el, container ) {
             container.className += ' ex-over';
@@ -241,9 +226,9 @@ $( function ()
                 //$( '#modalPipelineTask > div.card-body' ).html( response );
                 $( '#modalPipelineTask' ).html( response );
                 
-                flatpickr( "#kanban_board_create_task_form_dueDate", {
+                flatpickr( "#kanbanboard_task_form_dueDate", {
                     dateFormat: "d M, Y",
-                    defaultDate: $( "#kanban_board_create_task_form_dueDate" ).val(),
+                    defaultDate: $( "#kanbanboard_task_form_dueDate" ).val(),
                 });
                 
                 /** Bootstrap 5 Modal Toggle */

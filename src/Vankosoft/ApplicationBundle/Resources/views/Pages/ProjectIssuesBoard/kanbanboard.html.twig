@@ -9,21 +9,6 @@
         <div class="card-body">
             <div class="row g-2">
             
-                {#
-                <div class="col-lg-auto">
-                    <div class="hstack gap-2">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Board</button>
-                    </div>
-                </div>
-                <!--end col-->
-                <div class="col-lg-3 col-auto">
-                    <div class="search-box">
-                        <input type="text" class="form-control search" id="search-task-options" placeholder="Search for project, tasks...">
-                        <i class="ri-search-line search-icon"></i>
-                    </div>
-                </div>
-                #}
-                
                 <div class="col-auto ms-sm-auto">
                     <div class="avatar-group" id="newMembar">
                         
@@ -42,14 +27,14 @@
                             </a>
                         {% endfor %}
                         
-                        {# Create Member Button #}
-                        <a href="#addmemberModal" data-bs-toggle="modal" class="avatar-group-item">
-                            <div class="avatar-xs">
-                                <div class="avatar-title rounded-circle">
-                                    +
+                        {% if addMembers %}
+                            {# Create Member Button #}
+                            <a href="#addmemberModal" data-bs-toggle="modal" class="avatar-group-item">
+                                <div class="avatar-xs">
+                                    <div class="avatar-title rounded-circle">+</div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        {% endif %}
                         
                     </div>
                 </div>
@@ -88,7 +73,7 @@
                 <div data-simplebar class="tasks-wrapper px-3 mx-n3">
                     <div id="{{ pipeline.slug }}" class="tasks">
                         
-                        {% for task in pipeline.tasks %}
+                        {% for taskId, task in pipeline.tasks %}
                             <div class="card tasks-box" id="{{ task.slug }}">
                                 <div class="card-body">
                                     <div class="d-flex mb-2">
@@ -103,7 +88,7 @@
                                                 <li>
                                                     <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': task.id} ) }}">
                                                         <i class="ri-eye-fill align-bottom me-2 text-muted"></i> 
-                                                        {{ 'vankosoft_org.form.kanbanboard.view'  | trans( {},'VankoSoftOrg' ) }}
+                                                        {{ 'vs_application.form.kanbanboard_task.view'  | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                                 <li>
@@ -121,7 +106,7 @@
                                                 <li>
                                                     <a class="dropdown-item" data-bs-toggle="modal" href="#inviteMembersModal">
                                                         <i class="ri-share-line me-1 align-bottom me-2 text-muted"></i> 
-                                                        Assign Member
+                                                        {{ 'vs_application.form.kanbanboard_task.assign_member' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                             </ul>
@@ -220,7 +205,7 @@
                     <button class="btn btn-soft-info w-100 btnCreateTask"
                         data-pipelineId="{{ pipeline.id }}"
                     >
-                        Add More
+                        {{ 'vs_application.form.kanbanboard_task.add_more' | trans( {},'VSApplicationBundle' ) }}
                     </button>
                 </div>
                  
@@ -234,11 +219,10 @@
 {% block modals %}
     {{ parent() }}
     
+    {% include '@VSApplication/Pages/ProjectIssuesBoard/modal/create_member.html.twig' %}
+    {% include '@VSApplication/Pages/ProjectIssuesBoard/modal/create_task.html.twig' %}
     {#
-    {% include 'Pages/KanbanBoards/modal/create_member.html.twig' %}
-    {% include 'Pages/KanbanBoards/modal/create_task.html.twig' %}
-    
-    {% include 'Pages/KanbanBoardTasks/modal/assign_to_member.html.twig' %}
+    {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/assign_to_member.html.twig' %}
     #}
 {% endblock %}
 

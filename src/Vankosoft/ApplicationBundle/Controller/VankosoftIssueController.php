@@ -46,7 +46,6 @@ class VankosoftIssueController extends AbstractController
     {
         $labelsWhitelist    = $this->vsProject->getIssueLabelWhitelist();
         
-        //$issue = $this->vsProject->createIssue();
         $form               = $this->createIssueForm();
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {

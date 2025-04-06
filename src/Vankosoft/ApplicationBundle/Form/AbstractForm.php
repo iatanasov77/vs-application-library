@@ -47,7 +47,11 @@ class AbstractForm extends AbstractResourceType
         $results = $this->localesRepository->findAll();
         
         $locales = [];
-        foreach( $results as $le ){
+        foreach( $results as $le ) {
+            if ( ! $le->isActive() ) {
+                continue;
+            }
+            
             $locales[$le->getCode()] = $le->getTitle();
         }
         

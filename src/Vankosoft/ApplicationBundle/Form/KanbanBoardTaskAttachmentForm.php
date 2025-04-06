@@ -43,8 +43,8 @@ class KanbanBoardTaskAttachmentForm extends AbstractType
                 'mapped'                => false,
                 'required'              => true,
                 
-                'label'                 => 'vankosoft_org.form.kanbanboard_task.attachment',
-                'translation_domain'    => 'VankoSoftOrg',
+                'label'                 => 'vs_application.form.kanbanboard_task.attachment',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
         ;
     }

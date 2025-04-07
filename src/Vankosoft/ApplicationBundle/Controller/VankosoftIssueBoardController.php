@@ -23,7 +23,7 @@ class VankosoftIssueBoardController extends AbstractController
     public function __construct(
         ProjectIssue $vsProject
     ) {
-        $this->vsProject            = $vsProject;
+        $this->vsProject    = $vsProject;
     }
     
     public function showKanbanboardAction( Request $request ): Response

@@ -2,14 +2,14 @@ import './file-input.css';
 
 $( function()
 {
-    $( 'div.form-field-file input[type=file]' ).on( 'change', function()
+    $( document ).on( 'change', 'div.form-field-file input[type=file]', function()
     {
         var label       = $( this ).next();
         var fileName    = $( this ).val().split( '\\' ).pop();
         if ( fileName ) { 
             $( label ).html( fileName );
         } else { 
-            $( label ).html( '' );
+            $( label ).html( 'Choose File' );
         }
     });
 });

@@ -1,4 +1,4 @@
-// Using My Path Alias
+require( '../includes/resource-delete.js' );
 require( '../includes/bootstrap-5/file-input.js' );
 
 import lottie from "lottie-web";

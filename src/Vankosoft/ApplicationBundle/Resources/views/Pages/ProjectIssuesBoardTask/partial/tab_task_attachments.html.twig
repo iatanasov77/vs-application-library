@@ -77,8 +77,10 @@
                                     </li>
                                     <li class="dropdown-divider"></li>
                                     <li>
-                                        <a class="dropdown-item"
+                                        <a class="dropdown-item btnDeleteResource"
                                             href="{{ path( 'vs_application_project_issues_kanbanboard_task_delete_attachment', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
+                                            data-csrfToken="{{ csrf_token( item.id ) }}"
+                                            data-redirectUrl="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'pipelineId': pipelineId, 'taskId': task.id} ) }}"
                                             title="{{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}"
                                         >
                                             <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>

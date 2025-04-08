@@ -31,7 +31,6 @@ export function VsFormDlete( onOk, onCancel, message = null )
     return $( translatedDialog ).dialog( { buttons: myButtons } );
 }
 
-
 /*
  * I'm not sure if this should work. This is an old implementation
  */

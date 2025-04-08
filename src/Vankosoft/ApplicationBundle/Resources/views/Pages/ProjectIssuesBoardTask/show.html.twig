@@ -100,15 +100,15 @@
         <!--end col-->
     </div>
     <!--end row-->
+    
+    {% include '@VSApplication/Partial/resource-delete.html.twig' %}
 {% endblock %}
 
 {% block modals %}
     {{ parent() }}
     
     {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/assign_to_member.html.twig' %}
-    {#
     {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/add_attachment.html.twig' %}
-    #}
 {% endblock %}
 
 {% block head_styles %} 

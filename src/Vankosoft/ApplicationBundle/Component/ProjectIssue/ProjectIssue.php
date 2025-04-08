@@ -223,6 +223,20 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function deleteKanbanboardTaskAttachment( int $id )
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-attachment/' . $id;
+        
+        $response = $this->httpClient->request('DELETE', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     private function processApiResponse( ResponseInterface $response ): array
     {
         try {

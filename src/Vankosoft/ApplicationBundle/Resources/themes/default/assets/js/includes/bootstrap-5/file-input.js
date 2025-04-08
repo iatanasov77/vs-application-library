@@ -6,9 +6,9 @@ $( function()
     {
         var label       = $( this ).next();
         var fileName    = $( this ).val().split( '\\' ).pop();
-        if ( fileName ) { 
+        if ( fileName ) {
             $( label ).html( fileName );
-        } else { 
+        } else {
             $( label ).html( 'Choose File' );
         }
     });

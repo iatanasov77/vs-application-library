@@ -93,10 +93,11 @@ $( function ()
                     
                     progressbarSelector: "#FileUploadProgressbar",
                     
-                    fileInputFieldName: "attachment",
+                    requestType: "VankosoftApi",
+                    requestTarget: "VankosoftApi_TaskAttachment",
+                    fileOwnerId: $( '#FileOwnerId' ).val(),
                     fileResourceId: $( '#kanban_board_task_attachment_form_id' ).val(),
                     fileResourceKey: "VsOrg_KanbanBoardTaskAttachment",
-                    fileResourceClass: "App\\Entity\\KanbanBoardTaskAttachment",
                     maxChunkSize: 10000000
                 });
             },

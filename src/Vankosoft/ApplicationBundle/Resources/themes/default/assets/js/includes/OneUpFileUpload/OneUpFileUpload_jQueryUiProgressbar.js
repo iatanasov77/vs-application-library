@@ -217,8 +217,15 @@ function validateOptions( options )
         'fileResourceKey',
         'fileResourceClass'
     ];
-    let checkAllKeys = requiredKeys.every( ( i ) => options.hasOwnProperty( i ) );
     
+    if ( options.hasOwnProperty( 'requestType' ) && options.requestType == "VankosoftApi" ) {
+        const index = requiredKeys.indexOf( 'requiredKeys' );
+        if ( index > -1 ) {
+            requiredKeys.splice( index, 1 );
+        }
+    }
+    
+    let checkAllKeys = requiredKeys.every( ( i ) => options.hasOwnProperty( i ) );
     if( ! checkAllKeys ) {
         throw new Error( 'Exception message' );
     }

@@ -66,36 +66,12 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
         },
         formData: function ( form )
         {
-            //console.log( form );
-            let formName    = form[0] ? form[0].name : '';
-            
             /*
              * Send Values Needed For PostPersistListener In Backend
              *
              * If Files is Not Wrapped by Form Name Remove It From Here
              */
-            return [
-                {
-                    name: 'formName',
-                    value: formName
-                },
-                {
-                    name: 'fileInputFieldName',
-                    value: options.fileInputFieldName
-                },
-                {
-                    name: 'fileResourceId',
-                    value: options.fileResourceId
-                },
-                {
-                    name: 'fileResourceClass',
-                    value: options.fileResourceClass
-                },
-                {
-                    name: 'fileResourceKey',
-                    value: options.fileResourceKey
-                }
-            ];
+             return postPersistFormData( form, options );
         }
     });
     
@@ -229,6 +205,52 @@ function validateOptions( options )
     if( ! checkAllKeys ) {
         throw new Error( 'InitOneUpFileUpload has Missing Options !!!' );
     }
+}
+
+function postPersistFormData( form, options )
+{
+    //console.log( form );
+    let formName    = form[0] ? form[0].name : '';
+    let formData    = [
+        {
+            name: 'formName',
+            value: formName
+        },
+        {
+            name: 'fileInputFieldName',
+            value: options.fileInputFieldName
+        },
+        {
+            name: 'fileResourceId',
+            value: options.fileResourceId
+        },
+        {
+            name: 'fileResourceKey',
+            value: options.fileResourceKey
+        }
+    ];
+    
+    if ( options.hasOwnProperty( 'requestType' ) && options.requestType == "VankosoftApi" ) {
+        formData.push({
+            name: 'requestType',
+            value: options.requestType
+        });
+        formData.push({
+            name: 'requestTarget',
+            value: options.requestTarget
+        });
+        formData.push({
+            name: 'fileOwnerId',
+            value: options.fileOwnerId
+        });
+    } else {
+        formData.push({
+            name: 'fileResourceClass',
+            value: options.fileResourceClass
+        });
+    }
+    
+    return formData;
 }
 
 function getFormFieldValue( form, field )

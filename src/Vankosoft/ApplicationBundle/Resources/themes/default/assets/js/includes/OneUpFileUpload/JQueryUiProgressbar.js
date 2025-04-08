@@ -1,6 +1,7 @@
 require( 'jquery-ui-dist/jquery-ui.js' );
 require( 'jquery-ui-dist/jquery-ui.css' );
 require( 'jquery-ui-dist/jquery-ui.theme.css' );
+require( './JQueryUiProgressbar.css' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from '../humanFileSize.js';

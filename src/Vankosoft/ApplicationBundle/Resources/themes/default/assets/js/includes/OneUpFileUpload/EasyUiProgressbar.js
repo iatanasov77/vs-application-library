@@ -1,4 +1,5 @@
 require( 'jquery-easyui/css/easyui.css' );
+require( './EasyUiProgressbar.css' );
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 

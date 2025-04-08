@@ -219,7 +219,7 @@ function validateOptions( options )
     ];
     
     if ( options.hasOwnProperty( 'requestType' ) && options.requestType == "VankosoftApi" ) {
-        const index = requiredKeys.indexOf( 'requiredKeys' );
+        const index = requiredKeys.indexOf( 'fileResourceClass' );
         if ( index > -1 ) {
             requiredKeys.splice( index, 1 );
         }
@@ -227,7 +227,7 @@ function validateOptions( options )
     
     let checkAllKeys = requiredKeys.every( ( i ) => options.hasOwnProperty( i ) );
     if( ! checkAllKeys ) {
-        throw new Error( 'Exception message' );
+        throw new Error( 'InitOneUpFileUpload has Missing Options !!!' );
     }
 }
 

@@ -123,14 +123,4 @@ $( function ()
             window.FileSaved   = true;
         }
     });
-    
-    $( document ).on( 'change', '#kanban_board_task_attachment_form_attachment', function()
-    {
-        var fileName    = $( this ).val().split( '\\' ).pop();
-        if ( fileName ) { 
-            $( '#kanban_board_task_attachment_form_attachment_custom_label' ).html( fileName );
-        } else { 
-            $( '#kanban_board_task_attachment_form_attachment_custom_label' ).html( 'Choose File' );
-        }
-    });
 });

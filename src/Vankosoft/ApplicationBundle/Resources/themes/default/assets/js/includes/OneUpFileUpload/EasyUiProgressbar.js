@@ -133,11 +133,12 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
 }
 
 /**
- * options
- * {
- *     btnStartUploadSelector: "#btnSaveUploadFile",
- *     progressbarSelector: "#FileUploadProgressbar"
- * }
+ * USAGE:
+ * ======
+ *  TestUploadProgressBar({
+ *      btnStartUploadSelector: "#btnSaveUploadFile",
+ *      progressbarSelector: "#FileUploadProgressbar"
+ *  });
  */
 export function TestUploadProgressBar( options )
 {

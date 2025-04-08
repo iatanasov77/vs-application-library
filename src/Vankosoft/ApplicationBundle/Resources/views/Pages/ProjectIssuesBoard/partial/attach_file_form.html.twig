@@ -1,3 +1,6 @@
+{% import "@VSApplication/Macros/OneUpUpload/progressbar.html.twig" as vs_progressbar %}
+{% import "@VSApplication/Macros/OneUpUpload/oneup_upload.html.twig" as vs_oneup_upload %}
+
 {% if fileId and form.vars.value %}
     {% set originalName = file.originalName %}
 {% else %}
@@ -34,5 +37,7 @@
             </label>
         </div>
         
+        {{ vs_progressbar.jquery_ui( "FileUploadProgressbar" ) }}
+        {{ vs_oneup_upload.jquery_fileupload( "OneUpFileUpload", oneup_uploader_endpoint( 'kanbanboard_task_attachments' ) ) }}
     </div>
 {{ form_end(form, {'render_rest': false}) }}

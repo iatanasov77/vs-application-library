@@ -112,6 +112,7 @@ class VankosoftIssueBoardController extends AbstractController
     public function deleteMemberAction( $taskId, $memberId, Request $request ): Response
     {
         $response   = $this->vsProject->deleteKanbanboardTaskMember([
+            'taskId'    => $taskId,
             'memberId'  => $memberId,
         ]);
         

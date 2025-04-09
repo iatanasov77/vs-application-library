@@ -17,6 +17,20 @@ window.UploadedResources    = {};
 
 var mimetype2fa = require( 'mimetype-to-fontawesome' )( { prefix: 'fa-' } );
 
+function initTaskAttachmentField()
+{
+    $( '#addAttachmentModal' ).on( 'change', 'div.form-field-file input[type=file]', function()
+    {
+        var label       = $( this ).next();
+        var fileName    = $( this ).val().split( '\\' ).pop();
+        if ( fileName ) { 
+            $( label ).html( fileName );
+        } else { 
+            $( label ).html( '' );
+        }
+    });
+}
+
 $( function ()
 {
     $( '#SelectBoxPipeline' ).on( 'change', function ( e ) {
@@ -123,4 +137,6 @@ $( function ()
             window.FileSaved   = true;
         }
     });
+    
+    initTaskAttachmentField();
 });

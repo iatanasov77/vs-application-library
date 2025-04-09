@@ -206,8 +206,10 @@ class VankosoftIssueBoardController extends AbstractController
     
     public function deleteTaskAttachment( $taskId, $attachmentId, Request $request ): Response
     {
-        $response   = $this->vsProject->deleteKanbanboardTaskAttachment( intval( $attachmentId ) );
+        $response   = $this->vsProject->deleteKanbanboardTaskAttachment([
+            'attachmentId'  => $attachmentId,
+        ]);
         
-        return $response;
+        return new JsonResponse( $response );
     }
 }

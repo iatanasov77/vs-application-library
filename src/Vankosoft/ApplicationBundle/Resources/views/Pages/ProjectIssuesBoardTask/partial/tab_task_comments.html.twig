@@ -12,7 +12,7 @@
                 <div class="flex-grow-1 ms-3">
                     <h5 class="fs-13">
                         <a href="pages-profile.html">{{ comment.authorName }}</a> 
-                        <small class="text-muted">{{ comment.createdAt | date( "d M Y - hh:i a" ) }}</small>
+                        <small class="text-muted">{{ comment.createdAt }}</small>
                     </h5>
                     <p class="text-muted">{{ comment.message | raw }}</p>
                     <a href="javascript: void(0);" class="badge text-muted bg-light">

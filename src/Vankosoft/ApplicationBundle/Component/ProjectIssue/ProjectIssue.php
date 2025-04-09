@@ -226,7 +226,7 @@ final class ProjectIssue extends ProjectApiClient
     public function deleteKanbanboardTaskAttachment( array $formData )
     {
         $apiToken       = $this->login();
-        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-attachment/' . $id;
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-attachment';
         
         $response = $this->httpClient->request( 'POST', $issuesEndpoint, [
             'headers'   => [

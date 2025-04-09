@@ -210,6 +210,8 @@ class VankosoftIssueBoardController extends AbstractController
             'attachmentId'  => $attachmentId,
         ]);
         
-        return new JsonResponse( $response );
+        return new JsonResponse([
+            'status'    => Status::STATUS_OK,
+        ]);
     }
 }

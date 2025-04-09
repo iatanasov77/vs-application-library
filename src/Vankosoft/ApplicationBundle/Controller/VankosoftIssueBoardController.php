@@ -210,6 +210,11 @@ class VankosoftIssueBoardController extends AbstractController
             'attachmentId'  => $attachmentId,
         ]);
         
+        $redirectUrl    = $request->request->get( 'redirectUrl' );
+        if ( $redirectUrl ) {
+            return $this->redirect( $redirectUrl );
+        }
+        
         return new JsonResponse([
             'status'    => Status::STATUS_OK,
         ]);

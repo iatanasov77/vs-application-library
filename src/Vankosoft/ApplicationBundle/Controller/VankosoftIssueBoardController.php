@@ -109,6 +109,22 @@ class VankosoftIssueBoardController extends AbstractController
         return new JsonResponse( $response );
     }
     
+    public function deleteMemberAction( $taskId, $memberId, Request $request ): Response
+    {
+        $response   = $this->vsProject->deleteKanbanboardTaskMember([
+            'memberId'  => $memberId,
+        ]);
+        
+        $redirectUrl    = $request->request->get( 'redirectUrl' );
+        if ( $redirectUrl ) {
+            return $this->redirect( $redirectUrl );
+        }
+        
+        return new JsonResponse([
+            'status'    => Status::STATUS_OK,
+        ]);
+    }
+    
     public function createTaskAction( $pipelineId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );

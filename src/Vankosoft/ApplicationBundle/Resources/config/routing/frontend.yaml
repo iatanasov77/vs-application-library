@@ -111,3 +111,7 @@ vs_application_project_issues_kanbanboard_task_download_attachment:
 vs_application_project_issues_kanbanboard_task_delete_attachment:
     path: /project-issues-board/task-attachment/{taskId}/delete-attachment/{attachmentId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::deleteTaskAttachment
+
+vs_application_project_issues_kanbanboard_task_delete_member:
+    path: /project-issues-board/delete-member/{taskId}/{memberId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::deleteMemberAction

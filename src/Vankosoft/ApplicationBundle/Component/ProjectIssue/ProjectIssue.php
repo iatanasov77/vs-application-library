@@ -208,6 +208,21 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function deleteKanbanboardTaskMember( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-member';
+        
+        $response = $this->httpClient->request( 'POST', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     public function createKanbanboardTaskAttachment( array $formData ): array
     {
         $apiToken       = $this->login();

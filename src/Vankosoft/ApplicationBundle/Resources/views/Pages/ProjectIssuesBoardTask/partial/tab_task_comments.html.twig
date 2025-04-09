@@ -1,8 +1,30 @@
 <div class="tab-pane active" id="home-1" role="tabpanel">
-    <h5 class="card-title mb-4">Comments</h5>
+    <h5 class="card-title mb-4">
+        {{ 'vs_application.template.project_issues.project_issue_comments_tab' | trans( {},'VSApplicationBundle' ) }}
+    </h5>
     
     <div data-simplebar class="px-3 mx-n3 mb-2">
         {% for comment in task.comments %}
+            <div class="d-flex mb-4">
+                <div class="flex-shrink-0">
+                    <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-xs rounded-circle" />
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h5 class="fs-13">
+                        <a href="pages-profile.html">{{ comment.authorName }}</a> 
+                        <small class="text-muted">{{ comment.createdAt | date( "d M Y - hh:i a" ) }}</small>
+                    </h5>
+                    <p class="text-muted">{{ comment.message | raw }}</p>
+                    <a href="javascript: void(0);" class="badge text-muted bg-light">
+                        <i class="mdi mdi-reply"></i> 
+                        {{ 'vs_application.template.project_issues.button_reply' | trans( {},'VSApplicationBundle' ) }}
+                    </a>
+                </div>
+            </div>
+            
+            
+            
+            {#
             <div class="d-flex mb-4">
                 <div class="flex-shrink-0">
                     <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-xs rounded-circle" />
@@ -23,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            #}
         {% endfor %}
     </div>
     

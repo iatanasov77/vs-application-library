@@ -229,6 +229,8 @@ vs_application:
             status: Status
             due_date: Due Date
             add_task: Add Task
+            leave_comment: Leave a Comment
+            post_comment: Post Comment
         
         save_tags: 'Запази Таговете'
             

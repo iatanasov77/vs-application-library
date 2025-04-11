@@ -38,6 +38,10 @@ services:
         tags:
             - { name: form.type }
     
+    Vankosoft\ApplicationBundle\Form\ProjectIssueCommentForm:
+        tags:
+            - { name: form.type }
+    
     Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm:
         tags:
             - { name: form.type }

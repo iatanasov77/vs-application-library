@@ -115,3 +115,11 @@ vs_application_project_issues_kanbanboard_task_delete_attachment:
 vs_application_project_issues_kanbanboard_task_delete_member:
     path: /project-issues-board/delete-member/{taskId}/{memberId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::deleteMemberAction
+
+vs_application_project_issues_kanbanboard_task_get_comment_form:
+    path: /project-issues-board/task-comment/{taskId}/get-comment-form
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::getCommentFormAction
+
+vs_application_project_issues_kanbanboard_task_save_comment:
+    path: /project-issues-board/task-comment/{taskId}/save-comment/{commentId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::saveCommentFormAction

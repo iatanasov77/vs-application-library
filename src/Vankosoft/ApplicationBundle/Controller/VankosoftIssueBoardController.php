@@ -14,6 +14,7 @@ use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
 use Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm;
 use Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm;
+use Vankosoft\ApplicationBundle\Form\ProjectIssueCommentForm;
 
 class VankosoftIssueBoardController extends AbstractController
 {
@@ -70,6 +71,10 @@ class VankosoftIssueBoardController extends AbstractController
             'pipelineId'    => $pipelineId,
             'taskId'        => $taskId,
             'pipelineSlug'  => $board['pipelines'][$pipelineId]['slug'],
+            
+            'commentForm'   => $this->createForm( ProjectIssueCommentForm::class, null, [
+                //'action'    => $formAction,
+            ]),
         ]);
     }
     
@@ -165,6 +170,16 @@ class VankosoftIssueBoardController extends AbstractController
             'form'          => $form,
             'boardMembers'  => $formOptions['members'],
         ]);
+    }
+    
+    public function getCommentFormAction( $taskId, Request $request ): Response
+    {
+        
+    }
+    
+    public function saveCommentFormAction( $taskId, Request $request ): Response
+    {
+        
     }
     
     public function getAttachmentFormAction( $taskId, Request $request ): Response

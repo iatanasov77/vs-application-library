@@ -1,7 +1,6 @@
 <?php namespace Vankosoft\ApplicationBundle\Form;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,12 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType;
 
-class ProjectIssueCommentForm extends AbstractResourceType
+class ProjectIssueCommentForm extends AbstractType
 {
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
-        $entity = $builder->getData();
-        
         $builder
             ->add( 'redirectUrl', HiddenType::class, ['required' => false, 'mapped' => false] )
 

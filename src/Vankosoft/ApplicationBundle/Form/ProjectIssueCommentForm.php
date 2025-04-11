@@ -18,21 +18,21 @@ class ProjectIssueCommentForm extends AbstractType
             ->add( 'redirectUrl', HiddenType::class, ['required' => false, 'mapped' => false] )
 
             ->add( 'message', Ckeditor5TextareaType::class, [
-                'label'                 => 'vankosoft_org.form.blog_post_comment.message',
-                'translation_domain'    => 'VankoSoftOrg',
+                'label'                 => 'vs_application.form.kanbanboard_task.leave_comment',
+                'translation_domain'    => 'VSApplicationBundle',
                 'attr' => [
                     'data-ckeditor5-config' => 'devpage'
                 ],
             ])
             
             ->add( 'btnSave', SubmitType::class, [
-                'label'                 => 'vankosoft_org.form.blog_post_comment.save',
-                'translation_domain'    => 'VankoSoftOrg',
+                'label'                 => 'vs_application.form.kanbanboard_task.post_comment',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
             
             ->add( 'btnCancel', ButtonType::class, [
-                'label'                 => 'vankosoft_org.form.cancel',
-                'translation_domain'    => 'VankoSoftOrg',
+                'label'                 => 'vs_application.form.cancel',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
         ;
     }

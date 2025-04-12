@@ -93,6 +93,7 @@ vs_application:
         banner_places_create: Create a Banner Place
         banner_places_update: Edit Banner Place
         
+        issue_tracking: Issue Tracking
         project_issues: Project Issues
         create_issue: Create Issue
         update_issue: Update Issue

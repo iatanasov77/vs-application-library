@@ -93,6 +93,7 @@ vs_application:
         banner_places_create: Създаване място за банер
         banner_places_update: Редакция място за банер
         
+        issue_tracking: Проследяване на Проблеми
         project_issues: Проблеми в Проекта
         create_issue: Създай Нов Проблем
         update_issue: Редакция на Проблем

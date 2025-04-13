@@ -42,7 +42,7 @@ vs_application_project_issue_comments_create:
     methods: GET|POST
 
 vs_application_project_issue_comments_update:
-    path: /project-issues/{issueId}/{parentCommentId}
+    path: /project-issues/{issueId}/{commentId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueCommentController::updateAction
     methods: GET|PUT
 

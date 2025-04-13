@@ -64,7 +64,7 @@ vs_application_project_issue_tasks_create:
     methods: GET|POST
 
 vs_application_project_issue_tasks_update:
-    path: /project-issues/{id}
+    path: /project-issues/{issueId}/{taskId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueTaskController::updateAction
     methods: GET|PUT
 

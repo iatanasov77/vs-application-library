@@ -10,9 +10,9 @@
 {% block content %}
     <div class="row">
         <div class="col-xxl-3">
-            {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+            {# Time Tracking NOT Implemented
                 {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_time_tracking.html.twig' %}
-            {% endif %}
+            #}
             
             {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_details.html.twig' %}
             {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/card_task_members.html.twig' %}
@@ -69,13 +69,13 @@
                                     {{ 'vs_application.template.project_issues.project_issue_attachments_tab' | trans( {},'VSApplicationBundle' ) }} ({{ task.attachments | length }})
                                 </a>
                             </li>
-                            {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+                            {# Time Tracking NOT Implemented
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">
                                         {{ 'vs_application.template.project_issues.project_issue_timeentries_tab' | trans( {},'VSApplicationBundle' ) }} (9 hrs 13 min)
                                     </a>
                                 </li>
-                            {% endif %}
+                            #}
                         </ul>
                         <!--end nav-->
                     </div>

@@ -375,6 +375,7 @@ vs_application:
             
             summary: Summary
             sub_tasks: Sub-tasks
+            create_sub_task: Create Sub-Task
             task_tags: Task Tags
             project_issue_comments_tab: Comments
             project_issue_attachments_tab: Attachments

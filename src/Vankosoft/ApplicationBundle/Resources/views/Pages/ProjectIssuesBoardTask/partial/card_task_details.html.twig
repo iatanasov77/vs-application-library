@@ -28,11 +28,11 @@
                     </tr>
                     <tr>
                         <td class="fw-medium">{{ 'vs_application.template.project_issues.priority' | trans( {},'VSApplicationBundle' ) }}</td>
-                        <td>{{ task.priority | vs_kanbanboard_task_priority }}</td>
+                        <td>{{ task.priority | vs_kanbanboard_task_priority_subtle }}</td>
                     </tr>
                     <tr>
                         <td class="fw-medium">{{ 'vs_application.template.project_issues.status' | trans( {},'VSApplicationBundle' ) }}</td>
-                        <td>{{ task.status | vs_kanbanboard_task_status }}</td>
+                        <td>{{ task.status | vs_kanbanboard_task_status_subtle }}</td>
                     </tr>
                     {% if task.dueDate %}
                         <tr>

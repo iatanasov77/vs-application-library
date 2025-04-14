@@ -12,10 +12,65 @@ final class KanbanBoardTaskExtension extends AbstractExtension
         return [
             new TwigFilter( 'vs_kanbanboard_task_priority', [$this, 'priority'] ),
             new TwigFilter( 'vs_kanbanboard_task_status', [$this, 'status'] ),
+            new TwigFilter( 'vs_kanbanboard_task_priority_subtle', [$this, 'prioritySubtle'] ),
+            new TwigFilter( 'vs_kanbanboard_task_status_subtle', [$this, 'statusSubtle'] ),
         ];
     }
     
     public function priority( string $priority ): Markup
+    {
+        $priorityHtml = 'UNDEFINED';
+        switch ( $priority ) {
+            case KanbanboardTask::TASK_PRIORITY_LOW:
+                $priorityHtml = \sprintf( '<span class="badge bg-success text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_PRIORITIES[KanbanboardTask::TASK_PRIORITY_LOW]
+                );
+                break;
+            case KanbanboardTask::TASK_PRIORITY_MEDIUM:
+                $priorityHtml = \sprintf( '<span class="badge bg-warning text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_PRIORITIES[KanbanboardTask::TASK_PRIORITY_MEDIUM]
+                );
+                break;
+            case KanbanboardTask::TASK_PRIORITY_HIGH:
+                $priorityHtml = \sprintf( '<span class="badge bg-danger text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_PRIORITIES[KanbanboardTask::TASK_PRIORITY_HIGH]
+                );
+                break;
+        }
+        
+        return new Markup( $priorityHtml, 'UTF-8' );
+    }
+    
+    public function status( string $status ): Markup
+    {
+        $statusHtml = 'UNDEFINED';
+        switch ( $status ) {
+            case KanbanboardTask::TASK_STATUS_NEW:
+                $statusHtml = \sprintf( '<span class="badge bg-info-subtle text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_STATUSES[KanbanboardTask::TASK_STATUS_NEW]
+                );
+                break;
+            case KanbanboardTask::TASK_STATUS_INPROGRESS:
+                $statusHtml = \sprintf( '<span class="badge bg-secondary-subtle text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_STATUSES[KanbanboardTask::TASK_STATUS_INPROGRESS]
+                );
+                break;
+            case KanbanboardTask::TASK_STATUS_COMPLETED:
+                $statusHtml = \sprintf( '<span class="badge bg-success-subtle text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_STATUSES[KanbanboardTask::TASK_STATUS_COMPLETED]
+                );
+                break;
+            case KanbanboardTask::TASK_STATUS_PENDING:
+                $statusHtml = \sprintf( '<span class="badge bg-warning-subtle text-warning text-uppercase">%s</span>',
+                    KanbanboardTask::TASK_STATUSES[KanbanboardTask::TASK_STATUS_PENDING]
+                );
+                break;
+        }
+        
+        return new Markup( $statusHtml, 'UTF-8' );
+    }
+    
+    public function prioritySubtle( string $priority ): Markup
     {
         $priorityHtml = 'UNDEFINED';
         switch ( $priority ) {
@@ -39,7 +94,7 @@ final class KanbanBoardTaskExtension extends AbstractExtension
         return new Markup( $priorityHtml, 'UTF-8' );
     }
     
-    public function status( string $status ): Markup
+    public function statusSubtle( string $status ): Markup
     {
         $statusHtml = 'UNDEFINED';
         switch ( $status ) {

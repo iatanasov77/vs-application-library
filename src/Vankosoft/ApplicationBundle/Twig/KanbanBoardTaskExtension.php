@@ -46,7 +46,7 @@ final class KanbanBoardTaskExtension extends AbstractExtension
         $statusHtml = 'UNDEFINED';
         switch ( $status ) {
             case KanbanboardTask::TASK_STATUS_NEW:
-                $statusHtml = \sprintf( '<span class="badge bg-info-subtle text-uppercase">%s</span>',
+                $statusHtml = \sprintf( '<span class="badge bg-info-subtle text-success text-uppercase">%s</span>',
                     KanbanboardTask::TASK_STATUSES[KanbanboardTask::TASK_STATUS_NEW]
                 );
                 break;
@@ -56,7 +56,7 @@ final class KanbanBoardTaskExtension extends AbstractExtension
                 );
                 break;
             case KanbanboardTask::TASK_STATUS_COMPLETED:
-                $statusHtml = \sprintf( '<span class="badge bg-success-subtle text-uppercase">%s</span>',
+                $statusHtml = \sprintf( '<span class="badge bg-success-subtle text-success text-uppercase">%s</span>',
                     KanbanboardTask::TASK_STATUSES[KanbanboardTask::TASK_STATUS_COMPLETED]
                 );
                 break;

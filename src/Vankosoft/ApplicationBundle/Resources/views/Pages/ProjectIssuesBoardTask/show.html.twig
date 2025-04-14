@@ -86,9 +86,9 @@
                         {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/tab_task_comments.html.twig' %}
                         {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/tab_task_attachments.html.twig' %}
                         
-                        {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
+                        {# Time Tracking NOT Implemented
                             {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/tab_task_time_entries.html.twig' %}
-                        {% endif %}
+                        #}
 
                     </div>
                     <!--end tab-content-->

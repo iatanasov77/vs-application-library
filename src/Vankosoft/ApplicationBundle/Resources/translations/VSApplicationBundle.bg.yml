@@ -391,6 +391,7 @@ vs_application:
             button_create_issue_task: Create New Task
             create_issue_task_modal_title: Create New Kanbanboard Task
             edit_issue_task_modal_title: Edit Kanbanboard Task
+            create_issue: Create Issue
         
     modal:
         are_you_sure: Are you sure ?

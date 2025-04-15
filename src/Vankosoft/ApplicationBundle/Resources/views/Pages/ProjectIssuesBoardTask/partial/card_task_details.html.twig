@@ -37,7 +37,7 @@
                     {% if task.dueDate %}
                         <tr>
                             <td class="fw-medium">{{ 'vs_application.template.project_issues.due_date' | trans( {},'VSApplicationBundle' ) }}</td>
-                            <td>{{ task.dueDate | date( 'd.m.Y' ) }}</td>
+                            <td>{{ task.dueDate }}</td>
                         </tr>
                     {% endif %}
                 </tbody>

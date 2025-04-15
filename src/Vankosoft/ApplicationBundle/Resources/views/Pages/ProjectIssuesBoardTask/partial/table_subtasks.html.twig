@@ -86,7 +86,7 @@
                                         </div>
                                     </td>
                                     <td class="due_date">
-                                        {% if subTask.dueDate %}{{ subTask.dueDate | date( 'd M, Y' ) }}{% endif %}
+                                        {% if subTask.dueDate %}{{ subTask.dueDate }}{% endif %}
                                      </td>
                                     <td class="status">
                                         {{ subTask.status | vs_kanbanboard_task_status }}

@@ -294,6 +294,7 @@ vs_application:
         items_index_row_action_delete: Изтрий
         items_index_row_action_download: Даунлоуд
         items_index_there_are_no_mappers_to_display: Няма Обекти за Показване
+        items_index_there_are_no_result_found: Sorry! No Result Found
         locales_index_title: 'Списък Локали'
         locales_update_title: 'Редакция на Локал'
         locales_create_title: 'Създаване Нов Локал'
@@ -357,6 +358,7 @@ vs_application:
             pipeline: Pipeline
             task_no: Task No
             task_title: Task Title
+            task: Task
             project_name: Project Name
             priority: Priority
             due_date: Due Date

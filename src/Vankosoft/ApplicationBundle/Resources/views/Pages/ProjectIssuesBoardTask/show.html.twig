@@ -28,19 +28,7 @@
                         {{ task.summary | raw }}
                         
                         {% if task.issueType == constant( 'Vankosoft\\ApplicationBundle\\Component\\ProjectIssue\\KanbanboardTask::ISSUE_TYPE_EPIC' ) %}
-                            <h6 class="mb-3 fw-semibold text-uppercase">{{ 'vs_application.template.project_issues.sub_tasks' | trans( {},'VSApplicationBundle' ) }}</h6>
-                            <ul class="ps-3 list-unstyled vstack gap-2">
-                                {% for task in allTasks %}
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="productTask">
-                                            <label class="form-check-label" for="productTask">
-                                                Product Design, Figma (Software), Prototype
-                                            </label>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                            {% include '@VSApplication/Pages/ProjectIssuesBoardTask/partial/table_subtasks.html.twig' %}
                         {% endif %}
                         
                         <div class="pt-3 border-top border-top-dashed mt-4">

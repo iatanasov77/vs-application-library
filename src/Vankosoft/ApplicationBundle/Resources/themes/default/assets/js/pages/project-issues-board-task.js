@@ -142,12 +142,17 @@ $( function ()
     
     $( '.btnCreateSubtaskModal' ).on( 'click', function( e )
     {
-        var taskId = $( this ).attr( 'data-taskId' );
-        var subTaskId = $( this ).attr( 'data-subTaskId' );
+        var taskId      = $( this ).attr( 'data-taskId' );
+        var issueId     = $( this ).attr( 'data-issueId' );
+        var subTaskId   = $( this ).attr( 'data-subTaskId' );
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', { 'taskId': taskId, 'subTaskId': subTaskId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', {
+                'taskId': taskId,
+                'issueId': issueId,
+                'subTaskId': subTaskId
+            }),
             success: function( response )
             {
                 var _Translator = VsTranslator( 'VSApplicationBundle' );

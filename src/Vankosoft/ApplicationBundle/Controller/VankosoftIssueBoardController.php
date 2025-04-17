@@ -248,7 +248,7 @@ class VankosoftIssueBoardController extends AbstractController
             ]);
         }
         
-        return $this->render( 'Pages/KanbanBoardTasks/subtask_form.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_subtask_form.html.twig', [
             'form'          => $form,
             'item'          => $response['task'],
             'boardMembers'  => $response['board']['members'],

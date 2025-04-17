@@ -25,17 +25,12 @@ class VankosoftIssueBoardController extends AbstractController
     /** @var ProjectIssue */
     private $vsProject;
     
-    /** @var RepositoryInterface */
-    private $tagsWhitelistContext;
-    
     public function __construct(
         SecurityBridge $securityBridge,
-        ProjectIssue $vsProject,
-        RepositoryInterface $tagsWhitelistContext
+        ProjectIssue $vsProject
     ) {
-        $this->securityBridge       = $securityBridge;
-        $this->vsProject            = $vsProject;
-        $this->tagsWhitelistContext = $tagsWhitelistContext;
+        $this->securityBridge   = $securityBridge;
+        $this->vsProject        = $vsProject;
     }
     
     public function showKanbanboardAction( Request $request ): Response
@@ -171,10 +166,9 @@ class VankosoftIssueBoardController extends AbstractController
             ]);
         }
         
-        $tagsContext    = $this->tagsWhitelistContext->findByTaxonCode( 'project-issue-labels' );
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_issue_form.html.twig', [
             'form'              => $form,
-            'labelsWhitelist'   => $tagsContext->getTagsArray(),
+            'labelsWhitelist'   => $this->vsProject->getIssueLabelWhitelist(),
         ]);
     }
     

@@ -147,7 +147,7 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vsorg_kanbanboard_task_get_subtask_form', { 'taskId': taskId, 'subTaskId': subTaskId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', { 'taskId': taskId, 'subTaskId': subTaskId } ),
             success: function( response )
             {
                 var _Translator = VsTranslator( 'VSApplicationBundle' );
@@ -179,7 +179,7 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vsorg_kanbanboard_task_create_issue', {'pipelineId': pipelineId, 'parentTaskId': parentTaskId} ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_create_issue', {'pipelineId': pipelineId, 'parentTaskId': parentTaskId} ),
             success: function( response )
             {
                 var _Translator = VsTranslator( 'VSApplicationBundle' );
@@ -232,9 +232,10 @@ $( function ()
             data: form.serialize(),
             success: function( response )
             {
-                var taskUrl = VsPath( 'vsorg_kanbanboard_pipeline_create_task', {
-                    'pipelineId': response.payload.pipelineId,
-                    'issueId': response.payload.issueId
+                var taskUrl = VsPath( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', {
+                    'taskId': response.payload.parentTaskId,
+                    'issueId': response.payload.issueId,
+                    'subTaskId': 0
                 });
                 
                 $.ajax({

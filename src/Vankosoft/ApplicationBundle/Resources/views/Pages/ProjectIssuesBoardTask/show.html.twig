@@ -97,16 +97,20 @@
     
     {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/assign_to_member.html.twig' %}
     {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/add_attachment.html.twig' %}
+    {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/create_subtask.html.twig' %}
+    {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/issue_comment_edit.html.twig' %}
 {% endblock %}
 
 {% block head_styles %} 
     {{ parent() }}
     
-    {{ encore_entry_link_tags( 'js/project-issues-board-task', null, 'VelzonTheme' ) }}
+    {{ encore_entry_link_tags( 'js/project-issues-board-task' ) }}
+    {{ encore_entry_link_tags( 'ckeditor5' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
-    {{ encore_entry_script_tags( 'js/project-issues-board-task', null, 'VelzonTheme' ) }}
+    {{ encore_entry_script_tags( 'js/project-issues-board-task' ) }}
+    {{ encore_entry_script_tags( 'ckeditor5' ) }}
 {% endblock %}

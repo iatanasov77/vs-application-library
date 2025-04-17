@@ -7,7 +7,7 @@
                 data-taskId="{{ task.slug }}"
             >
                 {% for pipeline in board.pipelines %}
-                    <option value="{{ pipeline.slug }}" {% if pipeline.slug == pipelineSlug %}selected="selected"{% endif %}>{{ pipeline.name }}</option>
+                    <option value="{{ pipeline.slug }}" {% if pipeline.slug == task.pipelineSlug %}selected="selected"{% endif %}>{{ pipeline.name }}</option>
                 {% endfor %}
             </select>
         </div>

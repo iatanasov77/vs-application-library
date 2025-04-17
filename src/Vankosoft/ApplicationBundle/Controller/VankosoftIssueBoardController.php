@@ -4,9 +4,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Form\FormInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 use Vankosoft\UsersBundle\Security\SecurityBridge;
 use Vankosoft\ApplicationBundle\Component\Status;
@@ -226,12 +223,7 @@ class VankosoftIssueBoardController extends AbstractController
     
     public function getSubTaskFormAction( $taskId, $issueId, $subTaskId, Request $request ): Response
     {
-        $task           = $this->tasksRepository->find( $taskId );
-        $subTask        = $this->tasksFactory->createNew();
-        $subTask->setParentTask( $task );
-        
-        $issue          = intval( $issueId ) ? $this->issuesRepository->find( $issueId ) : null;
-        $subTask->setIssue( $issue );
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
         
         $formOptions    = [
             'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', [
@@ -252,15 +244,14 @@ class VankosoftIssueBoardController extends AbstractController
             $em->flush();
             
             return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_task_show', [
-                'pipelineId'    => $task->getPipelene()->getId(),
                 'taskId'        => $taskId
             ]);
         }
         
         return $this->render( 'Pages/KanbanBoardTasks/subtask_form.html.twig', [
             'form'          => $form,
-            'item'          => $task,
-            'boardMembers'  => $task->getBoard()->getMembers(),
+            'item'          => $response['task'],
+            'boardMembers'  => $response['board']['members'],
         ]);
     }
     

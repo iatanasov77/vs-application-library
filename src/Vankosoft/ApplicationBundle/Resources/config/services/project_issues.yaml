@@ -31,9 +31,6 @@ services:
     Vankosoft\ApplicationBundle\Form\ProjectIssueForm:
         tags:
             - { name: form.type }
-        arguments:
-            - '%vs_cms.form.use_ckeditor%'
-            - '%vs_cms.form.decription_field.ckeditor5_editor%'
     
     Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm:
         tags:

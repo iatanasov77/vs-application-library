@@ -233,7 +233,7 @@ class VankosoftIssueBoardController extends AbstractController
             ]),
             'method'    => 'POST',
         ];
-        $form   = $this->createForm( KanbanBoardSubTaskForm::class, $subTask, $formOptions );
+        $form   = $this->createForm( KanbanBoardSubTaskForm::class, null, $formOptions );
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {

@@ -78,7 +78,7 @@
                                 <div class="card-body">
                                     <div class="d-flex mb-2">
                                         <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title">
-                                            <a href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'pipelineId': pipelineId, 'taskId': task.id} ) }}" class="d-block">
+                                            <a href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': task.id} ) }}" class="d-block">
                                                 {{ task.title }}
                                             </a>
                                         </h6>
@@ -86,7 +86,7 @@
                                             <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'pipelineId': pipelineId, 'taskId': task.id} ) }}">
+                                                    <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': task.id} ) }}">
                                                         <i class="ri-eye-fill align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.form.kanbanboard_task.view'  | trans( {},'VSApplicationBundle' ) }}
                                                     </a>

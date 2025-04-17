@@ -43,7 +43,7 @@ class KanbanBoardSubTaskForm extends AbstractType
                 'widget'                => 'single_text',
             ])
             
-            ->add( 'assignedTo', EntityType::class, [
+            ->add( 'assignedTo', ChoiceType::class, [
                 'label'              => 'vs_application.form.kanbanboard_task.members',
                 'translation_domain' => 'VSApplicationBundle',
                 'choices'            => [],

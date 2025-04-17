@@ -27,6 +27,7 @@ services:
         arguments:
             - '@vs_users.security_bridge'
             - '@vs_application.project_issues'
+            - '@vs_application.repository.tags_whitelist_context'
     
     Vankosoft\ApplicationBundle\Form\ProjectIssueForm:
         tags:

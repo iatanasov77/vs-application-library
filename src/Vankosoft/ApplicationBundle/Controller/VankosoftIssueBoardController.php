@@ -4,12 +4,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 use Vankosoft\UsersBundle\Security\SecurityBridge;
 use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
+use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
 use Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm;
 use Vankosoft\ApplicationBundle\Form\KanbanBoardSubTaskForm;
 use Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm;
@@ -23,12 +25,17 @@ class VankosoftIssueBoardController extends AbstractController
     /** @var ProjectIssue */
     private $vsProject;
     
+    /** @var RepositoryInterface */
+    private $tagsWhitelistContext;
+    
     public function __construct(
         SecurityBridge $securityBridge,
-        ProjectIssue $vsProject
+        ProjectIssue $vsProject,
+        RepositoryInterface $tagsWhitelistContext
     ) {
-        $this->securityBridge   = $securityBridge;
-        $this->vsProject        = $vsProject;
+        $this->securityBridge       = $securityBridge;
+        $this->vsProject            = $vsProject;
+        $this->tagsWhitelistContext = $tagsWhitelistContext;
     }
     
     public function showKanbanboardAction( Request $request ): Response
@@ -136,16 +143,7 @@ class VankosoftIssueBoardController extends AbstractController
     
     public function createIssueAction( $pipelineId, $parentTaskId, Request $request ): Response
     {
-        $user       = $this->securityBridge->getUser();
-        if ( ! $user->getKanbanBboardMember() ) {
-            return new JsonResponse([
-                'status'    => Status::STATUS_ERROR,
-                'message'   => 'The logged user should have a Kanban Board Member Created.',
-            ]);
-        }
-        
-        $issue  = $this->issuesFactory->createNew();
-        $form   = $this->createForm( ProjectIssueForm::class, $issue, [
+        $form   = $this->createForm( ProjectIssueForm::class, null, [
             'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_create_issue', [
                 'pipelineId'    => $pipelineId,
                 'parentTaskId'  => $parentTaskId
@@ -174,7 +172,7 @@ class VankosoftIssueBoardController extends AbstractController
         }
         
         $tagsContext    = $this->tagsWhitelistContext->findByTaxonCode( 'project-issue-labels' );
-        return $this->render( 'Pages/KanbanBoards/partial/create_issue_form.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_issue_form.html.twig', [
             'form'              => $form,
             'labelsWhitelist'   => $tagsContext->getTagsArray(),
         ]);

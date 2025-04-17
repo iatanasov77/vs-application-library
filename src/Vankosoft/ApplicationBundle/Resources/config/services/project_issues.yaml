@@ -25,6 +25,7 @@ services:
     Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController:
         tags: ['controller.service_arguments']
         arguments:
+            - '@vs_users.security_bridge'
             - '@vs_application.project_issues'
     
     Vankosoft\ApplicationBundle\Form\ProjectIssueForm:
@@ -35,6 +36,10 @@ services:
             - '%vs_cms.form.decription_field.ckeditor5_editor%'
     
     Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm:
+        tags:
+            - { name: form.type }
+    
+    Vankosoft\ApplicationBundle\Form\KanbanBoardSubTaskForm:
         tags:
             - { name: form.type }
     

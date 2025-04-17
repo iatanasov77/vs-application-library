@@ -8,23 +8,30 @@ use Symfony\Component\Form\FormInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+use Vankosoft\UsersBundle\Security\SecurityBridge;
 use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
 use Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm;
+use Vankosoft\ApplicationBundle\Form\KanbanBoardSubTaskForm;
 use Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm;
 use Vankosoft\ApplicationBundle\Form\ProjectIssueCommentForm;
 
 class VankosoftIssueBoardController extends AbstractController
 {
+    /** @var SecurityBridge */
+    private $securityBridge;
+    
     /** @var ProjectIssue */
     private $vsProject;
     
     public function __construct(
+        SecurityBridge $securityBridge,
         ProjectIssue $vsProject
     ) {
-        $this->vsProject    = $vsProject;
+        $this->securityBridge   = $securityBridge;
+        $this->vsProject        = $vsProject;
     }
     
     public function showKanbanboardAction( Request $request ): Response
@@ -131,6 +138,52 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
+    public function createIssueAction( $pipelineId, $parentTaskId, Request $request ): Response
+    {
+        $user       = $this->securityBridge->getUser();
+        if ( ! $user->getKanbanBboardMember() ) {
+            return new JsonResponse([
+                'status'    => Status::STATUS_ERROR,
+                'message'   => 'The logged user should have a Kanban Board Member Created.',
+            ]);
+        }
+        
+        $issue  = $this->issuesFactory->createNew();
+        $form   = $this->createForm( ProjectIssueForm::class, $issue, [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_create_issue', [
+                'pipelineId'    => $pipelineId,
+                'parentTaskId'  => $parentTaskId
+            ]),
+            'method'    => 'POST',
+        ]);
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $submitedIssue  = $form->getData();
+            $submitedIssue->setCreatedBy( $user->getKanbanBboardMember() );
+            
+            $this->doctrine->getManager()->persist( $submitedIssue );
+            $this->doctrine->getManager()->flush();
+            
+            $this->eventDispatcher->dispatch( new GenericEvent( $submitedIssue ), ProjectIssueEvents::POST_CREATE );
+            
+            return new JsonResponse([
+                'status'   => Status::STATUS_OK,
+                'payload'   => [
+                    'pipelineId'    => $pipelineId,
+                    'parentTaskId'  => $parentTaskId,
+                    'issueId'       => $submitedIssue->getId(),
+                ],
+            ]);
+        }
+        
+        $tagsContext    = $this->tagsWhitelistContext->findByTaxonCode( 'project-issue-labels' );
+        return $this->render( 'Pages/KanbanBoards/partial/create_issue_form.html.twig', [
+            'form'              => $form,
+            'labelsWhitelist'   => $tagsContext->getTagsArray(),
+        ]);
+    }
+    
     public function createTaskAction( $pipelineId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
@@ -169,6 +222,46 @@ class VankosoftIssueBoardController extends AbstractController
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
             'form'          => $form,
             'boardMembers'  => $formOptions['members'],
+        ]);
+    }
+    
+    public function getSubTaskFormAction( $taskId, $issueId, $subTaskId, Request $request ): Response
+    {
+        $task           = $this->tasksRepository->find( $taskId );
+        $subTask        = $this->tasksFactory->createNew();
+        $subTask->setParentTask( $task );
+        
+        $issue          = intval( $issueId ) ? $this->issuesRepository->find( $issueId ) : null;
+        $subTask->setIssue( $issue );
+        
+        $formOptions    = [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', [
+                'taskId'    => $taskId,
+                'subTaskId' => $subTaskId,
+                'issueId'   => $issueId,
+            ]),
+            'method'    => 'POST',
+        ];
+        $form   = $this->createForm( KanbanBoardSubTaskForm::class, $subTask, $formOptions );
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $subTask    = $form->getData();
+            
+            $em = $this->doctrine->getManager();
+            $em->persist( $subTask );
+            $em->flush();
+            
+            return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_task_show', [
+                'pipelineId'    => $task->getPipelene()->getId(),
+                'taskId'        => $taskId
+            ]);
+        }
+        
+        return $this->render( 'Pages/KanbanBoardTasks/subtask_form.html.twig', [
+            'form'          => $form,
+            'item'          => $task,
+            'boardMembers'  => $task->getBoard()->getMembers(),
         ]);
     }
     

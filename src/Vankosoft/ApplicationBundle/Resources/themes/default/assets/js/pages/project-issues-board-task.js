@@ -8,8 +8,10 @@ import { defineElement } from "@lordicon/element";
 // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { VsPath } from '../includes/fos_js_routes.js';
-import { InitOneUpFileUpload } from '../includes/OneUpFileUpload/JQueryUiProgressbar.js';
+import { VsTranslator, VsLoadTranslations } from '@/js/includes/bazinga_js_translations.js';
+VsLoadTranslations(['VSApplicationBundle']);
 
+import { InitOneUpFileUpload } from '../includes/OneUpFileUpload/JQueryUiProgressbar.js';
 import { moveTask, saveAttachment } from '../includes/kanbanboard.js';
 
 window.FileSaved            = false;
@@ -136,6 +138,130 @@ $( function ()
             saveAttachment();
             window.FileSaved   = true;
         }
+    });
+    
+    $( '.btnCreateSubtaskModal' ).on( 'click', function( e )
+    {
+        var taskId = $( this ).attr( 'data-taskId' );
+        var subTaskId = $( this ).attr( 'data-subTaskId' );
+        
+        $.ajax({
+            type: "GET",
+            url: VsPath( 'vsorg_kanbanboard_task_get_subtask_form', { 'taskId': taskId, 'subTaskId': subTaskId } ),
+            success: function( response )
+            {
+                var _Translator = VsTranslator( 'VSApplicationBundle' );
+                $( '#createSubtaskModalLabel' ).text( _Translator.trans( 'vs_application.template.project_issues.create_sub_task' ) );
+                $( '#modalSubtask > div.card-body' ).html( response );
+                
+                /** Bootstrap 5 Modal Toggle */
+                const myModal = new bootstrap.Modal( '#createSubtaskModal', {
+                    keyboard: false
+                });
+                myModal.show( $( '#createSubtaskModal' ).get( 0 ) );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
+    $( '#btnCreateSubtask' ).on( 'click', function ( e )
+    {
+        $( '#form-kanbanboard-subtask' ).submit();
+    });
+    
+    $( '#modalSubtask' ).on( 'click', '#btnCreateIssue', function( e )
+    {
+        var pipelineId      = $( this ).attr( 'data-pipelineId' );
+        var parentTaskId    = $( this ).attr( 'data-parentTaskId' );
+        
+        $.ajax({
+            type: "GET",
+            url: VsPath( 'vsorg_kanbanboard_task_create_issue', {'pipelineId': pipelineId, 'parentTaskId': parentTaskId} ),
+            success: function( response )
+            {
+                var _Translator = VsTranslator( 'VSApplicationBundle' );
+                $( '#createSubtaskModalLabel' ).text( _Translator.trans( 'vs_application.template.project_issues.create_issue' ) );
+                
+                $( '#modalSubtask > div.card-body' ).html( response );
+                
+                var tagsInputWhitelist  = $( '#project_issue_form_labelsWhitelist' ).val().split( ',' );
+                //console.log( tagsInputWhitelist );
+                
+                tagsInput   = $( '#project_issue_form_labels' )[0];
+                tagify      = new Tagify( tagsInput, {
+                    whitelist : tagsInputWhitelist,
+                    dropdown : {
+                        classname     : "color-blue",
+                        enabled       : 0,              // show the dropdown immediately on focus
+                        maxItems      : 5,
+                        position      : "text",         // place the dropdown near the typed text
+                        closeOnSelect : false,          // keep the dropdown open after selecting a suggestion
+                        highlightFirst: true
+                    }
+                });
+                
+                // bind "DragSort" to Tagify's main element and tell
+                // it that all the items with the below "selector" are "draggable"
+                dragsort    = new DragSort( tagify.DOM.scope, {
+                    selector: '.'+tagify.settings.classNames.tag,
+                    callbacks: {
+                        dragEnd: onDragEnd
+                    }
+                });
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
+    $( '#modalSubtask' ).on( 'submit', '#btnCreateIssueForm', function( e )
+    {
+        e.preventDefault();
+        
+        var form        = $( this );
+        var actionUrl   = form.attr( 'action' );
+        
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(),
+            success: function( response )
+            {
+                var taskUrl = VsPath( 'vsorg_kanbanboard_pipeline_create_task', {
+                    'pipelineId': response.payload.pipelineId,
+                    'issueId': response.payload.issueId
+                });
+                
+                $.ajax({
+                    type: "GET",
+                    url: taskUrl,
+                    success: function( response )
+                    {
+                        var _Translator = VsTranslator( 'VSApplicationBundle' );
+                        $( '#createSubtaskModalLabel' ).text( _Translator.trans( 'vs_application.template.project_issues.create_sub_task' ) );
+                        $( '#modalSubtask > div.card-body' ).html( response );
+                        
+                        flatpickr( "#kanban_board_create_task_form_dueDate", {
+                            dateFormat: "d M, Y",
+                            defaultDate: $( "#kanban_board_create_task_form_dueDate" ).val(),
+                        });
+                    },
+                    error: function()
+                    {
+                        alert( "SYSTEM ERROR!!!" );
+                    }
+                });
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
     });
     
     initTaskAttachmentField();

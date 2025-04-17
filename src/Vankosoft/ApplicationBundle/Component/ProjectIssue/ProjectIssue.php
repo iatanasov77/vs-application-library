@@ -135,6 +135,20 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function getKanbanboardTask( $id ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/kanbanboard-tasks/' . $id;
+        
+        $response       = $this->httpClient->request( 'GET', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     /**
      * Options for Kanbanboard Create Task Form
      *

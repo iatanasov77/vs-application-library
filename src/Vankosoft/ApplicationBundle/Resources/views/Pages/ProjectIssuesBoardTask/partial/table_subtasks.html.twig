@@ -10,6 +10,7 @@
                        <div class="d-flex flex-wrap gap-2">
                             <button class="btn btn-danger add-btn text-uppercase btnCreateSubtaskModal"
                                 data-taskId="{{ task.id }}"
+                                data-issueId="0"
                                 data-subTaskId="0"
                             >
                                 <i class="ri-add-line align-bottom me-1"></i> 
@@ -38,7 +39,7 @@
                                 <tr>
                                     <td class="id">
                                         <a class="fw-medium link-primary"
-                                            href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'pipelineId': pipelineId, 'taskId': subTask.id} ) }}"
+                                            href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': subTask.id} ) }}"
                                         >
                                             {{ subTask.number }}
                                         </a>
@@ -49,7 +50,7 @@
                                             <div class="flex-shrink-0 ms-4">
                                                 <ul class="list-inline tasks-list-menu mb-0">
                                                     <li class="list-inline-item">
-                                                        <a href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'pipelineId': pipelineId, 'taskId': subTask.id} ) }}">
+                                                        <a href="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': subTask.id} ) }}">
                                                             <i class="ri-eye-fill align-bottom me-2 text-muted"></i>
                                                         </a>
                                                     </li>

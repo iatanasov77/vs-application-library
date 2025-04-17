@@ -55,7 +55,7 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
-    public function showTaskAction( $pipelineId, $taskId, Request $request ): Response
+    public function showTaskAction( $taskId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
         $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
@@ -68,15 +68,13 @@ class VankosoftIssueBoardController extends AbstractController
             throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
         }
         
-        $task           = $this->vsProject->getKanbanboardTask( $taskId );
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
         $designations   = VsKanbanboardTask::BOARD_MEMBER_DESIGNATIONS;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'designations'  => $designations,
-            'task'          => $task,
-            
-//             'board'         => $board,
-//             'pipelineId'    => $pipelineId,
+            'task'          => $response['task'],
+            'board'         => $response['board'],
 //             'taskId'        => $taskId,
 //             'pipelineSlug'  => $board['pipelines'][$pipelineId]['slug'],
             

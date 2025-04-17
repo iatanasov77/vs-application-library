@@ -17,6 +17,22 @@ import { moveTask, saveAttachment } from '../includes/kanbanboard.js';
 window.FileSaved            = false;
 window.UploadedResources    = {};
 
+import Tagify from '@yaireo/tagify';
+import '@yaireo/tagify/dist/tagify.css';
+
+import DragSort from '@yaireo/dragsort';
+import '@yaireo/dragsort/dist/dragsort.css';
+
+var tagsInput;
+var tagify;
+var dragsort;
+
+// must update Tagify's value according to the re-ordered nodes in the DOM
+function onDragEnd( elm )
+{
+    tagify.updateValueByDOMTags();
+}
+
 var mimetype2fa = require( 'mimetype-to-fontawesome' )( { prefix: 'fa-' } );
 
 function initTaskAttachmentField()

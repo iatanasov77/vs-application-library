@@ -16,42 +16,42 @@ class KanbanBoardSubTaskForm extends AbstractType
     {
         $builder
             ->add( 'issue', ChoiceType::class, [
-                'label'              => 'vs_application.form.kanbanboard_task.project_issue',
-                'placeholder'        => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
-                'translation_domain' => 'VSApplicationBundle',
-                'choices'            => $options['projectIssues'],
-                'empty_data'         => $options['selectedIssue'],
+                'label'                 => 'vs_application.form.kanbanboard_task.project_issue',
+                'placeholder'           => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
+                'translation_domain'    => 'VSApplicationBundle',
+                'choices'               => $options['projectIssues'],
+                'data'                  => $options['selectedIssue'],
             ])
             
             ->add( 'priority', ChoiceType::class, [
-                'required'           => true,
-                'choices'            => \array_flip( VsKanbanboardTask::TASK_PRIORITIES ),
-                'label'              => 'vs_application.form.kanbanboard_task.priority',
-                'translation_domain' => 'VSApplicationBundle',
+                'required'              => true,
+                'choices'               => \array_flip( VsKanbanboardTask::TASK_PRIORITIES ),
+                'label'                 => 'vs_application.form.kanbanboard_task.priority',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
             
             ->add( 'status', ChoiceType::class, [
-                'required'           => true,
-                'choices'            => \array_flip( VsKanbanboardTask::TASK_STATUSES ),
-                'label'              => 'vs_application.form.kanbanboard_task.status',
-                'translation_domain' => 'VSApplicationBundle',
+                'required'              => true,
+                'choices'               => \array_flip( VsKanbanboardTask::TASK_STATUSES ),
+                'label'                 => 'vs_application.form.kanbanboard_task.status',
+                'translation_domain'    => 'VSApplicationBundle',
             ])
             
             ->add( 'dueDate', DateType::class, [
-                'label'              => 'vs_application.form.kanbanboard_task.due_date',
-                'translation_domain' => 'VSApplicationBundle',
-                'widget'             => 'single_text',
-                'html5'              => false,
-                'required'           => false,
+                'label'                 => 'vs_application.form.kanbanboard_task.due_date',
+                'translation_domain'    => 'VSApplicationBundle',
+                'widget'                => 'single_text',
+                'html5'                 => false,
+                'required'              => false,
             ])
             
             ->add( 'assignedTo', ChoiceType::class, [
-                'label'              => 'vs_application.form.kanbanboard_task.members',
-                'translation_domain' => 'VSApplicationBundle',
-                'choices'            => [],
-                'multiple'           => true,
-                'expanded'           => true,
-                'required'           => false,
+                'label'                 => 'vs_application.form.kanbanboard_task.members',
+                'translation_domain'    => 'VSApplicationBundle',
+                'choices'               => [],
+                'multiple'              => true,
+                'expanded'              => true,
+                'required'              => false,
             ])
             
         ;

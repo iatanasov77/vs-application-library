@@ -8,7 +8,14 @@
                 }) 
             }}
             
-            {{ form_widget(form.issue, {'attr': {'class': 'form-select'}}) }}
+            <div class="input-group mb-3">
+                {{ form_widget(form.issue, {'attr': {'class': 'form-select'}}) }}
+                <div class="input-group-append ms-2">
+                    <button type="button" class="btn btn-primary" id="btnCreateIssue" data-pipelineId="{{ pipelineId }}">
+                        {{ 'vs_application.template.project_issues.create_issue' | trans( {},'VSApplicationBundle' ) }}
+                    </button>
+                </div>
+            </div>
         </div>
         <!--end col-->
         

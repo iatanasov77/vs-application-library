@@ -190,7 +190,7 @@ $( function ()
     
     $( '#btnCreateSubtask' ).on( 'click', function ( e )
     {
-        $( '#form-kanbanboard-subtask' ).submit();
+        $( '#modalSubtask > div.card-body > form' ).submit();
     });
     
     $( '#modalSubtask' ).on( 'click', '#btnCreateIssue', function( e )

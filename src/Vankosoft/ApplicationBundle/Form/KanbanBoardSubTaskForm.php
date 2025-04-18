@@ -64,7 +64,7 @@ class KanbanBoardSubTaskForm extends AbstractType
         $resolver->setDefaults([
             'csrf_protection'   => false,
             'projectIssues'     => [],
-            'selectedIssue'     => 12,
+            'selectedIssue'     => 0,
         ]);
     }
     

@@ -81,7 +81,7 @@ class KanbanboardTaskForm extends AbstractType
             'csrf_protection'   => false,
             'pipeline_id'       => 0,
             'projectIssues'     => [],
-            'selectedIssue'     => 12,
+            'selectedIssue'     => 0,
         ]);
     }
     

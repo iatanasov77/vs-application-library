@@ -171,7 +171,7 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
-    public function createTaskAction( $pipelineId, Request $request ): Response
+    public function createTaskAction( $pipelineId, $issueId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
         $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
@@ -188,11 +188,13 @@ class VankosoftIssueBoardController extends AbstractController
         $form = $this->createForm( KanbanboardTaskForm::class, null, [
             'action'        => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_create_task', [
                 'pipelineId'    => $pipelineId,
+                'issueId'       => $issueId,
             ]),
             'method'        => 'POST',
             
             'pipeline_id'   => $pipelineId,
             'projectIssues' => $formOptions['issues'],
+            'selectedIssue' => $issueId,
         ]);
         
         $form->handleRequest( $request );
@@ -208,6 +210,7 @@ class VankosoftIssueBoardController extends AbstractController
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
             'form'          => $form,
+            'pipelineId'    => $pipelineId,
             'boardMembers'  => $formOptions['members'],
         ]);
     }
@@ -226,6 +229,7 @@ class VankosoftIssueBoardController extends AbstractController
             'method'    => 'POST',
             
             'projectIssues' => $formOptions['issues'],
+            'selectedIssue' => $issueId,
         ]);
         
         $form->handleRequest( $request );

@@ -25,6 +25,7 @@ services:
     Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController:
         tags: ['controller.service_arguments']
         arguments:
+            - '@http_client'
             - '@vs_users.security_bridge'
             - '@vs_application.project_issues'
     

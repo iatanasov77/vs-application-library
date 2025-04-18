@@ -4,6 +4,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 use Vankosoft\UsersBundle\Security\SecurityBridge;
@@ -19,6 +22,9 @@ use Vankosoft\ApplicationBundle\Form\ProjectIssueCommentForm;
 
 class VankosoftIssueBoardController extends AbstractController
 {
+    /** @var HttpClientInterface */
+    private $httpClient;
+    
     /** @var SecurityBridge */
     private $securityBridge;
     
@@ -26,9 +32,11 @@ class VankosoftIssueBoardController extends AbstractController
     private $vsProject;
     
     public function __construct(
+        HttpClientInterface $httpClient,
         SecurityBridge $securityBridge,
         ProjectIssue $vsProject
     ) {
+        $this->httpClient       = $httpClient;
         $this->securityBridge   = $securityBridge;
         $this->vsProject        = $vsProject;
     }
@@ -314,14 +322,6 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
-    public function downloadTaskAttachment( $taskId, $attachmentId, Request $request ): Response
-    {
-        return new JsonResponse([
-            'status'    => Status::STATUS_ERROR,
-            'message'   => 'Action NOT Implemented !!!',
-        ]);
-    }
-    
     public function deleteTaskAttachment( $taskId, $attachmentId, Request $request ): Response
     {
         $response   = $this->vsProject->deleteKanbanboardTaskAttachment([
@@ -336,5 +336,42 @@ class VankosoftIssueBoardController extends AbstractController
         return new JsonResponse([
             'status'    => Status::STATUS_OK,
         ]);
+    }
+    
+    public function downloadTaskAttachment( $taskId, $attachmentId, Request $request ): Response
+    {
+        $attachment     = $this->vsProject->getKanbanboardTaskAttachment( $attachmentId );
+        $remoteResponse = $this->vsProject->downloadKanbanboardTaskAttachment( $attachmentId );
+        
+        $client     = $this->httpClient;
+        $response   = new StreamedResponse();
+        $response->setCallback( function() use ( $client, $remoteResponse )
+        {
+            foreach ( $client->stream( $remoteResponse ) as $chunk ) {
+                print $chunk->getContent();
+            }
+        });
+        
+        $response->headers->set( 'Content-Transfer-Encoding', 'binary' );
+        $response->headers->set( 'Content-Type', $attachment['type'] );
+        $this->makeContentDisposition( $attachment, $response );
+        
+        return $response;
+    }
+    
+    private function makeContentDisposition( array $attachment, Response &$response )
+    {
+        $transliterator = \Transliterator::create( 'Any-Latin' );
+        $transliteratorToASCII = \Transliterator::create( 'Latin-ASCII' );
+        $originalName   = $transliteratorToASCII->transliterate(
+            $transliterator->transliterate( $attachment['originalName'] )
+        );
+        
+        $disposition    = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            $originalName
+        );
+        
+        $response->headers->set( 'Content-Disposition', $disposition );
     }
 }

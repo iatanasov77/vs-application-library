@@ -54,7 +54,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function createIssue( array $formData )
+    public function createIssue( array $formData ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/new';
@@ -70,7 +70,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function updateIssue( int $id, array $formData )
+    public function updateIssue( int $id, array $formData ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
@@ -86,7 +86,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function deleteIssue( int $id )
+    public function deleteIssue( int $id ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
@@ -268,7 +268,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function deleteKanbanboardTaskAttachment( array $formData )
+    public function deleteKanbanboardTaskAttachment( array $formData ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-attachment';
@@ -281,6 +281,34 @@ final class ProjectIssue extends ProjectApiClient
         ]);
         
         return $this->processApiResponse( $response );
+    }
+    
+    public function getKanbanboardTaskAttachment( $id ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/attachment/' . $id;
+        
+        $response = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function downloadKanbanboardTaskAttachment( $id ): ResponseInterface
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/download-attachment/' . $id;
+        
+        $response = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $response;
     }
     
     private function processApiResponse( ResponseInterface $response ): array

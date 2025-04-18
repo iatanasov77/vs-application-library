@@ -228,12 +228,14 @@ class VankosoftIssueBoardController extends AbstractController
                 'subTaskId' => $subTaskId,
                 'issueId'   => $issueId,
             ]),
-            'method'    => 'POST',
+            'method'            => 'POST',
             
-            'projectIssues' => $formOptions['issues'],
-            'selectedIssue' => $issueId,
+            'parent_task_id'    => $taskId,
             
-            'boardMembers'  => $formOptions['members']['selectOptions'],
+            'projectIssues'     => $formOptions['issues'],
+            'selectedIssue'     => $issueId,
+            
+            'boardMembers'      => $formOptions['members']['selectOptions'],
         ]);
         
         $form->handleRequest( $request );
@@ -241,7 +243,7 @@ class VankosoftIssueBoardController extends AbstractController
             $subTask    = $form->getData();
             //echo '<pre>'; var_dump( $subTask ); die;
             
-            $response   = $this->vsProject->createKanbanboardTask( $subTask );
+            $response   = $this->vsProject->createKanbanboardTaskSubTask( $subTask );
             //echo '<pre>'; var_dump( $response ); die;
             
             return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_task_show', [

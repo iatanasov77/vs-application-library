@@ -15,6 +15,10 @@ class KanbanBoardSubTaskForm extends AbstractType
     public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
         $builder
+            ->add( 'parentTask', HiddenType::class, [
+                'data'  => $options['parent_task_id'],
+            ])
+            
             ->add( 'issue', ChoiceType::class, [
                 'label'                 => 'vs_application.form.kanbanboard_task.project_issue',
                 'placeholder'           => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
@@ -63,6 +67,8 @@ class KanbanBoardSubTaskForm extends AbstractType
         
         $resolver->setDefaults([
             'csrf_protection'   => false,
+            'parent_task_id'    => 0,
+            
             'projectIssues'     => [],
             'selectedIssue'     => 0,
             

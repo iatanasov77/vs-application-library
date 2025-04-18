@@ -45,7 +45,10 @@
                         <div class="flex-shrink-0 ms-2">
                             <div class="d-flex gap-1">
                                 <a class="btn btn-icon text-muted btn-sm fs-18"
+                                    {#
                                     href="{{ path( 'vs_application_project_issues_kanbanboard_task_download_attachment', {'taskId': task.id, 'attachmentId': attachment.id} ) }}"
+                                    #}
+                                    href="{{ attachment.downloadUrl }}"
                                     title="{{ 'vs_application.template.items_index_row_action_download' | trans( {},'VSApplicationBundle' ) }}"
                                 >
                                     <i class="ri-download-2-line"></i>

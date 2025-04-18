@@ -23,24 +23,25 @@ class KanbanBoardSubTaskForm extends AbstractType
             ])
             
             ->add( 'priority', ChoiceType::class, [
-                'required'              => true,
-                'choices'               => \array_flip( VsKanbanboardTask::TASK_PRIORITIES ),
-                'label'                 => 'vankosoft_org.form.kanbanboard_task.priority',
-                'translation_domain'    => 'VSApplicationBundle',
+                'required'           => true,
+                'choices'            => \array_flip( VsKanbanboardTask::TASK_PRIORITIES ),
+                'label'              => 'vs_application.form.kanbanboard_task.priority',
+                'translation_domain' => 'VSApplicationBundle',
             ])
             
             ->add( 'status', ChoiceType::class, [
-                'required'              => true,
-                'choices'               => \array_flip( VsKanbanboardTask::TASK_STATUSES ),
-                'label'                 => 'vankosoft_org.form.kanbanboard_task.status',
-                'translation_domain'    => 'VSApplicationBundle',
+                'required'           => true,
+                'choices'            => \array_flip( VsKanbanboardTask::TASK_STATUSES ),
+                'label'              => 'vs_application.form.kanbanboard_task.status',
+                'translation_domain' => 'VSApplicationBundle',
             ])
             
             ->add( 'dueDate', DateType::class, [
-                'label'                 => 'vankosoft_org.form.kanbanboard_task.due_date',
-                'translation_domain'    => 'VSApplicationBundle',
-                'required'              => false,
-                'widget'                => 'single_text',
+                'label'              => 'vs_application.form.kanbanboard_task.due_date',
+                'translation_domain' => 'VSApplicationBundle',
+                'widget'             => 'single_text',
+                'html5'              => false,
+                'required'           => false,
             ])
             
             ->add( 'assignedTo', ChoiceType::class, [

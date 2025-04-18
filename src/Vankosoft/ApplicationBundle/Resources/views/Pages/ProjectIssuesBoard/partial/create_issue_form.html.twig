@@ -16,16 +16,6 @@
         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
     </div>
     
-    <div class="form-group">
-        {{ form_label(form.project, null, {
-            'label_attr': {'class': 'form-label'}
-            }) 
-        }}
-        {{ form_widget(form.project, {'attr': {
-            'class': 'form-select'
-        }}) }}
-    </div>
-    
     {{ form_widget( form.labelsWhitelist, { 'value' : labelsWhitelist | join(',') } ) }}
     <div class="form-group">
         {{ form_label(form.labels, null, {

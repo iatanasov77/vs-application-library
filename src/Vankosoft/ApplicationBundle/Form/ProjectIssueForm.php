@@ -34,13 +34,6 @@ class ProjectIssueForm extends AbstractType
                 ],
             ])
             
-            ->add( 'project', ChoiceType::class, [
-                'label'                 => 'vs_application.form.project_issue.project',
-                'placeholder'           => 'vs_application.form.project_issue.project_placeholder',
-                'translation_domain'    => 'VSApplicationBundle',
-                'choices'               => [],
-            ])
-            
             ->add( 'status', ChoiceType::class, [
                 'label'                 => 'vs_application.form.project_issue.status',
                 'translation_domain'    => 'VSApplicationBundle',

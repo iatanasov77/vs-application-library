@@ -148,13 +148,11 @@ class VankosoftIssueBoardController extends AbstractController
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
-            $submitedIssue  = $form->getData();
-            $submitedIssue->setCreatedBy( $user->getKanbanBboardMember() );
+            $formData   = $form->getData();
+            //echo '<pre>'; var_dump( $formData ); die;
             
-            $this->doctrine->getManager()->persist( $submitedIssue );
-            $this->doctrine->getManager()->flush();
-            
-            $this->eventDispatcher->dispatch( new GenericEvent( $submitedIssue ), ProjectIssueEvents::POST_CREATE );
+            $response   = $this->vsProject->createIssue( $formData );
+            //echo '<pre>'; var_dump( $response ); die;
             
             return new JsonResponse([
                 'status'   => Status::STATUS_OK,

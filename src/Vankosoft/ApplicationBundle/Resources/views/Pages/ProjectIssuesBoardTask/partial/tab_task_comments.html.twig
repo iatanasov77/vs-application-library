@@ -13,7 +13,7 @@
                             class="avatar-xs rounded-circle"
                         />
                     {% else %}
-                        <img src="{{ asset( 'build/velzon-theme/images/users/avatar-7.jpg' ) }}"
+                        <img src="{{ asset( 'build/default/images/users/avatar-7.jpg' ) }}"
                             alt="{{ comment.authorEmail }}"
                             class="avatar-xs rounded-circle"
                         />
@@ -26,7 +26,9 @@
                     </h5>
                     <p class="text-muted">{{ comment.message | raw }}</p>
                     <a class="badge text-muted bg-light btnIssueComment"
+                        {#
                         href="{{ path('vsorg_project_issue_comment_create', {'issueId': task.issue.id, 'parentCommentId': comment.id}) }}"
+                        #}
                         data-commentId="0"
                         data-redirectUrl="{{ path( 'vs_application_project_issues_kanbanboard_task_show', {'taskId': task.id} ) }}"
                     >
@@ -37,10 +39,17 @@
                     {% for childComment in comment.children %}
                         <div class="d-flex mt-4">
                             <div class="flex-shrink-0">
-                                <img src="{{ asset( 'build/velzon-theme/images/users/avatar-10.jpg' ) }}"
-                                    alt="{{ childComment.authorEmail }}"
-                                    class="avatar-xs rounded-circle"
-                                />
+                                {% if  childComment.authorPhoto %}
+                                    <img src="{{ childComment.authorPhoto }}"
+                                        alt="{{ childComment.authorEmail }}"
+                                        class="avatar-xs rounded-circle"
+                                    />
+                                {% else %}
+                                    <img src="{{ asset( 'build/default/images/users/avatar-10.jpg' ) }}"
+                                        alt="{{ childComment.authorEmail }}"
+                                        class="avatar-xs rounded-circle"
+                                    />
+                                {% endif %}
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <h5 class="fs-13">

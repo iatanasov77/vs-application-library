@@ -195,6 +195,8 @@ class VankosoftIssueBoardController extends AbstractController
             'pipeline_id'   => $pipelineId,
             'projectIssues' => $formOptions['issues'],
             'selectedIssue' => $issueId,
+            
+            'boardMembers'  => $formOptions['members']['selectOptions'],
         ]);
         
         $form->handleRequest( $request );
@@ -211,7 +213,7 @@ class VankosoftIssueBoardController extends AbstractController
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
             'form'          => $form,
             'pipelineId'    => $pipelineId,
-            'boardMembers'  => $formOptions['members'],
+            'boardMembers'  => $formOptions['members']['extended'],
         ]);
     }
     
@@ -230,6 +232,8 @@ class VankosoftIssueBoardController extends AbstractController
             
             'projectIssues' => $formOptions['issues'],
             'selectedIssue' => $issueId,
+            
+            'boardMembers'  => $formOptions['members']['selectOptions'],
         ]);
         
         $form->handleRequest( $request );

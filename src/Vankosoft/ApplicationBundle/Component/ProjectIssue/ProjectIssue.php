@@ -164,7 +164,8 @@ final class ProjectIssue extends ProjectApiClient
                 'Authorization' => 'Bearer ' . $apiToken,
             ],
             'query'      => [
-                'board' => $this->kanbanboardSlug
+                'board'     => $this->kanbanboardSlug,
+                'project'   => $this->projectSlug
             ],
         ]);
         

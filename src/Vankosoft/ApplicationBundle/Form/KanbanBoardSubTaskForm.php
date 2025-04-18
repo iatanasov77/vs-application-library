@@ -48,7 +48,7 @@ class KanbanBoardSubTaskForm extends AbstractType
             ->add( 'assignedTo', ChoiceType::class, [
                 'label'                 => 'vs_application.form.kanbanboard_task.members',
                 'translation_domain'    => 'VSApplicationBundle',
-                'choices'               => [],
+                'choices'               => $options['boardMembers'],
                 'multiple'              => true,
                 'expanded'              => true,
                 'required'              => false,
@@ -65,6 +65,8 @@ class KanbanBoardSubTaskForm extends AbstractType
             'csrf_protection'   => false,
             'projectIssues'     => [],
             'selectedIssue'     => 0,
+            
+            'boardMembers'      => [],
         ]);
     }
     

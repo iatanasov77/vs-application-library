@@ -20,6 +20,7 @@ class KanbanBoardSubTaskForm extends AbstractType
                 'placeholder'        => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
                 'translation_domain' => 'VSApplicationBundle',
                 'choices'            => $options['projectIssues'],
+                'empty_data'         => $options['selectedIssue'],
             ])
             
             ->add( 'priority', ChoiceType::class, [
@@ -63,6 +64,7 @@ class KanbanBoardSubTaskForm extends AbstractType
         $resolver->setDefaults([
             'csrf_protection'   => false,
             'projectIssues'     => [],
+            'selectedIssue'     => 12,
         ]);
     }
     

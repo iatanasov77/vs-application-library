@@ -24,6 +24,7 @@ class KanbanboardTaskForm extends AbstractType
                'placeholder'        => 'vs_application.form.kanbanboard_task.project_issue_placeholder',
                'translation_domain' => 'VSApplicationBundle',
                'choices'            => $options['projectIssues'],
+               'empty_data'         => $options['selectedIssue'],
                
            ])
            
@@ -80,6 +81,7 @@ class KanbanboardTaskForm extends AbstractType
             'csrf_protection'   => false,
             'pipeline_id'       => 0,
             'projectIssues'     => [],
+            'selectedIssue'     => 12,
         ]);
     }
     

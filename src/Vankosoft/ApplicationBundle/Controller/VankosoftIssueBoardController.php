@@ -151,6 +151,7 @@ class VankosoftIssueBoardController extends AbstractController
             $formData   = $form->getData();
             //echo '<pre>'; var_dump( $formData ); die;
             
+            $formData['memberEmail']    = $this->securityBridge->getUser()->getEmail();
             $response   = $this->vsProject->createIssue( $formData );
             //echo '<pre>'; var_dump( $response ); die;
             
@@ -159,7 +160,7 @@ class VankosoftIssueBoardController extends AbstractController
                 'payload'   => [
                     'pipelineId'    => $pipelineId,
                     'parentTaskId'  => $parentTaskId,
-                    'issueId'       => $submitedIssue->getId(),
+                    'issueId'       => $response['issue_id'],
                 ],
             ]);
         }

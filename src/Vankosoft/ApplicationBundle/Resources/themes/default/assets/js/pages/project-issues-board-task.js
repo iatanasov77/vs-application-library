@@ -175,6 +175,11 @@ $( function ()
                 $( '#createSubtaskModalLabel' ).text( _Translator.trans( 'vs_application.template.project_issues.create_sub_task' ) );
                 $( '#modalSubtask > div.card-body' ).html( response );
                 
+                flatpickr( "#kanban_board_sub_task_form_dueDate", {
+                    dateFormat: "d M, Y",
+                    defaultDate: $( "#kanban_board_sub_task_form_dueDate" ).val(),
+                });
+                
                 /** Bootstrap 5 Modal Toggle */
                 const myModal = new bootstrap.Modal( '#createSubtaskModal', {
                     keyboard: false
@@ -268,9 +273,9 @@ $( function ()
                         $( '#createSubtaskModalLabel' ).text( _Translator.trans( 'vs_application.template.project_issues.create_sub_task' ) );
                         $( '#modalSubtask > div.card-body' ).html( response );
                         
-                        flatpickr( "#kanban_board_create_task_form_dueDate", {
+                        flatpickr( "#kanban_board_sub_task_form_dueDate", {
                             dateFormat: "d M, Y",
-                            defaultDate: $( "#kanban_board_create_task_form_dueDate" ).val(),
+                            defaultDate: $( "#kanban_board_sub_task_form_dueDate" ).val(),
                         });
                     },
                     error: function()

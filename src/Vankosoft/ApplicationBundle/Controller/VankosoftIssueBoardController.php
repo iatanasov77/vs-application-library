@@ -235,10 +235,10 @@ class VankosoftIssueBoardController extends AbstractController
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $subTask    = $form->getData();
+            //echo '<pre>'; var_dump( $subTask ); die;
             
-            $em = $this->doctrine->getManager();
-            $em->persist( $subTask );
-            $em->flush();
+            $response   = $this->vsProject->createKanbanboardTask( $subTask );
+            //echo '<pre>'; var_dump( $response ); die;
             
             return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_task_show', [
                 'taskId'        => $taskId

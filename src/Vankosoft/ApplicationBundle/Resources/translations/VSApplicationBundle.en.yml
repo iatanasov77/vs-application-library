@@ -93,6 +93,7 @@ vs_application:
         banner_places_create: Create a Banner Place
         banner_places_update: Edit Banner Place
         
+        issue_tracking: Issue Tracking
         project_issues: Project Issues
         create_issue: Create Issue
         update_issue: Update Issue
@@ -229,6 +230,8 @@ vs_application:
             status: Status
             due_date: Due Date
             add_task: Add Task
+            leave_comment: Leave a Comment
+            post_comment: Post Comment
             
         save_tags: 'Save Tags'
             
@@ -291,6 +294,7 @@ vs_application:
         items_index_row_action_delete: Delete
         items_index_row_action_download: Download
         items_index_there_are_no_mappers_to_display: No Items to Display
+        items_index_there_are_no_result_found: Sorry! No Result Found
         locales_index_title: 'List Available Locales'
         locales_update_title: 'Edit Locale'
         locales_create_title: 'Create New Locale'
@@ -354,6 +358,7 @@ vs_application:
             pipeline: Pipeline
             task_no: Task No
             task_title: Task Title
+            task: Task
             project_name: Project Name
             priority: Priority
             due_date: Due Date
@@ -366,9 +371,13 @@ vs_application:
             task_attachments: Attachments
             task_attachment: Attachment
             add_attachment: Add Attachment
+            file_name: File Name
+            attachment_type: Type
+            attachment_size: Size
             
             summary: Summary
             sub_tasks: Sub-tasks
+            create_sub_task: Create Sub-Task
             task_tags: Task Tags
             project_issue_comments_tab: Comments
             project_issue_attachments_tab: Attachments
@@ -379,10 +388,12 @@ vs_application:
             create_issue_comment_modal_title: Create New Comment
             edit_issue_comment_modal_title: Edit Comment
             button_reply_issue_comment: Reply to This Comment
+            button_reply: Reply
             project_issue_tasks_title: Kanbanboard Tasks
             button_create_issue_task: Create New Task
             create_issue_task_modal_title: Create New Kanbanboard Task
             edit_issue_task_modal_title: Edit Kanbanboard Task
+            create_issue: Create Issue
         
     modal:
         are_you_sure: Are you sure ?

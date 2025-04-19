@@ -1,0 +1,80 @@
+{% import "@VSApplication/Macros/form.html.twig" as vs_form %}
+
+<div class="card">
+    <h5 class="card-header">{{ 'vs_application.template.project_issues.issue_details'  | trans( {},'VSApplicationBundle' ) }}</h5>
+    <div class="card-body">
+    
+        {% if formErrors is defined %}
+            {{ vs_form.errors( formErrors ) }}
+        {% endif %}
+        
+        <div id="FormContainer">
+            {% if(itemId) %}{% set method = "PUT" %}{% else %}{% set method = "POST" %}{% endif %}
+            {{ form_start(form, { 'attr': {'id': 'FormProjectIssue'}, 'method': method }) }}
+            
+                <div class="form-group">
+                    {{ form_label(form.title, null, {
+                        'label_attr': {'class': 'form-label'}
+                        }) 
+                    }}
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.description, null, {
+                        'label_attr': {'class': 'form-label'}
+                        }) 
+                    }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                
+                <fieldset class="border border-dark rounded p-3 m-3">
+                    <legend class="w-auto float-none ps-2 pe-2">
+                        {{ 'vs_application.form.project_issue.status'  | trans( {},'VSApplicationBundle' ) }}
+                    </legend>
+                    
+                    {% for status in form.status %}
+                        <div class="form-check">
+                            {{ form_widget(status, {'attr': {'class': 'form-check-input project-issue-status-radio', 'checked': loop.index == 1}}) }}
+                            
+                            {{ form_label(status, null, {
+                                'label_attr': {'class': 'form-check-label'}
+                                }) 
+                            }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+                
+                {{ form_widget( form.labelsWhitelist, { 'value' : labelsWhitelist | join(',') } ) }}
+                <div class="form-group">
+                    {{ form_label(form.labels, null, {
+                        'label_attr': {'class': 'form-label'}
+                        }) 
+                    }}
+                    
+                    {{ form_widget(form.labels, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                
+                <div class="row">&nbsp;</div>
+
+                <div class="input-group row vsFormButtonsGroup">
+                    <div class="col-sm-2">
+                        {{ form_widget(form.btnApply, {'attr': {'class': 'btn btn-primary', 'id':'btnApply'}}) }}
+                    </div>
+                    <div class="col-sm-2">
+                        {{ form_widget(form.btnSave, {'attr': {'class': 'btn btn-primary', 'id':'btnSave'}}) }}
+                    </div>
+                    
+                    <div class="col-sm-2">
+                        <a class="btn btn-default" href="{{ path( 'vs_application_project_issues_index' ) }}">
+                            {{ 'vs_application.form.cancel' | trans( {},'VSApplicationBundle' ) }}
+                        </a>
+                    </div>
+                    
+                    <div class="col-sm-6"></div>
+                </div>
+                
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>

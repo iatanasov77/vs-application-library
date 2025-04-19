@@ -1,0 +1,14 @@
+.progressBar {
+    display: none;
+    margin-top: 5px;
+}
+
+.progressInfo {
+    position: absolute;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+
+.file-upload-help {
+    display: none;
+}

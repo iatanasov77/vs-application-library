@@ -4,26 +4,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
+use Vankosoft\UsersBundle\Security\SecurityBridge;
 use Vankosoft\ApplicationBundle\Component\Status;
 use Vankosoft\ApplicationBundle\Component\Exception\VankosoftApiException;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\ProjectIssue;
 use Vankosoft\ApplicationBundle\Component\ProjectIssue\KanbanboardTask as VsKanbanboardTask;
+use Vankosoft\ApplicationBundle\Form\ProjectIssueForm;
 use Vankosoft\ApplicationBundle\Form\KanbanboardTaskForm;
+use Vankosoft\ApplicationBundle\Form\KanbanBoardSubTaskForm;
 use Vankosoft\ApplicationBundle\Form\KanbanBoardTaskAttachmentForm;
+use Vankosoft\ApplicationBundle\Form\ProjectIssueCommentForm;
 
 class VankosoftIssueBoardController extends AbstractController
 {
+    /** @var HttpClientInterface */
+    private $httpClient;
+    
+    /** @var SecurityBridge */
+    private $securityBridge;
+    
     /** @var ProjectIssue */
     private $vsProject;
     
     public function __construct(
+        HttpClientInterface $httpClient,
+        SecurityBridge $securityBridge,
         ProjectIssue $vsProject
     ) {
-        $this->vsProject            = $vsProject;
+        $this->httpClient       = $httpClient;
+        $this->securityBridge   = $securityBridge;
+        $this->vsProject        = $vsProject;
     }
     
     public function showKanbanboardAction( Request $request ): Response
@@ -47,7 +62,7 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
-    public function showTaskAction( $pipelineId, $taskId, Request $request ): Response
+    public function showTaskAction( $taskId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
         $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
@@ -60,16 +75,19 @@ class VankosoftIssueBoardController extends AbstractController
             throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
         }
         
-        $board          = $this->vsProject->getKanbanboard();
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
         $designations   = VsKanbanboardTask::BOARD_MEMBER_DESIGNATIONS;
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/show.html.twig', [
             'designations'  => $designations,
-            'board'         => $board,
-            'task'          => $board['pipelines'][$pipelineId]['tasks'][$taskId],
-            'pipelineId'    => $pipelineId,
-            'taskId'        => $taskId,
-            'pipelineSlug'  => $board['pipelines'][$pipelineId]['slug'],
+            'task'          => $response['task'],
+            'board'         => $response['board'],
+//             'taskId'        => $taskId,
+//             'pipelineSlug'  => $board['pipelines'][$pipelineId]['slug'],
+            
+            'commentForm'   => $this->createForm( ProjectIssueCommentForm::class, null, [
+                //'action'    => $formAction,
+            ]),
         ]);
     }
     
@@ -109,7 +127,59 @@ class VankosoftIssueBoardController extends AbstractController
         return new JsonResponse( $response );
     }
     
-    public function createTaskAction( $pipelineId, Request $request ): Response
+    public function deleteMemberAction( $taskId, $memberId, Request $request ): Response
+    {
+        $response   = $this->vsProject->deleteKanbanboardTaskMember([
+            'taskId'    => $taskId,
+            'memberId'  => $memberId,
+        ]);
+        
+        $redirectUrl    = $request->request->get( 'redirectUrl' );
+        if ( $redirectUrl ) {
+            return $this->redirect( $redirectUrl );
+        }
+        
+        return new JsonResponse([
+            'status'    => Status::STATUS_OK,
+        ]);
+    }
+    
+    public function createIssueAction( $pipelineId, $parentTaskId, Request $request ): Response
+    {
+        $form   = $this->createForm( ProjectIssueForm::class, null, [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_create_issue', [
+                'pipelineId'    => $pipelineId,
+                'parentTaskId'  => $parentTaskId
+            ]),
+            'method'    => 'POST',
+        ]);
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $formData   = $form->getData();
+            //echo '<pre>'; var_dump( $formData ); die;
+            
+            $formData['memberEmail']    = $this->securityBridge->getUser()->getEmail();
+            $response   = $this->vsProject->createIssue( $formData );
+            //echo '<pre>'; var_dump( $response ); die;
+            
+            return new JsonResponse([
+                'status'   => Status::STATUS_OK,
+                'payload'   => [
+                    'pipelineId'    => $pipelineId,
+                    'parentTaskId'  => $parentTaskId,
+                    'issueId'       => $response['issue_id'],
+                ],
+            ]);
+        }
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_issue_form.html.twig', [
+            'form'              => $form,
+            'labelsWhitelist'   => $this->vsProject->getIssueLabelWhitelist(),
+        ]);
+    }
+    
+    public function createTaskAction( $pipelineId, $issueId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
         $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
@@ -126,11 +196,15 @@ class VankosoftIssueBoardController extends AbstractController
         $form = $this->createForm( KanbanboardTaskForm::class, null, [
             'action'        => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_create_task', [
                 'pipelineId'    => $pipelineId,
+                'issueId'       => $issueId,
             ]),
             'method'        => 'POST',
             
             'pipeline_id'   => $pipelineId,
             'projectIssues' => $formOptions['issues'],
+            'selectedIssue' => $issueId,
+            
+            'boardMembers'  => $formOptions['members']['selectOptions'],
         ]);
         
         $form->handleRequest( $request );
@@ -146,8 +220,60 @@ class VankosoftIssueBoardController extends AbstractController
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
             'form'          => $form,
-            'boardMembers'  => $formOptions['members'],
+            'pipelineId'    => $pipelineId,
+            'boardMembers'  => $formOptions['members']['extended'],
         ]);
+    }
+    
+    public function getSubTaskFormAction( $taskId, $issueId, $subTaskId, Request $request ): Response
+    {
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
+        
+        $formOptions = $this->vsProject->getPipelineTaskFormData();
+        $form   = $this->createForm( KanbanBoardSubTaskForm::class, null, [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_task_get_subtask_form', [
+                'taskId'    => $taskId,
+                'subTaskId' => $subTaskId,
+                'issueId'   => $issueId,
+            ]),
+            'method'            => 'POST',
+            
+            'parent_task_id'    => $taskId,
+            
+            'projectIssues'     => $formOptions['issues'],
+            'selectedIssue'     => $issueId,
+            
+            'boardMembers'      => $formOptions['members']['selectOptions'],
+        ]);
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $subTask    = $form->getData();
+            //echo '<pre>'; var_dump( $subTask ); die;
+            
+            $response   = $this->vsProject->createKanbanboardTaskSubTask( $subTask );
+            //echo '<pre>'; var_dump( $response ); die;
+            
+            return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_task_show', [
+                'taskId'        => $taskId
+            ]);
+        }
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_subtask_form.html.twig', [
+            'form'          => $form,
+            'item'          => $response['task'],
+            'boardMembers'  => $response['board']['members'],
+        ]);
+    }
+    
+    public function getCommentFormAction( $taskId, Request $request ): Response
+    {
+        
+    }
+    
+    public function saveCommentFormAction( $taskId, Request $request ): Response
+    {
+        
     }
     
     public function getAttachmentFormAction( $taskId, Request $request ): Response
@@ -194,5 +320,58 @@ class VankosoftIssueBoardController extends AbstractController
             'status'    => Status::STATUS_ERROR,
             'message'   => 'Form NOT Submitted Properly !',
         ]);
+    }
+    
+    public function deleteTaskAttachment( $taskId, $attachmentId, Request $request ): Response
+    {
+        $response   = $this->vsProject->deleteKanbanboardTaskAttachment([
+            'attachmentId'  => $attachmentId,
+        ]);
+        
+        $redirectUrl    = $request->request->get( 'redirectUrl' );
+        if ( $redirectUrl ) {
+            return $this->redirect( $redirectUrl );
+        }
+        
+        return new JsonResponse([
+            'status'    => Status::STATUS_OK,
+        ]);
+    }
+    
+    public function downloadTaskAttachment( $taskId, $attachmentId, Request $request ): Response
+    {
+        $attachment     = $this->vsProject->getKanbanboardTaskAttachment( $attachmentId );
+        $remoteResponse = $this->vsProject->downloadKanbanboardTaskAttachment( $attachmentId );
+        
+        $client     = $this->httpClient;
+        $response   = new StreamedResponse();
+        $response->setCallback( function() use ( $client, $remoteResponse )
+        {
+            foreach ( $client->stream( $remoteResponse ) as $chunk ) {
+                print $chunk->getContent();
+            }
+        });
+        
+        $response->headers->set( 'Content-Transfer-Encoding', 'binary' );
+        $response->headers->set( 'Content-Type', $attachment['type'] );
+        $this->makeContentDisposition( $attachment, $response );
+        
+        return $response;
+    }
+    
+    private function makeContentDisposition( array $attachment, Response &$response )
+    {
+        $transliterator = \Transliterator::create( 'Any-Latin' );
+        $transliteratorToASCII = \Transliterator::create( 'Latin-ASCII' );
+        $originalName   = $transliteratorToASCII->transliterate(
+            $transliterator->transliterate( $attachment['originalName'] )
+        );
+        
+        $disposition    = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            $originalName
+        );
+        
+        $response->headers->set( 'Content-Disposition', $disposition );
     }
 }

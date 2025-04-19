@@ -54,7 +54,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function createIssue( array $formData )
+    public function createIssue( array $formData ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/new';
@@ -70,7 +70,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function updateIssue( int $id, array $formData )
+    public function updateIssue( int $id, array $formData ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
@@ -86,7 +86,7 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function deleteIssue( int $id )
+    public function deleteIssue( int $id ): array
     {
         $apiToken       = $this->login();
         $issuesEndpoint = $this->apiConnection['host'] . '/project-issues/' . $id;
@@ -135,6 +135,20 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function getKanbanboardTask( $id ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/kanbanboard-tasks/' . $id;
+        
+        $response       = $this->httpClient->request( 'GET', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     /**
      * Options for Kanbanboard Create Task Form
      *
@@ -150,7 +164,8 @@ final class ProjectIssue extends ProjectApiClient
                 'Authorization' => 'Bearer ' . $apiToken,
             ],
             'query'      => [
-                'board' => $this->kanbanboardSlug
+                'board'     => $this->kanbanboardSlug,
+                'project'   => $this->projectSlug
             ],
         ]);
         
@@ -161,6 +176,21 @@ final class ProjectIssue extends ProjectApiClient
     {
         $apiToken       = $this->login();
         $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/new';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function createKanbanboardTaskSubTask( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/create-sub-task';
         
         $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
             'headers'   => [
@@ -206,6 +236,79 @@ final class ProjectIssue extends ProjectApiClient
         ]);
         
         return $this->processApiResponse( $response );
+    }
+    
+    public function deleteKanbanboardTaskMember( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-member';
+        
+        $response = $this->httpClient->request( 'POST', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function createKanbanboardTaskAttachment( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/create-attachment';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function deleteKanbanboardTaskAttachment( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/delete-attachment';
+        
+        $response = $this->httpClient->request( 'POST', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function getKanbanboardTaskAttachment( $id ): array
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/attachment/' . $id;
+        
+        $response = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
+    public function downloadKanbanboardTaskAttachment( $id ): ResponseInterface
+    {
+        $apiToken       = $this->login();
+        $issuesEndpoint = $this->apiConnection['host'] . '/pipeline-task/download-attachment/' . $id;
+        
+        $response = $this->httpClient->request( 'GET', $issuesEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+        ]);
+        
+        return $response;
     }
     
     private function processApiResponse( ResponseInterface $response ): array

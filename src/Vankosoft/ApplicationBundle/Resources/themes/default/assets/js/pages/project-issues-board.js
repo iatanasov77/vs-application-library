@@ -220,7 +220,10 @@ $( function ()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vs_application_project_issues_kanbanboard_pipeline_create_task', {'pipelineId': pipelineId } ),
+            url: VsPath( 'vs_application_project_issues_kanbanboard_pipeline_create_task', {
+                'pipelineId': pipelineId,
+                'issueId': 0
+            }),
             success: function( response )
             {
                 //$( '#modalPipelineTask > div.card-body' ).html( response );
@@ -236,6 +239,53 @@ $( function ()
                     keyboard: false
                 });
                 myModal.show( $( '#creatertaskModal' ).get( 0 ) );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
+    $( '#modalPipelineTask' ).on( 'click', '#btnCreateIssue', function( e )
+    {
+        var pipelineId  = $( this ).attr( 'data-pipelineId' );
+        
+        $.ajax({
+            type: "GET",
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_create_issue', {
+                'pipelineId': pipelineId,
+                'parentTaskId': 0
+            }),
+            success: function( response )
+            {
+                $( '#creatertaskModalLabel' ).text( _Translator.trans( 'vs_application.template.project_issues.create_issue' ) );
+                $( '#modalPipelineTask' ).html( response );
+                
+                var tagsInputWhitelist  = $( '#project_issue_form_labelsWhitelist' ).val().split( ',' );
+                //console.log( tagsInputWhitelist );
+                
+                tagsInput   = $( '#project_issue_form_labels' )[0];
+                tagify      = new Tagify( tagsInput, {
+                    whitelist : tagsInputWhitelist,
+                    dropdown : {
+                        classname     : "color-blue",
+                        enabled       : 0,              // show the dropdown immediately on focus
+                        maxItems      : 5,
+                        position      : "text",         // place the dropdown near the typed text
+                        closeOnSelect : false,          // keep the dropdown open after selecting a suggestion
+                        highlightFirst: true
+                    }
+                });
+                
+                // bind "DragSort" to Tagify's main element and tell
+                // it that all the items with the below "selector" are "draggable"
+                dragsort    = new DragSort( tagify.DOM.scope, {
+                    selector: '.'+tagify.settings.classNames.tag,
+                    callbacks: {
+                        dragEnd: onDragEnd
+                    }
+                });
             },
             error: function()
             {

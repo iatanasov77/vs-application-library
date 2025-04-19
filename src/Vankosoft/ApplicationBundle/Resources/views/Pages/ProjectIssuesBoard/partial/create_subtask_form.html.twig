@@ -1,5 +1,5 @@
-{{ form_start(form, { 'attr': { 'class': 'form-horizontal' } }) }}
-    {{ form_widget( form.pipeline ) }}
+{{ form_start(form, { 'attr': { 'class': 'form-horizontal', 'id': 'form-kanbanboard-subtask' } }) }}
+    {{ form_widget( form.parentTask ) }}
     
     <div class="row g-3">
         <div class="col-lg-12">
@@ -11,21 +11,14 @@
             <div class="input-group mb-3">
                 {{ form_widget(form.issue, {'attr': {'class': 'form-select'}}) }}
                 <div class="input-group-append ms-2">
-                    <button type="button" class="btn btn-primary" id="btnCreateIssue" data-pipelineId="{{ pipelineId }}">
+                    <button type="button" class="btn btn-primary" id="btnCreateIssue"
+                        data-pipelineId="{{ item.pipeline.id }}"
+                        data-parentTaskId="{{ item.id }}"
+                    >
                         {{ 'vs_application.template.project_issues.create_issue' | trans( {},'VSApplicationBundle' ) }}
                     </button>
                 </div>
             </div>
-        </div>
-        <!--end col-->
-        
-        <div class="col-lg-12">
-            {{ form_label(form.issueType, null, {
-                'label_attr': {'class': 'form-label'}
-                }) 
-            }}
-            
-            {{ form_widget(form.issueType, {'attr': {'class': 'form-select'}}) }}
         </div>
         <!--end col-->
         
@@ -41,16 +34,19 @@
                         <li>
                             <div class="form-check d-flex align-items-center">
                                 <input type="checkbox"
-                                    id="kanban_board_create_task_form_assignedTo_{{ member.id }}"
-                                    name="kanban_board_create_task_form[assignedTo][]"
+                                    id="kanban_board_sub_task_form_assignedTo_{{ member.id }}"
+                                    name="kanban_board_sub_task_form[assignedTo][]"
                                     class="form-check-input me-3"
                                     value="{{ member.id }}"
                                 >
                                 <label class="form-check-label d-flex align-items-center"
-                                    for="kanban_board_create_task_form_assignedTo_{{ member.id }}"
+                                    for="kanban_board_sub_task_form_assignedTo_{{ member.id }}"
                                 >
                                     <span class="flex-shrink-0">
-                                        <img src="{{ member.photoPath }}" alt="{{ member.name }}" class="avatar-xxs rounded-circle" />
+                                        <img src="{{ member.photoPath }}"
+                                            alt="{{ member.name }}"
+                                            class="avatar-xxs rounded-circle"
+                                        />
                                     </span>
                                     <span class="flex-grow-1 ms-2">
                                         {{ member.name }}
@@ -96,16 +92,6 @@
                     'placeholder': 'Select date'
                 }}
             ) }}
-        </div>
-        <!--end col-->
-        
-        <div class="mt-4">
-            <div class="hstack gap-2 justify-content-end">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                    {{ 'vs_application.form.close' | trans( {},'VSApplicationBundle' ) }}
-                </button>
-                {{ form_widget( form.btnSave, { 'attr': { 'class': 'btn btn-success' } } ) }}
-            </div>
         </div>
         <!--end col-->
     </div>

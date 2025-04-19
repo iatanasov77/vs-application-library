@@ -93,6 +93,7 @@ vs_application:
         banner_places_create: Създаване място за банер
         banner_places_update: Редакция място за банер
         
+        issue_tracking: Проследяване на Проблеми
         project_issues: Проблеми в Проекта
         create_issue: Създай Нов Проблем
         update_issue: Редакция на Проблем
@@ -229,6 +230,8 @@ vs_application:
             status: Status
             due_date: Due Date
             add_task: Add Task
+            leave_comment: Leave a Comment
+            post_comment: Post Comment
         
         save_tags: 'Запази Таговете'
             
@@ -291,6 +294,7 @@ vs_application:
         items_index_row_action_delete: Изтрий
         items_index_row_action_download: Даунлоуд
         items_index_there_are_no_mappers_to_display: Няма Обекти за Показване
+        items_index_there_are_no_result_found: Sorry! No Result Found
         locales_index_title: 'Списък Локали'
         locales_update_title: 'Редакция на Локал'
         locales_create_title: 'Създаване Нов Локал'
@@ -354,6 +358,7 @@ vs_application:
             pipeline: Pipeline
             task_no: Task No
             task_title: Task Title
+            task: Task
             project_name: Project Name
             priority: Priority
             due_date: Due Date
@@ -364,10 +369,15 @@ vs_application:
             members: Members
             
             task_attachments: Attachments
+            task_attachment: Attachment
             add_attachment: Add Attachment
+            file_name: File Name
+            attachment_type: Type
+            attachment_size: Size
             
             summary: Summary
             sub_tasks: Sub-tasks
+            create_sub_task: Create Sub-Task
             task_tags: Task Tags
             project_issue_comments_tab: Comments
             project_issue_attachments_tab: Attachments
@@ -378,10 +388,12 @@ vs_application:
             create_issue_comment_modal_title: Create New Comment
             edit_issue_comment_modal_title: Edit Comment
             button_reply_issue_comment: Reply to This Comment
+            button_reply: Reply
             project_issue_tasks_title: Kanbanboard Tasks
             button_create_issue_task: Create New Task
             create_issue_task_modal_title: Create New Kanbanboard Task
             edit_issue_task_modal_title: Edit Kanbanboard Task
+            create_issue: Create Issue
         
     modal:
         are_you_sure: Are you sure ?

@@ -97,8 +97,8 @@ class VankosoftIssueController extends AbstractController
         return $this->render( '@VSApplication/Pages/ProjectIssues/update.html.twig', [
             'form'              => $form,
             'itemId'            => $id,
-            'itemComments'      => [],
-            'itemTasks'         => [],
+            'itemComments'      => $response ['comments'],
+            'itemTasks'         => $response ['tasks'],
             
             'labelsWhitelist'   => $labelsWhitelist,
         ]);

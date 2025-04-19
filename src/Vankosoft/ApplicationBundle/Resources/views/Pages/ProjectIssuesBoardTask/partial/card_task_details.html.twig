@@ -7,7 +7,7 @@
                 data-taskId="{{ task.slug }}"
             >
                 {% for pipeline in board.pipelines %}
-                    <option value="{{ pipeline.slug }}" {% if pipeline.slug == pipelineSlug %}selected="selected"{% endif %}>{{ pipeline.name }}</option>
+                    <option value="{{ pipeline.slug }}" {% if pipeline.slug == task.pipeline.slug %}selected="selected"{% endif %}>{{ pipeline.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -28,16 +28,16 @@
                     </tr>
                     <tr>
                         <td class="fw-medium">{{ 'vs_application.template.project_issues.priority' | trans( {},'VSApplicationBundle' ) }}</td>
-                        <td>{{ task.priority | vs_kanbanboard_task_priority }}</td>
+                        <td>{{ task.priority | vs_kanbanboard_task_priority_subtle }}</td>
                     </tr>
                     <tr>
                         <td class="fw-medium">{{ 'vs_application.template.project_issues.status' | trans( {},'VSApplicationBundle' ) }}</td>
-                        <td>{{ task.status | vs_kanbanboard_task_status }}</td>
+                        <td>{{ task.status | vs_kanbanboard_task_status_subtle }}</td>
                     </tr>
                     {% if task.dueDate %}
                         <tr>
                             <td class="fw-medium">{{ 'vs_application.template.project_issues.due_date' | trans( {},'VSApplicationBundle' ) }}</td>
-                            <td>{{ task.dueDate | date( 'd.m.Y' ) }}</td>
+                            <td>{{ task.dueDate }}</td>
                         </tr>
                     {% endif %}
                 </tbody>

@@ -1,3 +1,29 @@
+1.12.23	|	Release date: **19.04.2025**
+============================================
+* New Features:
+  - Refactoring All Uploader Components.
+  - Improve Kanbaboard Task Edit Page.
+  - Create a Project Issues Api Task Attachment Uploader.
+  - Improve Oneup PostPersistListener .
+  - Make Oneup PostPersistListener to Save Kanbanboard Task Attachments From API Request.
+  - Refactoring Oneup Uploader Initialization Scripts.
+  - Create a Project Issues Api Task Attachment Uploader.
+  - Improve Bootstrap5 'file_input.js' .
+  - Improve Oneupupload Macros .
+  - Improve Project Issues Api Task Attachment Modal.
+  - Create Project Issues Api DeleteTask Attachment.
+  - Create Project Issues Api Delete Task Member.
+  - Create Kanbanboard Task Comments.
+  - Show Project Issue Comments on Edit Page.
+  - Improve a Twig Extension.
+  - Show Sub-Tasks For Kanbanboard Task.
+  - Create Sub-Tasks For Kanbanboard Task.
+  - Use a Vankosoft API KanbanBoard Show Task Endpoint.
+  - Create KanbanBoard Task Sub-Tasks.
+  - Fix Kanbanboard Task Comments Tab.
+  - Download Kanbanboard Task Attachment by API.
+
+
 1.12.22	|	Release date: **06.04.2025**
 ============================================
 * New Features:

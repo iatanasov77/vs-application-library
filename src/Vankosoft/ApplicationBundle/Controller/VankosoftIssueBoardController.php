@@ -193,7 +193,7 @@ class VankosoftIssueBoardController extends AbstractController
     {
         $response       = $this->vsProject->getKanbanboardTask( $taskId );
         
-        $form   = $this->createForm( KanbanboardTaskForm::class, $task, [
+        $form   = $this->createForm( KanbanboardTaskForm::class, null, [
             'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', [
                 'pipelineId'    => $pipelineId,
                 'taskId'        => $taskId,

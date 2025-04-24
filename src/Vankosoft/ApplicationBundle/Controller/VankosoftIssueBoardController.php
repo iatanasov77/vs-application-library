@@ -115,6 +115,7 @@ class VankosoftIssueBoardController extends AbstractController
         
         return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/assign_member_form.html.twig', [
             'task'  => $response['task'],
+            'board' => $response['board'],
         ]);
     }
     

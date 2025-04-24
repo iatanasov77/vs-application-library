@@ -30,7 +30,7 @@
 <div class="mx-n4 px-4" data-simplebar style="max-height: 225px;">
     <div class="vstack gap-3">
         
-        {% for boardMember in task.board.members %}
+        {% for boardMember in board.members %}
             {% if boardMember.id not in memberIds %}
                 <div class="d-flex align-items-center">
                     <div class="avatar-xs flex-shrink-0 me-3">

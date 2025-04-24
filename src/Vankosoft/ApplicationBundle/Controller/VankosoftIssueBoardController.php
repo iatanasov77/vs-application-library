@@ -189,6 +189,35 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
+    public function editTaskAction( $pipelineId, $taskId, Request $request ): Response
+    {
+        $task   = $this->tasksRepository->find( $taskId );
+        
+        $form   = $this->createForm( KanbanboardTaskForm::class, $task, [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', [
+                'pipelineId'    => $pipelineId,
+                'taskId'        => $taskId,
+            ]),
+            'method'    => 'POST',
+        ]);
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $submitedTask    = $form->getData();
+            
+            $this->doctrine->getManager()->persist( $submitedTask );
+            $this->doctrine->getManager()->flush();
+            
+            return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_show' );
+        }
+        
+        return $this->render( 'Pages/KanbanBoardTasks/update.html.twig', [
+            'form'          => $form,
+            'item'          => $task,
+            'pipelineId'    => $pipelineId,
+        ]);
+    }
+    
     public function createTaskAction( $pipelineId, $issueId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );

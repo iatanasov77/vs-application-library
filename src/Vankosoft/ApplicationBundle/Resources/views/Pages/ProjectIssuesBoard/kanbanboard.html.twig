@@ -92,7 +92,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="#">
+                                                    <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', { 'pipelineId': pipeline.id, 'taskId': task.id } ) }}">
                                                         <i class="ri-edit-2-line align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>

@@ -87,6 +87,10 @@ vs_application_project_issues_kanbanboard_task_assign_member:
     path: /project-issues-board/assign-member/{taskId}/{memberId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::assignMemberAction
 
+vs_application_project_issues_kanbanboard_pipeline_edit_task:
+    path: /project-issues-board/edit-task/{pipelineId}/{taskId}
+    controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::editTaskAction
+
 vs_application_project_issues_kanbanboard_pipeline_create_task:
     path: /project-issues-board/create-task/{pipelineId}/{issueId}
     controller: Vankosoft\ApplicationBundle\Controller\VankosoftIssueBoardController::createTaskAction

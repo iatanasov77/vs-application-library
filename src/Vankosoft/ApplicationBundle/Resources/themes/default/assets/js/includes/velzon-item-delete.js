@@ -1,4 +1,5 @@
 var onResourceDeleteCancel  = function() {
+    alert( 'Delete Canceled ' );
     $( '#deleteResourceForm' ).attr( 'action', '' );
     $( '#resource_delete__token' ).val( '' );
     
@@ -22,12 +23,7 @@ $( function()
             keyboard: false
         });
         
-        subsModal.addEventListener( 'hide.bs.modal', function() {
-            alert(2);
-        }, {
-            once: true
-        });
-         
+        subsModal.addEventListener( 'hide.bs.modal', onResourceDeleteCancel, { once: true } );
         myModal.show( subsModal );
 	});
 	

@@ -1,5 +1,3 @@
-{% import "@VSApplication/Macros/form.html.twig" as vs_form %}
-
 {% if useFormMethod is not defined %}
     {% set useFormMethod = item.id ? 'PUT' : 'POST' %}
 {% endif %}
@@ -56,5 +54,5 @@
         {{ form_widget(form.dueDate, {'attr': {'class': 'form-control'}}) }}
     </div>
     
-    {{ vs_form.buttons( form, null ) }}
+    {{ form_widget( form.btnSave, { 'attr': { 'class': 'btn btn-success' } } ) }}
 {{ form_end(form, {'render_rest': false}) }}

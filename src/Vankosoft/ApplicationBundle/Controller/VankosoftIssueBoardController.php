@@ -191,7 +191,7 @@ class VankosoftIssueBoardController extends AbstractController
     
     public function editTaskAction( $pipelineId, $taskId, Request $request ): Response
     {
-        $task   = $this->tasksRepository->find( $taskId );
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
         
         $form   = $this->createForm( KanbanboardTaskForm::class, $task, [
             'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', [
@@ -213,7 +213,7 @@ class VankosoftIssueBoardController extends AbstractController
         
         return $this->render( 'Pages/KanbanBoardTasks/update.html.twig', [
             'form'          => $form,
-            'item'          => $task,
+            'item'          => $response['task'],
             'pipelineId'    => $pipelineId,
         ]);
     }

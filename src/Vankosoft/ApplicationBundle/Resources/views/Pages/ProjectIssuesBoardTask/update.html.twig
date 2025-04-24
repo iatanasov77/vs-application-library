@@ -1,0 +1,37 @@
+{% extends "@VSApplication/layout.html.twig" %}
+
+{# Import Macros #}
+{% import "@VSApplication/Macros/form.html.twig" as vs_form %}
+
+{% if( item.id ) %}
+    {% set pageTitle = ( 'vs_application.form.kanbanboard_task.kanbanboard_task_edit_title' | trans( {},'VSApplicationBundle' ) ) ~ ': ' ~ item.title %}
+{% else %}
+    {% set pageTitle = 'vs_application.form.kanbanboard_task.' | trans( {},'VSApplicationBundle' ) %}
+{% endif %}
+
+{% block title %}{{ parent() }} :: {{ pageTitle }}{% endblock %}
+{% block pageTitle %}
+    <h4 class="pageheader-title">
+        <i class="fas fa-bug"></i> 
+        {{ pageTitle }}
+    </h4>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+            	<h5 class="card-header">{{ 'vs_application.form.kanbanboard_task.kanbanboard_task_details'  | trans( {},'VSApplicationBundle' ) }}</h5>
+            	<div class="card-body">
+            	
+                    {% if formErrors is defined %}
+                        {{ vs_form.errors( formErrors ) }}
+                    {% endif %}
+            	   
+            		{% include '@VSApplication/Pages/ProjectIssuesBoardTask/_form.html.twig' %}
+            		
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -211,7 +211,7 @@ class VankosoftIssueBoardController extends AbstractController
             return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_show' );
         }
         
-        return $this->render( 'Pages/KanbanBoardTasks/update.html.twig', [
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/update.html.twig', [
             'form'          => $form,
             'item'          => $response['task'],
             'pipelineId'    => $pipelineId,

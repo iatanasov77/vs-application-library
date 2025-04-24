@@ -109,6 +109,15 @@ class VankosoftIssueBoardController extends AbstractController
         return new JsonResponse( $response );
     }
     
+    public function getAssignMemberForm( $taskId, Request $request ): Response
+    {
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/assign_member_form.html.twig', [
+            'task'  => $response['task'],
+        ]);
+    }
+    
     public function assignMemberAction( $taskId, $memberId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );

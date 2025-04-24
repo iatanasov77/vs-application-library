@@ -214,16 +214,17 @@
         {% endfor %}
     </div>
     <!--end task-board-->
+    
+    {% include '@VSApplication/Partial/resource-delete.html.twig' %}
 {% endblock %}
 
 {% block modals %}
     {{ parent() }}
     
+    {% include '@VSApplication/Modal/delete-record-modal.html.twig' %}
     {% include '@VSApplication/Pages/ProjectIssuesBoard/modal/create_member.html.twig' %}
     {% include '@VSApplication/Pages/ProjectIssuesBoard/modal/create_task.html.twig' %}
-    {#
     {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/assign_to_member.html.twig' %}
-    #}
 {% endblock %}
 
 {% block head_styles %}

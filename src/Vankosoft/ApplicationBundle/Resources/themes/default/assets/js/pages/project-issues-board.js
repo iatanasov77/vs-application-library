@@ -1,4 +1,5 @@
 require( '../../css/kanbanboard.css' );
+require( '@/js/includes/velzon-item-delete.js' );
 
 var dragula = require( 'dragula' );
 var autoScroll = require( 'dom-autoscroller' );
@@ -195,7 +196,31 @@ $( function ()
         }
     }
     
-    $( '#btnAssignMember' ).on( 'click', function( e )
+    $( '.btnAssignMemberModal' ).on( 'click', function( e )
+    {
+        var taskId = $( this ).attr( 'data-taskId' );
+        
+        $.ajax({
+            type: "GET",
+            url: VsPath( 'vs_application_project_issues_kanbanboard_task_assign_member_form', {'taskId': taskId } ),
+            success: function( response )
+            {
+                $( '#AssignMemberModalBody' ).html( response );
+                
+                /** Bootstrap 5 Modal Toggle */
+                const myModal = new bootstrap.Modal( '#inviteMembersModal', {
+                    keyboard: false
+                });
+                myModal.show( $( '#inviteMembersModal' ).get( 0 ) );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
+    $( '#btnAssignMemberModal' ).on( 'click', '.btnAssignMember', function( e )
     {
         var taskId = $( this ).attr( 'data-taskId' );
         var memberId = $( this ).attr( 'data-memberId' );

@@ -14,7 +14,8 @@
     "authors": [
         {
             "name": "Ivan I. Atanasov",
-            "email": "i.atanasov77@gmail.com"
+            "email": "i.atanasov77@gmail.com",
+            "homepage": "http://vankosoft.org"
         }
     ],
     "require": {

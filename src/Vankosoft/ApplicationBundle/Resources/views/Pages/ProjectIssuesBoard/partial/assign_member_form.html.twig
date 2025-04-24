@@ -34,7 +34,7 @@
             {% if boardMember.id not in memberIds %}
                 <div class="d-flex align-items-center">
                     <div class="avatar-xs flex-shrink-0 me-3">
-                        <img src="{{ boardMember.photo.path | imagine_filter( 'users_crud_index_thumb' ) }}" alt="" class="img-fluid rounded-circle">
+                        <img src="{{ boardMember.photoPath }}" alt="" class="img-fluid rounded-circle">
                     </div>
                     <div class="flex-grow-1">
                         <h5 class="fs-13 mb-0">

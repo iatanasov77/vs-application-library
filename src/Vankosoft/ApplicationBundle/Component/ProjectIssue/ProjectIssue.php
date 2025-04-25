@@ -172,6 +172,21 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function editKanbanboardTask( $id, array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/' . $id;
+        
+        $response       = $this->httpClient->request( 'PUT', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     public function createKanbanboardTask( array $formData ): array
     {
         $apiToken       = $this->login();

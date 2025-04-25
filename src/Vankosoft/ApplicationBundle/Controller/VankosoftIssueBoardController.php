@@ -191,22 +191,39 @@ class VankosoftIssueBoardController extends AbstractController
     
     public function editTaskAction( $pipelineId, $taskId, Request $request ): Response
     {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
         $response       = $this->vsProject->getKanbanboardTask( $taskId );
         
+        $formOptions = $this->vsProject->getPipelineTaskFormData();
         $form   = $this->createForm( KanbanboardTaskForm::class, null, [
             'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', [
                 'pipelineId'    => $pipelineId,
                 'taskId'        => $taskId,
             ]),
-            'method'    => 'POST',
+            'method'    => 'PUT',
+            
+            'pipeline_id'   => $pipelineId,
+            'projectIssues' => $formOptions['issues'],
+            'selectedIssue' => $response['task']['issue']['id'],
+            
+            'boardMembers'  => $formOptions['members']['selectOptions'],
         ]);
         
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ) {
             $submitedTask    = $form->getData();
             
-            $this->doctrine->getManager()->persist( $submitedTask );
-            $this->doctrine->getManager()->flush();
+            $response   = $this->vsProject->editKanbanboardTask( $submitedTask );
             
             return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_show' );
         }

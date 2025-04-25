@@ -109,6 +109,16 @@ class VankosoftIssueBoardController extends AbstractController
         return new JsonResponse( $response );
     }
     
+    public function getAssignMemberForm( $taskId, Request $request ): Response
+    {
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/assign_member_form.html.twig', [
+            'task'  => $response['task'],
+            'board' => $response['board'],
+        ]);
+    }
+    
     public function assignMemberAction( $taskId, $memberId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
@@ -223,6 +233,59 @@ class VankosoftIssueBoardController extends AbstractController
             'pipelineId'    => $pipelineId,
             'boardMembers'  => $formOptions['members']['extended'],
         ]);
+    }
+    
+    public function editTaskAction( $pipelineId, $taskId, Request $request ): Response
+    {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
+        $response       = $this->vsProject->getKanbanboardTask( $taskId );
+        
+        $formOptions = $this->vsProject->getPipelineTaskFormData();
+        $form   = $this->createForm( KanbanboardTaskForm::class, null, [
+            'action'    => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', [
+                'pipelineId'    => $pipelineId,
+                'taskId'        => $taskId,
+            ]),
+            'method'    => 'PUT',
+            
+            'pipeline_id'   => $pipelineId,
+            'projectIssues' => $formOptions['issues'],
+            'selectedIssue' => $response['task']['issue']['id'],
+            
+            'boardMembers'  => $formOptions['members']['selectOptions'],
+        ]);
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $submitedTask    = $form->getData();
+            
+            $response   = $this->vsProject->editKanbanboardTask( $submitedTask );
+            
+            return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_show' );
+        }
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoardTask/update.html.twig', [
+            'form'          => $form,
+            'item'          => $response['task'],
+            'pipelineId'    => $pipelineId,
+        ]);
+    }
+    
+    public function deleteTaskAction( $taskId, Request $request ): Response
+    {
+        $response   = $this->vsProject->deleteKanbanboardTask( $taskId );
+        
+        return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_show' );
     }
     
     public function getSubTaskFormAction( $taskId, $issueId, $subTaskId, Request $request ): Response

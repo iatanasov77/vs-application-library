@@ -92,19 +92,19 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="#">
+                                                    <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_pipeline_edit_task', { 'pipelineId': pipeline.id, 'taskId': task.id } ) }}">
                                                         <i class="ri-edit-2-line align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.template.items_index_row_action_edit' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal">
+                                                    <a class="dropdown-item" href="{{ path( 'vs_application_project_issues_kanbanboard_pipeline_delete_task', { 'taskId': task.id } ) }}">
                                                         <i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" data-bs-toggle="modal" href="#inviteMembersModal">
+                                                    <a class="dropdown-item btnAssignMemberModal" data-taskId="{{ taskId }}" href="javascript:void(0)">
                                                         <i class="ri-share-line me-1 align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.form.kanbanboard_task.assign_member' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
@@ -214,16 +214,17 @@
         {% endfor %}
     </div>
     <!--end task-board-->
+    
+    {% include '@VSApplication/Partial/resource-delete.html.twig' %}
 {% endblock %}
 
 {% block modals %}
     {{ parent() }}
     
+    {% include '@VSApplication/Modal/delete-record-modal.html.twig' %}
     {% include '@VSApplication/Pages/ProjectIssuesBoard/modal/create_member.html.twig' %}
     {% include '@VSApplication/Pages/ProjectIssuesBoard/modal/create_task.html.twig' %}
-    {#
     {% include '@VSApplication/Pages/ProjectIssuesBoardTask/modal/assign_to_member.html.twig' %}
-    #}
 {% endblock %}
 
 {% block head_styles %}

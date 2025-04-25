@@ -4,6 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -189,20 +190,10 @@ class AbstractCrudController extends ResourceController
     
     public function deleteAction( Request $request ): Response
     {
+        $redirectUrl    = $request->request->get( 'redirectUrl' );
+        
         try {
             $response = parent::deleteAction( $request );
-            
-            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
-            // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
-            $this->get( 'event_dispatcher' )->dispatch(
-                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, ResourceActions::DELETE ),
-                ResourceActionEvent::NAME
-            );
-            
-            $redirectUrl    = $request->request->get( 'redirectUrl' );
-            if ( $redirectUrl ) {
-                return $this->redirect( $redirectUrl );
-            }
         } catch ( DBALException $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application DBAL Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
@@ -219,10 +210,25 @@ class AbstractCrudController extends ResourceController
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application PDO Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
+        } catch ( RouteNotFoundException $e ) {
+            if ( ! $redirectUrl ) {
+                throw $e; // Rethrow the Exception
+            }
         } catch ( \Exception $e ) {
             if ( ! $this->getParameter( 'vs_application.supress_pdo_exception' ) ) {
                 throw new \Vankosoft\ApplicationBundle\Component\Exception\PDOException( 'VS Application PHP Exception. You can supress it by setting the parameter: vs_application.supress_pdo_exception', 500, $e );
             }
+        }
+        
+        $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+        // Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
+        $this->get( 'event_dispatcher' )->dispatch(
+            new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, ResourceActions::DELETE ),
+            ResourceActionEvent::NAME
+        );
+        
+        if ( $redirectUrl ) {
+            return $this->redirect( $redirectUrl );
         }
         
         //var_dump( $this->getParameter( 'vs_application.supress_pdo_exception' ) ); die;

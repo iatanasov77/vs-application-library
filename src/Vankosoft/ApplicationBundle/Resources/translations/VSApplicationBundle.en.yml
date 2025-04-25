@@ -233,6 +233,9 @@ vs_application:
             leave_comment: Leave a Comment
             post_comment: Post Comment
             
+            kanbanboard_task_edit_title: Edit Kanbanboard Task
+            kanbanboard_task_details: Kanbanboard Task Details
+            
         save_tags: 'Save Tags'
             
     template:

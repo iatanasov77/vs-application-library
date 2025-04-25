@@ -172,6 +172,21 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
+    public function createKanbanboardTask( array $formData ): array
+    {
+        $apiToken       = $this->login();
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/new';
+        
+        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+            'headers'   => [
+                'Authorization' => 'Bearer ' . $apiToken,
+            ],
+            'json'      => $formData,
+        ]);
+        
+        return $this->processApiResponse( $response );
+    }
+    
     public function editKanbanboardTask( $id, array $formData ): array
     {
         $apiToken       = $this->login();
@@ -187,16 +202,15 @@ final class ProjectIssue extends ProjectApiClient
         return $this->processApiResponse( $response );
     }
     
-    public function createKanbanboardTask( array $formData ): array
+    public function deleteKanbanboardTask( $id ): array
     {
         $apiToken       = $this->login();
-        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/new';
+        $boardsEndpoint = $this->apiConnection['host'] . '/pipeline-task/' . $id;
         
-        $response       = $this->httpClient->request( 'POST', $boardsEndpoint, [
+        $response       = $this->httpClient->request( 'DELETE', $boardsEndpoint, [
             'headers'   => [
                 'Authorization' => 'Bearer ' . $apiToken,
             ],
-            'json'      => $formData,
         ]);
         
         return $this->processApiResponse( $response );

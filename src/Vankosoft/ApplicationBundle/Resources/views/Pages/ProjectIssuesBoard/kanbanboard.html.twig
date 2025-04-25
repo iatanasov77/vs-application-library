@@ -98,13 +98,13 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal">
+                                                    <a class="dropdown-item" data-bs-toggle="modal" href="{{ path( 'vs_application_project_issues_kanbanboard_pipeline_delete_task', { 'taskId': task.id } ) }}">
                                                         <i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.template.items_index_row_action_delete' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" data-bs-toggle="modal" href="#inviteMembersModal">
+                                                    <a class="dropdown-item btnAssignMemberModal" data-taskId="{{ taskId }}" href="javascript:void(0)">
                                                         <i class="ri-share-line me-1 align-bottom me-2 text-muted"></i> 
                                                         {{ 'vs_application.form.kanbanboard_task.assign_member' | trans( {},'VSApplicationBundle' ) }}
                                                     </a>

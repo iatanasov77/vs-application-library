@@ -189,6 +189,52 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
+    public function createTaskAction( $pipelineId, $issueId, Request $request ): Response
+    {
+        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
+        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        
+        if( ! $apiEnabled ) {
+            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
+        }
+        
+        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
+            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
+        }
+        
+        $formOptions = $this->vsProject->getPipelineTaskFormData();
+        $form = $this->createForm( KanbanboardTaskForm::class, null, [
+            'action'        => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_create_task', [
+                'pipelineId'    => $pipelineId,
+                'issueId'       => $issueId,
+            ]),
+            'method'        => 'POST',
+            
+            'pipeline_id'   => $pipelineId,
+            'projectIssues' => $formOptions['issues'],
+            'selectedIssue' => $issueId,
+            
+            'boardMembers'  => $formOptions['members']['selectOptions'],
+        ]);
+        
+        $form->handleRequest( $request );
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $formData   = $form->getData();
+            //echo '<pre>'; var_dump( $formData ); die;
+            
+            $response   = $this->vsProject->createKanbanboardTask( $formData );
+            //echo '<pre>'; var_dump( $response ); die;
+            
+            return $this->redirect( $this->generateUrl( 'vs_application_project_issues_kanbanboard_show' ) );
+        }
+        
+        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
+            'form'          => $form,
+            'pipelineId'    => $pipelineId,
+            'boardMembers'  => $formOptions['members']['extended'],
+        ]);
+    }
+    
     public function editTaskAction( $pipelineId, $taskId, Request $request ): Response
     {
         $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
@@ -235,50 +281,11 @@ class VankosoftIssueBoardController extends AbstractController
         ]);
     }
     
-    public function createTaskAction( $pipelineId, $issueId, Request $request ): Response
+    public function deleteTaskAction( $taskId, Request $request ): Response
     {
-        $apiEnabled = $this->getParameter( 'vs_application.vankosoft_api.enabled' );
-        $apiBoard   = $this->getParameter( 'vs_application.vankosoft_api.kanbanboard' );
+        $response   = $this->vsProject->deleteKanbanboardTask( $taskId );
         
-        if( ! $apiEnabled ) {
-            throw new VankosoftApiException( 'VankoSoft API is NOT Enabled !!! Please Enable it and Configure it !!!' );
-        }
-        
-        if ( $apiBoard === ProjectIssue::BOARD_UNDEFINED ) {
-            throw new VankosoftApiException( 'VankoSoft API Kanbanboard Slug is NOT Defined !!!' );
-        }
-        
-        $formOptions = $this->vsProject->getPipelineTaskFormData();
-        $form = $this->createForm( KanbanboardTaskForm::class, null, [
-            'action'        => $this->generateUrl( 'vs_application_project_issues_kanbanboard_pipeline_create_task', [
-                'pipelineId'    => $pipelineId,
-                'issueId'       => $issueId,
-            ]),
-            'method'        => 'POST',
-            
-            'pipeline_id'   => $pipelineId,
-            'projectIssues' => $formOptions['issues'],
-            'selectedIssue' => $issueId,
-            
-            'boardMembers'  => $formOptions['members']['selectOptions'],
-        ]);
-        
-        $form->handleRequest( $request );
-        if( $form->isSubmitted() && $form->isValid() ) {
-            $formData   = $form->getData();
-            //echo '<pre>'; var_dump( $formData ); die;
-            
-            $response   = $this->vsProject->createKanbanboardTask( $formData );
-            //echo '<pre>'; var_dump( $response ); die;
-            
-            return $this->redirect( $this->generateUrl( 'vs_application_project_issues_kanbanboard_show' ) );
-        }
-        
-        return $this->render( '@VSApplication/Pages/ProjectIssuesBoard/partial/create_task_form.html.twig', [
-            'form'          => $form,
-            'pipelineId'    => $pipelineId,
-            'boardMembers'  => $formOptions['members']['extended'],
-        ]);
+        return $this->redirectToRoute( 'vs_application_project_issues_kanbanboard_show' );
     }
     
     public function getSubTaskFormAction( $taskId, $issueId, $subTaskId, Request $request ): Response

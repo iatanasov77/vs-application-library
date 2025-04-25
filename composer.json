@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.12.23",
+    "version": "v1.12.24",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -15,7 +15,7 @@
         {
             "name": "Ivan I. Atanasov",
             "email": "i.atanasov77@gmail.com",
-            "homepage": "http://vankosoft.org"
+            "homepage": "http:\/\/vankosoft.org"
         }
     ],
     "require": {

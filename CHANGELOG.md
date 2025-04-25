@@ -1,3 +1,11 @@
+1.12.24	|	Release date: **25.04.2025**
+============================================
+* New Features:
+  - Add a New Resource Delete JS Script.
+  - Improve AbstractCrudController Delete Action.
+  - Make Actions of Kanbanboard Show Page to Works.
+
+
 1.12.23	|	Release date: **19.04.2025**
 ============================================
 * New Features:

@@ -18,8 +18,8 @@ class JsonKeyValueTransformer implements DataTransformerInterface
         $transformed    = [];
         foreach ( $value as $key => $val ) {
             $transformed[]  = [
-                'key'   => $key,
-                'value' => $val,
+                'jsonKey'   => $key,
+                'jsonValue' => $val,
             ];
         }
         
@@ -39,7 +39,7 @@ class JsonKeyValueTransformer implements DataTransformerInterface
         
         $reversed    = [];
         foreach ( $value as $val ) {
-            $reversed[$val['key']] = $val['value'];
+            $reversed[$val['jsonKey']] = $val['jsonValue'];
         }
         
         return $reversed;

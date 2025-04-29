@@ -1,3 +1,9 @@
+1.12.25	|	Release date: **29.04.2025**
+============================================
+* New Features:
+  - Create a Form Data Transformer for Json Fields.
+
+
 1.12.24	|	Release date: **25.04.2025**
 ============================================
 * New Features:

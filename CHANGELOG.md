@@ -1,3 +1,9 @@
+1.12.26	|	Release date: **01.05.2025**
+============================================
+* New Features:
+  - Add INTL Subdevision Package into Composer Requirements.
+
+
 1.12.25	|	Release date: **29.04.2025**
 ============================================
 * New Features:

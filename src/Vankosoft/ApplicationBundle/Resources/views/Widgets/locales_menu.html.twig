@@ -1,11 +1,11 @@
 {% if widget.isActive %}
     <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
-        {% for oLocale in widget.params.locales %}
+        {% for locale in widget.params.locales %}
             {% if locale.active %}
                 <li>
-                    <a class="dropdown-item " href="{{ path( 'app_set_locale', {'locale': oLocale.code} ) }}">
-                        <i class="flag flag-{{ ( oLocale.code | split( '_' ) )[1] | lower }}"></i>
-                        {{ oLocale.title }}
+                    <a class="dropdown-item " href="{{ path( 'app_set_locale', {'locale': locale.code} ) }}">
+                        <i class="flag flag-{{ ( locale.code | split( '_' ) )[1] | lower }}"></i>
+                        {{ locale.title }}
                     </a>
                </li>
            {% endif %}

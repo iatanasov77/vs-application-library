@@ -1,3 +1,9 @@
+1.12.27	|	Release date: **03.05.2025**
+============================================
+* Bug-Fixes:
+  - Fix Admin Panel Locales Menue Widget Template.
+
+
 1.12.26	|	Release date: **01.05.2025**
 ============================================
 * New Features:

@@ -1,7 +1,0 @@
-<table class="table table-striped table-advance table-hover" id="tableIssueComments">
-    <tbody id="IssueCommentsTableBody">
-        {% for comment in itemComments %}
-            {% include '@VSApplication/Pages/ProjectIssues/partial/simpleTreeTableRows.html.twig' with {'parentId': 0, 'comment': comment} %}
-        {% endfor %}
-    </tbody>
-</table>

@@ -7,6 +7,7 @@ const applicationAssetsPath         = './vendor/vankosoft/application/src/Vankos
 const usersSubscriptionsAssetsPath  = './vendor/vankosoft/users-subscriptions-bundle/lib/Resources/themes/default/assets';
 const paymentAssetsPath             = './vendor/vankosoft/payment-bundle/lib/Resources/themes/default/assets';
 const catalogAssetsPath             = './vendor/vankosoft/catalog-bundle/lib/Resources/themes/default/assets';
+const issueTrackingAssetsPath       = './vendor/vankosoft/issue-tracking-bundle/lib/Resources/themes/default/assets';
 
 const addCKEditor = require( '../../../../../../../../daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor-webpack-entry' );
 
@@ -137,13 +138,6 @@ Encore
     .addEntry( 'js/banners', applicationAssetsPath + '/js/pages/banners.js' )
     .addEntry( 'js/banners-edit', applicationAssetsPath + '/js/pages/banners-edit.js' )
     .addEntry( 'js/banner-modal', applicationAssetsPath + '/js/pages/banner-modal.js' )
-    
-    .addEntry( 'js/project-issues', applicationAssetsPath + '/js/pages/project-issues.js' )
-    .addEntry( 'js/project-issues-edit', applicationAssetsPath + '/js/pages/project-issues-edit.js' )
-    .addEntry( 'js/project-issue-comments-edit', applicationAssetsPath + '/js/pages/project-issue-comments-edit.js' )
-    .addEntry( 'js/project-issue-tasks-edit', applicationAssetsPath + '/js/pages/project-issue-tasks-edit.js' )
-    .addEntry( 'js/project-issues-board', applicationAssetsPath + '/js/pages/project-issues-board.js' )
-    .addEntry( 'js/project-issues-board-task', applicationAssetsPath + '/js/pages/project-issues-board-task.js' )
 ;
 
 //////////////////////////////////////////////////////////////////
@@ -198,6 +192,20 @@ if ( pathExists.sync( catalogAssetsPath ) ) {
         .addEntry( 'js/pricing-plan-subscriptions', catalogAssetsPath + '/js/pages/pricing-plan-subscriptions.js' )
         .addEntry( 'js/pricing-plan-subscription-payments', catalogAssetsPath + '/js/pages/pricing-plan-subscription-payments.js' )
         .addEntry( 'js/association-types-index', catalogAssetsPath + '/js/pages/association-types-index.js' )
+    ;
+}
+
+//////////////////////////////////////////////////////////////////
+// Issue Tracking Pages
+//////////////////////////////////////////////////////////////////
+if ( pathExists.sync( issueTrackingAssetsPath ) ) {
+    Encore
+        .addEntry( 'js/project-issues', issueTrackingAssetsPath + '/js/pages/project-issues.js' )
+        .addEntry( 'js/project-issues-edit', issueTrackingAssetsPath + '/js/pages/project-issues-edit.js' )
+        .addEntry( 'js/project-issue-comments-edit', issueTrackingAssetsPath + '/js/pages/project-issue-comments-edit.js' )
+        .addEntry( 'js/project-issue-tasks-edit', issueTrackingAssetsPath + '/js/pages/project-issue-tasks-edit.js' )
+        .addEntry( 'js/project-issues-board', issueTrackingAssetsPath + '/js/pages/project-issues-board.js' )
+        .addEntry( 'js/project-issues-board-task', issueTrackingAssetsPath + '/js/pages/project-issues-board-task.js' )
     ;
 }
 

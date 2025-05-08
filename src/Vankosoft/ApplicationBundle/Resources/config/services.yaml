@@ -14,7 +14,6 @@ imports:
     - { resource: services/twig.yaml }
     - { resource: services/sylius_resource.yaml }
     - { resource: services/widgets.yaml }
-    - { resource: services/project_issues.yaml }
 
 parameters:
     applicationIcon: 'build/default/images/superman.svg'
@@ -38,4 +37,3 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-

@@ -1,3 +1,12 @@
+1.12.28	|	Release date: **08.05.2025**
+============================================
+* New Features:
+  - Update Application Installator Configs.
+  - Remove All about Vankosoft  Issue Tracking.
+  - Move Vankosoft Issues Uploader PostPersistListener into Issue Tracking Bundle.
+  - Move Issue Tracking Assets into Issue Tracking Bundle.
+
+
 1.12.27	|	Release date: **03.05.2025**
 ============================================
 * Bug-Fixes:

@@ -7,7 +7,3 @@ services:
         
     Vankosoft\ApplicationBundle\Twig\FunctionsExtension:
         tags: ['twig.extension']
-    
-    Vankosoft\ApplicationBundle\Twig\KanbanBoardTaskExtension:
-        tags:
-            - { name: twig.extension }

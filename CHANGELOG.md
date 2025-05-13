@@ -1,3 +1,9 @@
+1.12.29	|	Release date: **13.05.2025**
+============================================
+* New Features:
+  - Add a Payment Assets Endpoint.
+
+
 1.12.28	|	Release date: **08.05.2025**
 ============================================
 * New Features:

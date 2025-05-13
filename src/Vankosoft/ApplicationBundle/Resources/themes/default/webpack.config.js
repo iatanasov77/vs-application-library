@@ -162,7 +162,6 @@ if ( pathExists.sync( paymentAssetsPath ) ) {
         .addEntry( 'js/exchange-rates', paymentAssetsPath + '/js/pages/exchange-rates.js' )
         .addEntry( 'js/recieved-payments', paymentAssetsPath + '/js/pages/recieved-payments.js' )
         .addEntry( 'js/orders', paymentAssetsPath + '/js/pages/orders.js' )
-        .addEntry( 'js/stripe-webhook-endpoint', paymentAssetsPath + '/js/pages/stripe-webhook-endpoint.js' )
         .addEntry( 'js/coupon-objects', paymentAssetsPath + '/js/pages/coupon-objects.js' )
         .addEntry( 'js/coupons-index', paymentAssetsPath + '/js/pages/coupons-index.js' )
         .addEntry( 'js/coupons-edit', paymentAssetsPath + '/js/pages/coupons-edit.js' )
@@ -173,6 +172,7 @@ if ( pathExists.sync( paymentAssetsPath ) ) {
         .addEntry( 'js/customer-groups', paymentAssetsPath + '/js/pages/customer-groups.js' )
         .addEntry( 'js/customer-groups-edit', paymentAssetsPath + '/js/pages/customer-groups-edit.js' )
         .addEntry( 'js/stripe-objects', paymentAssetsPath + '/js/pages/stripe-objects.js' )
+        .addEntry( 'js/stripe-object-form', paymentAssetsPath + '/js/pages/stripe-object-form.js' )
     ;
 }
     

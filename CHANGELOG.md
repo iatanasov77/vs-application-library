@@ -1,3 +1,10 @@
+1.12.30	|	Release date: **15.05.2025**
+============================================
+* New Features and Improvements:
+  - Fix Styling of VsPinner .
+  - Update Application Installator Configs With Fixed Deprecations.
+
+
 1.12.29	|	Release date: **13.05.2025**
 ============================================
 * New Features:

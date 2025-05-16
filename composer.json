@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.12.30",
+    "version": "v1.12.31",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -57,7 +57,6 @@
         "league\/flysystem-ftp": "^3.29",
         "league\/flysystem-sftp-v3": "^3.29",
         "m2mtech\/flysystem-stream-wrapper": "^1.4",
-        "trickeyone\/intl-subdivision": "^4.0",
         "vankosoft\/agent-bundle": "^1.0"
     },
     "replace": {

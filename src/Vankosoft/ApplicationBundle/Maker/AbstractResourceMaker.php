@@ -23,6 +23,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Inflector\InflectorFactory;
+use Doctrine\Inflector\Inflector;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -41,25 +42,55 @@ use Vankosoft\ApplicationBundle\Component\SlugGenerator;
  */
 abstract class AbstractResourceMaker extends AbstractMaker
 {
-    protected ApplicationInterface $application;
-    protected string $applicationConfigPath;
+    /** @var ApplicationInterface */
+    protected $application;
     
-    protected string $resourceName;
-    protected string $resourceId;
-    protected string $resourceRoute;
-    protected bool $applicationHasTheme;
-    protected string $makerTemplatesPath;
-    protected string $templatesPath;
+    /** @var string */
+    protected $applicationConfigPath;
     
+    /** @var string */
+    protected $resourceName;
+    
+    /** @var string */
+    protected $resourceId;
+    
+    /** @var string */
+    protected $resourceRoute;
+    
+    /** @var bool */
+    protected $applicationHasTheme;
+    
+    /** @var string */
+    protected $makerTemplatesPath;
+    
+    /** @var string */
+    protected $templatesPath;
+    
+    
+    /** @var DoctrineHelper */
     protected $doctrineHelper;
+    
+    /** @var FormTypeRenderer */
     protected $formTypeRenderer;
+    
+    /** @var Inflector */
     protected $inflector;
+    
+    /** @var string */
     protected $controllerClassName;
+    
+    /** @var bool */
     protected $generateTests = false;
     
-    protected ApplicationRepositoryInterface $applicationRepository;
-    protected SettingsRepositoryInterface $settingsRepository;
-    protected SlugGenerator $slugGenerator;
+    
+    /** @var ApplicationRepositoryInterface */
+    protected $applicationRepository;
+    
+    /** @var SettingsRepositoryInterface */
+    protected $settingsRepository;
+    
+    /** @var SlugGenerator */
+    protected $slugGenerator;
     
     public function __construct(
         KernelInterface $kernel,

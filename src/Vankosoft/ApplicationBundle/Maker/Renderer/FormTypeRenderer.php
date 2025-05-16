@@ -13,8 +13,11 @@ use Vankosoft\ApplicationBundle\Form\AbstractForm;
 
 final class FormTypeRenderer
 {
-    private string $makerTemplatesPath;
-    private Generator $generator;
+    /** @var string */
+    private $makerTemplatesPath;
+    
+    /** @var Generator */
+    private $generator;
     
     public function __construct(
         KernelInterface $kernel,
@@ -34,18 +37,18 @@ final class FormTypeRenderer
     ): void {
         $fieldTypeUseStatements = [];
         $fields = [];
-        foreach ($formFields as $name => $fieldTypeOptions) {
+        foreach ( $formFields as $name => $fieldTypeOptions ) {
             $fieldTypeOptions ??= ['type' => null, 'options_code' => null];
             
-            if (isset($fieldTypeOptions['type'])) {
+            if ( isset( $fieldTypeOptions['type'] ) ) {
                 $fieldTypeUseStatements[] = $fieldTypeOptions['type'];
-                $fieldTypeOptions['type'] = Str::getShortClassName($fieldTypeOptions['type']);
+                $fieldTypeOptions['type'] = Str::getShortClassName( $fieldTypeOptions['type'] );
             }
             
             $fields[$name] = $fieldTypeOptions;
         }
         
-        $useStatements = new UseStatementGenerator(array_unique(array_merge(
+        $useStatements = new UseStatementGenerator( array_unique( array_merge(
             $fieldTypeUseStatements,
             $extraUseClasses,
             $constraintClasses
@@ -63,8 +66,8 @@ final class FormTypeRenderer
             \Symfony\Component\Form\Extension\Core\Type\TextType::class,
         ]);
         
-        if ($boundClassDetails) {
-            $useStatements->addUseStatement($boundClassDetails->getFullName());
+        if ( $boundClassDetails ) {
+            $useStatements->addUseStatement( $boundClassDetails->getFullName() );
         }
         
         $this->generator->generateClass(

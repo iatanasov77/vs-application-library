@@ -19,8 +19,11 @@ use Vankosoft\ApplicationBundle\Component\SlugGenerator;
 
 final class MakeTheme extends AbstractMaker
 {
-    protected string $makerTemplatesPath;
-    protected SlugGenerator $slugGenerator;
+    /** @var string */
+    protected $makerTemplatesPath;
+    
+    /** @var SlugGenerator */
+    protected $slugGenerator;
     
     public function __construct( KernelInterface $kernel, SlugGenerator $slugGenerator )
     {

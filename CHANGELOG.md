@@ -1,3 +1,9 @@
+1.12.31	|	Release date: **16.05.2025**
+============================================
+* New Features:
+  - Move IntlSubdivision Component Package Into My Application Bundle.
+
+
 1.12.30	|	Release date: **15.05.2025**
 ============================================
 * New Features and Improvements:

@@ -19,7 +19,7 @@ class ThemeChangeListener
         ThemeRepositoryInterface $themeRepository,
         SettingsRepositoryInterface $settingsRepository,
         ApplicationContextInterface $applicationContext,
-        int $applicationId = null
+        ?int $applicationId = null
     ) {
         $this->themeContext         = $themeContext;
         $this->themeRepository      = $themeRepository;

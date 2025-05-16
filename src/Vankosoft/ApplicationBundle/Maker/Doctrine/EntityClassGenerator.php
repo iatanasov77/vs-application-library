@@ -21,18 +21,23 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class EntityClassGenerator
 {
-    private string $makerTemplatesPath;
+    /** @var string */
+    private $makerTemplatesPath;
+    
+    /** @var Generator */
     private $generator;
+    
+    /** @var DoctrineHelper */
     private $doctrineHelper;
 
-    public function __construct(KernelInterface $kernel, Generator $generator, DoctrineHelper $doctrineHelper)
+    public function __construct( KernelInterface $kernel, Generator $generator, DoctrineHelper $doctrineHelper )
     {
         $this->makerTemplatesPath   = $kernel->locateResource( '@VSApplicationBundle/Resources/maker' );
         $this->generator            = $generator;
         $this->doctrineHelper       = $doctrineHelper;
     }
 
-    public function generateEntityClass(ClassNameDetails $entityClassDetails, bool $apiResource, bool $withPasswordUpgrade = false, bool $generateRepositoryClass = true, bool $broadcast = false): string
+    public function generateEntityClass( ClassNameDetails $entityClassDetails, bool $apiResource, bool $withPasswordUpgrade = false, bool $generateRepositoryClass = true, bool $broadcast = false ): string
     {
         $repoClassDetails = $this->generator->createClassNameDetails(
             $entityClassDetails->getRelativeName(),
@@ -40,24 +45,24 @@ final class EntityClassGenerator
             'Repository'
         );
 
-        $tableName = $this->doctrineHelper->getPotentialTableName($entityClassDetails->getFullName());
+        $tableName = $this->doctrineHelper->getPotentialTableName( $entityClassDetails->getFullName() );
 
         $useStatements = new UseStatementGenerator([
             [Mapping::class => 'ORM'],
             \Sylius\Component\Resource\Model\ResourceInterface::class,
         ]);
 
-        if ($generateRepositoryClass) {
-            $useStatements->addUseStatement($repoClassDetails->getFullName());
+        if ( $generateRepositoryClass ) {
+            $useStatements->addUseStatement( $repoClassDetails->getFullName() );
         }
         
-        if ($broadcast) {
-            $useStatements->addUseStatement(Broadcast::class);
+        if ( $broadcast ) {
+            $useStatements->addUseStatement( Broadcast::class );
         }
 
-        if ($apiResource) {
+        if ( $apiResource ) {
             // @legacy Drop annotation class when annotations are no longer supported.
-            $useStatements->addUseStatement( \class_exists( ApiResource::class ) ? ApiResource::class : \ApiPlatform\Core\Annotation\ApiResource::class);
+            $useStatements->addUseStatement( \class_exists( ApiResource::class ) ? ApiResource::class : \ApiPlatform\Core\Annotation\ApiResource::class );
         }
 
         $entityPath = $this->generator->generateClass(
@@ -68,13 +73,13 @@ final class EntityClassGenerator
                 'repository_class_name' => $repoClassDetails->getShortName(),
                 'api_resource' => $apiResource,
                 'broadcast' => $broadcast,
-                'should_escape_table_name' => $this->doctrineHelper->isKeyword($tableName),
+                'should_escape_table_name' => $this->doctrineHelper->isKeyword( $tableName ),
                 'table_name' => $tableName,
-                'doctrine_use_attributes' => $this->doctrineHelper->isDoctrineSupportingAttributes() && $this->doctrineHelper->doesClassUsesAttributes($entityClassDetails->getFullName()),
+                'doctrine_use_attributes' => $this->doctrineHelper->isDoctrineSupportingAttributes() && $this->doctrineHelper->doesClassUsesAttributes( $entityClassDetails->getFullName() ),
             ]
         );
 
-        if ($generateRepositoryClass) {
+        if ( $generateRepositoryClass ) {
             $this->generateRepositoryClass(
                 $repoClassDetails->getFullName(),
                 $entityClassDetails->getFullName(),
@@ -86,18 +91,18 @@ final class EntityClassGenerator
         return $entityPath;
     }
 
-    public function generateRepositoryClass(string $repositoryClass, string $entityClass, bool $withPasswordUpgrade, bool $includeExampleComments = true): void
+    public function generateRepositoryClass( string $repositoryClass, string $entityClass, bool $withPasswordUpgrade, bool $includeExampleComments = true ): void
     {
-        $shortEntityClass = Str::getShortClassName($entityClass);
-        $entityAlias = strtolower($shortEntityClass[0]);
+        $shortEntityClass = Str::getShortClassName( $entityClass );
+        $entityAlias = strtolower( $shortEntityClass[0] );
 
         $passwordUserInterfaceName = UserInterface::class;
 
-        if (interface_exists(PasswordAuthenticatedUserInterface::class)) {
+        if ( interface_exists( PasswordAuthenticatedUserInterface::class ) ) {
             $passwordUserInterfaceName = PasswordAuthenticatedUserInterface::class;
         }
 
-        $interfaceClassNameDetails = new ClassNameDetails($passwordUserInterfaceName, 'Symfony\Component\Security\Core\User');
+        $interfaceClassNameDetails = new ClassNameDetails( $passwordUserInterfaceName, 'Symfony\Component\Security\Core\User' );
 
         $useStatements = new UseStatementGenerator([
             $entityClass,
@@ -105,7 +110,7 @@ final class EntityClassGenerator
             ServiceEntityRepository::class,
         ]);
 
-        if ($withPasswordUpgrade) {
+        if ( $withPasswordUpgrade ) {
             $useStatements->addUseStatement([
                 $interfaceClassNameDetails->getFullName(),
                 PasswordUpgraderInterface::class,

@@ -1,3 +1,12 @@
+1.12.32	|	Release date: **16.05.2025**
+============================================
+* New Features:
+  - Improve Code Styling of Application Bundle - Maker Classes.
+* Bug-Fixes:
+  - Update Application Installator Configs.
+  - Fix nullable parameter declarations.
+
+
 1.12.31	|	Release date: **16.05.2025**
 ============================================
 * New Features:

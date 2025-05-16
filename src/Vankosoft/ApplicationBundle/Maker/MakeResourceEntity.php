@@ -40,10 +40,10 @@ final class MakeResourceEntity extends AbstractMaker implements InputAwareMakerI
     public function __construct(
         FileManager $fileManager,
         DoctrineHelper $doctrineHelper,
-        Generator $generator = null,
-        EntityClassGenerator $entityClassGenerator = null,
-        PhpCompatUtil $phpCompatUtil = null,
-        string $projectDirectory = null
+        ?Generator $generator = null,
+        ?EntityClassGenerator $entityClassGenerator = null,
+        ?PhpCompatUtil $phpCompatUtil = null,
+        ?string $projectDirectory = null
     ) {
         $this->fileManager = $fileManager;
         $this->doctrineHelper = $doctrineHelper;
@@ -312,7 +312,7 @@ final class MakeResourceEntity extends AbstractMaker implements InputAwareMakerI
         ]);
     }
 
-    public function configureDependencies(DependencyBuilder $dependencies, InputInterface $input = null): void
+    public function configureDependencies( DependencyBuilder $dependencies, ?InputInterface $input = null ): void
     {
         if (null !== $input && $input->getOption('api-resource')) {
             $dependencies->addClassDependency(

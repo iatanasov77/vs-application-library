@@ -8,11 +8,7 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
  */
 trait ApplicationRelationEntity
 {
-    /**
-     * @var \Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface
-     * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\Application\Application")
-     */
+    /** @var \Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface */
     #[ORM\ManyToOne(targetEntity: "App\Entity\Application\Application")]
     protected $application;
     

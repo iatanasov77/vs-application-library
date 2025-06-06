@@ -1,3 +1,15 @@
+1.12.33	|	Release date: **06.06.2025**
+============================================
+* New Features:
+  - Update Application Installator Configs.
+  - Add doctrine/common Composer Dependency.
+  - Remove 'cascade-merge' option Doctrine Mapping Files.
+  - Remove Annotations from All Model Traits.
+* Bug-Fixes:
+  - Fix Application Installator For API Application.
+
+
+
 1.12.32	|	Release date: **16.05.2025**
 ============================================
 * New Features:

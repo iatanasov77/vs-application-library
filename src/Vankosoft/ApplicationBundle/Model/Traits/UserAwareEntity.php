@@ -8,27 +8,15 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
  */
 trait UserAwareEntity
 {
-    /**
-     * @var UserInterface
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
-     */
+    /** @var UserInterface */
     #[ORM\ManyToOne(targetEntity: "App\Entity\UserManagement\User")]
     protected $createdBy;
     
-    /**
-     * @var UserInterface
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
-     */
+    /** @var UserInterface */
     #[ORM\ManyToOne(targetEntity: "App\Entity\UserManagement\User")]
     protected $updatedBy;
     
-    /**
-     * @var UserInterface
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserManagement\User")
-     */
+    /** @var UserInterface */
     #[ORM\ManyToOne(targetEntity: "App\Entity\UserManagement\User")]
     protected $deletedBy;
     

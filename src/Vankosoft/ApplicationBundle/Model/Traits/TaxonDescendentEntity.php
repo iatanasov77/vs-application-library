@@ -5,12 +5,7 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface;
 
 trait TaxonDescendentEntity
 {
-    /**
-     * @var TaxonInterface
-     * 
-     * @ORM\OneToOne(targetEntity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface", cascade={"all"}, orphanRemoval=true)
-     * @ORM\JoinColumn(name="taxon_id", referencedColumnName="id", nullable=false)
-     */
+    /** @var TaxonInterface */
     #[ORM\OneToOne(targetEntity: "Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface", cascade: ["all"], orphanRemoval: true)]
     protected $taxon;
     

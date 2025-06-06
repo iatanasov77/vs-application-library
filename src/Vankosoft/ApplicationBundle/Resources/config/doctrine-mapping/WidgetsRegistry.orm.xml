@@ -14,6 +14,6 @@
             <join-column name="owner_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
         </one-to-one>
         
-        <field name="config" type="array" />
+        <field name="config" type="json" />
     </mapped-superclass>
 </doctrine-mapping>

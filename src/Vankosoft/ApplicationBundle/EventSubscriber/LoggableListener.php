@@ -2,7 +2,6 @@
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
-use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 use Gedmo\Translatable\Mapping\Event\Adapter\ORM as TranslatableOrmAdapter;
 use Doctrine\Persistence\ObjectManager;
@@ -62,7 +61,7 @@ class LoggableListener extends BaseLoggableListener
      * {@inheritDoc}
      * @see \Gedmo\Loggable\LoggableListener::createLogEntry()
      */
-    protected function createLogEntry( $action, $object, LoggableAdapter $ea ): ?AbstractLogEntry
+    protected function createLogEntry( $action, $object, LoggableAdapter $ea )
     {
         // Default Adapter not used. Using custom adapter $this->logEa;
         $ea = $this->logEa;

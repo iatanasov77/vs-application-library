@@ -5,6 +5,16 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
     <mapped-superclass name="Vankosoft\ApplicationBundle\Model\Translation">
+    	<id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        
+        <field name="locale" type="string" length="8" />
+    	<field name="objectClass" column="object_class" type="string" length="191" />
+    	<field name="field" type="string" length="32" />
+    	<field name="foreignKey" column="foreign_key" type="string" length="64" />
+    	<field name="content" type="text" nullable="true" />
+    	
     	<options>
             <option name="row_format">DYNAMIC</option>
         </options>

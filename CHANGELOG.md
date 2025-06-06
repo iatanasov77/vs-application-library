@@ -1,3 +1,14 @@
+1.12.34	|	Release date: **06.06.2025**
+============================================
+* New Features:
+  - Replace type array with json in Doctrine Mapping Configs.
+  - Remove All Doctrine Migrations.
+  - Remove Extending of AbstractTranslation Class of 'gedmo/doctrine-extensions'.
+  - Remove Extending of AbstractLogEntry Class of 'gedmo/doctrine-extensions'.
+  - Update Application Installator Configs.
+  - Add a Summerized Doctrine Migration.
+
+
 1.12.33	|	Release date: **06.06.2025**
 ============================================
 * New Features:

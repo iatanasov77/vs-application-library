@@ -1,3 +1,21 @@
+1.13.0	|	Release date: **07.06.2025**
+============================================
+* New Features:
+  - Remove Component: ApplicationInstalatorBundle
+  - Squashed 'src/Vankosoft/ApplicationInstalatorBundle/' content from commit f3f923e8
+  - Merge commit '159e853bf7329148fe7bb50b77b95cf32d70448a' as 'src/Vankosoft/ApplicationInstalatorBundle'
+  - Remove Component: ApplicationBundle
+  - Squashed 'src/Vankosoft/ApplicationBundle/' content from commit 623d8cdd
+  - Merge commit '9d9753fb8933779aab060aa67ffe21630763174a' as 'src/Vankosoft/ApplicationBundle'
+  - Remove Component: CmsBundle
+  - Squashed 'src/Vankosoft/CmsBundle/' content from commit ec2bf7a9
+  - Merge commit 'b01c819ae257d67f288b5a61a575a4319ad65348' as 'src/Vankosoft/CmsBundle'
+  - Remove Component: UsersBundle
+  - Squashed 'src/Vankosoft/UsersBundle/' content from commit 27bc3e0b
+  - Merge commit '014da26e2951ecd183b1351047b38e2aaec702a2' as 'src/Vankosoft/UsersBundle'
+  - Update Some Composer Dependencies.
+
+
 1.12.34	|	Release date: **06.06.2025**
 ============================================
 * New Features:

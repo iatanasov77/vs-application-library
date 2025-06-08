@@ -50,7 +50,8 @@ trait TaxonRepositoryTrait
     public function getPathAsString( TaxonDescendentInterface $category ): string
     {
         $categoryPath       = '';
-        $taxonRepository    = $this->_em->getRepository( \get_class( $category->getTaxon() ) );
+        $em                 = $this->getEntityManager();
+        $taxonRepository    = $em->getRepository( \get_class( $category->getTaxon() ) );
         
         $categoryPathArray  = $taxonRepository->getPath( $category->getTaxon() );
         \array_shift( $categoryPathArray );
@@ -67,7 +68,8 @@ trait TaxonRepositoryTrait
     public function getPathAsPath( TaxonDescendentInterface $category ): string
     {
         $categoryPath       = '';
-        $taxonRepository    = $this->_em->getRepository( \get_class( $category->getTaxon() ) );
+        $em                 = $this->getEntityManager();
+        $taxonRepository    = $em->getRepository( \get_class( $category->getTaxon() ) );
         
         $categoryPathArray  = $taxonRepository->getPath( $category->getTaxon() );
         \array_shift( $categoryPathArray );

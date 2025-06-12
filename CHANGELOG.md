@@ -1,3 +1,11 @@
+1.13.2	|	Release date: **12.06.2025**
+============================================
+* New Features:
+  - Updating intl-subdivision database.
+* Bug-Fixes:
+  - Fix CMS Bundle PagesRepository .
+
+
 1.13.1	|	Release date: **08.06.2025**
 ============================================
 * Bug-Fixes:

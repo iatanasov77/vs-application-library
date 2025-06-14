@@ -1,6 +1,7 @@
 <?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
+use Gedmo\Loggable\LogEntryInterface;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 use Gedmo\Translatable\Mapping\Event\Adapter\ORM as TranslatableOrmAdapter;
@@ -46,22 +47,12 @@ class LoggableListener extends BaseLoggableListener
     }
     
     /**
-     * {@inheritDoc}
-     */
-    /*
-    protected function getNamespace()
-    {
-        return __NAMESPACE__;
-    }
-    */
-    
-    /**
      * Create a new Log instance with locale
      * 
      * {@inheritDoc}
      * @see \Gedmo\Loggable\LoggableListener::createLogEntry()
      */
-    protected function createLogEntry( $action, $object, LoggableAdapter $ea )
+    protected function createLogEntry( $action, $object, LoggableAdapter $ea ): ?LogEntryInterface
     {
         // Default Adapter not used. Using custom adapter $this->logEa;
         $ea = $this->logEa;
@@ -134,7 +125,7 @@ class LoggableListener extends BaseLoggableListener
         return null;
     }
     
-    private function submitTranslations( $class, $object, ObjectManager $om )
+    private function submitTranslations( $class, $object, ObjectManager $om ): void
     {
         if ( isset( self::$configurations['Translatable'][$class] ) ) {
             foreach ( self::$configurations['Translatable'][$class]['fields'] as $field ) {
@@ -143,7 +134,7 @@ class LoggableListener extends BaseLoggableListener
         }
     }
     
-    private function persistTranslation( $class, $object, $field, ObjectManager $om )
+    private function persistTranslation( $class, $object, $field, ObjectManager $om ): void
     {
         $wrapped            = AbstractWrapper::wrap( $object, $om );
         $translationClass   = self::$configurations['Translatable'][$class]['translationClass'];

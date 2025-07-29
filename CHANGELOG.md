@@ -1,3 +1,13 @@
+1.13.3	|	Release date: **29.07.2025**
+============================================
+* New Features:
+  - Create a SuperAdminAccessTokenAuthenticator .
+* Bug-Fixes:
+  - Fix Some Deprecations.
+  - Update Application Installator Configs.
+  - Fix a Deprecation of VerifyEmail.
+
+
 1.13.2	|	Release date: **12.06.2025**
 ============================================
 * New Features:

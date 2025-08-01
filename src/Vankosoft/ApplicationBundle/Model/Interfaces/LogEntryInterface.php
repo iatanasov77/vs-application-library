@@ -1,14 +1,9 @@
 <?php namespace Vankosoft\ApplicationBundle\Model\Interfaces;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Gedmo\Loggable\LogEntryInterface as BaseLogEntryInterface;
 
-interface LogEntryInterface extends ResourceInterface
+interface LogEntryInterface extends ResourceInterface, BaseLogEntryInterface
 {
-    public function getAction();
-    public function getObjectClass();
-    public function getObjectId();
-    public function getUsername();
-    public function getLoggedAt();
-    public function getData();
-    public function getVersion();
+    public function getLocale();
 }

@@ -1,3 +1,9 @@
+1.13.4	|	Release date: **01.08.2025**
+============================================
+* Bug-Fixes:
+  - Fix Application Model LogEntryInterface .
+
+
 1.13.3	|	Release date: **29.07.2025**
 ============================================
 * New Features:

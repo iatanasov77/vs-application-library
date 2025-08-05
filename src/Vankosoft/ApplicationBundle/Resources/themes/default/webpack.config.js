@@ -38,7 +38,7 @@ Encore
     })
     
     .addAliases({
-        '@': path.resolve( __dirname, 'assets' )
+        '@@': path.resolve( __dirname, 'assets' )
     })
     
     // Default Theme Images

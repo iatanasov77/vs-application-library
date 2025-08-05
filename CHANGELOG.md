@@ -1,3 +1,9 @@
+1.13.5	|	Release date: **05.08.2025**
+============================================
+* Bug-Fixes:
+  - Fix Webpack Config for Default AdminPanel Theme.
+
+
 1.13.4	|	Release date: **01.08.2025**
 ============================================
 * Bug-Fixes:

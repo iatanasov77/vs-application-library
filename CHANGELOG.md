@@ -1,3 +1,9 @@
+1.13.8	|	Release date: **20.08.2025**
+============================================
+* New Features:
+  - Update Changed Namespace For Vankosoft NPM Packages.
+
+
 1.13.7	|	Release date: **20.08.2025**
 ============================================
 * New Features:

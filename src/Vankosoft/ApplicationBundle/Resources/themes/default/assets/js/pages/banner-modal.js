@@ -8,9 +8,9 @@ import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_transla
 VsLoadTranslations(['VSCmsBundle']);
 
 
-import { EasyuiCombobox } from 'jquery-easyui-extensions/EasyuiCombobox.js';
+import { EasyuiCombobox } from '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.js';
 import { VsRemoveDuplicates } from '../includes/vs_remove_duplicates.js';
-require( 'jquery-easyui-extensions/EasyuiCombobox.css' );
+require( '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.css' );
 
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveBannerClicked = window.btnSaveBannerClicked = false;

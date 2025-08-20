@@ -1,5 +1,5 @@
 //require ( '../../css/custom.css' );
-//require ( 'jquery-duplicate-fields/jquery.duplicateFields.js' );
+//require ( '@vankosoft/jquery-duplicate-fields/jquery.duplicateFields.js' );
 
 $( function ()
 {

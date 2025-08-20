@@ -1,5 +1,5 @@
 require( '../includes/resource-delete.js' );
-//require ( 'jquery-duplicate-fields/jquery.duplicateFields.js' );
+//require ( '@vankosoft/jquery-duplicate-fields/jquery.duplicateFields.js' );
 
 $( function()
 {

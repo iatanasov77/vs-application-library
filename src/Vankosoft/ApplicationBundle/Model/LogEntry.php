@@ -44,7 +44,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get action
      */
-    public function getAction()
+    public function getAction(): ?string
     {
         return $this->action;
     }
@@ -52,7 +52,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Set action
      */
-    public function setAction($action)
+    public function setAction($action): void
     {
         $this->action = $action;
     }
@@ -60,7 +60,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get object class
      */
-    public function getObjectClass()
+    public function getObjectClass(): ?string
     {
         return $this->objectClass;
     }
@@ -68,7 +68,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Set object class
      */
-    public function setObjectClass($objectClass)
+    public function setObjectClass($objectClass): void
     {
         $this->objectClass = $objectClass;
     }
@@ -76,7 +76,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get object id
      */
-    public function getObjectId()
+    public function getObjectId(): ?string
     {
         return $this->objectId;
     }
@@ -86,7 +86,7 @@ class LogEntry implements LogEntryInterface
      *
      * @param string $objectId
      */
-    public function setObjectId($objectId)
+    public function setObjectId($objectId): void
     {
         $this->objectId = $objectId;
     }
@@ -94,7 +94,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get username
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -104,7 +104,7 @@ class LogEntry implements LogEntryInterface
      *
      * @param string $username
      */
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         $this->username = $username;
     }
@@ -112,7 +112,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get loggedAt
      */
-    public function getLoggedAt()
+    public function getLoggedAt(): ?\DateTimeInterface
     {
         return $this->loggedAt;
     }
@@ -120,7 +120,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Set loggedAt to "now"
      */
-    public function setLoggedAt()
+    public function setLoggedAt(): void
     {
         $this->loggedAt = new \DateTime();
     }
@@ -128,7 +128,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get data
      */
-    public function getData()
+    public function getData(): ?array
     {
         return $this->data;
     }
@@ -136,7 +136,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Set data
      */
-    public function setData($data)
+    public function setData($data): void
     {
         $this->data = $data;
     }
@@ -146,7 +146,7 @@ class LogEntry implements LogEntryInterface
      *
      * @param int $version
      */
-    public function setVersion($version)
+    public function setVersion($version): void
     {
         $this->version = $version;
     }
@@ -154,7 +154,7 @@ class LogEntry implements LogEntryInterface
     /**
      * Get current version
      */
-    public function getVersion()
+    public function getVersion(): ?int
     {
         return $this->version;
     }

@@ -1,3 +1,10 @@
+1.13.9	|	Release date: **07.11.2025**
+============================================
+* Bug-Fixes:
+  - Fix Some Deprecations.
+  - Fix File Uploader.
+
+
 1.13.8	|	Release date: **20.08.2025**
 ============================================
 * New Features:

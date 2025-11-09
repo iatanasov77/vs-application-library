@@ -9,6 +9,11 @@ export function VsFormSubmit( formData, submitUrl, redirectUrl )
                 if ( redirectUrl ) {
                     document.location = redirectUrl;
                 }
+            } else if ( response.status == 'form-error' ) {
+                $( '#FormErrorsContainer' ).html( '' );
+                for ( var i = 0; i < response.errors.length; i++ ) {
+                    $( '#FormErrorsContainer' ).append( `<div>${response.errors[i]}</div>` );
+                }
             } else {
                 window.dispatchEvent(
                     // Response Can to Be Form With Errors

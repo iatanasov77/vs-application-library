@@ -1,3 +1,9 @@
+1.13.11	|	Release date: **09.11.2025**
+============================================
+* New Features:
+  - Improve 'VsFormSubmit' js method.
+
+
 1.13.10	|	Release date: **08.11.2025**
 ============================================
 * New Features:

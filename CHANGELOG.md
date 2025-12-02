@@ -1,3 +1,9 @@
+1.13.12	|	Release date: **02.12.2025**
+============================================
+* Bug-Fixes:
+  - Some Fixes on Application Installator Configs.
+
+
 1.13.11	|	Release date: **09.11.2025**
 ============================================
 * New Features:

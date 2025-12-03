@@ -1,3 +1,9 @@
+1.13.13	|	Release date: **03.12.2025**
+============================================
+* Bug-Fixes and Improvements:
+  - Update Application Installator Configs For Extended Project.
+
+
 1.13.12	|	Release date: **02.12.2025**
 ============================================
 * Bug-Fixes:

@@ -15,10 +15,11 @@ class LocalesController extends AbstractCrudController
     
     protected function prepareEntity( &$entity, &$form, Request $request )
     {
-        $formPost   = $request->getContent();
+        $formPost   = $request->request->all( 'locale_form' );
+        $formLocale = $formPost['locale'];
         
-        if ( isset( $formPost['translatableLocale'] ) ) {
-            $entity->setTranslatableLocale( $formPost['translatableLocale'] );
+        if ( $formLocale ) {
+            $entity->setTranslatableLocale( $formLocale );
         }
     }
     

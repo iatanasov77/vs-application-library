@@ -1,3 +1,10 @@
+1.13.14	|	Release date: **07.12.2025**
+============================================
+* Bug-Fixes:
+  - Fix Application Locales to Can Titles to Be Translated.
+  - Fix Many Deprecations of Nullable Method Parameters.
+
+
 1.13.13	|	Release date: **03.12.2025**
 ============================================
 * Bug-Fixes and Improvements:

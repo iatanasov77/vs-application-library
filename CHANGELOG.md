@@ -1,3 +1,12 @@
+1.13.15	|	Release date: **05.01.2026**
+============================================
+* New Features:
+  - Add New Feature in Application Configs.
+* Bug-Fixes and Improvements:
+  - Some Fixes on Application Installator Configs.
+  - Improve Default Theme Modal Dialogs.
+
+
 1.13.14	|	Release date: **07.12.2025**
 ============================================
 * Bug-Fixes:

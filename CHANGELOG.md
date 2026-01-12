@@ -1,3 +1,9 @@
+1.13.16	|	Release date: **12.01.2026**
+============================================
+* Bug-Fixes:
+  - Fix Email Vaidation After Registraton.
+
+
 1.13.15	|	Release date: **05.01.2026**
 ============================================
 * New Features:

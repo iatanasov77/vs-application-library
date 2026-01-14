@@ -37,7 +37,7 @@
                             <div class="list-group">
 
                             {# {% for notification in app.user.notifications %} #}
-                            {% for notification in app.user.unreadedNotifications %}
+                            {% for notification in app.user.unreadedNotifications | slice( 0, 5 ) %}
                                 <a href="#" class="list-group-item list-group-item-action active">
                                     <div class="notification-info">
                                         <div class="notification-list-user-img">

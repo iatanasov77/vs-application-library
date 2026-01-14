@@ -1,3 +1,11 @@
+1.13.17	|	Release date: **14.01.2026**
+============================================
+* New Features:
+  - Improve AdminPanel Default Theme Layout.
+  - Update to Symfony 7
+  - Update all Composer Requirements to latest versions.
+
+
 1.13.16	|	Release date: **12.01.2026**
 ============================================
 * Bug-Fixes:

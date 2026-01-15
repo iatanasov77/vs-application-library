@@ -9,9 +9,16 @@ use Vankosoft\ApplicationBundle\Repository\Interfaces\SettingsRepositoryInterfac
 
 class ThemeChangeListener
 {
+    /** @var ThemeContextInterface */
     protected $themeContext;
+    
+    /** @var ThemeRepositoryInterface */
     protected $themeRepository;
+    
+    /** @var SettingsRepositoryInterface */
     protected $settingsRepository;
+    
+    /** @var int | null */
     protected $applicationId;
     
     public function __construct(

@@ -6,6 +6,7 @@ use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInter
 
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {
+    /** @var ApplicationRepositoryInterface */
     private ApplicationRepositoryInterface $applicationRepository;
 
     public function __construct( ApplicationRepositoryInterface $applicationRepository )

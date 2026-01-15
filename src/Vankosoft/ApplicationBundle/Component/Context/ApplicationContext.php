@@ -10,8 +10,10 @@ use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException a
 
 final class ApplicationContext implements ApplicationContextInterface
 {
+    /** @var RequestResolverInterface */
     private RequestResolverInterface $requestResolver;
     
+    /** @var RequestStack */
     private RequestStack $requestStack;
     
     public function __construct( RequestResolverInterface $requestResolver, RequestStack $requestStack )

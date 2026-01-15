@@ -1,3 +1,10 @@
+1.13.18	|	Release date: **15.01.2026**
+============================================
+* New Features and Improvements:
+  - Add Some Missing Class Properties Comments.
+  - Improve Applicaton Context Service to Can Get Application in Console Commands.
+
+
 1.13.17	|	Release date: **14.01.2026**
 ============================================
 * New Features:

@@ -6,6 +6,7 @@ use Vankosoft\ApplicationBundle\Repository\Interfaces\ApplicationRepositoryInter
 
 final class HostnameBasedRequestResolver implements RequestResolverInterface
 {
+    /** @var ApplicationRepositoryInterface */
     private ApplicationRepositoryInterface $applicationRepository;
 
     public function __construct( ApplicationRepositoryInterface $applicationRepository )
@@ -13,8 +14,8 @@ final class HostnameBasedRequestResolver implements RequestResolverInterface
         $this->applicationRepository = $applicationRepository;
     }
 
-    public function findApplication( Request $request ) : ?ApplicationInterface
+    public function findApplication( string $host ) : ?ApplicationInterface
     {
-        return $this->applicationRepository->findOneByHostname( $request->getHost() );
+        return $this->applicationRepository->findOneByHostname( $host );
     }
 }

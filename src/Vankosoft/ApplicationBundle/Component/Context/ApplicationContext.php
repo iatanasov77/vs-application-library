@@ -5,19 +5,26 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\RequestNotFoundException;
+use Vankosoft\ApplicationBundle\Component\Exception\MisingHostException;
 use Vankosoft\ApplicationBundle\Component\Exception\ApplicationNotFoundException;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException as ContextApplicationNotFoundException;
 
 final class ApplicationContext implements ApplicationContextInterface
 {
+    /** @var RequestResolverInterface */
     private RequestResolverInterface $requestResolver;
     
+    /** @var RequestStack */
     private RequestStack $requestStack;
     
-    public function __construct( RequestResolverInterface $requestResolver, RequestStack $requestStack )
+    /** @var string | null **/
+    private ?string $appHost;
+    
+    public function __construct( RequestResolverInterface $requestResolver, RequestStack $requestStack, ?string $appHost )
     {
         $this->requestResolver  = $requestResolver;
         $this->requestStack     = $requestStack;
+        $this->appHost          = $appHost;
     }
     
     public function getApplication(): ApplicationInterface
@@ -25,8 +32,13 @@ final class ApplicationContext implements ApplicationContextInterface
         try {
             return $this->getApplicationForRequest( $this->getMasterRequest() );
         } catch ( RequestNotFoundException $exception ) {
-            // Do Nothing ( May be The Service is triggered by Command Line )
-            return new NullApplication();
+            // May be The Service is triggered by Command Line
+            if ( ! $this->appHost ) {
+                // throw new MisingHostException( 'Missing Host in ENV Variables.' );
+                return new NullApplication();
+            }
+            
+            return $this->getApplicationForConsoleCommand( $this->appHost );
         } catch ( ApplicationNotFoundException $exception ) {
             //throw new ApplicationNotFoundException( null, $exception );
             throw new ContextApplicationNotFoundException( null, $exception );
@@ -35,7 +47,16 @@ final class ApplicationContext implements ApplicationContextInterface
     
     private function getApplicationForRequest( Request $request ): ApplicationInterface
     {
-        $application    = $this->requestResolver->findApplication( $request );
+        $application    = $this->requestResolver->findApplication( $request->getHost() );
+        
+        $this->assertApplicationWasFound( $application );
+        
+        return $application;
+    }
+    
+    private function getApplicationForConsoleCommand( string $host ): ApplicationInterface
+    {
+        $application    = $this->requestResolver->findApplication( $host );
         
         $this->assertApplicationWasFound( $application );
         

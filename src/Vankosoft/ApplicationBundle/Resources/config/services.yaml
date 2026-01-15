@@ -31,6 +31,7 @@ parameters:
     vs_application.sliders.taxonomy_code: 'sliders'
     vs_application.banner_places.taxonomy_code: 'banner-places'
     vs_application.mailer_user: '%env(resolve:MAILER_USER)%'
+    vs_application.app_host: '%env(resolve:HOST)%'
 
 services:
     _defaults:

@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Vankosoft\ApplicationBundle\Model\Interfaces\ApplicationInterface;
 
 use Vankosoft\ApplicationBundle\Component\Exception\RequestNotFoundException;
+use Vankosoft\ApplicationBundle\Component\Exception\MisingHostException;
 use Vankosoft\ApplicationBundle\Component\Exception\ApplicationNotFoundException;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationNotFoundException as ContextApplicationNotFoundException;
 
@@ -33,6 +34,7 @@ final class ApplicationContext implements ApplicationContextInterface
         } catch ( RequestNotFoundException $exception ) {
             // May be The Service is triggered by Command Line
             if ( ! $this->appHost ) {
+                // throw new MisingHostException( 'Missing Host in ENV Variables.' );
                 return new NullApplication();
             }
             

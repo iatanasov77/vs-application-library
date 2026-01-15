@@ -32,7 +32,10 @@ final class ApplicationContext implements ApplicationContextInterface
             return $this->getApplicationForRequest( $this->getMasterRequest() );
         } catch ( RequestNotFoundException $exception ) {
             // May be The Service is triggered by Command Line
-            //return new NullApplication();
+            if ( ! $this->appHost ) {
+                return new NullApplication();
+            }
+            
             return $this->getApplicationForConsoleCommand( $this->appHost );
         } catch ( ApplicationNotFoundException $exception ) {
             //throw new ApplicationNotFoundException( null, $exception );
@@ -49,7 +52,7 @@ final class ApplicationContext implements ApplicationContextInterface
         return $application;
     }
     
-    private function getApplicationForConsoleCommand( ?string $host ): ApplicationInterface
+    private function getApplicationForConsoleCommand( string $host ): ApplicationInterface
     {
         $application    = $this->requestResolver->findApplication( $host );
         

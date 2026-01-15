@@ -14,8 +14,8 @@ final class HostnameBasedRequestResolver implements RequestResolverInterface
         $this->applicationRepository = $applicationRepository;
     }
 
-    public function findApplication( Request $request ) : ?ApplicationInterface
+    public function findApplication( string $host ) : ?ApplicationInterface
     {
-        return $this->applicationRepository->findOneByHostname( $request->getHost() );
+        return $this->applicationRepository->findOneByHostname( $host );
     }
 }

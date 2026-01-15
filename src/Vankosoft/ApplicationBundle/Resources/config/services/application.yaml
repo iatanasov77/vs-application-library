@@ -24,6 +24,7 @@ services:
         arguments:
             - '@vs_application.context.application.hostname_based_request_resolver'
             - '@request_stack'
+            - '%vs_application.app_host%'
         tags:
             - { name: 'vs_application.context.application' }
     

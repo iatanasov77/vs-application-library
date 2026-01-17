@@ -1,3 +1,9 @@
+1.13.19	|	Release date: **17.01.2026**
+============================================
+* Bug-Fixes and Improvements:
+  - Improve form.errors Macros.
+
+
 1.13.18	|	Release date: **15.01.2026**
 ============================================
 * New Features and Improvements:

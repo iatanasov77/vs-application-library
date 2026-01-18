@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Pagerfanta\Pagerfanta;
 
 use Doctrine\DBAL\Driver\PDO\PDOException;
@@ -235,7 +237,7 @@ class AbstractCrudController extends ResourceController
         return $response;
     }
         
-    protected function classInfo( Request $request )
+    protected function classInfo( Request $request ): void
     {
         if ( ! $this->classInfo ) {
             // when write this code request return: vs_users.controller.users:indexAction
@@ -250,7 +252,7 @@ class AbstractCrudController extends ResourceController
         }
     }
     
-    protected function prepareEntity( &$entity, &$form, Request $request )
+    protected function prepareEntity( &$entity, &$form, Request $request ): void
     {
         
     }
@@ -260,17 +262,17 @@ class AbstractCrudController extends ResourceController
         return [];
     }
     
-    protected function afterSaveEntity( $entity, Request $request )
+    protected function afterSaveEntity( $entity, Request $request ): void
     {
         
     }
     
-    protected function getRepository()
+    protected function getRepository(): ?RepositoryInterface
     {
         return $this->get( $this->classInfo['bundle'] . '.repository.' . $this->classInfo['controller'] );
     }
     
-    protected function getFactory()
+    protected function getFactory(): ?FactoryInterface
     {
         return $this->get( $this->classInfo['bundle'] . '.factory.' . $this->classInfo['controller'] );
     }
@@ -307,5 +309,17 @@ class AbstractCrudController extends ResourceController
         //var_dump($routeParams);die;
         
         return $routeParams;
+    }
+    
+    protected function getTranslations(): array
+    {
+        $translations   = [];
+        $transRepo      = $this->get( 'vs_application.repository.translation' );
+        
+        foreach ( $this->resources as $entity ) {
+            $translations[$entity->getId()] = array_keys( $transRepo->findTranslations( $entity ) );
+        }
+        
+        return $translations;
     }
 }

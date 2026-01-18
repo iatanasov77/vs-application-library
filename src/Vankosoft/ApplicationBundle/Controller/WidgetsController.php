@@ -13,7 +13,7 @@ class WidgetsController extends AbstractCrudController
         ];
     }
     
-    protected function prepareEntity( &$entity, &$form, Request $request )
+    protected function prepareEntity( &$entity, &$form, Request $request ): void
     {
         $widgetName = $form->get( 'name' )->getData();
         
@@ -23,23 +23,7 @@ class WidgetsController extends AbstractCrudController
         $this->buildRoles( $entity, $selectedRoles );
     }
     
-    private function getTranslations(): array
-    {
-        $translations   = [];
-        $transRepo      = $this->get( 'vs_application.repository.translation' );
-        
-        /* THIS MAKE FATAL ERROR IN PRODUCTION ( I DONT KNOW WHY )
-         * ========================================================
-         */
-        foreach ( $this->getRepository()->findAll() as $widget ) {
-            $translations[$widget->getId()] = array_keys( $transRepo->findTranslations( $widget ) );
-        }
-        
-        
-        return $translations;
-    }
-    
-    private function buildRoles( &$entity, array $roles )
+    private function buildRoles( &$entity, array $roles ): void
     {
         //var_dump( $roles ); die;
         $repo   = $this->get( 'vs_users.repository.user_roles' );

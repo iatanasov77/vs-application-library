@@ -1,3 +1,9 @@
+1.13.21	|	Release date: **18.01.2026**
+============================================
+* Bug-Fixes:
+  - Fix All Controllers that Extends AbstractCrudController.
+
+
 1.13.20	|	Release date: **18.01.2026**
 ============================================
 * New Features and Improvements:

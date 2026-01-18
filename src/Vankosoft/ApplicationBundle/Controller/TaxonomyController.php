@@ -48,19 +48,6 @@ class TaxonomyController extends AbstractCrudController
         return $rootTaxon;
     }
     
-    private function getTranslations(): array
-    {
-        $translations   = [];
-        $transRepo      = $this->get( 'vs_application.repository.translation' );
-        
-        foreach ( $this->getRepository()->findAll() as $taxonomy ) {
-            $translations[$taxonomy->getId()] = array_keys( $transRepo->findTranslations( $taxonomy ) );
-        }
-        
-        
-        return $translations;
-    }
-    
     private function getTaxonTranslations()
     {
         $translations   = [];

@@ -1,3 +1,9 @@
+1.13.20	|	Release date: **18.01.2026**
+============================================
+* New Features and Improvements:
+  - Add Method To Get Translations for Resources in AbstractCrudController.
+
+
 1.13.19	|	Release date: **17.01.2026**
 ============================================
 * Bug-Fixes and Improvements:

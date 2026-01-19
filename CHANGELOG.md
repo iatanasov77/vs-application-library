@@ -1,3 +1,9 @@
+1.13.22	|	Release date: **19.01.2026**
+============================================
+* New Features:
+  - Translate Messages in Application Installator Commands.
+
+
 1.13.21	|	Release date: **18.01.2026**
 ============================================
 * Bug-Fixes:

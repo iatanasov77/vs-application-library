@@ -1,3 +1,17 @@
+1.14.0	|	Release date: **04.02.2026**
+============================================
+* New Features:
+  - Update Some Dependency Version Requirements.
+  - Remove Component: ApplicationBundle
+  - Squashed 'src/Vankosoft/ApplicationBundle/' content from commit ada79e1d
+  - Remove Component: ApplicationInstalatorBundle
+  - Squashed 'src/Vankosoft/ApplicationInstalatorBundle/' content from commit 481ae8ac
+  - Remove Component: CmsBundle
+  - Squashed 'src/Vankosoft/CmsBundle/' content from commit 8e322c12
+  - Remove Component: UsersBundle
+  - Squashed 'src/Vankosoft/UsersBundle/' content from commit 34a5fe80
+
+
 1.13.22	|	Release date: **19.01.2026**
 ============================================
 * New Features:

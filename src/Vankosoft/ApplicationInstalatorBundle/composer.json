@@ -17,7 +17,7 @@
 		"symfony/templating" : "^6.4 || ^7.4",
 		"doctrine/doctrine-migrations-bundle" : "^3.7",
 		"doctrine/doctrine-fixtures-bundle" : "^3.7",
-		"sylius/resource-bundle" : "^1.13",
+		"sylius/resource-bundle" : "^1.14",
 		"sylius/fixtures-bundle" : "^1.9"
 	},
 	"autoload" : {

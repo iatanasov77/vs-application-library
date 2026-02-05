@@ -1,3 +1,11 @@
+1.14.1	|	Release date: **05.02.2026**
+============================================
+* Bug-Fixes and Improvements:
+  - Fix Deprecations on UsersBundle Security Voters.
+  - Fix Confliction getTranslations Mehod between TaxonomyHelperTrait and AbstractCrudController .
+  - Add Some Missing Methods Arguments Types.
+
+
 1.14.0	|	Release date: **04.02.2026**
 ============================================
 * New Features:

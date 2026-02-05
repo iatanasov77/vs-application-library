@@ -21,8 +21,10 @@ use Vankosoft\ApplicationBundle\EventSubscriber\ResourceActionEvent;
 
 class AbstractCrudController extends ResourceController
 {
+    /** @var array | null */
     protected $classInfo;
     
+    /** @var Request */
     protected $currentRequest;
     
     /** @var Pagerfanta $resources */

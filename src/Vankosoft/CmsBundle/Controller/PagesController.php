@@ -3,6 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Persistence\ObjectRepository;
 //use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -69,7 +70,7 @@ class PagesController extends AbstractCrudController
         $this->buildCategories( $entity, $selectedCategories );
     }
     
-    protected function getFilterRepository()
+    protected function getFilterRepository(): ObjectRepository
     {
         return $this->get( 'vs_cms.repository.page_categories' );
     }

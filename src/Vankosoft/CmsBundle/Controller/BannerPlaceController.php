@@ -12,7 +12,7 @@ class BannerPlaceController extends AbstractCrudController
     {
         $taxonomy       = $this->getTaxonomy( 'vs_application.banner_places.taxonomy_code' );
         
-        $translations   = $this->classInfo['action'] == 'indexAction' ? $this->getTranslations( false ) : [];
+        $translations   = $this->classInfo['action'] == 'indexAction' ? $this->getTaxonTranslations( false ) : [];
         if ( $entity && $entity->getTaxon() ) {
             $entity->getTaxon()->setCurrentLocale( $request->getLocale() );
         }

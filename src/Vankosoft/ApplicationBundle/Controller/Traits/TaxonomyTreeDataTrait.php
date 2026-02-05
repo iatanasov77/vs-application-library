@@ -11,7 +11,7 @@ trait TaxonomyTreeDataTrait
     /** @var TaxonRepository */
     protected $taxonRepository;
     
-    protected function gtreeTableData( $taxonomyId, $parentId, $displayRootTaxon = false ): array
+    protected function gtreeTableData( mixed $taxonomyId, mixed $parentId, bool $displayRootTaxon = false ): array
     {
         $ertt       = $this->getTaxonRepository();
         $ert        = $this->getTaxonomyRepository();
@@ -36,7 +36,7 @@ trait TaxonomyTreeDataTrait
         return ['nodes' => $gtreeTableData];
     }
     
-    protected function easyuiComboTreeData( $taxonomyId, array $selectedValues = [], array $leafs = [], $displayRootTaxon = false ): array
+    protected function easyuiComboTreeData( mixed $taxonomyId, array $selectedValues = [], array $leafs = [], bool $displayRootTaxon = false ): array
     {
         $rootTaxon      = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         $data           = [];
@@ -64,7 +64,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildGtreeTableData( $taxons ): array
+    protected function buildGtreeTableData( array $taxons ): array
     {
         $data   = [];
         foreach ( $taxons as $t ) {
@@ -79,7 +79,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( $tree, &$data, array $selectedValues, array $leafs, $notLeafs ): void
+    protected function buildEasyuiCombotreeData( array $tree, &$data, array $selectedValues, array $leafs, bool $notLeafs ): void
     {
         $key    = 0;
         foreach( $tree as $node ) {
@@ -106,7 +106,7 @@ trait TaxonomyTreeDataTrait
         }
     }
     
-    protected function bootstrapTreeviewData( $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] ): bool
+    protected function bootstrapTreeviewData( array $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] ): bool
     {
         foreach( $tree as $k => $node ) {
             $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
@@ -152,17 +152,17 @@ trait TaxonomyTreeDataTrait
         return $expandParent;
     }
     
-    protected function targetCount( $taxonId )
+    protected function targetCount( mixed $taxonId )
     {
         return 0;
     }
     
-    protected function targetUrl( $taxonId ): string
+    protected function targetUrl( mixed $taxonId ): string
     {
         return '';
     }
     
-    protected function targetUrlLeaf( $leafId ): string
+    protected function targetUrlLeaf( mixed $leafId ): string
     {
         return '';
     }

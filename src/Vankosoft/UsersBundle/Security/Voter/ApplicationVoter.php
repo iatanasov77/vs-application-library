@@ -2,6 +2,7 @@
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -10,9 +11,11 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 class ApplicationVoter implements VoterInterface
 {
+    /** @var Security | null */
     private $security;
     
-    private ApplicationContextInterface $applicationContext;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
     
     public function __construct(
         ApplicationContextInterface $applicationContext,
@@ -25,7 +28,7 @@ class ApplicationVoter implements VoterInterface
     /**
      * {@inheritdoc}
      */
-    public function vote( TokenInterface $token, $subject, array $attributes ): int
+    public function vote( TokenInterface $token, mixed $subject, array $attributes, ?Vote $vote = null ): int
     {
         $user   = $token->getUser();
         

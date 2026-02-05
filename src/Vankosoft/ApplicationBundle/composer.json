@@ -28,7 +28,7 @@
 		"knplabs/knp-paginator-bundle" : "^6.10",
 		"knplabs/knp-time-bundle" : "^2.5",
 		"sylius-labs/doctrine-migrations-extra-bundle" : "^0.2",
-		"sylius/resource-bundle" : "^1.13",
+		"sylius/resource-bundle" : "^1.14",
 		"sylius/taxonomy" : "^2.2",
 		"sylius/locale" : "^2.2",
 		"sylius/theme-bundle" : "^2.4",

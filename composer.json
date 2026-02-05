@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.14.0",
+    "version": "v1.14.1",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -42,7 +42,7 @@
         "daddl3\/symfony-ckeditor-5-webpack": "^1.2",
         "liip\/imagine-bundle": "^2.17",
         "artgris\/filemanager-bundle": "^2.10",
-        "sylius\/resource-bundle": "^1.13",
+        "sylius\/resource-bundle": "^1.14",
         "sylius\/taxonomy": "^2.2",
         "sylius\/locale": "^2.2",
         "sylius\/theme-bundle": "^2.4",

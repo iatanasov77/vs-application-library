@@ -70,7 +70,7 @@ trait ConsoleCommandTrait
         return $response;
     }
     
-    public function streamedProcessResponse( $callback ): StreamedResponse
+    public function streamedProcessResponse( callable | iterable | null $callback ): StreamedResponse
     {
         return new StreamedResponse( $callback );
     }

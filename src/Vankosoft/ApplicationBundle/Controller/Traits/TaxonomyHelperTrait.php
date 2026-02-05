@@ -37,7 +37,7 @@ trait TaxonomyHelperTrait
      * @param string|null $description
      * @return TaxonInterface
      */
-    protected function createTaxon( string $name, string $locale, ?TaxonInterface $parent, int $taxonomyId, $description = null ): TaxonInterface
+    protected function createTaxon( string $name, string $locale, ?TaxonInterface $parent, int $taxonomyId, ?string $description = null ): TaxonInterface
     {
         $taxon  = $this->get( 'vs_application.factory.taxon' )->createNew();
         
@@ -92,7 +92,7 @@ trait TaxonomyHelperTrait
      * @param string|null $description
      * @return TaxonTranslationInterface
      */
-    protected function createTranslation( TaxonInterface $taxon, string $locale, string $name, $description = null ): TaxonTranslationInterface
+    protected function createTranslation( TaxonInterface $taxon, string $locale, string $name, ?string $description = null ): TaxonTranslationInterface
     {
         $translation    = $taxon->createNewTranslation();
         
@@ -109,7 +109,7 @@ trait TaxonomyHelperTrait
      * @param bool $paginated
      * @return array
      */
-    protected function getTranslations( bool $paginated = true ): array
+    protected function getTaxonTranslations( bool $paginated = true ): array
     {
         $locales        = $this->get( 'vs_application.repository.locale' )->findAll();
         

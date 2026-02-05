@@ -11,7 +11,7 @@ trait TaxonomyTreeDataTrait
     /** @var TaxonRepository */
     protected $taxonRepository;
     
-    protected function gtreeTableData( ?mixed $taxonomyId, ?mixed $parentId, bool $displayRootTaxon = false ): array
+    protected function gtreeTableData( mixed $taxonomyId, mixed $parentId, bool $displayRootTaxon = false ): array
     {
         $ertt       = $this->getTaxonRepository();
         $ert        = $this->getTaxonomyRepository();
@@ -36,7 +36,7 @@ trait TaxonomyTreeDataTrait
         return ['nodes' => $gtreeTableData];
     }
     
-    protected function easyuiComboTreeData( ?mixed $taxonomyId, array $selectedValues = [], array $leafs = [], bool $displayRootTaxon = false ): array
+    protected function easyuiComboTreeData( mixed $taxonomyId, array $selectedValues = [], array $leafs = [], bool $displayRootTaxon = false ): array
     {
         $rootTaxon      = $this->getTaxonomyRepository()->find( $taxonomyId )->getRootTaxon();
         $data           = [];
@@ -152,17 +152,17 @@ trait TaxonomyTreeDataTrait
         return $expandParent;
     }
     
-    protected function targetCount( ?mixed $taxonId )
+    protected function targetCount( mixed $taxonId )
     {
         return 0;
     }
     
-    protected function targetUrl( ?mixed $taxonId ): string
+    protected function targetUrl( mixed $taxonId ): string
     {
         return '';
     }
     
-    protected function targetUrlLeaf( ?mixed $leafId ): string
+    protected function targetUrlLeaf( mixed $leafId ): string
     {
         return '';
     }

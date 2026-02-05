@@ -7,7 +7,7 @@ use Doctrine\Persistence\ObjectRepository;
 
 trait FilterFormTrait
 {
-    protected function getFilterForm( string $filterClass, ?mixed $selected, Request $request ): FormInterface
+    protected function getFilterForm( string $filterClass, mixed $selected, Request $request ): FormInterface
     {
         $filterForm     = $this->createFormBuilder()
                             ->add( 'filterByCategory', EntityType::class, [

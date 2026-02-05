@@ -109,7 +109,7 @@ trait TaxonomyHelperTrait
      * @param bool $paginated
      * @return array
      */
-    protected function getTranslations( bool $paginated = true ): array
+    protected function getTaxonTranslations( bool $paginated = true ): array
     {
         $locales        = $this->get( 'vs_application.repository.locale' )->findAll();
         

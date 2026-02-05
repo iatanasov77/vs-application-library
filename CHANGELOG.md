@@ -1,3 +1,9 @@
+1.14.2	|	Release date: **05.02.2026**
+============================================
+* Bug-Fixes:
+  - Some Fixes on Controller Trait.
+
+
 1.14.1	|	Release date: **05.02.2026**
 ============================================
 * Bug-Fixes and Improvements:

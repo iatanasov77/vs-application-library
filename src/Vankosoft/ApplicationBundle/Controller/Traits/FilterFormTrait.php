@@ -1,10 +1,13 @@
 <?php namespace Vankosoft\ApplicationBundle\Controller\Traits;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\Persistence\ObjectRepository;
 
 trait FilterFormTrait
 {
-    protected function getFilterForm( $filterClass, $selected, $request )
+    protected function getFilterForm( string $filterClass, ?mixed $selected, Request $request ): FormInterface
     {
         $filterForm     = $this->createFormBuilder()
                             ->add( 'filterByCategory', EntityType::class, [
@@ -26,5 +29,5 @@ trait FilterFormTrait
         return $filterForm;
     }
     
-    abstract protected function getFilterRepository();
+    abstract protected function getFilterRepository(): ObjectRepository;
 }

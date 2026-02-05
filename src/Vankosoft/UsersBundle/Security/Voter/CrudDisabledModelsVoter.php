@@ -2,6 +2,7 @@
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,9 +12,10 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 class CrudDisabledModelsVoter extends CrudVoter
 {
-    private ApplicationContextInterface $applicationContext;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
     
-    /** @var Collection */
+    /** @var array */
     private $disabledModels;
     
     /** @var ContainerInterface */
@@ -25,12 +27,11 @@ class CrudDisabledModelsVoter extends CrudVoter
         ContainerInterface $container
     ) {
             $this->applicationContext   = $applicationContext;
-            //$this->disabledModels       = new ArrayCollection( $disabledModels );
             $this->disabledModels       = $disabledModels;
             $this->container            = $container;
     }
     
-    protected function supports( string $attribute, $subject ): bool
+    protected function supports( string $attribute, mixed $subject ): bool
     {
         return is_object( $subject ) && in_array( get_class( $subject ), array_keys( $this->disabledModels ) );
     }
@@ -44,7 +45,7 @@ class CrudDisabledModelsVoter extends CrudVoter
      * $authorizationChecker   = $this->container->get( 'security.authorization_checker' );
      * $authorizationChecker->isGranted( $attribute, $subject );
      */
-    protected function voteOnAttribute( string $attribute, $subject, TokenInterface $token ): bool
+    protected function voteOnAttribute( string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null ): bool
     {        
         $user = $token->getUser();
         

@@ -11,9 +11,11 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 class ApplicationVoter implements VoterInterface
 {
+    /** @var Security | null */
     private $security;
     
-    private ApplicationContextInterface $applicationContext;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
     
     public function __construct(
         ApplicationContextInterface $applicationContext,

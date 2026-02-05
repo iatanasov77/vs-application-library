@@ -2,7 +2,7 @@
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,12 +12,11 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 class CrudOwnerModelsVoter extends CrudVoter
 {
-    private ApplicationContextInterface $applicationContext;
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
     
-    /** @var Collection */
+    /** @var array */
     private $ownerModels;
-    
-    private $authorizationCheker;
     
     /** @var ContainerInterface */
     private $container;
@@ -28,12 +27,11 @@ class CrudOwnerModelsVoter extends CrudVoter
         ContainerInterface $container
     ) {
         $this->applicationContext   = $applicationContext;
-        //$this->ownerModels          = new ArrayCollection( $ownerModels );
         $this->ownerModels          = $ownerModels;
         $this->container            = $container;
     }
     
-    protected function supports( string $attribute, $subject ): bool
+    protected function supports( string $attribute, mixed $subject ): bool
     {
         return is_object( $subject ) && in_array( get_class( $subject ), $this->ownerModels );
     }
@@ -47,7 +45,7 @@ class CrudOwnerModelsVoter extends CrudVoter
      * $authorizationChecker   = $this->container->get( 'security.authorization_checker' );
      * $authorizationChecker->isGranted( $attribute, $subject );
      */
-    protected function voteOnAttribute( string $attribute, $subject, TokenInterface $token ): bool
+    protected function voteOnAttribute( string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null ): bool
     {        
         $user = $token->getUser();
         

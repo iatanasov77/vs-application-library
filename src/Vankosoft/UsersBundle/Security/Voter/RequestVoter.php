@@ -13,10 +13,13 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 class RequestVoter implements VoterInterface
 {
+    /** @var ApplicationContextInterface */
+    private $applicationContext;
+    
+    /** @var AuthorizationCheckerInterface | null */
     private $security;
     
-    private ApplicationContextInterface $applicationContext;
-    
+    /** @var RoleHierarchyInterface | null */
     private $roleHierarchy;
     
     public function __construct(

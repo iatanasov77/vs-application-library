@@ -48,9 +48,9 @@ trait TaxonomyTreeDataTrait
                 'children'  => []
             ];
             
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data[0]['children'], $selectedValues, $leafs, empty( $leafs ) );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren()->toArray(), $data[0]['children'], $selectedValues, $leafs, empty( $leafs ) );
         } else {
-            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren(), $data, $selectedValues, $leafs, empty( $leafs) );
+            $this->buildEasyuiCombotreeData( $rootTaxon->getChildren()->toArray(), $data, $selectedValues, $leafs, empty( $leafs) );
         }
         
         return $data;
@@ -79,7 +79,7 @@ trait TaxonomyTreeDataTrait
         return $data;
     }
     
-    protected function buildEasyuiCombotreeData( array $tree, &$data, array $selectedValues, array $leafs, bool $notLeafs ): void
+    protected function buildEasyuiCombotreeData( array $tree, array &$data, array $selectedValues, array $leafs, bool $notLeafs ): void
     {
         $key    = 0;
         foreach( $tree as $node ) {
@@ -99,14 +99,14 @@ trait TaxonomyTreeDataTrait
             
             // Buld Child Categories After Leafs because Leafs override children keys
             if ( $node->getChildren()->count() ) {
-                $this->buildEasyuiCombotreeData( $node->getChildren(), $data[$key]['children'], $selectedValues, $leafs, $notLeafs );
+                $this->buildEasyuiCombotreeData( $node->getChildren()->toArray(), $data[$key]['children'], $selectedValues, $leafs, $notLeafs );
             }
             
             $key++;
         }
     }
     
-    protected function bootstrapTreeviewData( array $tree, &$data, $useTarget = true, $taxonId = null, array $leafs = [] ): bool
+    protected function bootstrapTreeviewData( array $tree, array &$data, bool $useTarget = true, mixed $taxonId = null, array $leafs = [] ): bool
     {
         foreach( $tree as $k => $node ) {
             $node->setCurrentLocale(  $node->getParent()->getCurrentLocale() );
@@ -118,7 +118,7 @@ trait TaxonomyTreeDataTrait
             
             if ( $node->getChildren()->count() ) {
                 $data[$k]['nodes']  = [];
-                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren(), $data[$k]['nodes'], $useTarget, $taxonId, $leafs );
+                $expandParent   = $this->bootstrapTreeviewData( $node->getChildren()->toArray(), $data[$k]['nodes'], $useTarget, $taxonId, $leafs );
             } else {
                 $expandParent   = false;
                 foreach ( $leafs as $l => $leaf ) {

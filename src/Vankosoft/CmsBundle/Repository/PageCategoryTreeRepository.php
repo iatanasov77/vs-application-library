@@ -34,7 +34,7 @@ class PageCategoryTreeRepository extends NestedTreeRepository implements Reposit
         return $countPages;
     }
     
-    public function createPaginator(array $criteria = [], array $sorting = []): iterable
+    public function createPaginator( array $criteria = [], array $sorting = [] ): iterable
     {
         return $this->resourceRepository( $criteria, $sorting );
     }

@@ -5,12 +5,12 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 interface ApplicationRepositoryInterface extends RepositoryInterface
 {
-    public function findOneByHostname( string $hostname ) : ?ApplicationInterface;
+    public function findOneByHostname( string $hostname ): ?ApplicationInterface;
     
-    public function findOneByCode( string $code ) : ?ApplicationInterface;
+    public function findOneByCode( string $code ): ?ApplicationInterface;
     
     /**
      * @return iterable|ApplicationInterface[]
      */
-    public function findByName( string $name ) : iterable;
+    public function findByName( string $name ): iterable;
 }

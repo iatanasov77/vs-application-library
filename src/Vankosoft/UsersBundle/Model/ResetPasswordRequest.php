@@ -52,7 +52,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
         return $this->id;
     }
     
-    public function getUser() : object
+    public function getUser(): object
     {
         return $this->user;
     }

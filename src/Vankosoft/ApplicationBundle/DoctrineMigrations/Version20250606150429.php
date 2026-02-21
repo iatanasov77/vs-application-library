@@ -39,7 +39,7 @@ final class Version20250606150429 extends AbstractMigration
             CREATE TABLE VSAPP_LogEntries (action VARCHAR(8) NOT NULL, logged_at DATETIME NOT NULL, object_id VARCHAR(64) DEFAULT NULL, object_class VARCHAR(191) NOT NULL, version INT NOT NULL, data JSON DEFAULT NULL, username VARCHAR(191) DEFAULT NULL, locale VARCHAR(8) NOT NULL, id INT AUTO_INCREMENT NOT NULL, INDEX versions_lookup_idx (object_class, object_id), UNIQUE INDEX versions_lookup_unique_idx (object_class, object_id, version, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE TABLE VSAPP_Settings (maintenanceMode TINYINT(1) DEFAULT 0 NOT NULL COMMENT 'This Application is In Maintenace Mode.', theme VARCHAR(255) DEFAULT NULL, id INT AUTO_INCREMENT NOT NULL, application_id INT DEFAULT NULL, maintenance_page_id  INT DEFAULT NULL, INDEX IDX_4A491FD3E030ACD (application_id), INDEX IDX_4A491FD507FAB6A (maintenance_page_id ), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8
+            CREATE TABLE VSAPP_Settings (maintenanceMode TINYINT(1) DEFAULT 0 NOT NULL COMMENT 'This Application is In Maintenace Mode.', theme VARCHAR(255) DEFAULT NULL, id INT AUTO_INCREMENT NOT NULL, application_id INT DEFAULT NULL, maintenance_page_id INT DEFAULT NULL, INDEX IDX_4A491FD3E030ACD (application_id), INDEX IDX_4A491FD507FAB6A (maintenance_page_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE VSAPP_TagsWhitelistContexts (id INT AUTO_INCREMENT NOT NULL, taxon_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_AD13B59BDE13F470 (taxon_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8
@@ -162,7 +162,7 @@ final class Version20250606150429 extends AbstractMigration
             ALTER TABLE VSAPP_Settings ADD CONSTRAINT FK_4A491FD3E030ACD FOREIGN KEY (application_id) REFERENCES VSAPP_Applications (id) ON DELETE CASCADE
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE VSAPP_Settings ADD CONSTRAINT FK_4A491FD507FAB6A FOREIGN KEY (maintenance_page_id ) REFERENCES VSCMS_Pages (id) ON DELETE CASCADE
+            ALTER TABLE VSAPP_Settings ADD CONSTRAINT FK_4A491FD507FAB6A FOREIGN KEY (maintenance_page_id) REFERENCES VSCMS_Pages (id) ON DELETE CASCADE
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE VSAPP_TagsWhitelistContexts ADD CONSTRAINT FK_AD13B59BDE13F470 FOREIGN KEY (taxon_id) REFERENCES VSAPP_Taxons (id)

@@ -1,3 +1,11 @@
+1.14.3	|	Release date: **21.02.2026**
+============================================
+* Bug-Fixes:
+  - Update Installator Application Configs.
+  - Fixing a Doctrine Migration.
+  - Fixing Doctrine Mapping of Application Settings.
+
+
 1.14.2	|	Release date: **05.02.2026**
 ============================================
 * Bug-Fixes:

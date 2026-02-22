@@ -19,7 +19,7 @@ final class FilesystemRequirements extends RequirementCollection
                 $translator->trans( 'vs_application_instalator.installer.filesystem.cache.help', ['%path%' => $cacheDir], 'VSApplicationInstalatorBundle' )
             ) )
             ->add( new Requirement(
-                $translator->trans( 'vs_application_instalator.installer.filesystem.logs.header', [] ),
+                $translator->trans( 'vs_application_instalator.installer.filesystem.logs.header', [], 'VSApplicationInstalatorBundle' ),
                 is_writable( $logsDir ),
                 true,
                 $translator->trans( 'vs_application_instalator.installer.filesystem.logs.help', ['%path%' => $logsDir], 'VSApplicationInstalatorBundle' )

@@ -1,6 +1,8 @@
 <?php namespace Vankosoft\ApplicationInstalatorBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -13,6 +15,9 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 {
     /** @var Registry */
     private $doctrineRegistry;
+    
+    /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
+    private ?AbstractSchemaManager $schemaManager = null;
 
     public function __construct( Registry $doctrineRegistry )
     {
@@ -45,7 +50,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         $databaseName = $this->getDatabaseName();
 
         try {
-            $schemaManager  = $this->getSchemaManager();
+            $schemaManager  = $this->createSchemaManager();
 
             return in_array( $databaseName, $schemaManager->listDatabases() );
         } catch ( \Exception $exception ) {
@@ -96,7 +101,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function isSchemaPresent(): bool
     {
-        return 0 !== count( $this->getSchemaManager()->listTableNames() );
+        return 0 !== count( $this->createSchemaManager()->listTableNames() );
     }
 
     private function getDatabaseName(): string
@@ -109,9 +114,13 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         //return $this->getEntityManager()->getConnection()->getDatabase();
     }
 
-    private function getSchemaManager(): AbstractSchemaManager
+    private function createSchemaManager(): AbstractSchemaManager
     {
-        return $this->getEntityManager()->getConnection()->getSchemaManager();
+        if ( null === $this->schemaManager ) {
+            $this->schemaManager = $this->getEntityManager()->getConnection()->createSchemaManager();
+        }
+        
+        return $this->schemaManager;
     }
 
     private function getEntityManager(): EntityManagerInterface

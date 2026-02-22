@@ -1,3 +1,10 @@
+1.14.5	|	Release date: **22.02.2026**
+============================================
+* Bug-Fixes:
+  - Fix Application Installator Check Requirements Command.
+  - Fix Application Installator DatabaseSetupCommandsProvider.
+
+
 1.14.4	|	Release date: **22.02.2026**
 ============================================
 * Bug-Fixes:

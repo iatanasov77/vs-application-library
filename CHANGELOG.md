@@ -1,3 +1,9 @@
+1.14.4	|	Release date: **22.02.2026**
+============================================
+* Bug-Fixes:
+  - Remove Thruway Bundle From Application Installator Configs Because  Its Requirements Not Support Symfony 7
+
+
 1.14.3	|	Release date: **21.02.2026**
 ============================================
 * Bug-Fixes:

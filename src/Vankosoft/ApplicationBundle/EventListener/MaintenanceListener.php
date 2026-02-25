@@ -1,6 +1,5 @@
 <?php namespace Vankosoft\ApplicationBundle\EventListener;
 
-//use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,6 +17,16 @@ use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
 use Vankosoft\ApplicationBundle\Twig\Alerts;
 use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
+/**
+ * This Class is used when Maintenance Mode is setted on Application Settings
+ * and load Maintenance Page from CMS Bundle Pages, but this NOT a good Idea.
+ * Better way is to Use ENV Variable to Set Maintenance Mode and a Satic Page or Template.
+ * 
+ * I create a MaintenanceSubscriber which should be used in the future to set Maintenance Mode.
+ * 
+ * @TODO Remove this Class,
+ *      Remove Maintenance Mode and Maintenance Page from Application Settings
+ */
 final class MaintenanceListener
 {
     /** @var ContainerInterface */
@@ -55,7 +64,6 @@ final class MaintenanceListener
         }
     }
     
-    //public function onKernelRequest( GetResponseEvent $event )
     public function onKernelRequest( RequestEvent $event ): void
     {
         $request    = $event->getRequest();

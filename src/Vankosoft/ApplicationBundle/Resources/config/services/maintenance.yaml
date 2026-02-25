@@ -14,3 +14,8 @@ services:
             - '@vs_application.context.application'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest' }
+    
+    vs_app.subscriber.maintenance:
+        class: App\EventSubscriber\MaintenanceSubscriber
+        arguments: ['@twig']
+        tags: [kernel.event_subscriber]

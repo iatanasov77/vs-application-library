@@ -19,6 +19,13 @@ sylius_fixtures:
                 logger: ~
                 
             fixtures:
+                general_settings:
+                    name: general_settings
+                    options:
+                        custom:
+                            - applicationTitle: 'Application FrontOffice'
+                              theme: 'TestTheme'
+
                 application_user_roles:
                     name: user_roles
                     options:

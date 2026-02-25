@@ -1,4 +1,4 @@
-<?php namespace App\EventSubscriber;
+<?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;

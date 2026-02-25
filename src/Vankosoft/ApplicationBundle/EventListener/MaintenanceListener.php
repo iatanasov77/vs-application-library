@@ -26,6 +26,7 @@ use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
  * 
  * @TODO Remove this Class,
  *      Remove Maintenance Mode and Maintenance Page from Application Settings
+ *      Remove Console Command that SET the Maintenance Mode
  */
 final class MaintenanceListener
 {

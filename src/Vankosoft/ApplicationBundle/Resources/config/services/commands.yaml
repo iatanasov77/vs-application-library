@@ -4,15 +4,6 @@ services:
         autoconfigure: true
         public: true
     
-    vs_application.command.maintenance:
-        class: Vankosoft\ApplicationBundle\Command\MaintenanceModeCommand
-        tags:
-            - 'console.command'
-        arguments:
-            - '@service_container'
-            - '@doctrine'
-            - '@validator'
-
     vs_application.command.regenerate_slugs:
         class: Vankosoft\ApplicationBundle\Command\RegenerateSlugsCommand
         tags:

@@ -25,17 +25,6 @@ class SettingsForm extends AbstractForm
         parent::buildForm( $builder, $options );
         
         $builder
-            ->add( 'maintenanceMode', CheckboxType::class, ['label' => 'vs_application.form.maintenance_mode', 'translation_domain' => 'VSApplicationBundle',] )
-            
-            ->add( 'maintenancePage', EntityType::class, [
-                'label'                 => 'vs_application.form.maintenance_page',
-                'translation_domain'    => 'VSApplicationBundle',
-                'class'                 => $this->pageClass,
-                'placeholder'           => 'vs_application.form.maintenance_page_placeholder',
-                'choice_label'          => 'title',
-                'required'              => false
-            ])
-            
             ->add('theme', ThemeNameChoiceType::class, [
                 'label'                 => 'vs_application.form.theme',
                 'translation_domain'    => 'VSApplicationBundle',

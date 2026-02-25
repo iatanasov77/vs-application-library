@@ -28,7 +28,7 @@ final class Settings
         $this->container        = $container;
         
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->settingsKeys     = ['maintenanceMode', 'maintenancePage', 'theme'];
+        $this->settingsKeys     = ['theme'];
         
         $this->cache            = $cache;
     }
@@ -123,7 +123,7 @@ final class Settings
         $generalizedSettings    = [];
         foreach( $this->settingsKeys as $key ) {
             $value  = $applicationSettings ? $this->propertyAccessor->getValue( $applicationSettings, $key ) : null;
-            if ( $value === null || ( $key == 'maintenanceMode' && $value == false ) ) {
+            if ( $value === null ) {
                 $value  = $this->propertyAccessor->getValue( $generalSettings, $key );
             }
             

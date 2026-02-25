@@ -38,10 +38,8 @@ sylius_fixtures:
                     name: general_settings
                     options:
                         custom:
-                            -   maintenanceMode: false
 #                                 applicationTitle: 'Application FrontOffice'
 #                                 theme: 'TestTheme'
-#                                 maintenancePage: 0
 
                 taxonomies:
                     name: taxonomy
@@ -187,22 +185,6 @@ sylius_fixtures:
                     name: pages
                     options:
                         custom:
-                            - title: 'Maintenance Mode'
-                              description: 'Page Displayed When the Application is in Maintenance Mode'
-                              text: '<h1>Maintenance Mode</h1>'
-                              published: true
-                              category_code: 'maintenance-pages'
-                              locale:  '%locale%'
-                              translations:
-                                  en_US:
-                                      title: 'Maintenance Mode'
-                                      description: 'Page Displayed When the Application is in Maintenance Mode'
-                                      text: '<h1>Maintenance Mode</h1>'
-                                  bg_BG:
-                                      title: 'Режим на поддръжка'
-                                      description: 'Страницата се показва, когато приложението е в режим на поддръжка'
-                                      text: '<h1>Режим на поддръжка</h1>'
-                                      
                             - title: 'Under Construction'
                               description: 'Page Displayed When the Application is Under Construction'
                               text: '<h1>Under Construction</h1>'

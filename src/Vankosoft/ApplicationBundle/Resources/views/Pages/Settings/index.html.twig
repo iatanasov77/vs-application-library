@@ -45,7 +45,6 @@
                                     <tr>
                                         <th width="50">N</th>
                                         <th>{{ 'vs_application.template.items_index_row_title' | trans( {},'VSApplicationBundle' ) }}</th>
-                                        <th>{{ 'vs_application.template.items_index_row_in_maintenance' | trans( {},'VSApplicationBundle' ) }}</th>
                                         <th>{{ 'vs_application.template.items_index_row_hostname' | trans( {},'VSApplicationBundle' ) }}</th>
                                         <th>{{ 'vs_application.template.items_index_row_theme' | trans( {},'VSApplicationBundle' ) }}</th>
                                         <th>{{ 'vs_application.template.items_index_row_action' | trans( {},'VSApplicationBundle' ) }}</th>
@@ -56,13 +55,6 @@
                                     <tr>
                                         <td>{{ loop.index }}</td>
                                         <td>{{ item.title }}</td>
-                                        <td>
-                                        {% if item.settings[0] is defined and item.settings[0].maintenanceMode %}
-                                            <i class="fas fa-check" style="color: #82c91e;">
-                                        {% else %}
-                                            <i class="fas fa-times" style="color: #ff1e1e;"></i>
-                                        {% endif %}
-                                        </td>
                                         <td>{{ item.hostname }}</td>
                                         <td>
                                             {% if appThemes[item.id] %}{{ appThemes[item.id].title }}{% endif %}

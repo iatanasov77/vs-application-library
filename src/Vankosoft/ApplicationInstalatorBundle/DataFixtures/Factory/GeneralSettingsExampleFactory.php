@@ -42,8 +42,6 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
             $settingsEntity->setApplication( null );
         }
         
-        $settingsEntity->setMaintenanceMode( $options['maintenanceMode'] );
-        $settingsEntity->setMaintenancePage( $options['maintenancePage'] );
         $settingsEntity->setTheme( $options['theme'] );
         
         return $settingsEntity;
@@ -54,12 +52,6 @@ class GeneralSettingsExampleFactory extends AbstractExampleFactory implements Ex
         $resolver
             ->setDefault( 'applicationTitle', null )
             ->setAllowedTypes( 'applicationTitle', ['null', 'string'] )
-            
-            ->setDefault( 'maintenanceMode', false )
-            ->setAllowedTypes( 'maintenanceMode', 'bool' )
-            
-            ->setDefault( 'maintenancePage', null )
-            ->setAllowedTypes( 'maintenancePage', ['null', PageInterface::class] )
             
             ->setDefault( 'theme', null )
             ->setAllowedTypes( 'theme', ['null', 'string'] )

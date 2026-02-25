@@ -1,3 +1,11 @@
+1.14.7	|	Release date: **25.02.2026**
+============================================
+* Bug-Fixes:
+  - Fix Application Installator Fixtures.
+  - Remove DoctrineMigrations.
+  - Add Again Removed DoctrineMigrations because the problem is not there.
+
+
 1.14.6	|	Release date: **25.02.2026**
 ============================================
 * New Features:

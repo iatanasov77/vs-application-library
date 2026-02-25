@@ -281,7 +281,6 @@ EOT
         }
         
         $settings->setApplication( $this->application );
-        $settings->setMaintenanceMode( 0 );
         
         $theme                  = null;
         if ( $applicationType != self::APPLICATION_TYPE_API ) {

@@ -8,12 +8,6 @@ class Settings implements SettingsInterface
 {   
     /** @var integer */
     protected $id;
-
-    /** @var boolean */
-    protected $maintenanceMode;
-    
-    /** @var PageInterface */
-    protected $maintenancePage;
     
     /** @var string */
     protected $theme;
@@ -24,30 +18,6 @@ class Settings implements SettingsInterface
     public function getId()
     {
         return $this->id;
-    }
-  
-    public function setMaintenanceMode( $maintenanceMode )
-    {
-        $this->maintenanceMode  = $maintenanceMode;
-
-        return $this;
-    }
-
-    public function getMaintenanceMode()
-    {
-        return $this->maintenanceMode;
-    }
-    
-    public function getMaintenancePage() : ?PageInterface
-    {
-        return $this->maintenancePage;
-    }
-    
-    public function setMaintenancePage( ?PageInterface $maintenancePage ) : self
-    {
-        $this->maintenancePage  = $maintenancePage;
-        
-        return $this;
     }
     
     public function setTheme( $theme )

@@ -1,3 +1,11 @@
+1.14.6	|	Release date: **25.02.2026**
+============================================
+* New Features:
+  - Create a MaintenanceSubscriber Class which to be used in the feature for Maintenance Mode.
+  - Remove Maintenance Mode From Settings Model
+  - Remove Old Maintenance Listener.
+
+
 1.14.5	|	Release date: **22.02.2026**
 ============================================
 * Bug-Fixes:

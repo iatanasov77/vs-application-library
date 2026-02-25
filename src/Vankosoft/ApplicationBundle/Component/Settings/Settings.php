@@ -28,7 +28,7 @@ final class Settings
         $this->container        = $container;
         
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->settingsKeys     = ['maintenanceMode', 'maintenancePage', 'theme'];
+        $this->settingsKeys     = ['theme'];
         
         $this->cache            = $cache;
     }
@@ -96,34 +96,6 @@ final class Settings
         }
     }
     
-    public function forceMaintenanceMode( bool $maintenanceMode )
-    {
-        $settingsCache  = $this->cache->getItem( 'settings_general' );
-        $allSettings    = [];
-        
-        // Applications Settings
-        $applications  = $this->getApplicationRepository()->findAll();
-        foreach ( $applications as $app ) {
-            $settings                                       = $this->getSettings( $app->getId() );
-            $settings['maintenanceMode']                    = $maintenanceMode;
-            
-            $appCacheId = "settings_application_{$app->getId()}";
-            $allSettings[$appCacheId]  = json_encode( $settings );
-            
-            $appSettings    = $this->cache->getItem( $appCacheId );
-            $appSettings->set( $allSettings[$appCacheId] );
-            $this->cache->save( $appSettings );
-        }
-        
-        // General Settings
-        $settings                           = $this->getSettings( null );
-        $settings['maintenanceMode']        = $maintenanceMode;
-        $allSettings['settings_general']    = json_encode( $settings );
-        
-        $settingsCache->set( \json_encode( $allSettings ) );
-        $this->cache->save( $settingsCache );
-    }
-    
     // Used For Dump/Debug
     public function getAllSettings()
     {
@@ -151,7 +123,7 @@ final class Settings
         $generalizedSettings    = [];
         foreach( $this->settingsKeys as $key ) {
             $value  = $applicationSettings ? $this->propertyAccessor->getValue( $applicationSettings, $key ) : null;
-            if ( $value === null || ( $key == 'maintenanceMode' && $value == false ) ) {
+            if ( $value === null ) {
                 $value  = $this->propertyAccessor->getValue( $generalSettings, $key );
             }
             

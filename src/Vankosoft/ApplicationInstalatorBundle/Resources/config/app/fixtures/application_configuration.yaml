@@ -34,12 +34,12 @@ sylius_fixtures:
                                   bg_BG:
                                       title: 'Български'
                 
-                general_settings:
-                    name: general_settings
-                    options:
-                        custom:
-#                                 applicationTitle: 'Application FrontOffice'
-#                                 theme: 'TestTheme'
+#                 general_settings:
+#                     name: general_settings
+#                     options:
+#                         custom:
+#                             - applicationTitle: 'Application FrontOffice'
+#                               theme: 'TestTheme'
 
                 taxonomies:
                     name: taxonomy

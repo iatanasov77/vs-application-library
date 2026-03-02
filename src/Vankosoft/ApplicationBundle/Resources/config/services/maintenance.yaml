@@ -1,5 +1,4 @@
 parameters:
-    vs_application.in_maintenance: false
     vs_application.maintenance_template: 'maintenance.html.twig'
     
 services:

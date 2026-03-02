@@ -336,6 +336,10 @@ vs_application:
         widget: Уиджет
         load_widget: Зареди Уиджет
         
+        maintenance:
+            title: Сайтът е в процес на поддръжка
+            sorry_text: Моля, проверете отново по-късно
+        
         widget_user_info:
             users_count: Users Count
         

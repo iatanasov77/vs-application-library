@@ -1,10 +1,13 @@
 parameters:
-    vs_application.in_maintenance: false
+    vs_application.maintenance_template: 'maintenance.html.twig'
+    
 services:
     vs_app.twig.alerts:
         class: Vankosoft\ApplicationBundle\Twig\Alerts
     
     vs_app.subscriber.maintenance:
         class: Vankosoft\ApplicationBundle\EventSubscriber\MaintenanceSubscriber
-        arguments: ['@twig']
+        arguments:
+            - '@twig'
+            - '%vs_application.maintenance_template%'
         tags: [kernel.event_subscriber]

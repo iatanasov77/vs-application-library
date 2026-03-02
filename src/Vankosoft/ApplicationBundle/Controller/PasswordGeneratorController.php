@@ -24,7 +24,7 @@ class PasswordGeneratorController extends AbstractController
         $this->computerPasswordGenerator    = $computerPasswordGenerator;
     }
     
-    public function getPasswords( int $quantity, Request $request )
+    public function getPasswords( int $quantity, Request $request ): Response
     {
         return new JsonResponse([
             'status'    => Status::STATUS_OK,

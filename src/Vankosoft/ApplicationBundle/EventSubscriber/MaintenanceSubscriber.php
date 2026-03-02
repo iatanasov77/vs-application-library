@@ -12,11 +12,15 @@ use Twig\Environment as TwigEnvironment;
 class MaintenanceSubscriber implements EventSubscriberInterface
 {
     /** @var TwigEnvironment */
-    private TwigEnvironment $twig;
+    private $twig;
     
-    public function __construct( TwigEnvironment $twig )
+    /** @var string */
+    private $template;
+    
+    public function __construct( TwigEnvironment $twig, string $template )
     {
-        $this->twig = $twig;
+        $this->twig     = $twig;
+        $this->template = $template;
     }
     
     /**
@@ -38,7 +42,7 @@ class MaintenanceSubscriber implements EventSubscriberInterface
         
         if ( $isMaintenance ) {
             $event->setResponse( new Response(
-                $this->twig->render( 'maintenance.html.twig' ),
+                $this->twig->render( $this->template ),
                 Response::HTTP_SERVICE_UNAVAILABLE,
             ));
             $event->stopPropagation();

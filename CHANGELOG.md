@@ -1,3 +1,12 @@
+1.14.8	|	Release date: **02.03.2026**
+============================================
+* New Features and Improvements:
+  - Add Some Improvements.
+  - Improve MaintenanceSubscriber
+  - Improve MaintenanceSubscriber Service.
+  - Add Translations for Maintenance Page.
+
+
 1.14.7	|	Release date: **25.02.2026**
 ============================================
 * Bug-Fixes:

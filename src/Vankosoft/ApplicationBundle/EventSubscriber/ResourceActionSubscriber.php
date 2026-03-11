@@ -39,12 +39,12 @@ final class ResourceActionSubscriber implements EventSubscriberInterface
         return [ResourceActionEvent::NAME => 'addUserActivity'];
     }
 
-    public function addUserActivity( ResourceActionEvent $event )
+    public function addUserActivity( ResourceActionEvent $event ): void
     {
         $this->_addUserActivity( 'Resource: ' . $event->getResource() . '    Action: ' . $event->getAction() );
     }
     
-    private function _addUserActivity( string $activity )
+    private function _addUserActivity( string $activity ): void
     {
         $oActivity  = $this->userActivitiesFactory->createNew();
         $oActivity->setActivity( $activity );

@@ -1,3 +1,12 @@
+1.14.9	|	Release date: **23.03.2026**
+============================================
+* New Features and Improvements:
+  - Improve Application Installator Configs.
+  - Add Some Type Hints.
+  - Fix Some Deprecations.
+  - Improve EasyUiProgressbar.js
+
+
 1.14.8	|	Release date: **02.03.2026**
 ============================================
 * New Features and Improvements:

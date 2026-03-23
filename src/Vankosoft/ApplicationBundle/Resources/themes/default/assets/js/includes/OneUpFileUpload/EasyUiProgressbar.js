@@ -1,5 +1,6 @@
 require( 'jquery-easyui/css/easyui.css' );
 require( './EasyUiProgressbar.css' );
+
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
@@ -24,7 +25,10 @@ window.TestUploadProgressBarData    = {
  *     fileResourceId: 0,
  *     fileResourceKey: "",
  *     fileResourceClass: "",
- *     maxChunkSize: 10000000
+ *     maxChunkSize: 10000000,
+ *     autoResumeOnFileUploadFails: false,
+ *     autoUpload: false,
+ *     orphanageUploadResponseField
  * }
  */
 export function InitOneUpFileUpload( options, preFormSubmit = null )
@@ -38,21 +42,55 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
     
     ///////////////////////////////////////////////////////////////////////
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
+    // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
+    ///////////////////////////////////////////////////////////////////////
+    // USEFULL MANUALS
+    ///////////////////
+    // https://github.com/blueimp/jQuery-File-Upload/wiki/Chunked-file-uploads
+    // https://github.com/blueimp/jQuery-File-Upload/wiki/Upload-directly-to-S3
+    // https://github.com/blueimp/jQuery-File-Upload/wiki/Force-re-upload-of-last-chunk
     ///////////////////////////////////////////////////////////////////////
     $( options.fileuploadSelector ).fileupload({
         url: '' + $( options.fileuploadSelector  ).attr( 'data-endpoint' ),
         type: 'POST',
+        
+        // VERY IMPORTANT.  you will get 405 Method Not Allowed if you don't add this.
+        //forceIframeTransport: true,
+        
+        //replaceFileInput: false,
+        //recalculateProgress: false,
+        
         dropZone: null,
+        autoUpload: options.autoUpload || false,
         fileInput: $( options.fileinputSelector  ),
-        maxChunkSize: options.maxChunkSize,
-        autoUpload: false,
+        maxChunkSize: options.maxChunkSize || 10000000,
+        autoResumeOnFileUploadFails: options.autoResumeOnFileUploadFails || false,
+        maxRetries: 100,
+        retryTimeout: 500,
         add: function ( e, data )
         {
+            data.context = $(options.fileuploadSelector);
+            
+            //alert( $(this).fileupload( 'option', 'autoUpload' ) );
+            if ( data.autoUpload ||
+                (
+                    data.autoUpload !== false &&
+                    $( this ).fileupload( 'option', 'autoUpload' )
+                )
+            ) {
+                data.process().done( function ()
+                {
+                    data.submit();
+                });
+                return;
+            }
+            
             $( options.btnStartUploadSelector ).on( 'click', function ( e )
             {
                 e.preventDefault();
                 //e.stopPropagation();
                 
+                data.context = $( options.fileuploadSelector  );
                 $( this ).hide();
                 
                 let submitForm  = true;
@@ -67,7 +105,6 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
                     
                     data.submit();
                 }
-                
             });
         },
         formData: function ( form )
@@ -78,11 +115,57 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
              * If Files is Not Wrapped by Form Name Remove It From Here
              */
             return postPersistFormData( form, options );
+        },
+//         chunkdone: function ( e, data )
+//         {
+//             console.log( 'FileUpload Submit Data', data );
+//         },
+        fail: function ( e, data )
+        {
+            console.log( 'FileUpload Fail Data', data );
+            
+            var fu = $( this ).data( 'blueimp-fileupload' ) || $( this ).data( 'fileupload' );
+            var retries = data.context.data( 'retries' ) || 0;
+            var retry = function () {
+                var progress = data.progress();
+                console.log('FileUpload On Retry Data', progress );
+                
+                if ( progress.loaded == progress.total ) {
+                    data.uploadedBytes = progress.loaded;
+                }
+                
+                // clear the previous data:
+                data.data = null;
+                data.submit().then( function ( response ) {
+                    console.log( response );
+                });
+            };
+            
+            if (
+                data.errorThrown !== 'abort' &&
+                options.autoResumeOnFileUploadFails &&
+                data.uploadedBytes < data.files[0].size &&
+                retries < fu.options.maxRetries
+            ) {
+                retries += 1;
+                data.context.data( 'retries', retries );
+                
+                window.setTimeout( retry.bind( this ), retries * fu.options.retryTimeout );
+                return;
+            }
+            
+            alert( 'File Upload Failed !' );
+            data.context.removeData( 'retries' );
+            //$.blueimp.fileupload.prototype.options.fail.call( this, e, data );
         }
     });
     
     $( options.fileuploadSelector ).on( 'fileuploadstart', function ( e, data )
     {
+        if( options.autoUpload ) {
+            $( options.btnStartUploadSelector ).hide();
+        }
+        
         $( options.progressbarSelector ).progressbar({
             value: 0,
             
@@ -94,11 +177,19 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
     
     $( options.fileuploadSelector ).on( 'fileuploadprogress', function ( e, data )
     {
-        //console.log( data.loaded, data.total, data.bitrate );
         var progressPercents    = Math.round( ( data.loaded / data.total ) * 100 );
         if ( progressPercents <= 100 ) {
             $( options.progressbarSelector ).progressbar( 'setValue', progressPercents );
         }
+        
+        /* USing For Debaug Fail Callback
+        if ( progressPercents == 5 ) {
+            var fu = $( this ).data( 'blueimp-fileupload' ) || $( this ).data( 'fileupload' );
+            
+            data.errorThrown = 'fail';
+            fu._trigger( 'fail', e, data );
+        }
+        */
     });
     
     // Uncomment Console Logs For Debugging
@@ -107,19 +198,22 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
         e.preventDefault();
         e.stopPropagation();
         
-        //console.log( data );
+        console.log( 'File Upload Done', data );
         let result  = JSON.parse( data.result );
+        
+        if ( options.autoUpload ) {
+            $( options.fileinputSelector ).prop( 'required',false );
+            $( options.orphanageUploadResponseField ).val( data.result );
+            $( options.btnStartUploadSelector ).show();
+            
+            return;
+        }
+        
         if ( ! ( "resourceKey" in result ) ) {
             return;
         }
         
         $( options.progressbarSelector ).hide();
-        
-        /*
-        console.log( 'jQueryFileUpload Debuging:' );
-        console.log( data );
-        console.log( data.result );
-        */
         
         window.dispatchEvent(
             new CustomEvent( "resourceUploaded", {

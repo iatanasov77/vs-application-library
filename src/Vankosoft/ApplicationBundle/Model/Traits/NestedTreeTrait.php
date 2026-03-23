@@ -33,7 +33,7 @@ trait NestedTreeTrait
         return $this->parent;
     }
     
-    public function setParent(self $parent = null): void
+    public function setParent( ?self $parent = null ): void
     {
         $this->parent = $parent;
     }
@@ -43,9 +43,9 @@ trait NestedTreeTrait
         return $this->children;
     }
     
-    public function hasChild(NestedTreeInterface $entity): bool
+    public function hasChild( NestedTreeInterface $entity ): bool
     {
-        return $this->children->contains($entity);
+        return $this->children->contains( $entity );
     }
     
     public function hasChildren(): bool
@@ -53,23 +53,23 @@ trait NestedTreeTrait
         return !$this->children->isEmpty();
     }
     
-    public function addChild(NestedTreeInterface $entity): void
+    public function addChild( NestedTreeInterface $entity ): void
     {
-        if (!$this->hasChild($entity)) {
-            $this->children->add($entity);
+        if ( ! $this->hasChild( $entity ) ) {
+            $this->children->add( $entity );
         }
         
-        if ($this !== $entity->getParent()) {
-            $entity->setParent($this);
+        if ( $this !== $entity->getParent() ) {
+            $entity->setParent( $this );
         }
     }
     
-    public function removeChild(NestedTreeInterface $entity): void
+    public function removeChild( NestedTreeInterface $entity ): void
     {
-        if ($this->hasChild($entity)) {
-            $entity->setParent(null);
+        if ( $this->hasChild( $entity ) ) {
+            $entity->setParent( null );
             
-            $this->children->removeElement($entity);
+            $this->children->removeElement( $entity );
         }
     }
 }

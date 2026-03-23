@@ -13,14 +13,13 @@ class UserLocaleSubscriber implements EventSubscriberInterface
 {
     private $session;
     
-    public function onInteractiveLogin( InteractiveLoginEvent $event )
+    public function onInteractiveLogin( InteractiveLoginEvent $event ): void
     {
         $user       = $event->getAuthenticationToken()->getUser();
         $session    = $event->getRequest()->getSession();
         
         if ( null !== $user->getPreferedLocale() ) {
             $session->set( '_locale', $user->getPreferedLocale() );
-            
         }
     }
     

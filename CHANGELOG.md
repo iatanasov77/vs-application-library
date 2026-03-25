@@ -1,3 +1,10 @@
+1.14.10	|	Release date: **25.03.2026**
+============================================
+* New Features and Improvements:
+  - Add Check For Not Existing Charts Selectors in Dashoard Page.
+  - Remove Links on Sortable Tables , But Non Sortable Head Fields.
+
+
 1.14.9	|	Release date: **23.03.2026**
 ============================================
 * New Features and Improvements:

@@ -48,7 +48,9 @@ $( function()
                     
                     headers[j].innerHTML    = header;
                 } else {
-                    //headers[j].innerHTML    = "<a href='" + currentUrl + "#'>" + headers[j].innerText + "</a>";
+                    if ( ! table.classList.contains( "vsTableOnlySortableLinks" ) ) {
+                        headers[j].innerHTML    = "<a href='" + currentUrl + "#'>" + headers[j].innerText + "</a>";
+                    }
                 }
             }
         }

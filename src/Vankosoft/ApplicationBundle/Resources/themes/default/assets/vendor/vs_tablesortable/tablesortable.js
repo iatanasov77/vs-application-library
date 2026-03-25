@@ -48,7 +48,7 @@ $( function()
                     
                     headers[j].innerHTML    = header;
                 } else {
-                    headers[j].innerHTML    = "<a href='" + currentUrl + "#'>" + headers[j].innerText + "</a>";
+                    //headers[j].innerHTML    = "<a href='" + currentUrl + "#'>" + headers[j].innerText + "</a>";
                 }
             }
         }

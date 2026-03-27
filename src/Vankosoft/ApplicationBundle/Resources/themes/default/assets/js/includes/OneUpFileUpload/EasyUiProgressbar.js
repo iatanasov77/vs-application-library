@@ -202,7 +202,7 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
         let result  = JSON.parse( data.result );
         
         if ( options.autoUpload ) {
-            $( options.fileinputSelector ).prop( 'required',false );
+            $( options.fileinputSelector ).prop( 'required', false );
             $( options.orphanageUploadResponseField ).val( data.result );
             $( options.btnStartUploadSelector ).show();
             

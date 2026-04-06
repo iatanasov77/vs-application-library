@@ -29,6 +29,11 @@ class UsersController extends AbstractCrudController
             );
         }
         
+        $accessToken  = $form->get( "accessToken" )->getData();
+        if ( $accessToken ) {
+            $entity->setAccessToken( $accessToken );
+        }
+        
         $this->buildUserInfo( $entity, $form );
         
         $selectedRoles  = \json_decode( $request->request->get( 'selectedRoles' ), true );

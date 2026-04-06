@@ -1,3 +1,13 @@
+1.14.11	|	Release date: **06.04.2026**
+============================================
+* New Features and Improvements:
+  - Improve EasyUiProgressbar.js
+  - Create an AccessToken Model Trait to Use Where is Needed in User Model.
+  - Add Form Field for AccessToken in UsersForm.
+  - Generate and Save Access Token.
+  - Improve SuperAdminAccessTokenAuthenticator .
+
+
 1.14.10	|	Release date: **25.03.2026**
 ============================================
 * New Features and Improvements:

@@ -48,16 +48,16 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
     
     public function supports( Request $request ): ?bool
     {
-        return $request->query->get( 'token' ) === '123456789' ? true : false;
+        return $request->query->get( 'token' ) !== null ? true : false;
     }
     
     public function authenticate( Request $request ): Passport
     {
-        $apiToken   = $request->query->get( 'token' );
-        $user       = $this->usersRepository->find( 1 );
+        $accessToken    = $request->query->get( 'token' );
+        $user           = $this->usersRepository->findOneBy( ['accessToken' => $accessToken] );
         
         // Use anonymous class which implements UserInterface.
-        return new SelfValidatingPassport( new UserBadge( $apiToken, fn() => $user ) );
+        return new SelfValidatingPassport( new UserBadge( $accessToken, fn() => $user ) );
     }
     
     public function createToken( Passport $passport, string $firewallName ): TokenInterface

@@ -83,4 +83,28 @@ $( function()
             }
         });
     });
+    
+    $( '#btnGenerateAccessToken' ).on( 'click', function ( e )
+    {
+        $.ajax({
+            type: 'GET',
+            url: VsPath( 'vs_application_json_get_passwords', { 'quantity': 1 } ),
+            success: function ( data )
+            {
+                if ( data['status'] == 'ok' ) {
+                    var accessToken    = data['data']['passwords'][0];
+                    
+                    $( '#user_form_accessToken' ).val( accessToken );
+                    
+                    var dialog  = VsDisplayPassword( accessToken );
+                } else {
+                    alert( 'ERROR !!!' );
+                }
+            }, 
+            error: function( XMLHttpRequest, textStatus, errorThrown )
+            {
+                alert( 'ERROR !!!' );
+            }
+        });
+    });
 });

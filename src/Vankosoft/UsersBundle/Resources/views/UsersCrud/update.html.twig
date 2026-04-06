@@ -125,6 +125,21 @@
                             {{ form_widget(form.plain_password.second, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         
+                        {% if is_granted( 'ROLE_ACCESS_TOKEN' ) %}
+                            <div class="form-group">
+                                {{ form_label(form.accessToken, null, {
+                                    'label_attr': {'class': 'form-label'}
+                                    }) 
+                                }}
+                                <div class="input-group mb-3">
+                                    {{ form_widget(form.accessToken, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-primary" id="btnGenerateAccessToken">{{ 'vs_users.form.generate_access_token' | trans( {},'VSUsersBundle' ) }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
                         {# This Section will be allowed only for 'ROLE_SUPER_ADMIN' for Now #}
                         {% if is_granted( 'ROLE_SUPER_ADMIN' ) %}
                             <fieldset class="border border-dark rounded p-3">

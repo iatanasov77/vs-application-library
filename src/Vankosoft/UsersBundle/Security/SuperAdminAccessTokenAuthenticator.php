@@ -48,7 +48,7 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
     
     public function supports( Request $request ): ?bool
     {
-        return $request->query->get( 'token' );
+        return $request->query->get( 'token' ) !== null ? true : false;
     }
     
     public function authenticate( Request $request ): Passport

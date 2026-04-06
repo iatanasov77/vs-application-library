@@ -158,6 +158,12 @@ class UserFormType extends AbstractForm
 //                     }
 //                 },
             ])
+            
+            ->add( 'accessToken', TextType::class, [
+                'label'                 => 'vs_users.form.user.access_token',
+                'translation_domain'    => 'VSUsersBundle',
+                "required"              => false,
+            ])
         ;
         
         /**

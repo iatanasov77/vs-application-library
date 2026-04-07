@@ -1,3 +1,13 @@
+1.14.12	|	Release date: **07.04.2026**
+============================================
+* Bug-Fixes and Improvements:
+  - Some Improvement.
+  - Remove Security RequestVoter.
+  - Add Again Security RequestVoter.
+  - Fix User Edit Form View.
+  - Move Some Translations to Another Bundle.
+
+
 1.14.11	|	Release date: **06.04.2026**
 ============================================
 * New Features and Improvements:

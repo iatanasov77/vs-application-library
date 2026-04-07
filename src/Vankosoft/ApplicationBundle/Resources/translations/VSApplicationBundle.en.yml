@@ -205,37 +205,6 @@ vs_application:
             button_show_preferences: Button Manage Preferences
             language_code_placeholder: '-- Select a Language --'
             
-        project_issue:
-            title: Title
-            description: 'Description'
-            project: 'Project'
-            project_placeholder: '-- Choose a Project --'
-            labels: Labels
-            status: 'Issue Status'
-            status_opened: Opened
-            status_closed: Closed as Incompleted
-            status_completed: Closed as Completed
-        
-        kanbanboard_task:
-            view: View
-            assign_member: Assign Member
-            add_more: Add More
-            create_new_task: Create New Task
-            project_issue: Project Issue
-            project_issue_placeholder: '- Select a Project Issue --'
-            members: Add Team Member
-            attachment: Attachment file
-            issue_type: Issue Type
-            priority: Priority
-            status: Status
-            due_date: Due Date
-            add_task: Add Task
-            leave_comment: Leave a Comment
-            post_comment: Post Comment
-            
-            kanbanboard_task_edit_title: Edit Kanbanboard Task
-            kanbanboard_task_details: Kanbanboard Task Details
-            
         save_tags: 'Save Tags'
             
     template:
@@ -351,56 +320,6 @@ vs_application:
             opening_hours: Opening Hours
             email_us: Email Us
             view_larger_map: View Larger Map
-            
-        project_issues:
-            index_title: Project Issues
-            create_title: Create Project Issue
-            update_title: Update Project Issue
-            issue_details: Issue Details
-            labels: Labels
-            status: Status
-            projects: Projects
-            kanbanboard: Kanbanboard
-            
-            pipeline: Pipeline
-            task_no: Task No
-            task_title: Task Title
-            task: Task
-            project_name: Project Name
-            priority: Priority
-            due_date: Due Date
-            
-            assigned_to: Assigned To
-            assign_member: Assign Member
-            task_members: Task Members
-            members: Members
-            
-            task_attachments: Attachments
-            task_attachment: Attachment
-            add_attachment: Add Attachment
-            file_name: File Name
-            attachment_type: Type
-            attachment_size: Size
-            
-            summary: Summary
-            sub_tasks: Sub-tasks
-            create_sub_task: Create Sub-Task
-            task_tags: Task Tags
-            project_issue_comments_tab: Comments
-            project_issue_attachments_tab: Attachments
-            project_issue_timeentries_tab: Time Entries
-            
-            project_issue_comments_title: Issue Comments
-            button_create_issue_comment: Create New Comment
-            create_issue_comment_modal_title: Create New Comment
-            edit_issue_comment_modal_title: Edit Comment
-            button_reply_issue_comment: Reply to This Comment
-            button_reply: Reply
-            project_issue_tasks_title: Kanbanboard Tasks
-            button_create_issue_task: Create New Task
-            create_issue_task_modal_title: Create New Kanbanboard Task
-            edit_issue_task_modal_title: Edit Kanbanboard Task
-            create_issue: Create Issue
         
     modal:
         are_you_sure: Are you sure ?

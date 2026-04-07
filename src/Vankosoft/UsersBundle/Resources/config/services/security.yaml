@@ -33,6 +33,31 @@ services:
             - '@vs_users.factory.avatar_image'
             - '@vs_cms.profile_uploader'
     
+    # Register a listener for the logout event only on the main firewall
+    # https://symfony.com/blog/new-in-symfony-5-1-simpler-logout-customization
+    vs_users.security.logout_success_handler:
+        class: Vankosoft\UsersBundle\Security\MainLogoutListener
+        arguments:
+            - '@security.http_utils'
+            - '/'
+        tags:
+            - name: 'kernel.event_listener'
+              event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
+              dispatcher: security.event_dispatcher.main
+    
+    vs_users.security.firewall.access_denied_listener:
+        class: Vankosoft\UsersBundle\Security\Firewall\AccessDeniedListener
+        arguments: 
+            - '@router'
+            - {
+                loginRoute: '%vs_users.login_route%',
+            }
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.exception', method: 'onKernelException' }
+    
+    ###################################################
+    # Authenticators
+    ###################################################
     vs_users.security.login_form_authenticator:
         class: Vankosoft\UsersBundle\Security\LoginFormAuthenticator
         arguments:
@@ -68,19 +93,10 @@ services:
             - '@vs_users.manager.user'
             - '@vs_users.repository.users'
             - '@vs_users.factory.users'
-
-    # Register a listener for the logout event only on the main firewall
-    # https://symfony.com/blog/new-in-symfony-5-1-simpler-logout-customization
-    vs_users.security.logout_success_handler:
-        class: Vankosoft\UsersBundle\Security\MainLogoutListener
-        arguments:
-            - '@security.http_utils'
-            - '/'
-        tags:
-            - name: 'kernel.event_listener'
-              event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
-              dispatcher: security.event_dispatcher.main
-
+    
+    ###################################################
+    # Voters
+    ###################################################
     vs_users.security.application_voter:
         class: Vankosoft\UsersBundle\Security\Voter\ApplicationVoter
         tags: ['security.voter']
@@ -110,13 +126,3 @@ services:
             - '@vs_application.context.application'
             - '@security.helper'
             - '@security.role_hierarchy'
-
-    vs_users.security.firewall.access_denied_listener:
-        class: Vankosoft\UsersBundle\Security\Firewall\AccessDeniedListener
-        arguments: 
-            - '@router'
-            - {
-                loginRoute: '%vs_users.login_route%',
-            }
-        tags:
-            - { name: 'kernel.event_listener', event: 'kernel.exception', method: 'onKernelException' }

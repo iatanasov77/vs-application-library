@@ -243,6 +243,7 @@ export function TestUploadProgressBar( options )
     });
     
     if ( options.debugWidget ) {
+        alert( 'Debug ProgressBar' );
         $( options.progressbarSelector ).progressbar({
             value: 0,
             

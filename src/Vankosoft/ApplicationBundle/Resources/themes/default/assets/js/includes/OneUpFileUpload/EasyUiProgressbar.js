@@ -69,7 +69,7 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
         retryTimeout: 500,
         add: function ( e, data )
         {
-            data.context = $(options.fileuploadSelector);
+            data.context = $( options.fileuploadSelector );
             
             //alert( $(this).fileupload( 'option', 'autoUpload' ) );
             if ( data.autoUpload ||
@@ -231,7 +231,8 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
  * ======
  *  TestUploadProgressBar({
  *      btnStartUploadSelector: "#btnSaveUploadFile",
- *      progressbarSelector: "#FileUploadProgressbar"
+ *      progressbarSelector: "#FileUploadProgressbar",
+ *      debugWidget: true
  *  });
  */
 export function TestUploadProgressBar( options )
@@ -240,6 +241,16 @@ export function TestUploadProgressBar( options )
         sizeUploaded: 0,
         sizeTotal: 0
     });
+    
+    if ( options.debugWidget ) {
+        $( options.progressbarSelector ).progressbar({
+            value: 0,
+            
+            sizeUploaded: 0,
+            sizeTotal: window.TestUploadProgressBarData.total,
+            //text: "{sizeUploaded} / {sizeTotal} ( {value}% )"
+        });
+    }
     
     $( options.btnStartUploadSelector ).on( 'click', function ( e )
     {

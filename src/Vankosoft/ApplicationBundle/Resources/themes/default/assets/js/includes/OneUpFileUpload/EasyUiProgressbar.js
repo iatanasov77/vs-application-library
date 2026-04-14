@@ -142,6 +142,11 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
                 });
             };
             
+            if ( data.jqXHR.status == 503 ) {
+                alert( 'Maintenance Mode !!!' );
+                return;
+            }
+            
             if (
                 data.errorThrown !== 'abort' &&
                 options.autoResumeOnFileUploadFails &&

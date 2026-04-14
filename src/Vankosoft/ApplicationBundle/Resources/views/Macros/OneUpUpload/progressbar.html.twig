@@ -5,6 +5,9 @@
 {% endmacro %}
 
 {% macro easy_ui( id, resumeButton = null ) %}
+    <div id="{{ id }}" class="progressBar"></div>
+    
+    {#
     <div class="row">
         <div class="col-11">
             <div id="{{ id }}" class="progressBar"></div>
@@ -15,4 +18,5 @@
             </div>
         {% endif %}
     </div>
+    #}
 {% endmacro %}

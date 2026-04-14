@@ -1,3 +1,11 @@
+1.14.13	|	Release date: **14.04.2026**
+============================================
+* New Features and Improvements:
+  - Improve Debugging of EasyUi Progress Bar.
+  - Add Resume Button on  EasyUi Progress Bar.
+  - Dont Resume OneupUpload on Error Code 503.
+
+
 1.14.12	|	Release date: **07.04.2026**
 ============================================
 * Bug-Fixes and Improvements:

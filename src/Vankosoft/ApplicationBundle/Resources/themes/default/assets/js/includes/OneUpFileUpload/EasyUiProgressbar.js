@@ -248,10 +248,8 @@ export function TestUploadProgressBar( options )
         $( options.progressbarSelector ).progressbar({
             value: 32,
             
-            /*
             sizeUploaded: 0,
             sizeTotal: window.TestUploadProgressBarData.total,
-            */
         });
     }
     

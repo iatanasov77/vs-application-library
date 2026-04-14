@@ -143,7 +143,8 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
             };
             
             if ( data.jqXHR.status == 503 ) {
-                //alert( 'Maintenance Mode !!!' );
+                alert( 'The Site is in Maintenance Mode. Try Again Later.' );
+                
                 window.AbortedData = data;
                 return;
             }

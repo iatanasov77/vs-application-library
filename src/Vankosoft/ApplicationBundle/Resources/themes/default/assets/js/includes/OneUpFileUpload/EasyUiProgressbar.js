@@ -129,7 +129,7 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
             var retries = data.context.data( 'retries' ) || 0;
             var retry = function () {
                 var progress = data.progress();
-                console.log('FileUpload On Retry Data', progress );
+                console.log( 'FileUpload On Retry Data', progress );
                 
                 if ( progress.loaded == progress.total ) {
                     data.uploadedBytes = progress.loaded;

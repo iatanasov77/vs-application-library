@@ -5,5 +5,12 @@
 {% endmacro %}
 
 {% macro easy_ui( id ) %}
-    <div id="{{ id }}" class="progressBar"></div>
+    <div class="row">
+        <div class="col-11">
+            <div id="{{ id }}" class="progressBar"></div>
+        </div>
+        <div class="col-1">
+            <a href="javascript:void( 0 );" id="FileUploadResumeVideo" class="easyui-linkbutton"></a>
+        </div>
+    </div>
 {% endmacro %}

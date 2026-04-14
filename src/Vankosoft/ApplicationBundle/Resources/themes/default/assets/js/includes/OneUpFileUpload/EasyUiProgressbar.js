@@ -1,4 +1,5 @@
 require( 'jquery-easyui/css/easyui.css' );
+require( 'jquery-easyui/css/easyui.css' );
 require( './EasyUiProgressbar.css' );
 
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
@@ -69,7 +70,7 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
         retryTimeout: 500,
         add: function ( e, data )
         {
-            data.context = $(options.fileuploadSelector);
+            data.context = $( options.fileuploadSelector );
             
             //alert( $(this).fileupload( 'option', 'autoUpload' ) );
             if ( data.autoUpload ||
@@ -128,7 +129,7 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
             var retries = data.context.data( 'retries' ) || 0;
             var retry = function () {
                 var progress = data.progress();
-                console.log('FileUpload On Retry Data', progress );
+                console.log( 'FileUpload On Retry Data', progress );
                 
                 if ( progress.loaded == progress.total ) {
                     data.uploadedBytes = progress.loaded;
@@ -140,6 +141,13 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
                     console.log( response );
                 });
             };
+            
+            if ( data.jqXHR.status == 503 ) {
+                alert( 'The Site is in Maintenance Mode. Try Again Later.' );
+                
+                window.AbortedData = data;
+                return;
+            }
             
             if (
                 data.errorThrown !== 'abort' &&
@@ -231,7 +239,8 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
  * ======
  *  TestUploadProgressBar({
  *      btnStartUploadSelector: "#btnSaveUploadFile",
- *      progressbarSelector: "#FileUploadProgressbar"
+ *      progressbarSelector: "#FileUploadProgressbar",
+ *      debugWidget: true
  *  });
  */
 export function TestUploadProgressBar( options )
@@ -240,6 +249,16 @@ export function TestUploadProgressBar( options )
         sizeUploaded: 0,
         sizeTotal: 0
     });
+    
+    if ( options.debugWidget ) {
+        //alert( 'Debug ProgressBar' );
+        $( options.progressbarSelector ).progressbar({
+            value: 32,
+            
+            sizeUploaded: 0,
+            sizeTotal: window.TestUploadProgressBarData.total,
+        });
+    }
     
     $( options.btnStartUploadSelector ).on( 'click', function ( e )
     {

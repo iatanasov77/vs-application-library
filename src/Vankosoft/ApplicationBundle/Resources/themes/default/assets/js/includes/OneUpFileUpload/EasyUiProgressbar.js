@@ -13,21 +13,6 @@ window.TestUploadProgressBarData    = {
     total: 1000000000
 };
 
-var retry = function () {
-    var progress = data.progress();
-    console.log('FileUpload On Retry Data', progress );
-    
-    if ( progress.loaded == progress.total ) {
-        data.uploadedBytes = progress.loaded;
-    }
-    
-    // clear the previous data:
-    data.data = null;
-    data.submit().then( function ( response ) {
-        console.log( response );
-    });
-};
-
 /**
  * options
  * {
@@ -142,10 +127,25 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
             
             var fu = $( this ).data( 'blueimp-fileupload' ) || $( this ).data( 'fileupload' );
             var retries = data.context.data( 'retries' ) || 0;
+            var retry = function () {
+                var progress = data.progress();
+                console.log('FileUpload On Retry Data', progress );
+                
+                if ( progress.loaded == progress.total ) {
+                    data.uploadedBytes = progress.loaded;
+                }
+                
+                // clear the previous data:
+                data.data = null;
+                data.submit().then( function ( response ) {
+                    console.log( response );
+                });
+            };
             
             if ( data.jqXHR.status == 503 ) {
-                alert( 'Maintenance Mode !!!' );
-                //return;
+                //alert( 'Maintenance Mode !!!' );
+                window.AbortedData = data;
+                return;
             }
             
             if (

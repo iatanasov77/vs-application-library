@@ -1,4 +1,5 @@
 require( 'jquery-easyui/css/easyui.css' );
+require( 'jquery-easyui/css/easyui.css' );
 require( './EasyUiProgressbar.css' );
 
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
@@ -243,13 +244,14 @@ export function TestUploadProgressBar( options )
     });
     
     if ( options.debugWidget ) {
-        alert( 'Debug ProgressBar' );
+        //alert( 'Debug ProgressBar' );
         $( options.progressbarSelector ).progressbar({
-            value: 0,
+            value: 32,
             
+            /*
             sizeUploaded: 0,
             sizeTotal: window.TestUploadProgressBarData.total,
-            //text: "{sizeUploaded} / {sizeTotal} ( {value}% )"
+            */
         });
     }
     

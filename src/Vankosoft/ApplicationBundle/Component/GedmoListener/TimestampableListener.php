@@ -16,7 +16,7 @@ use Vankosoft\ApplicationBundle\Model\Interfaces\TimestampableCancelInterface;
  */
 class TimestampableListener extends GedmoTimestampableListener
 {
-    protected function updateField( $object, $eventAdapter, $meta, $field )
+    protected function updateField( $object, $eventAdapter, $meta, $field ): void
     {
         /** @var \Doctrine\Orm\Mapping\ClassMetadata $meta */
         $property = $meta->getReflectionProperty( $field );

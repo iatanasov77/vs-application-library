@@ -3,7 +3,7 @@ services:
     # https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/frameworks/symfony.md
     ##################################################################################################
     stof_doctrine_extensions.listener.loggable:
-        class: Vankosoft\ApplicationBundle\EventSubscriber\LoggableListener
+        class: Vankosoft\ApplicationBundle\Component\GedmoListener\LoggableListener
         arguments: ['%kernel.default_locale%']
         tags:
             - { name: doctrine.event_listener, event: 'onFlush' }

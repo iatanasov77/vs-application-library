@@ -1,4 +1,4 @@
-<?php namespace Vankosoft\ApplicationBundle\EventSubscriber;
+<?php namespace Vankosoft\ApplicationBundle\Component\GedmoListener;
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Gedmo\Loggable\LogEntryInterface;

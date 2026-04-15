@@ -1,3 +1,10 @@
+1.14.14	|	Release date: **15.04.2026**
+============================================
+* New Features:
+  - Override Gedmo Timestampable Listener.
+  - Add Gedmo Timestampable Listener in Application Installator Configs.
+
+
 1.14.13	|	Release date: **14.04.2026**
 ============================================
 * New Features and Improvements:

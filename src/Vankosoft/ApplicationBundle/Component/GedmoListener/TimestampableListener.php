@@ -3,6 +3,17 @@
 use Gedmo\Timestampable\TimestampableListener as GedmoTimestampableListener;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TimestampableCancelInterface;
 
+/**
+ * Usage
+ * ====================================================
+ * $em = $this->doctrine->getManager();
+        
+ * $video->addWatchedByUsers( $user );
+ * $video->cancelTimestampable( true );
+ * 
+ * $em->persist( $video );
+ * $em->flush();
+ */
 class TimestampableListener extends GedmoTimestampableListener
 {
     protected function updateField( $object, $eventAdapter, $meta, $field )

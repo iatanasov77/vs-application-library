@@ -34,7 +34,7 @@
 		"sylius/theme-bundle" : "^2.4",
 		"friendsofsymfony/jsrouting-bundle" : "^3.6",
 		"willdurand/js-translation-bundle" : "^7.0",
-		"hackzilla/password-generator-bundle" : "^6.0",
+		"hackzilla/password-generator-bundle" : "^7.0",
 		"vankosoft/agent-bundle" : "^0.1"
 	},
 	"suggest" : {

@@ -1,3 +1,10 @@
+1.14.15	|	Release date: **20.04.2026**
+============================================
+* Bug-Fixes and Improvements:
+  - Update Applications Installator Configs.
+  - Update Composer Requirement 'hackzilla/password-generator-bundle' Version.
+
+
 1.14.14	|	Release date: **15.04.2026**
 ============================================
 * New Features:

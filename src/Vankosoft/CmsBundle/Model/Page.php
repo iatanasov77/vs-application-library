@@ -14,6 +14,7 @@ use Vankosoft\ApplicationBundle\Model\Traits\TaxonLeafTrait;
 use Vankosoft\ApplicationBundle\Model\Interfaces\LoggableObjectInterface;
 use Vankosoft\CmsBundle\Model\Interfaces\PageInterface;
 use Vankosoft\CmsBundle\Model\Interfaces\PageCategoryInterface;
+use Vankosoft\CmsBundle\Model\Traits\SeoMetadataTrait;
 
 class Page implements PageInterface, TaxonLeafInterface, LoggableObjectInterface
 {
@@ -21,6 +22,7 @@ class Page implements PageInterface, TaxonLeafInterface, LoggableObjectInterface
     use ToggleableTrait;    // About enabled field - $enabled (published)
     use TranslatableTrait;
     use TaxonLeafTrait;
+    use SeoMetadataTrait;
     
     const TYPE_SINGLE_PAGE  = 1;
     const TYPE_MULTI_PAGE   = 2;

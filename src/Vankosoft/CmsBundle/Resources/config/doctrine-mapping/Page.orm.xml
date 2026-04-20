@@ -55,6 +55,18 @@
             </join-table>
         </many-to-many>
         
+        <field name="metaDescription" column="meta_description" type="string" length="255" nullable="true">
+            <!--  
+            <gedmo:translatable />
+            -->
+        </field>
+        
+        <field name="metaKeywords" column="meta_keywords" type="string" length="255" nullable="true">
+            <!--  
+            <gedmo:translatable />
+            -->
+        </field>
+        
         <!--
             Used locale to override Translation listener`s locale
 	       this is not a mapped field of entity metadata, just a simple property

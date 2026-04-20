@@ -119,6 +119,18 @@ class PageForm extends AbstractForm
                 'label'                 => 'vs_cms.form.page.slug',
                 'translation_domain'    => 'VSCmsBundle',
             ])
+            
+            ->add( 'metaDescription', TextType::class, [
+                'label'                 => 'vs_cms.form.meta_description',
+                'translation_domain'    => 'VSCmsBundle',
+                'required'              => false,
+            ])
+            
+            ->add( 'metaKeywords', TextType::class, [
+                'label'                 => 'vs_cms.form.meta_keywords',
+                'translation_domain'    => 'VSCmsBundle',
+                'required'              => false,
+            ])
         ;
             
         if ( $this->useCkEditor == '5' ) {

@@ -11,6 +11,10 @@ vs_cms:
         published: 'Публикуван'
         url: УРЛ
         
+        seo_meta_data: SEO Meta Data
+        meta_description: Meta Description
+        meta_keywords: Meta Keywords
+        
         page:
             published: 'Публикувана'
             category: 'Категория'

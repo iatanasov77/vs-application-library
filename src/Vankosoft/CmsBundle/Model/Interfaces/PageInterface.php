@@ -1,18 +1,19 @@
 <?php namespace Vankosoft\CmsBundle\Model\Interfaces;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Vankosoft\ApplicationBundle\Model\Interfaces\TranslatableInterface;
-use Doctrine\Common\Collections\Collection;
 
 interface PageInterface extends
     ResourceInterface,
     SlugAwareInterface,
     TimestampableInterface,
     ToggleableInterface,
-    TranslatableInterface
+    TranslatableInterface,
+    SeoMetadataInterface
 {
     public function getCategories(): Collection;
     
@@ -25,16 +26,6 @@ interface PageInterface extends
     public function getTitle(): ?string;
     
     public function getText(): ?string;
-    
-    /*
-    public function getMetaKeywords(): ?string;
-    
-    public function setMetaKeywords(?string $metaKeywords): void;
-    
-    public function getMetaDescription(): ?string;
-    
-    public function setMetaDescription(?string $metaDescription): void;
-    */
     
     public function getPublished(): ?bool;
 }

@@ -256,6 +256,7 @@ vs_application:
         items_index_row_translations: Преводи
         items_index_row_created: Създаден
         items_index_row_updated: Редактиран
+        items_index_row_changed_by: Changed By
         items_index_row_action: Действие
         items_index_row_in_maintenance: В Поддръжка
         items_index_row_hostname: Хост

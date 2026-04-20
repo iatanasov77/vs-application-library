@@ -1,3 +1,9 @@
+1.14.16	|	Release date: **20.04.2026**
+============================================
+* New Features:
+  - Create a SeoMetaData Trait and Interface to be Used in Models and Entities that Needed.
+
+
 1.14.15	|	Release date: **20.04.2026**
 ============================================
 * Bug-Fixes and Improvements:

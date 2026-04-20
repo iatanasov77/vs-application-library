@@ -56,11 +56,15 @@
         </many-to-many>
         
         <field name="metaDescription" column="meta_description" type="string" length="255" nullable="true">
+            <!--  
             <gedmo:translatable />
+            -->
         </field>
         
         <field name="metaKeywords" column="meta_keywords" type="string" length="255" nullable="true">
+            <!--  
             <gedmo:translatable />
+            -->
         </field>
         
         <!--

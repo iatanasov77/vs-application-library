@@ -1,3 +1,12 @@
+1.14.18	|	Release date: **22.04.2026**
+============================================
+* Bug-Fixes:
+  - Fix All Doctrine Mappings about DBAL 4.
+  - Remove Doctrine Migrations.
+  - Add a Single Doctrine Migration.
+  - Return Previous Doctrine Migrations.
+
+
 1.14.17	|	Release date: **20.04.2026**
 ============================================
 * New Features:

@@ -5,7 +5,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="type" column="type" type="string" nullable="true" />
+        <field name="type" column="type" type="string" length="255" nullable="true" />
 
         <field name="path" />
         

@@ -17,6 +17,6 @@
             </cascade>
         </many-to-one>
         
-        <field name="theme" type="string" nullable="true"/>
+        <field name="theme" type="string" length="255" nullable="true"/>
     </mapped-superclass>
 </doctrine-mapping>

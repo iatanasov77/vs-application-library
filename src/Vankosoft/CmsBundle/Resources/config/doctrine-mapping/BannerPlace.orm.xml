@@ -5,7 +5,7 @@
             <generator strategy="AUTO" />
         </id>
         
-        <field name="imagineFilter" column="imagine_filter" type="string" />
+        <field name="imagineFilter" column="imagine_filter" type="string" length="255" />
         
         <one-to-one field="taxon" name="taxon_id" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" orphan-removal="true">
             <cascade>

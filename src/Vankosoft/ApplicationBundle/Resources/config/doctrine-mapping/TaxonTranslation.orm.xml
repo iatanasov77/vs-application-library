@@ -9,13 +9,13 @@
     	<id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="locale" column="locale" type="string" />
+        <field name="locale" column="locale" type="string" length="255" />
         <many-to-one field="translatable" target-entity="Vankosoft\ApplicationBundle\Model\Interfaces\TaxonInterface" inversed-by="translations">
             <join-column on-delete="CASCADE" />
         </many-to-one>
         
-        <field name="name" column="name" type="string" />
-        <field name="slug" column="slug" type="string" unique="false" />
+        <field name="name" column="name" type="string" length="255" />
+        <field name="slug" column="slug" type="string" length="255" unique="false" />
         <field name="description" column="description" type="text" nullable="true" />
         <unique-constraints>
             <unique-constraint columns="locale,slug" name="slug_uidx" />

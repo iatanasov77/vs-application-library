@@ -11,9 +11,9 @@
             <generator strategy="AUTO" />
         </id>
         
-        <field name="title" type="string" nullable="false" />
-        <field name="hostname" type="string" nullable="true" />
-        <field name="code" type="string" unique="true" />
+        <field name="title" type="string" length="255" nullable="false" />
+        <field name="hostname" type="string" length="255" nullable="true" />
+        <field name="code" type="string" length="255" unique="true" />
         
         <field name="enabled" type="boolean" />
         

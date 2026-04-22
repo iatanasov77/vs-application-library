@@ -17,7 +17,7 @@
             </cascade>
         </many-to-one>
         
-        <field name="code" column="code" type="string" unique="true" />
+        <field name="code" column="code" type="string" length="255" unique="true" />
     
         <field name="name" column="name" type="string" length="255" nullable="false">
             <gedmo:translatable />

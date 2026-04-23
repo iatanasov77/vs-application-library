@@ -68,8 +68,6 @@ class ApplicationSetup
             'controller'    => $projectRootDir . '/src/Controller/' . $this->applicationNamespace,
         ];
         
-        
-        
         return $applicationDirs;
     }
     

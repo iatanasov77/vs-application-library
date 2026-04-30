@@ -33,6 +33,16 @@ vs_cms_quick_link_category:
     options:
         expose: true
 
+vs_cms_quick_link:
+    resource: |
+        alias: vs_cms.quick_link
+        except: ['show']
+        path: /quick-links
+        templates: "@VSCms/Pages/QuickLinks"
+    type: sylius.resource
+    options:
+        expose: true
+
 vs_cms_quick_link_index:
     path: /quick-links/
     methods: [GET]

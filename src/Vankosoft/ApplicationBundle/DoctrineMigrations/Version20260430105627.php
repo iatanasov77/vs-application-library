@@ -25,7 +25,6 @@ final class Version20260430105627 extends AbstractMigration
         $this->addSql('ALTER TABLE VSCMS_QuickLinks_Categories ADD CONSTRAINT FK_1EC78068A74E21B5 FOREIGN KEY (quick_link_id) REFERENCES VSCMS_QuickLinks (id)');
         $this->addSql('ALTER TABLE VSCMS_QuickLinks_Categories ADD CONSTRAINT FK_1EC7806812469DE2 FOREIGN KEY (category_id) REFERENCES VSCMS_QuickLinksCategories (id)');
         $this->addSql('ALTER TABLE VSCMS_QuickLinksCategories ADD CONSTRAINT FK_3AA6C0F5DE13F470 FOREIGN KEY (taxon_id) REFERENCES VSAPP_Taxons (id)');
-        $this->addSql('ALTER TABLE VSCMS_SlidersItemsPhotos ADD CONSTRAINT FK_A9581A697E3C61F9 FOREIGN KEY (owner_id) REFERENCES VSCMS_SlidersItems (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE VSUM_UsersInfo CHANGE title title ENUM(\'mr\', \'mrs\', \'miss\')');
     }
 
@@ -37,7 +36,6 @@ final class Version20260430105627 extends AbstractMigration
         $this->addSql('ALTER TABLE VSCMS_QuickLinksCategories DROP FOREIGN KEY FK_3AA6C0F5DE13F470');
         $this->addSql('DROP TABLE VSCMS_QuickLinks_Categories');
         $this->addSql('DROP TABLE VSCMS_QuickLinksCategories');
-        $this->addSql('ALTER TABLE VSCMS_SlidersItemsPhotos DROP FOREIGN KEY FK_A9581A697E3C61F9');
         $this->addSql('ALTER TABLE VSUM_UsersInfo CHANGE title title VARCHAR(255) DEFAULT NULL');
     }
 }

@@ -23,16 +23,6 @@ vs_cms_helpcenter_question_index:
     options:
         expose: true
 
-vs_cms_banner_place:
-    resource: |
-        alias: vs_cms.banner_place
-        except: ['show']
-        path: /banner-places
-        templates: "@VSCms/Pages/BannerPlaces"
-    type: sylius.resource
-    options:
-        expose: true
-
 vs_cms_quick_link_category:
     resource: |
         alias: vs_cms.quick_link_category

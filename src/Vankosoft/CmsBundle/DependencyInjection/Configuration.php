@@ -47,7 +47,7 @@ use Vankosoft\CmsBundle\Controller\HelpCenterQuestionController;
 use Vankosoft\CmsBundle\Form\HelpCenterQuestionForm;
 
 use Vankosoft\CmsBundle\Model\QuickLinksCategory;
-//use Vankosoft\CmsBundle\Controller\QuickLinksCategoryController;
+use Vankosoft\CmsBundle\Controller\QuickLinksCategoryController;
 use Vankosoft\CmsBundle\Form\QuickLinksCategoryForm;
 
 use Vankosoft\CmsBundle\Model\QuickLink;
@@ -251,7 +251,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'model' )->defaultValue( QuickLinksCategory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
-                                        //->scalarNode( 'controller' )->defaultValue( QuickLinksCategoryController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'controller' )->defaultValue( QuickLinksCategoryController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( QuickLinksCategoryForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()

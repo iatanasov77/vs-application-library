@@ -22,13 +22,23 @@ vs_cms_helpcenter_question_index:
             template: "@VSCms/Pages/HelpCenterQuestions/index.html.twig"
     options:
         expose: true
-        
-vs_cms_quick_link:
+
+vs_cms_banner_place:
     resource: |
-        alias: vs_cms.quick_link
+        alias: vs_cms.banner_place
         except: ['show']
-        path: /quick-links
-        templates: "@VSCms/Pages/QuickLinks"
+        path: /banner-places
+        templates: "@VSCms/Pages/BannerPlaces"
+    type: sylius.resource
+    options:
+        expose: true
+
+vs_cms_quick_link_category:
+    resource: |
+        alias: vs_cms.quick_link_category
+        except: ['show']
+        path: /quick-link-categories
+        templates: "@VSCms/Pages/QuickLinksCategories"
     type: sylius.resource
     options:
         expose: true

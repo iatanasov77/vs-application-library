@@ -121,6 +121,6 @@ class BannerForm extends AbstractForm
     
     public function getName()
     {
-        return 'vs_cms.slider';
+        return 'vs_cms.banner';
     }
 }

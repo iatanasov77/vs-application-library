@@ -6,6 +6,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,6 +16,7 @@ class QuickLinkForm extends AbstractForm
 {
     public function __construct(
         string $dataClass,
+        string $categoryClass,
         RepositoryInterface $localesRepository,
         RequestStack $requestStack
     ) {
@@ -21,6 +24,8 @@ class QuickLinkForm extends AbstractForm
         
         $this->localesRepository    = $localesRepository;
         $this->requestStack         = $requestStack;
+        
+        $this->categoryClass        = $categoryClass;
     }
     
     public function buildForm( FormBuilderInterface $builder, array $options ): void
@@ -29,6 +34,11 @@ class QuickLinkForm extends AbstractForm
         
         $entity         = $builder->getData();
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
+        
+        $selectedCategories = [];
+        foreach ( $entity->getCategories() as $category ) {
+            $selectedCategories[] = $category->getId();
+        }
         
         $builder
             ->add( 'locale', ChoiceType::class, [
@@ -42,6 +52,17 @@ class QuickLinkForm extends AbstractForm
             ->add( 'enabled', CheckboxType::class, [
                 'label'                 => 'vs_cms.form.page.published',
                 'translation_domain'    => 'VSCmsBundle',
+            ])
+            
+            ->add( 'selectedCategories', HiddenType::class, ['mapped' => false, 'data' => \json_encode( $selectedCategories )] )
+            ->add( 'categories', EntityType::class, [
+                'required'              => true,
+                'multiple'              => true,
+                'label'                 => 'vs_cms.form.quick_link.category',
+                'translation_domain'    => 'VSCmsBundle',
+                'class'                 => $this->categoryClass,
+                'choice_label'          => 'name',
+                'placeholder'           => 'vs_cms.form.quick_link.category_placeholder',
             ])
             
             ->add( 'linkText', TextType::class, [

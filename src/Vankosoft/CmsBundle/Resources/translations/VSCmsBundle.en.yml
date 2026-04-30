@@ -49,6 +49,8 @@ vs_cms:
             answer: Answer
             
         quick_link:
+            category: Category
+            category_placeholder: '-- Choose a Category --'
             link_text: Link Text
             link_path: Link Path (OR Absolute Url)
             

@@ -49,6 +49,8 @@ vs_cms:
             answer: Отговор
             
         quick_link:
+            category: Category
+            category_placeholder: '-- Choose a Category --'
             link_text: Линк Текст
             link_path: 'Линк Път (ИЛИ Абсолютен УРЛ)'
             

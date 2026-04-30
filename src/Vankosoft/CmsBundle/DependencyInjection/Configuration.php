@@ -46,6 +46,10 @@ use Vankosoft\CmsBundle\Model\HelpCenterQuestion;
 use Vankosoft\CmsBundle\Controller\HelpCenterQuestionController;
 use Vankosoft\CmsBundle\Form\HelpCenterQuestionForm;
 
+use Vankosoft\CmsBundle\Model\QuickLinksCategory;
+//use Vankosoft\CmsBundle\Controller\QuickLinksCategoryController;
+use Vankosoft\CmsBundle\Form\QuickLinksCategoryForm;
+
 use Vankosoft\CmsBundle\Model\QuickLink;
 use Vankosoft\CmsBundle\Controller\QuickLinkController;
 use Vankosoft\CmsBundle\Form\QuickLinkForm;
@@ -232,6 +236,23 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( HelpCenterQuestionController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( HelpCenterQuestionForm::class )->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        
+                        ->arrayNode( 'quick_link_category' )
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode( 'options' )->end()
+                                ->arrayNode( 'classes' )
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode( 'model' )->defaultValue( QuickLinksCategory::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
+                                        //->scalarNode( 'controller' )->defaultValue( QuickLinksCategoryController::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'form' )->defaultValue( QuickLinksCategoryForm::class )->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

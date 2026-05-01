@@ -15,7 +15,7 @@
             <gedmo:translatable />
         </field>
         
-        <field name="linkIconPath" column="link_icon_path" type="string" length="255" nullable="true" />
+        <field name="linkIconPath" column="link_icon_path" type="text" nullable="true" />
         
         <many-to-many field="categories" target-entity="Vankosoft\CmsBundle\Model\Interfaces\QuickLinksCategoryInterface" inversed-by="quickLinks">
             <cascade>

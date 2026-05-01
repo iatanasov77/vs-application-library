@@ -1,3 +1,9 @@
+1.14.22	|	Release date: **01.05.2026**
+============================================
+* New Features and Improvements:
+  - Change Icon Path of Quick Link Resource Type Text.
+
+
 1.14.21	|	Release date: **01.05.2026**
 ============================================
 * New Features:

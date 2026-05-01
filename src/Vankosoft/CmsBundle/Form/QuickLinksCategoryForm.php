@@ -44,7 +44,6 @@ class QuickLinksCategoryForm extends AbstractForm
                 'mapped'                => false,
             ])
         ;
-        
     }
     
     public function configureOptions( OptionsResolver $resolver ): void

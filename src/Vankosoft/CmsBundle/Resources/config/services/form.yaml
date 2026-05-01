@@ -133,7 +133,7 @@ services:
             - '@request_stack'
     
     vs_cms.resources.quick_link_category.form:
-        class: Vankosoft\CmsBundle\Form\QuickLinkForm
+        class: Vankosoft\CmsBundle\Form\QuickLinksCategoryForm
         tags:
             - { name: form.type }
         arguments:

@@ -1,4 +1,9 @@
+require( 'jquery-easyui/css/easyui.css' );
+require( 'jquery-easyui/js/jquery.easyui.min.js' );
+
 import { VsPath } from '../includes/fos_js_routes.js';
+
+require( '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.css' );
 import { EasyuiCombobox } from '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.js';
 
 $( function()

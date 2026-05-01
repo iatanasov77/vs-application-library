@@ -1,3 +1,9 @@
+1.14.20	|	Release date: **01.05.2026**
+============================================
+* New Features:
+  - Add a Repository for QuickLinkCategory Resource.
+
+
 1.14.19	|	Release date: **01.05.2026**
 ============================================
 * New Features and Improvements:

@@ -1,3 +1,10 @@
+1.14.21	|	Release date: **01.05.2026**
+============================================
+* New Features:
+  - Add an Icon Path Field in Quick Link Resource.
+  - Add a Doctrine Migration.
+
+
 1.14.20	|	Release date: **01.05.2026**
 ============================================
 * New Features:

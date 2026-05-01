@@ -53,6 +53,7 @@ vs_cms:
             category_placeholder: '-- Choose a Category --'
             link_text: Link Text
             link_path: Link Path (OR Absolute Url)
+            link_icon_path: Icon Path
             
         slider_item:
             slider: Slider

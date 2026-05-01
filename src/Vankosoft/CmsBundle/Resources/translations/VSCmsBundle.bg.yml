@@ -53,6 +53,7 @@ vs_cms:
             category_placeholder: '-- Choose a Category --'
             link_text: Линк Текст
             link_path: 'Линк Път (ИЛИ Абсолютен УРЛ)'
+            link_icon_path: Icon Path
             
         slider_item:
             slider: Слайдер

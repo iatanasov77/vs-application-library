@@ -74,6 +74,12 @@ class QuickLinkForm extends AbstractForm
                 'label'                 => 'vs_cms.form.quick_link.link_path',
                 'translation_domain'    => 'VSCmsBundle',
             ])
+            
+            ->add( 'linkIconPath', TextType::class, [
+                'label'                 => 'vs_cms.form.quick_link.link_icon_path',
+                'translation_domain'    => 'VSCmsBundle',
+                'required'              => false,
+            ])
         ;
         
     }

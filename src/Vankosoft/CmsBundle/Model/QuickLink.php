@@ -21,6 +21,9 @@ class QuickLink implements QuickLinkInterface
     /** @var string */
     protected $linkPath;
     
+    /** @var string */
+    protected $linkIconPath;
+    
     /** @var Collection|QuickLinksCategory[] */
     protected $categories;
     
@@ -55,6 +58,18 @@ class QuickLink implements QuickLinkInterface
     public function setLinkPath($linkPath)
     {
         $this->linkPath  = $linkPath;
+        
+        return $this;
+    }
+    
+    public function getLinkIconPath(): ?string
+    {
+        return $this->linkIconPath;
+    }
+    
+    public function setLinkIconPath($linkIconPath)
+    {
+        $this->linkIconPath  = $linkIconPath;
         
         return $this;
     }

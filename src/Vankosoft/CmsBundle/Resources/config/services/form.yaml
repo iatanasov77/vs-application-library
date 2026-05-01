@@ -131,13 +131,23 @@ services:
             - '%vs_cms.model.helpcenter_question.class%'
             - '@vs_application.repository.locale'
             - '@request_stack'
-            
+    
+    vs_cms.resources.quick_link_category.form:
+        class: Vankosoft\CmsBundle\Form\QuickLinksCategoryForm
+        tags:
+            - { name: form.type }
+        arguments:
+            - '%vs_cms.model.quick_link_category.class%'
+            - '@vs_application.repository.locale'
+            - '@request_stack'
+    
     vs_cms.resources.quick_link.form:
         class: Vankosoft\CmsBundle\Form\QuickLinkForm
         tags:
             - { name: form.type }
         arguments:
             - '%vs_cms.model.quick_link.class%'
+            - '%vs_cms.model.quick_link_category.class%'
             - '@vs_application.repository.locale'
             - '@request_stack'
 

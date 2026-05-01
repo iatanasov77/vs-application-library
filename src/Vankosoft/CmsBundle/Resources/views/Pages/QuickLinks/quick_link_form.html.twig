@@ -28,6 +28,16 @@
         {{ form_widget(form.locale, {'attr': {'class': 'form-control'}}) }}
     </div>
     
+    {{ form_widget( form.selectedCategories ) }}
+    <div class="form-group">
+        {{ form_label(form.categories, null, {
+            'label_attr': {'class': 'col-form-label'}
+            }) 
+        }}
+        
+        {{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    
     <div class="form-group">
         {{ form_label(form.linkText, null, {
             'label_attr': {'class': 'col-form-label'}

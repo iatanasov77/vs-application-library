@@ -1,3 +1,16 @@
+1.14.19	|	Release date: **01.05.2026**
+============================================
+* New Features and Improvements:
+  - Fix Some Model Traits with String Fields.
+  - Update Appication Installator Configs.
+  - Create a Category Model for QuickLink Model in CMS Bundle.
+  - Create a QuickLink Category Resource in CMS Bundle.
+  - Add a Doctrine Migration.
+  - Create Quick Links Category Controller and Templates.
+  - Update Application Installator Configs.
+  - Improve Quiclink Form Category Field.
+
+
 1.14.18	|	Release date: **22.04.2026**
 ============================================
 * Bug-Fixes:

@@ -1,4 +1,10 @@
+require( 'jquery-easyui/css/easyui.css' );
+require( 'jquery-easyui/js/jquery.easyui.min.js' );
+
 import { VsPath } from '../includes/fos_js_routes.js';
+
+require( '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.css' );
+import { EasyuiCombobox } from '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.js';
 
 $( function()
 {
@@ -19,5 +25,17 @@ $( function()
                 }
             });
         }
+    });
+    
+    let selectedCategories  = JSON.parse( $( '#quick_link_form_selectedCategories' ).val() );
+    if ( ! selectedCategories.length ) {
+        selectedCategories = null;
+    }
+    
+    EasyuiCombobox( $( '#quick_link_form_categories' ), {
+        required: true,
+        multiple: true,
+        checkboxId: "QuickLinkCategories",
+        values: selectedCategories
     });
 });

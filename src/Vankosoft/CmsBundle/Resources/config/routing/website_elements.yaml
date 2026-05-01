@@ -22,7 +22,17 @@ vs_cms_helpcenter_question_index:
             template: "@VSCms/Pages/HelpCenterQuestions/index.html.twig"
     options:
         expose: true
-        
+
+vs_cms_quick_link_category:
+    resource: |
+        alias: vs_cms.quick_link_category
+        except: ['show']
+        path: /quick-link-categories
+        templates: "@VSCms/Pages/QuickLinksCategories"
+    type: sylius.resource
+    options:
+        expose: true
+
 vs_cms_quick_link:
     resource: |
         alias: vs_cms.quick_link

@@ -1,4 +1,5 @@
 import { VsPath } from '../includes/fos_js_routes.js';
+import { EasyuiCombobox } from '@vankosoft/jquery-easyui-extensions/EasyuiCombobox.js';
 
 $( function()
 {
@@ -19,5 +20,17 @@ $( function()
                 }
             });
         }
+    });
+    
+    let selectedCategories  = JSON.parse( $( '#quick_link_form_selectedCategories' ).val() );
+    if ( ! selectedCategories.length ) {
+        selectedCategories = null;
+    }
+    
+    EasyuiCombobox( $( '#quick_link_form_categories' ), {
+        required: true,
+        multiple: true,
+        checkboxId: "QuickLinkCategories",
+        values: selectedCategories
     });
 });

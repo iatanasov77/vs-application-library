@@ -1,3 +1,10 @@
+1.14.23	|	Release date: **03.05.2026**
+============================================
+* New Features and Improvements:
+  - Improve Registration Confirmation Email Template.
+  - Improve Application Contact Controller and Add a Email Template.
+
+
 1.14.22	|	Release date: **01.05.2026**
 ============================================
 * New Features and Improvements:

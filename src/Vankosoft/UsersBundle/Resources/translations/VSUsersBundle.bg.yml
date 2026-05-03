@@ -102,7 +102,7 @@ vs_users:
         profile_order_status: Статус
         profile_order_description: Описание
         profile_back_to_home: Назад към Начало
-        register_confirmation_email__header: Здравейте! Моля потвърдете Вашия Емейл!
+        register_confirmation_email_header: Здравейте! Моля потвърдете Вашия Емейл!
         register_confirmation_email_text_1: 'Моля потвърдете вашият емейл като кликнете на линка:'
         register_confirmation_email_text_2: 'Потвърждаване на Емейл'
         register_confirmation_email_text_3: 'Линкът изтича след '

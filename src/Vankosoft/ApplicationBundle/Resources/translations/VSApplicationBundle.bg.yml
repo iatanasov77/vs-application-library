@@ -326,6 +326,7 @@ vs_application:
             opening_hours: Работно Време
             email_us: Пратете Е-Мейл
             view_larger_map: Вижте по-голяма карта
+            contact_email_header: Hi! You have an email from Contact Form!
         
     modal:
         are_you_sure: Are you sure ?

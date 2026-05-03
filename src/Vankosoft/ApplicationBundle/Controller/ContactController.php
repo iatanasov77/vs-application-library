@@ -57,8 +57,8 @@ class ContactController extends AbstractController
         $email = ( new TemplatedEmail() )
                 ->from( $data['email'] )
                 ->to( $contactEmail )
-                ->subject( 'You have Contact Email From Vankosoft.Org' )
-                ->htmlTemplate( 'email/contact_email.html.twig' )
+                ->subject( 'You have Contact Email From ' . $this->params['applicationTitle'] )
+                ->htmlTemplate( '@VSApplication/Email/contact_email.html.twig' )
                 ->context([
                     'fromName'      => $data['name'],
                     'emailSubject'  => $data['subject'],

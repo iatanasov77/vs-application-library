@@ -102,6 +102,7 @@ vs_users:
         profile_order_status: Status
         profile_order_description: Description
         profile_back_to_home: Back To Home
+        register_confirmation_email__header: Hi! Please confirm your email!
         register_confirmation_email_text_1: 'Please confirm your email address by clicking the following link:'
         register_confirmation_email_text_2: 'Confirm my Email'
         register_confirmation_email_text_3: 'This link will expire in '

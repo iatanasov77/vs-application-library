@@ -1,3 +1,12 @@
+1.14.24	|	Release date: **12.05.2026**
+============================================
+* Bug-Fixes and Improvements:
+  - Update Application Installator Configs.
+  - Fix Header of Contact Email Template.
+  - Update Application Installator Configs.
+  - Improve Ajax Widget JS.
+
+
 1.14.23	|	Release date: **03.05.2026**
 ============================================
 * New Features and Improvements:

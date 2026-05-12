@@ -327,6 +327,7 @@ vs_application:
             email_us: Пратете Е-Мейл
             view_larger_map: Вижте по-голяма карта
             contact_email_header: Hi! You have an email from Contact Form!
+            alert_success: 'Your message were saved! We are answer you in some days.'
         
     modal:
         are_you_sure: Are you sure ?

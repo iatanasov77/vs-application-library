@@ -16,16 +16,16 @@ $( function()
  
         // The constructor
         _create: function() {
-            var getSuggestionsUrl       = this.options.callback;
-            var suggestionsContainer    = this.element;
-            var afterLoad               = this.options.afterLoad;
+            var getCallbackUrl  = this.options.callback;
+            var widgetContainer = this.element;
+            var afterLoad       = this.options.afterLoad;
             
             $.ajax({
                 type: "GET",
-                url: getSuggestionsUrl,
+                url: getCallbackUrl,
                 success: function( response )
                 {
-                    suggestionsContainer.html( response );
+                    widgetContainer.html( response );
                     
                     if ( afterLoad ) {
                         afterLoad();

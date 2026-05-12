@@ -154,11 +154,15 @@ class AbstractCrudController extends ResourceController
              * Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
              * Used for 'addUserActivity' Event
              */
-            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
-            $this->get( 'event_dispatcher' )->dispatch(
-                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
-                ResourceActionEvent::NAME
-            );
+            try {
+                $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+                $this->get( 'event_dispatcher' )->dispatch(
+                    new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
+                    ResourceActionEvent::NAME
+                );
+            } catch ( \Exception $e ) {
+                $this->onError( $e, $request );
+            }
             
             // middleware method to add Custom Events After Save ETC.
             $this->afterSaveEntity( $entity, $request );

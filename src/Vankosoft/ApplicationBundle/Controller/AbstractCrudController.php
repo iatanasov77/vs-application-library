@@ -120,7 +120,7 @@ class AbstractCrudController extends ResourceController
         return $this->editAction( $request->attributes->get( 'id' ), ResourceActions::UPDATE, $request );
     }
     
-    public function editAction( $id, $resourceAction , Request $request ): Response
+    public function editAction( $id, $resourceAction, Request $request ): Response
     {
         $this->classInfo( $request );   // call this for every controller action
         
@@ -140,7 +140,12 @@ class AbstractCrudController extends ResourceController
             $this->prepareEntity( $entity, $form, $request );
             
             $em->persist( $entity );
-            $em->flush();
+            
+            try {
+                $em->flush();
+            } catch ( \Exception $e ) {
+                $this->onError( $e, $request );
+            }
             
             // Dispach a Sylius Resource Post Event
             $postEvent = $this->eventDispatcher->dispatchPostEvent( $resourceAction, $configuration, $entity );
@@ -149,11 +154,15 @@ class AbstractCrudController extends ResourceController
              * Using Symfony Event Dispatcher ( NOT \Sylius\Bundle\ResourceBundle\Controller\EventDispatcher )
              * Used for 'addUserActivity' Event
              */
-            $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
-            $this->get( 'event_dispatcher' )->dispatch(
-                new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
-                ResourceActionEvent::NAME
-            );
+            try {
+                $currentUser    = $this->get( 'vs_users.security_bridge' )->getUser();
+                $this->get( 'event_dispatcher' )->dispatch(
+                    new ResourceActionEvent( $this->metadata->getAlias(), $currentUser, $resourceAction ),
+                    ResourceActionEvent::NAME
+                );
+            } catch ( \Exception $e ) {
+                $this->onError( $e, $request );
+            }
             
             // middleware method to add Custom Events After Save ETC.
             $this->afterSaveEntity( $entity, $request );
@@ -323,5 +332,10 @@ class AbstractCrudController extends ResourceController
         }
         
         return $translations;
+    }
+    
+    protected function onError( \Throwable $e, Request $request ): void
+    {
+        throw $e;
     }
 }

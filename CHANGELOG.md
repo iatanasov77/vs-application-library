@@ -1,3 +1,9 @@
+1.14.25	|	Release date: **12.05.2026**
+============================================
+* New Features:
+  - Add Custom method for Error Handling on AbstractCrudController.
+
+
 1.14.24	|	Release date: **12.05.2026**
 ============================================
 * Bug-Fixes and Improvements:

@@ -140,7 +140,12 @@ class AbstractCrudController extends ResourceController
             $this->prepareEntity( $entity, $form, $request );
             
             $em->persist( $entity );
-            $em->flush();
+            
+            try {
+                $em->flush();
+            } catch ( \Exception $e ) {
+                $this->onError( $e );
+            }
             
             // Dispach a Sylius Resource Post Event
             $postEvent = $this->eventDispatcher->dispatchPostEvent( $resourceAction, $configuration, $entity );
@@ -323,5 +328,10 @@ class AbstractCrudController extends ResourceController
         }
         
         return $translations;
+    }
+    
+    protected function onError( \Throwable $e ): void
+    {
+        throw $e;
     }
 }

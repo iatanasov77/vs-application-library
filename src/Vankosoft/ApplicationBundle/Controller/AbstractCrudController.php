@@ -120,7 +120,7 @@ class AbstractCrudController extends ResourceController
         return $this->editAction( $request->attributes->get( 'id' ), ResourceActions::UPDATE, $request );
     }
     
-    public function editAction( $id, $resourceAction , Request $request ): Response
+    public function editAction( $id, $resourceAction, Request $request ): Response
     {
         $this->classInfo( $request );   // call this for every controller action
         
@@ -144,7 +144,7 @@ class AbstractCrudController extends ResourceController
             try {
                 $em->flush();
             } catch ( \Exception $e ) {
-                $this->onError( $e );
+                $this->onError( $e, $request );
             }
             
             // Dispach a Sylius Resource Post Event
@@ -330,7 +330,7 @@ class AbstractCrudController extends ResourceController
         return $translations;
     }
     
-    protected function onError( \Throwable $e ): void
+    protected function onError( \Throwable $e, Request $request ): void
     {
         throw $e;
     }

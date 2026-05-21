@@ -1,3 +1,9 @@
+1.14.26	|	Release date: **21.05.2026**
+============================================
+* New Features:
+  - Add Last Activity Property in User Model.
+
+
 1.14.25	|	Release date: **12.05.2026**
 ============================================
 * New Features:

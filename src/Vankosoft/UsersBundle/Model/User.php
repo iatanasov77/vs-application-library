@@ -58,6 +58,11 @@ class User implements UserInterface, Comparable
     protected $lastLogin;
     
     /**
+     * @var \DateTime|null
+     */
+    protected $lastActivityAt;
+    
+    /**
      * Random string sent to the user email address in order to verify it.
      *
      * @var string|null
@@ -163,7 +168,7 @@ class User implements UserInterface, Comparable
         return $this;
     }
     
-    public function getLastLogin()
+    public function getLastLogin(): ?\DateTime
     {
         return $this->lastLogin;
     }
@@ -173,6 +178,31 @@ class User implements UserInterface, Comparable
         $this->lastLogin = $time;
         
         return $this;
+    }
+    
+    public function getLastActivityAt(): ?\DateTime
+    {
+        return $this->lastActivityAt;
+    }
+    
+    public function setLastActivityAt( ?\DateTime $lastActivityAt ): self
+    {
+        $this->lastActivityAt = $lastActivityAt;
+        
+        return $this;
+    }
+    
+    public function isActiveNow(): bool
+    {
+        // Delay during wich the user will be considered as still active
+        $delay = new \DateTime( '2 minutes ago' );
+        
+        return ( $this->getLastActivityAt() > $delay );
+    }
+    
+    public function isActiveBefore( \DateTime $activeBefore ): bool
+    {
+        return ( $this->getLastActivityAt() > $activeBefore );
     }
     
     public function getConfirmationToken()

@@ -1,6 +1,6 @@
 <?php namespace Vankosoft\UsersBundle\Security;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Doctrine\ORM\EntityManagerInterface;
 use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
@@ -26,7 +26,7 @@ class ActivityListener
      * Update the user "lastActivity" on each request
      * @param FilterControllerEvent $event
      */
-    public function onCoreController( FilterControllerEvent $event )
+    public function onCoreController( ControllerEvent $event )
     {
         // Check that the current request is a "MASTER_REQUEST"
         // Ignore any sub-request

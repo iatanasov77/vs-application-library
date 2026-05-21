@@ -18,7 +18,7 @@ class ActivityListener
     
     public function __construct( SecurityBridge $securityBridge, EntityManagerInterface $entityManager )
     {
-        $this->securityContext  = $securityContext;
+        $this->securityBridge   = $securityBridge;
         $this->entityManager    = $entityManager;
     }
     

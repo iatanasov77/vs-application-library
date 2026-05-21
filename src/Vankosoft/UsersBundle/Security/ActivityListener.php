@@ -1,12 +1,13 @@
 <?php namespace Vankosoft\UsersBundle\Security;
 
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
-use Symfony\Component\HttpKernel\HttpKernel;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 
 /**
  * Listener that updates the last activity of the authenticated user
+ * Manual: https://stackoverflow.com/questions/21096689/symfony-how-to-return-all-logged-in-active-users
  */
 class ActivityListener
 {
@@ -24,13 +25,13 @@ class ActivityListener
     
     /**
      * Update the user "lastActivity" on each request
-     * @param FilterControllerEvent $event
+     * @param ControllerEvent $event
      */
     public function onCoreController( ControllerEvent $event )
     {
         // Check that the current request is a "MASTER_REQUEST"
         // Ignore any sub-request
-        if ( $event->getRequestType() !== HttpKernel::MASTER_REQUEST ) {
+        if ( $event->getRequestType() !== HttpKernelInterface::MAIN_REQUEST ) {
             return;
         }
         $user = $this->securityBridge->getUser();

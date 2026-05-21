@@ -126,3 +126,11 @@ services:
             - '@vs_application.context.application'
             - '@security.helper'
             - '@security.role_hierarchy'
+    
+    vs_users.security.activity_listener:
+        class: Vankosoft\UsersBundle\Security\ActivityListener
+        arguments:
+            - '@vs_users.security_bridge'
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }

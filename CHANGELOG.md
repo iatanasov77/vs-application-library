@@ -1,3 +1,10 @@
+1.14.30	|	Release date: **23.05.2026**
+============================================
+* New Features:
+  - Create an Actions Controller and Views in Vankosoft Agent.
+  - Update Version of Vankosoft Agent Bundle.
+
+
 1.14.29	|	Release date: **21.05.2026**
 ============================================
 * Bug-Fixes:

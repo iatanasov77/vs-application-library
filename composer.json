@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.14.29",
+    "version": "v1.14.30",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -58,7 +58,7 @@
         "league\/flysystem-ftp": "^3.29",
         "league\/flysystem-sftp-v3": "^3.30",
         "m2mtech\/flysystem-stream-wrapper": "^1.4",
-        "vankosoft\/agent-bundle": "^1.0"
+        "vankosoft\/agent-bundle": "^1.1"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",
@@ -93,5 +93,6 @@
             "Vankosoft\\UsersBundle\\": "src\/Vankosoft\/UsersBundle\/",
             "Vankosoft\\CmsBundle\\": "src\/Vankosoft\/CmsBundle\/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

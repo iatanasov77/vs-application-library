@@ -35,7 +35,7 @@
 		"friendsofsymfony/jsrouting-bundle" : "^3.6",
 		"willdurand/js-translation-bundle" : "^7.0",
 		"hackzilla/password-generator-bundle" : "^7.0",
-		"vankosoft/agent-bundle" : "^0.1"
+		"vankosoft/agent-bundle" : "^1.1"
 	},
 	"suggest" : {
 		"symfony/debug-bundle" : "Allows developement debugging",

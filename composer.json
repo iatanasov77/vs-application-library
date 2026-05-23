@@ -1,7 +1,7 @@
 {
     "name": "vankosoft\/application",
     "type": "library",
-    "version": "v1.14.29",
+    "version": "v1.14.30",
     "description": "VankoSoft Symfony Application Core Library",
     "keywords": [
         "symfony",
@@ -94,5 +94,5 @@
             "Vankosoft\\CmsBundle\\": "src\/Vankosoft\/CmsBundle\/"
         }
     },
-    "minimum-stability" : "dev"
+    "minimum-stability": "dev"
 }

@@ -1,10 +1,11 @@
-export function ShowAlert( msg_title, msg_body, msg_type )
+export function ShowAlert( msgTitle, msgBody, msgType )
 {
-    var AlertMsg = $( 'div[role="alert"]' );
+    var AlertHtml = '<div class="alert alert-dismissible" role="alert"><strong></strong><p></p><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+    $( '#AlertsContainer' ).append( AlertHtml ); 
     
-    $( AlertMsg ).find( 'strong' ).html( msg_title );
-    $( AlertMsg ).find( 'p' ).html( msg_body );
-    $( AlertMsg ).removeAttr( 'class' );
-    $( AlertMsg ).addClass( 'alert alert-' + msg_type );
+    var AlertMsg = $( 'div[role="alert"]' );
+    $( AlertMsg ).find( 'strong' ).html( msgTitle );
+    $( AlertMsg ).find( 'p' ).html( msgBody );
+    $( AlertMsg ).addClass( 'alert-' + msgType );
     $( AlertMsg ).show();
 }

@@ -1,3 +1,5 @@
+window.MaintenanceModeStatus = [];
+
 export function CheckMaintenanceMode( url )
 {
     $.ajax({
@@ -6,10 +8,12 @@ export function CheckMaintenanceMode( url )
         success: function( data, textStatus, xhr ) {
             console.log( xhr.status );
             alert( xhr.status );
+            window.MaintenanceModeStatus = xhr.status;
         },
         complete: function( xhr, textStatus ) {
             console.log( xhr.status );
             alert( xhr.status );
+            window.MaintenanceModeStatus = xhr.status;
         } 
     });
 }

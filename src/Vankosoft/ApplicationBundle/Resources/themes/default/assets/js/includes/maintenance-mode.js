@@ -1,4 +1,4 @@
-window.MaintenanceModeStatus = [];
+window.MaintenanceModeStatus = 200;
 
 export function CheckMaintenanceMode( url )
 {

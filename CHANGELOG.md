@@ -1,3 +1,9 @@
+1.14.31	|	Release date: **25.05.2026**
+============================================
+* New Features:
+  - Create JS Helpers for Bootstrap Alerts and Maintenance Mode.
+
+
 1.14.30	|	Release date: **23.05.2026**
 ============================================
 * New Features:

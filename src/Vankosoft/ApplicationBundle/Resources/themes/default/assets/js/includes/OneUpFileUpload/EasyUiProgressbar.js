@@ -6,6 +6,7 @@ require( 'jquery-easyui/js/jquery.easyui.min.js' );
 require( 'blueimp-file-upload/js/jquery.fileupload.js' );
 
 import { humanFileSize } from '../humanFileSize.js';
+import { ShowAlert } from '../bootstrap-5/alert.js';
 
 window.UploadedFiles                = [];
 window.TestUploadProgressBarData    = {
@@ -143,7 +144,8 @@ export function InitOneUpFileUpload( options, preFormSubmit = null )
             };
             
             if ( data.jqXHR.status == 503 ) {
-                alert( 'The Site is in Maintenance Mode. Try Again Later.' );
+                //alert( 'The Site is in Maintenance Mode. Try Again Later.' );
+                ShowAlert( 'Maintenance Mode', 'The Site is in Maintenance Mode. Try Again Later.', 'danger' );
                 
                 window.AbortedData = data;
                 return;

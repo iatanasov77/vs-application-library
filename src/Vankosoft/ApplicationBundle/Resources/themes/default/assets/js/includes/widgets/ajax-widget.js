@@ -33,7 +33,8 @@ $( function()
                 },
                 error: function()
                 {
-                    alert( "AJAX WIDGET CALLBACK ERROR !!!" );
+                    // alert( "AJAX WIDGET CALLBACK ERROR !!!" );
+                    condole.log( "AJAX WIDGET CALLBACK ERROR !!!" );
                 }
             });
         },

@@ -1,3 +1,10 @@
+1.14.32	|	Release date: **09.06.2026**
+============================================
+* New Features and Improvements:
+  - Remove Alert from Ajax Widget JS.
+  - Create a Doctrine SET Type.
+
+
 1.14.31	|	Release date: **25.05.2026**
 ============================================
 * New Features:

@@ -58,7 +58,7 @@
         "league\/flysystem-ftp": "^3.29",
         "league\/flysystem-sftp-v3": "^3.30",
         "m2mtech\/flysystem-stream-wrapper": "^1.4",
-        "vankosoft\/agent-bundle": "dev-develop"
+        "vankosoft\/agent-bundle": "^1.1"
     },
     "replace": {
         "vankosoft\/application-bundle": "self.version",

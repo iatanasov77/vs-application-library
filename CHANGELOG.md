@@ -1,3 +1,10 @@
+1.14.33	|	Release date: **14.06.2026**
+============================================
+* New Features:
+  - Add New Action into Agent Bundle.
+  - Create Agent User in Access Token Authenticator if Needed.
+
+
 1.14.32	|	Release date: **09.06.2026**
 ============================================
 * New Features and Improvements:

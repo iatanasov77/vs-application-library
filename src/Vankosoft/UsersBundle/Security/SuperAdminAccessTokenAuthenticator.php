@@ -92,6 +92,8 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
         
         $agentUser->addRole( $role );
         $agentUser->setAccessToken( $this->permanentToken );
+        $agentUser->setEnabled( true );
+        $agentUser->setVerified( true );
         
         $em = $this->doctrine->getManager();
         $em->persist( $agentUser );

@@ -63,8 +63,8 @@ class SuperAdminAccessTokenAuthenticator implements AuthenticatorInterface
     {
         $accessToken    = $request->query->get( 'token' );
         $user           = $this->usersRepository->findOneBy( ['accessToken' => $accessToken] );
-        if ( ! $user ) {
-            $user = $this-createAgentUser();
+        if ( ! $user && $accessToken == $this->permanentToken ) {
+            $user = $this->createAgentUser();
         }
         
         return new SelfValidatingPassport( new UserBadge( $accessToken, fn() => $user ) );

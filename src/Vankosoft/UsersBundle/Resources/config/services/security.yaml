@@ -93,6 +93,7 @@ services:
             - '@vs_users.manager.user'
             - '@vs_users.repository.users'
             - '@vs_users.factory.users'
+            - '@vs_users.repository.user_roles'
     
     ###################################################
     # Voters

@@ -13,6 +13,7 @@ use Vankosoft\CmsBundle\Component\Uploader\FileUploaderInterface;
 
 use Vankosoft\UsersBundle\Model\Interfaces\UserInterface;
 use Vankosoft\UsersBundle\Model\Interfaces\UserInfoInterface;
+use Vankosoft\UsersBundle\Component\NewUserException;
 
 class UserManager
 {
@@ -46,11 +47,11 @@ class UserManager
         $this->imageUploader        = $imageUploader;
     }
     
-    public function createUser( $username, $email, $plainPassword ) : UserInterface
+    public function createUser( string $username, string $email, string $plainPassword ) : UserInterface
     {
         //if ( Assert::notNull( $this->userRepository->findOneByEmail( $username ) ) ) {
-        if ( is_object( $this->userRepository->findOneByEmail( $username ) ) ) {
-            throw new \Exception( 'User exists !!!' );
+        if ( is_object( $this->userRepository->findOneByEmail( $email ) ) ) {
+            throw new NewUserException( 'User with this email already exists !!!' );
         }
         
         $user       = $this->userFactory->createNew();

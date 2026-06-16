@@ -226,9 +226,6 @@ class RegisterController extends AbstractController
             'form'              => $form->createView(),
             'termsPageTitle'    => $termsPage ? $termsPage->getTitle() : null,
             'termsPageContent'  => $termsPage ? $termsPage->getText() : null,
-            'formCreateAccount' => \isset( $this->params['enableAdminpanelRegistration'] ) ?
-                                                $this->params['enableAdminpanelRegistration'] :
-                                                false,
         ];
     }
     

@@ -1,3 +1,9 @@
+1.14.34	|	Release date: **16.06.2026**
+============================================
+* New Features:
+  - Check for User Email Exists in User Manager when Creating.
+
+
 1.14.33	|	Release date: **14.06.2026**
 ============================================
 * New Features:

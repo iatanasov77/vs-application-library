@@ -1,6 +1,6 @@
 <?php namespace Vankosoft\UsersBundle\Component;
 
-use Vankosoft\UsersBundle\Component\RuntimeException;
+use RuntimeException;
 
 class NewUserException extends RuntimeException
 {

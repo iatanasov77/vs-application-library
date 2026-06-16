@@ -47,9 +47,12 @@ class UserManager
         $this->imageUploader        = $imageUploader;
     }
     
-    public function createUser( string $username, string $email, string $plainPassword ) : UserInterface
+    public function createUser( string $username, string $email, string $plainPassword, bool $uniqUsernames = false ) : UserInterface
     {
-        //if ( Assert::notNull( $this->userRepository->findOneByEmail( $username ) ) ) {
+        if ( $uniqUsernames && \is_object( $this->userRepository->findOneByUsername( $email ) ) ) {
+            throw new NewUserException( 'User with this username already exists !!!' );
+        }
+        
         if ( \is_object( $this->userRepository->findOneByEmail( $email ) ) ) {
             throw new NewUserException( 'User with this email already exists !!!' );
         }

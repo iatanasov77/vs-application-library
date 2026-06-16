@@ -50,17 +50,18 @@
         </form>
     </div>
     <div class="card-footer bg-white p-0  ">
-    {% if formCreateAccount %}
-        <div class="card-footer-item card-footer-item-bordered">
-            <a href="{{ path('vs_users_register_form') }}" class="footer-link">
-            	{{ 'vs_application.form.login.button_register' | trans( {},'VSApplicationBundle' ) }}
-            </a>
-        </div>
+        {% if formCreateAccount %}
+            <div class="card-footer-item card-footer-item-bordered">
+                <a href="{{ path('vs_users_register_form') }}" class="footer-link">
+                	{{ 'vs_application.form.login.button_register' | trans( {},'VSApplicationBundle' ) }}
+                </a>
+            </div>
+        {% endif %}
+        
         <div class="card-footer-item card-footer-item-bordered">
             <a href="{{ path('vs_users_forgot_password_form') }}" class="footer-link">
             	{{ 'vs_application.form.login.button_forgot_password' | trans( {},'VSApplicationBundle' ) }}
             </a>
         </div>
-    {% endif %}
     </div>
 {% endblock %}

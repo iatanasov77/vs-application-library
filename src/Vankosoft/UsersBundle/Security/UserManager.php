@@ -50,7 +50,7 @@ class UserManager
     public function createUser( string $username, string $email, string $plainPassword ) : UserInterface
     {
         //if ( Assert::notNull( $this->userRepository->findOneByEmail( $username ) ) ) {
-        if ( is_object( $this->userRepository->findOneByEmail( $email ) ) ) {
+        if ( \is_object( $this->userRepository->findOneByEmail( $email ) ) ) {
             throw new NewUserException( 'User with this email already exists !!!' );
         }
         

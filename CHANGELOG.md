@@ -1,3 +1,9 @@
+1.14.35	|	Release date: **16.06.2026**
+============================================
+* New Features:
+  - Add a Parameter to Disable AdminPanel Registration.
+
+
 1.14.34	|	Release date: **16.06.2026**
 ============================================
 * New Features:

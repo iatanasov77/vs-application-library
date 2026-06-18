@@ -2,9 +2,9 @@
 {% import "@VSApplication/Macros/alerts.html.twig" as alerts %}
 {% import "@VSApplication/Macros/translations.html.twig" as vs_translations %}
 
-<div class="card" id="containerBanners">
+<div class="card" id="containerQuickLinks">
     <div class="card-header">
-        <div class="float-start" style="height:30px; padding-top:10px;">{{ 'vs_cms.template.banners' | trans( {},'VSCmsBundle' ) }}</div>
+        <div class="float-start" style="height:30px; padding-top:10px;">{{ 'vs_cms.template.quick_links' | trans( {},'VSCmsBundle' ) }}</div>
         <div class="btn-group float-end">
             <a class="btn btn-primary btnBanner" id="btnBanner" 
                 title="{{ 'vs_cms.template.button_banner_create' | trans( {},'VSCmsBundle' ) }}" 
@@ -17,10 +17,10 @@
         </div>
     </div>
     <div class="card-body" style="padding: 0;">
-        {% if item.banners | length > 0 %}
-            <table class="table table-striped table-advance table-hover" id="tblBanners">
-                <tbody id="bannersTableBody">
-                    {% for banner in item.banners %}
+        {% if item.quickLinks | length > 0 %}
+            <table class="table table-striped table-advance table-hover" id="tblQuickLinks">
+                <tbody id="quickLinksTableBody">
+                    {% for banner in item.quickLinks %}
                         <tr data-node-id="{{ banner.id }}"
                             data-position="{{ banner.priority }}"
                             id="banner-{{ banner.id }}"
@@ -41,7 +41,7 @@
                                 {% endif %}
                             </td>
                             
-                            <td>{{ vs_translations.flags( bannersTranslations[banner.id] ) }}</td>
+                            {# <td>{{ vs_translations.flags( bannersTranslations[banner.id] ) }}</td> #}
                             
                             <td>
                                 <a href="javascript:void(0);"

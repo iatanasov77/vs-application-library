@@ -24,6 +24,9 @@ class QuickLink implements QuickLinkInterface
     /** @var string */
     protected $linkIconPath;
     
+    /** @var integer */
+    protected $priority = 0;
+    
     /** @var Collection|QuickLinksCategory[] */
     protected $categories;
     
@@ -77,6 +80,18 @@ class QuickLink implements QuickLinkInterface
     public function isPublished(): ?bool
     {
         return $this->enabled;
+    }
+    
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+    
+    public function setPriority( int $priority ): self
+    {
+        $this->priority  = $priority;
+        
+        return $this;
     }
     
     public function getCategories(): Collection

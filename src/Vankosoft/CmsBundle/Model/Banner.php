@@ -29,7 +29,7 @@ class Banner implements BannerInterface
     protected $enabled = true;
     
     /** @var integer */
-    protected $priority = 0;
+    protected $position = 0;
     
     /** @var Collection|BannerPlace[] */
     protected $places;
@@ -91,14 +91,14 @@ class Banner implements BannerInterface
         return $this->enabled;
     }
     
-    public function getPriority(): int
+    public function getPosition()
     {
-        return $this->priority;
+        return $this->position;
     }
     
-    public function setPriority( int $priority ): self
+    public function setPosition( $position ): self
     {
-        $this->priority  = $priority;
+        $this->position = $position;
         
         return $this;
     }

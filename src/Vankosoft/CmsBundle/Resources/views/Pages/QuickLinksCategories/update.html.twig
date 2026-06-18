@@ -21,6 +21,10 @@
                     
                 </div>
             </div>
+            
+            {% if( item.id ) %}
+                {% include '@VSCms/Pages/QuickLinksCategories/quick_links_table.html.twig' %}
+            {% endif %}
         </div>
     </div>
     

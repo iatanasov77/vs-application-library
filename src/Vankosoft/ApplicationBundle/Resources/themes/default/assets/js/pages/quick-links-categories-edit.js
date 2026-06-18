@@ -7,7 +7,7 @@ const siSortable  = new VsSortable( 'vs_cms_banner_ext_sort_action' );
 $( function()
 {
     // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
-    $( '#FormContainer' ).on( 'change', '#banner_place_form_locale', function( e ) {
+    $( '#FormContainer' ).on( 'change', '#quick_links_category_form_currentLocale', function( e ) {
         var placeId  = $( '#FormContainer' ).attr( 'data-itemId' );
         var locale  = $( this ).val();
         

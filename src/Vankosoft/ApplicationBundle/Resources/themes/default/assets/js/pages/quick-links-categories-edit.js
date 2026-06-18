@@ -2,7 +2,7 @@ require( '../includes/resource-delete.js' );
 
 import { VsPath } from '../includes/fos_js_routes.js';
 import VsSortable from '../includes/sortable';
-const siSortable  = new VsSortable( 'vs_cms_banner_ext_sort_action' );
+const siSortable  = new VsSortable( 'vs_cms__ext_sort_action' );
 
 $( function()
 {
@@ -26,16 +26,16 @@ $( function()
     });
     
     let sortableIds;
-    $( "#bannersTableBody" ).sortable({
+    $( "#quickLinksTableBody" ).sortable({
         start: function( event, ui ) {
-            sortableIds = $( "#bannersTableBody" ).sortable( "toArray" );
+            sortableIds = $( "#quickLinksTableBody" ).sortable( "toArray" );
             //console.log( sortableIds );
         },
         
         update: function( event, ui ) {
             var itemId      = ui.item.attr( "data-node-id" );
-            var sortedIDs   = $( "#bannersTableBody" ).sortable( "toArray" );
-            var itemIndex   = sortedIDs.indexOf( 'banner-' + itemId );
+            var sortedIDs   = $( "#quickLinksTableBody" ).sortable( "toArray" );
+            var itemIndex   = sortedIDs.indexOf( 'quickLink-' + itemId );
             
             var sortedItems = [];
             for ( let i = 0; i < sortedIDs.length; i++ ) {

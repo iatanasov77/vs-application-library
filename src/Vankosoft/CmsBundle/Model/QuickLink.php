@@ -77,6 +77,11 @@ class QuickLink implements QuickLinkInterface
         return $this;
     }
     
+    public function isPublic(): bool
+    {
+        return $this->enabled;
+    }
+    
     public function isPublished(): ?bool
     {
         return $this->enabled;

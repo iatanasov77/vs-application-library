@@ -11,6 +11,10 @@
             </cascade>
         </one-to-one>
         
-        <many-to-many field="quickLinks" target-entity="Vankosoft\CmsBundle\Model\Interfaces\QuickLinkInterface" mapped-by="categories" />
+        <many-to-many field="quickLinks" target-entity="Vankosoft\CmsBundle\Model\Interfaces\QuickLinkInterface" mapped-by="categories" >
+            <order-by>
+                <order-by-field name="position" direction="ASC" />
+            </order-by>
+        </many-to-many>
     </mapped-superclass>
 </doctrine-mapping>

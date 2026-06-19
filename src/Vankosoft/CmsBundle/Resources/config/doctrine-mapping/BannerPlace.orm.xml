@@ -13,6 +13,10 @@
             </cascade>
         </one-to-one>
         
-        <many-to-many field="banners" target-entity="Vankosoft\CmsBundle\Model\Interfaces\BannerInterface" mapped-by="places" />
+        <many-to-many field="banners" target-entity="Vankosoft\CmsBundle\Model\Interfaces\BannerInterface" mapped-by="places" >
+            <order-by>
+                <order-by-field name="position" direction="ASC" />
+            </order-by>
+        </many-to-many>
     </mapped-superclass>
 </doctrine-mapping>

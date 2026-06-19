@@ -15,7 +15,7 @@ class VsSortable
             success: function ( data )
             {
                 if ( data['status'] == 'ok' ) {
-                    document.location   = document.location;
+                    //document.location   = document.location;
                 } else {
                     alert( 'ERROR !!!' );
                 }
@@ -60,7 +60,7 @@ class VsSortable
             success: function ( data )
             {
                 if ( data['status'] == 'ok' ) {
-                    document.location   = document.location;
+                    //document.location   = document.location;
                 } else {
                     alert( 'ERROR !!!' );
                 }

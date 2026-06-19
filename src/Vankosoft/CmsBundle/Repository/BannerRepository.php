@@ -18,7 +18,7 @@ class BannerRepository extends SortableRepository implements RepositoryInterface
         
         $banners    = $query->getResult();
         foreach ( $banners as $b ) {
-            $b->setPriority( $b->getPriority() + 1 );
+            $b->setPosition( $b->getPosition() + 1 );
             $this->getEntityManager()->persist( $b );
         }
         $this->getEntityManager()->flush();

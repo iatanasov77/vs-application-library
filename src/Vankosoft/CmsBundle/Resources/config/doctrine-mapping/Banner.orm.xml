@@ -38,6 +38,8 @@
                     <join-column name="place_id" referenced-column-name="id" />
                 </inverse-join-columns>
             </join-table>
+            
+            <gedmo:sortable-group />
         </many-to-many>
         
         <gedmo:translation entity="Vankosoft\ApplicationBundle\Model\Interfaces\TranslationInterface" locale="locale"/>

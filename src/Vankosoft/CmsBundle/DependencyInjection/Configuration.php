@@ -53,6 +53,7 @@ use Vankosoft\CmsBundle\Form\QuickLinksCategoryForm;
 
 use Vankosoft\CmsBundle\Model\QuickLink;
 use Vankosoft\CmsBundle\Controller\QuickLinkController;
+use Vankosoft\CmsBundle\Repository\QuickLinkRepository;
 use Vankosoft\CmsBundle\Form\QuickLinkForm;
 
 use Vankosoft\CmsBundle\Model\Slider;
@@ -267,7 +268,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode( 'model' )->defaultValue( QuickLink::class )->cannotBeEmpty()->end()
-                                        ->scalarNode( 'repository' )->defaultValue( EntityRepository::class )->cannotBeEmpty()->end()
+                                        ->scalarNode( 'repository' )->defaultValue( QuickLinkRepository::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'factory' )->defaultValue( Factory::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'controller' )->defaultValue( QuickLinkController::class )->cannotBeEmpty()->end()
                                         ->scalarNode( 'form' )->defaultValue( QuickLinkForm::class )->cannotBeEmpty()->end()

@@ -9,7 +9,7 @@ import { VsFormSubmit } from '../includes/vs_form.js';
 import { GetCkEditorData } from '../includes/ckeditor.js';
 
 import VsSortable from '../includes/sortable';
-const siSortable  = new VsSortable( 'vs_cms_slider_item_ext_sort_action' );
+const siSortable  = new VsSortable( 'vs_cms_slider_item_sort_action' );
 
 // WORKAROUND: Prevent Double Submiting
 global.btnSaveSliderItemClicked = window.btnSaveSliderItemClicked = false;

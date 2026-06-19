@@ -2,7 +2,7 @@ require( '../includes/resource-delete.js' );
 
 import { VsPath } from '../includes/fos_js_routes.js';
 import VsSortable from '../includes/sortable';
-const siSortable  = new VsSortable( 'vs_cms_banner_ext_sort_action' );
+const siSortable  = new VsSortable( 'vs_cms_banner_sort_action' );
 
 $( function()
 {

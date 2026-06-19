@@ -34,8 +34,9 @@
                     <join-column name="category_id" referenced-column-name="id" />
                 </inverse-join-columns>
             </join-table>
-            
+            <!--  
             <gedmo:sortable-group />
+            -->
         </many-to-many>
         
         <!--

@@ -12,6 +12,9 @@
         </one-to-one>
         
         <many-to-many field="quickLinks" target-entity="Vankosoft\CmsBundle\Model\Interfaces\QuickLinkInterface" mapped-by="categories" >
+            <cascade>
+                <cascade-all/>
+            </cascade>
             <order-by>
                 <order-by-field name="position" direction="ASC" />
             </order-by>

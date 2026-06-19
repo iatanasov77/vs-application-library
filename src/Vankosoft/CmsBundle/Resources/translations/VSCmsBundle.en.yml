@@ -158,6 +158,9 @@ vs_cms:
         banners: Banners
         button_banner_create: Create Banner
         
+        quick_links: Quick Links
+        button_quick_link_create: Create Quick Link
+        
     modal:
         page_clone:
             title: 'Clone Page'

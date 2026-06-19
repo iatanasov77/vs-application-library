@@ -5,7 +5,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepositoryTrait;
 
-class BannerRepository extends SortableRepository implements RepositoryInterface
+class QuickLinkRepository extends SortableRepository implements RepositoryInterface
 {
     use ResourceRepositoryTrait;
     
@@ -13,13 +13,13 @@ class BannerRepository extends SortableRepository implements RepositoryInterface
     {
         $entityClass    = $this->getEntityName();
         $query          = $this->getEntityManager()->createQuery(
-            \sprintf( 'SELECT b FROM %s b WHERE b.id > %s', $entityClass, $insertAfterId )
+            \sprintf( 'SELECT tp FROM %s tp WHERE tp.id > %s', $entityClass, $insertAfterId )
         );
         
-        $banners    = $query->getResult();
-        foreach ( $banners as $b ) {
-            $b->setPosition( $b->getPosition() + 1 );
-            $this->getEntityManager()->persist( $b );
+        $tocPages       = $query->getResult();
+        foreach ( $tocPages as $tp ) {
+            $tp->setPosition( $tp->getPosition() + 1 );
+            $this->getEntityManager()->persist( $tp );
         }
         $this->getEntityManager()->flush();
         

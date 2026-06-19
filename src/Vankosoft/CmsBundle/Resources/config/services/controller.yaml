@@ -75,3 +75,12 @@ services:
             - '@vs_cms.repository.banner'
             - '@vs_cms.factory.banner'
             - '@vs_cms.file_manager'
+    
+    Vankosoft\CmsBundle\Controller\SortController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        arguments:
+            - '@doctrine'
+            - '@vs_cms.repository.slider_item'
+            - '@vs_cms.repository.banner'
+            - '@vs_cms.repository.quick_link'

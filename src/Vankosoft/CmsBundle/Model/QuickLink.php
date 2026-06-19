@@ -24,6 +24,9 @@ class QuickLink implements QuickLinkInterface
     /** @var string */
     protected $linkIconPath;
     
+    /** @var integer */
+    protected $position = 0;
+    
     /** @var Collection|QuickLinksCategory[] */
     protected $categories;
     
@@ -74,9 +77,26 @@ class QuickLink implements QuickLinkInterface
         return $this;
     }
     
+    public function isPublic(): bool
+    {
+        return $this->enabled;
+    }
+    
     public function isPublished(): ?bool
     {
         return $this->enabled;
+    }
+    
+    public function getPosition()
+    {
+        return $this->position;
+    }
+    
+    public function setPosition( $position ): self
+    {
+        $this->position = $position;
+        
+        return $this;
     }
     
     public function getCategories(): Collection

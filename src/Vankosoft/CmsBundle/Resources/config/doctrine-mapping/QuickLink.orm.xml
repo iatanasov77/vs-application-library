@@ -17,6 +17,10 @@
         
         <field name="linkIconPath" column="link_icon_path" type="text" nullable="true" />
         
+        <field name="position" column="position" type="integer" nullable="true">
+            <gedmo:sortable-position />
+        </field>
+        
         <many-to-many field="categories" target-entity="Vankosoft\CmsBundle\Model\Interfaces\QuickLinksCategoryInterface" inversed-by="quickLinks">
             <cascade>
                 <cascade-persist/>
@@ -30,6 +34,9 @@
                     <join-column name="category_id" referenced-column-name="id" />
                 </inverse-join-columns>
             </join-table>
+            <!--  
+            <gedmo:sortable-group />
+            -->
         </many-to-many>
         
         <!--

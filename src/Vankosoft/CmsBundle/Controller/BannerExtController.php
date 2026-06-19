@@ -10,7 +10,6 @@ use Vankosoft\CmsBundle\Repository\BannerPlaceRepository;
 use Vankosoft\CmsBundle\Repository\BannerRepository;
 use Vankosoft\CmsBundle\Form\BannerForm;
 use Vankosoft\CmsBundle\Component\FileManager;
-use Vankosoft\ApplicationBundle\Component\Status;
 
 class BannerExtController extends AbstractController
 {
@@ -41,23 +40,6 @@ class BannerExtController extends AbstractController
         $this->bannerRepository         = $bannerRepository;
         $this->bannerFactory            = $bannerFactory;
         $this->fileManager              = $fileManager;
-    }
-    
-    public function sortAction( $id, $insertAfterId, Request $request ): Response
-    {
-        $em             = $this->doctrine->getManager();
-        $item           = $this->bannerRepository->find( $id );
-        $insertAfter    = $this->bannerRepository->find( $insertAfterId );
-        $this->bannerRepository->insertAfter( $item, $insertAfterId );
-
-        $position       = $insertAfter ? ( $insertAfter->getPosition() + 1 ) : 1;
-        $item->setPosition( $position );
-        $em->persist( $item );
-        $em->flush();
-        
-        return new JsonResponse([
-            'status'   => Status::STATUS_OK
-        ]);
     }
     
     public function editBanner( $placeId, $itemId, $locale, Request $request ): Response

@@ -2,12 +2,12 @@ require( '../includes/resource-delete.js' );
 
 import { VsPath } from '../includes/fos_js_routes.js';
 import VsSortable from '../includes/sortable';
-const siSortable  = new VsSortable( 'vs_cms_banner_ext_sort_action' );
+const siSortable  = new VsSortable( 'vs_cms_quick_link_sort_action' );
 
 $( function()
 {
     // bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
-    $( '#FormContainer' ).on( 'change', '#banner_place_form_locale', function( e ) {
+    $( '#FormContainer' ).on( 'change', '#quick_links_category_form_currentLocale', function( e ) {
         var placeId  = $( '#FormContainer' ).attr( 'data-itemId' );
         var locale  = $( this ).val();
         
@@ -26,16 +26,16 @@ $( function()
     });
     
     let sortableIds;
-    $( "#bannersTableBody" ).sortable({
+    $( "#quickLinksTableBody" ).sortable({
         start: function( event, ui ) {
-            sortableIds = $( "#bannersTableBody" ).sortable( "toArray" );
+            sortableIds = $( "#quickLinksTableBody" ).sortable( "toArray" );
             //console.log( sortableIds );
         },
         
         update: function( event, ui ) {
             var itemId      = ui.item.attr( "data-node-id" );
-            var sortedIDs   = $( "#bannersTableBody" ).sortable( "toArray" );
-            var itemIndex   = sortedIDs.indexOf( 'banner-' + itemId );
+            var sortedIDs   = $( "#quickLinksTableBody" ).sortable( "toArray" );
+            var itemIndex   = sortedIDs.indexOf( 'quickLink-' + itemId );
             
             var sortedItems = [];
             for ( let i = 0; i < sortedIDs.length; i++ ) {

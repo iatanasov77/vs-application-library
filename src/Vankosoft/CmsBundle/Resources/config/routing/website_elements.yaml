@@ -104,12 +104,6 @@ vs_cms_slider_item:
     type: sylius.resource
     options:
         expose: true
-        
-vs_cms_slider_item_ext_sort_action:
-    path: /slider-item-sort/{id}/{insertAfterId}
-    controller: Vankosoft\CmsBundle\Controller\SliderItemExtController::sortAction
-    options:
-        expose: true
 
 vs_cms_slider_item_ext_edit:
     path: /slider-item-edit/{sliderId}/{itemId}/{locale}
@@ -157,12 +151,6 @@ vs_cms_banner:
     type: sylius.resource
     options:
         expose: true
-        
-vs_cms_banner_ext_sort_action:
-    path: /banner-sort/{id}/{insertAfterId}
-    controller: Vankosoft\CmsBundle\Controller\BannerExtController::sortAction
-    options:
-        expose: true
 
 vs_cms_banner_ext_edit:
     path: /banner-edit/{placeId}/{itemId}/{locale}
@@ -174,5 +162,26 @@ vs_cms_banner_ext_edit:
 vs_cms_banner_ext_delete:
     path: /banner-delete/{placeId}/{itemId}
     controller: Vankosoft\CmsBundle\Controller\BannerExtController::deleteBanner
+    options:
+        expose: true
+
+#################################################################################
+# Sorting Items
+#################################################################################
+vs_cms_slider_item_sort_action:
+    path: /slider-items-sort/{id}/{insertAfterId}
+    controller: Vankosoft\CmsBundle\Controller\SortController::sortSliderItemsAction
+    options:
+        expose: true
+
+vs_cms_banner_sort_action:
+    path: /banners-sort/{id}/{insertAfterId}
+    controller: Vankosoft\CmsBundle\Controller\SortController::sortBannersAction
+    options:
+        expose: true
+
+vs_cms_quick_link_sort_action:
+    path: /quick-links-sort/{id}/{insertAfterId}
+    controller: Vankosoft\CmsBundle\Controller\SortController::sorQuickLinksAction
     options:
         expose: true

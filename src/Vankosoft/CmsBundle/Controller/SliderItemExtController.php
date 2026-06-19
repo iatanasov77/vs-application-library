@@ -10,7 +10,6 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Vankosoft\CmsBundle\Repository\SliderItemRepository;
 use Vankosoft\CmsBundle\Form\SliderItemForm;
 use Vankosoft\CmsBundle\Component\FileManager;
-use Vankosoft\ApplicationBundle\Component\Status;
 
 class SliderItemExtController extends AbstractController
 {
@@ -46,23 +45,6 @@ class SliderItemExtController extends AbstractController
         $this->sliderItemFactory        = $sliderItemFactory;
         $this->fileManager              = $fileManager;
         $this->sliderPhotoDescription   = $sliderPhotoDescription;
-    }
-    
-    public function sortAction( $id, $insertAfterId, Request $request ): Response
-    {
-        $em             = $this->doctrine->getManager();
-        $item           = $this->sliderItemRepository->find( $id );
-        $insertAfter    = $this->sliderItemRepository->find( $insertAfterId );
-        $this->sliderItemRepository->insertAfter( $item, $insertAfterId );
-
-        $position       = $insertAfter ? ( $insertAfter->getPosition() + 1 ) : 1;
-        $item->setPosition( $position );
-        $em->persist( $item );
-        $em->flush();
-        
-        return new JsonResponse([
-            'status'   => Status::STATUS_OK
-        ]);
     }
     
     public function editSliderItem( $sliderId, $itemId, $locale, Request $request ): Response

@@ -1,3 +1,6 @@
+#################################################################################
+# FAQ
+#################################################################################
 vs_cms_helpcenter_question:
     resource: |
         alias: vs_cms.helpcenter_question
@@ -23,6 +26,9 @@ vs_cms_helpcenter_question_index:
     options:
         expose: true
 
+#################################################################################
+# Quick Links
+#################################################################################
 vs_cms_quick_link_category:
     resource: |
         alias: vs_cms.quick_link_category
@@ -37,14 +43,14 @@ vs_cms_quick_link:
     resource: |
         alias: vs_cms.quick_link
         except: ['show']
-        path: /quick-links
+        path: /quick-links/{categoryId}
         templates: "@VSCms/Pages/QuickLinks"
     type: sylius.resource
     options:
         expose: true
 
 vs_cms_quick_link_index:
-    path: /quick-links/
+    path: /quick-links/{categoryId}/
     methods: [GET]
     defaults:
         _controller: vs_cms.controller.quick_link::indexAction
@@ -58,6 +64,22 @@ vs_cms_quick_link_index:
     options:
         expose: true
 
+vs_cms_quick_link_ext_edit:
+    path: /quick-link-edit/{categoryId}/{itemId}/{locale}
+    controller: Vankosoft\CmsBundle\Controller\QuickLinkExtController::editQuickLink
+    defaults: { locale: '%locale%' }
+    options:
+        expose: true
+    
+vs_cms_quick_link_ext_delete:
+    path: /quick-link-delete/{categoryId}/{itemId}
+    controller: Vankosoft\CmsBundle\Controller\QuickLinkExtController::deleteQuickLink
+    options:
+        expose: true
+
+#################################################################################
+# Sliders
+#################################################################################
 vs_cms_slider:
     resource: |
         alias: vs_cms.slider
@@ -118,6 +140,9 @@ vs_cms_slider_item_ext_delete:
     options:
         expose: true
 
+#################################################################################
+# Banners
+#################################################################################
 vs_cms_banner_place:
     resource: |
         alias: vs_cms.banner_place

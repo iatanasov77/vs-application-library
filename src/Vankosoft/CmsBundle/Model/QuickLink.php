@@ -106,7 +106,7 @@ class QuickLink implements QuickLinkInterface
     
     public function addCategory( ?QuickLinksCategoryInterface $category ): self
     {
-        if ( ! $this->categories->contains( $category ) ) {
+        if ( $category && ! $this->categories->contains( $category ) ) {
             $this->categories[] = $category;
             $category->addQuickLink( $this );
         }

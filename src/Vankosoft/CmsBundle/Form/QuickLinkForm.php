@@ -35,7 +35,7 @@ class QuickLinkForm extends AbstractForm
         $entity         = $builder->getData();
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
-        if ( ! $entity->getId() ) {
+        if ( ! $entity->getId() && $options['category'] ) {
             $entity->addCategory( $options['category'] );
         }
         

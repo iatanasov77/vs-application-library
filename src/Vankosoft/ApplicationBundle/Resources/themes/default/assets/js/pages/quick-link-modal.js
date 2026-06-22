@@ -18,16 +18,16 @@ global.btnSaveQuickLinkClicked = window.btnSaveQuickLinkrClicked = false;
 
 function initQuickLinksCategoriesCombo()
 {
-    let selectedPlaces  = JSON.parse( $( '#quick_link_form_selectedCategories' ).val() );
-    if ( ! selectedPlaces.length ) {
-        selectedPlaces    = null;
+    let selectedCategories  = JSON.parse( $( '#quick_link_form_selectedCategories' ).val() );
+    if ( ! selectedCategories.length ) {
+        selectedCategories    = null;
     }
     
     EasyuiCombobox( $( '#quick_link_form_categories' ), {
         required: true,
         multiple: true,
         checkboxId: "QuickLinkCategories",
-        values: selectedPlaces
+        values: selectedCategories
     });
 }
 
@@ -52,7 +52,7 @@ $( function()
                                     
                 $( '#modalTitle' ).text( modalTitle );
                 $( '#modalBodyQuickLink > div.card-body' ).html( response );
-                initQuickLinksCategoriesCombo();
+                //initQuickLinksCategoriesCombo();
                 
                 /** Bootstrap 5 Modal Toggle */
                 const myModal = new bootstrap.Modal('#quickLinkModal', {
@@ -67,7 +67,7 @@ $( function()
                  */
                 $( '#quickLinkModal' ).removeAttr( "tabindex" );
                 
-                $( '#quickLinkModal' ).attr( "data-placeId", placeId );
+                $( '#quickLinkModal' ).attr( "data-categoryId", categoryId );
                 $( '#quickLinkModal' ).attr( "data-itemId", itemId );
             },
             error: function()
@@ -104,10 +104,10 @@ $( function()
         }
         window.btnSaveQuickLinkClicked = true;
         
-        var placeId    = $( '#FormContainer' ).attr( 'data-itemId' );
+        var categoryId  = $( '#FormContainer' ).attr( 'data-categoryId' );
         var formData    = new FormData( $( '#FormQuickLink' )[ 0 ] );
         var submitUrl   = $( '#FormQuickLink' ).attr( 'action' );
-        var redirectUrl = VsPath( 'vs_cms_quick_link_category_update', {'id': placeId} );
+        var redirectUrl = VsPath( 'vs_cms_quick_link_category_update', {'id': categoryId} );
         
         VsFormSubmit( formData, submitUrl, redirectUrl );
     });

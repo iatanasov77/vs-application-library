@@ -18,15 +18,15 @@ global.btnSaveQuickLinkClicked = window.btnSaveQuickLinkrClicked = false;
 
 function initQuickLinksCategoriesCombo()
 {
-    let selectedPlaces  = JSON.parse( $( '#banner_form_selectedPlaces' ).val() );
+    let selectedPlaces  = JSON.parse( $( '#quick_link_form_selectedCategories' ).val() );
     if ( ! selectedPlaces.length ) {
         selectedPlaces    = null;
     }
     
-    EasyuiCombobox( $( '#banner_form_places' ), {
+    EasyuiCombobox( $( '#quick_link_form_categories' ), {
         required: true,
         multiple: true,
-        checkboxId: "BannerPlaces",
+        checkboxId: "QuickLinkCategories",
         values: selectedPlaces
     });
 }
@@ -77,7 +77,7 @@ $( function()
         });
     });
     
-    $( '#quickLinkModal' ).on( 'change', '#banner_form_locale', function( e )
+    $( '#quickLinkModal' ).on( 'change', '#quick_link_form_locale', function( e )
     {
         var categoryId  = parseInt( $( '#quickLinkModal' ).attr( 'data-categoryId' ) );
         var itemId      = parseInt( $( '#quickLinkModal' ).attr( 'data-itemId' ) );

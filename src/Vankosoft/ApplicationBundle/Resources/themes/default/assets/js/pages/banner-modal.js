@@ -2,7 +2,10 @@ require( 'jquery-easyui/css/easyui.css' );
 require( 'jquery-easyui/js/jquery.easyui.min.js' );
 
 require( '../includes/bootstrap-5/file-input.js' );
+
+// bin/console fos:js-routing:dump --format=json --target=public/shared_assets/js/fos_js_routes_admin.json
 import { VsPath } from '../includes/fos_js_routes.js';
+
 import { VsFormSubmit } from '../includes/vs_form.js';
 import { VsTranslator, VsLoadTranslations } from '../includes/bazinga_js_translations.js';
 VsLoadTranslations(['VSCmsBundle']);

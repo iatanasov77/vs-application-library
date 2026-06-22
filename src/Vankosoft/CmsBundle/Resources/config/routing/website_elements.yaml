@@ -46,6 +46,7 @@ vs_cms_quick_link:
         path: /quick-links/{categoryId}
         templates: "@VSCms/Pages/QuickLinks"
     type: sylius.resource
+    defaults: { categoryId: 0 }
     options:
         expose: true
 
@@ -61,6 +62,7 @@ vs_cms_quick_link_index:
                 updatedAt: desc
             filterable: true
             template: "@VSCms/Pages/QuickLinks/index.html.twig"
+        categoryId: 0
     options:
         expose: true
 

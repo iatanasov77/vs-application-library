@@ -52,7 +52,7 @@ $( function()
                                     
                 $( '#modalTitle' ).text( modalTitle );
                 $( '#modalBodyQuickLink > div.card-body' ).html( response );
-                //initQuickLinksCategoriesCombo();
+                initQuickLinksCategoriesCombo();
                 
                 /** Bootstrap 5 Modal Toggle */
                 const myModal = new bootstrap.Modal('#quickLinkModal', {

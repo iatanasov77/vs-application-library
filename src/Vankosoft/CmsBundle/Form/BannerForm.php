@@ -68,7 +68,7 @@ class BannerForm extends AbstractForm
                 'class'                 => $this->bannerPlaceClass,
                 'choice_label'          => 'name',
                 'placeholder'           => 'vs_cms.form.banner.place_placeholder',
-                //'data'                  => $options['bannerPlace'],
+                'data'                  => $options['bannerPlace'],
             ])
             
             ->add( 'title', TextType::class, [

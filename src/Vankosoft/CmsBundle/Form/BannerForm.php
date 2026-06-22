@@ -40,6 +40,10 @@ class BannerForm extends AbstractForm
         $entity         = $builder->getData();
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
+        if ( ! $entity->getId() ) {
+            $entity->addPlace( $options['bannerPlace'] );
+        }
+        
         $selectedPlaces = [];
         foreach ( $entity->getPlaces() as $place ) {
             $selectedPlaces[] = $place->getId();

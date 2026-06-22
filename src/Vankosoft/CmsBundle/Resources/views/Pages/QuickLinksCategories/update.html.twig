@@ -31,14 +31,20 @@
     {% include '@VSApplication/Partial/resource-delete.html.twig' %}
 {% endblock %}
 
+{% block modals %}
+    {% include '@VSCms/Modals/quick_link_edit.html.twig' %}
+{% endblock %}
+
 {% block head_styles %}
     {{ parent() }}
     
     {{ encore_entry_link_tags( 'js/quick-links-categories-edit' ) }}
+    {{ encore_entry_link_tags( 'js/quick-link-modal' ) }}
 {% endblock %}
 
 {% block body_scripts %}
     {{ parent() }}
     
     {{ encore_entry_script_tags( 'js/quick-links-categories-edit' ) }}
+    {{ encore_entry_script_tags( 'js/quick-link-modal' ) }}
 {% endblock %}

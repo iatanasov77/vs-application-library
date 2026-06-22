@@ -1,3 +1,10 @@
+1.14.37	|	Release date: **22.06.2026**
+============================================
+* New Features:
+  - Improve Create a Banner.
+  - Improve Create a Quick Link.
+
+
 1.14.36	|	Release date: **19.06.2026**
 ============================================
 * New Features:

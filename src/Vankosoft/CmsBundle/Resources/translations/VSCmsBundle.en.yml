@@ -177,3 +177,6 @@ vs_cms:
         banner:
             create_title: 'Create Banner'
             update_title: 'Edit Banner'
+        quick_link:
+            create_title: 'Create Quick Link'
+            update_title: 'Edit Quick Link'

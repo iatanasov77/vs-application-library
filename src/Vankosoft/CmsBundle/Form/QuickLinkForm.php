@@ -35,6 +35,10 @@ class QuickLinkForm extends AbstractForm
         $entity         = $builder->getData();
         $currentLocale  = $entity->getTranslatableLocale() ?: $this->requestStack->getCurrentRequest()->getLocale();
         
+        if ( ! $entity->getId() && $options['category'] ) {
+            $entity->addCategory( $options['category'] );
+        }
+        
         $selectedCategories = [];
         foreach ( $entity->getCategories() as $category ) {
             $selectedCategories[] = $category->getId();
@@ -90,6 +94,7 @@ class QuickLinkForm extends AbstractForm
         
         $resolver->setDefaults([
             'csrf_protection'   => false,
+            'category'          => null,
         ]);
     }
     

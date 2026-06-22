@@ -76,6 +76,15 @@ services:
             - '@vs_cms.factory.banner'
             - '@vs_cms.file_manager'
     
+    Vankosoft\CmsBundle\Controller\QuickLinkExtController:
+        tags: ['controller.service_arguments']
+        autowire: true
+        arguments:
+            - '@doctrine'
+            - '@vs_cms.repository.quick_link_category'
+            - '@vs_cms.repository.quick_link'
+            - '@vs_cms.factory.quick_link'
+    
     Vankosoft\CmsBundle\Controller\SortController:
         tags: ['controller.service_arguments']
         autowire: true

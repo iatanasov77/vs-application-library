@@ -108,7 +108,7 @@ class Banner implements BannerInterface
         return $this->places;
     }
     
-    public function addPlace( BannerPlaceInterface $place ): self
+    public function addPlace( ?BannerPlaceInterface $place ): self
     {
         if ( ! $this->places->contains( $place ) ) {
             $this->places[] = $place;

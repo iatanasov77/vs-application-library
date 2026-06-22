@@ -43,7 +43,7 @@ $( function()
         
         $.ajax({
             type: "GET",
-            url: VsPath( 'vs_cms_quick_link_ext_editt', {'categoryId': categoryId, 'itemId': itemId} ),
+            url: VsPath( 'vs_cms_quick_link_ext_edit', {'categoryId': categoryId, 'itemId': itemId} ),
             success: function( response )
             {
                 let modalTitle  = itemId == '0' ?

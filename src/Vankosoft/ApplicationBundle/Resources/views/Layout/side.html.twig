@@ -13,18 +13,23 @@
     		
             {{ knp_menu_render('mainCms', {'template': '@VSApplication/Menu/mainCms.html.twig'}) }}
             
-        {% if installedBundles['VSUsersSubscriptionsBundle'] is defined %}
-            {{ knp_menu_render('mainUsersSubscriptions', {'template': '@VSUsersSubscriptions/Menu/mainUsersSubscriptions.html.twig'}) }}
-        {% endif %}
+            {% if installedBundles['VSUsersSubscriptionsBundle'] is defined %}
+                {{ knp_menu_render('mainUsersSubscriptions', {'template': '@VSUsersSubscriptions/Menu/mainUsersSubscriptions.html.twig'}) }}
+            {% endif %}
+                
+            {% if installedBundles['VSPaymentBundle'] is defined %}
+                {{ knp_menu_render('mainPayment', {'template': '@VSPayment/Menu/mainPayment.html.twig'}) }}
+            {% endif %}
             
-        {% if installedBundles['VSPaymentBundle'] is defined %}
-            {{ knp_menu_render('mainPayment', {'template': '@VSPayment/Menu/mainPayment.html.twig'}) }}
-        {% endif %}
+            {% if installedBundles['VSCatalogBundle'] is defined %}
+                {{ knp_menu_render('mainCatalog', {'template': '@VSCatalog/Menu/mainCatalog.html.twig'}) }}
+            {% endif %}
         
-        {% if installedBundles['VSCatalogBundle'] is defined %}
-            {{ knp_menu_render('mainCatalog', {'template': '@VSCatalog/Menu/mainCatalog.html.twig'}) }}
-        {% endif %}
-        
+            {% if installedBundles['VSAgentBundle'] is defined and get_parameter( 'vs_agent.enabled' )  %}
+                {{ knp_menu_render('mainAgent', {'template': '@VSAgent/Menu/mainAgent.html.twig'}) }}
+            {% endif %}
+            
+            {% include '@VSApplication/Layout/side-addition.html.twig' %}
         </ul>
     	<!-- sidebar menu end-->
     </div>

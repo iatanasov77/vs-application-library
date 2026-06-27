@@ -6,4 +6,6 @@ services:
         tags: ['twig.extension']
         
     Vankosoft\ApplicationBundle\Twig\FunctionsExtension:
+        arguments:
+            - '@parameter_bag'
         tags: ['twig.extension']

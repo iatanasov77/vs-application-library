@@ -1,3 +1,10 @@
+1.14.38	|	Release date: **27.06.2026**
+============================================
+* New Features:
+  - Add an Usefull Twig Function.
+  - Not VS Agent Menue if Agent is not enabled.
+
+
 1.14.37	|	Release date: **22.06.2026**
 ============================================
 * New Features:

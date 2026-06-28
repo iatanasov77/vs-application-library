@@ -1,3 +1,9 @@
+1.14.39	|	Release date: **28.06.2026**
+============================================
+* New Features:
+  - Update Using Vankosoft Agent
+
+
 1.14.38	|	Release date: **27.06.2026**
 ============================================
 * New Features:

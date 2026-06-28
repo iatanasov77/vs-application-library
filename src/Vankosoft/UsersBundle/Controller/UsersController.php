@@ -24,8 +24,10 @@ class UsersController extends AbstractCrudController
             $this->get( 'vs_agent.agent' )->userPasswordChanged(
                 $currentUser,
                 $entity,
-                'UNKNOWN OLD PASSWORD',
-                $plainPassword
+                [
+                    'UNKNOWN OLD PASSWORD',
+                    $plainPassword
+                ]
             );
         }
         

@@ -189,7 +189,7 @@ class ProfileController extends AbstractController
             $em->persist( $oUser );
             $em->flush();
             
-            $this->vankosoftAgent->userPasswordChanged( $oUser, $oUser, $oldPassword, $newPassword );
+            $this->vankosoftAgent->userPasswordChanged( $oUser, $oUser, [$oldPassword, $newPassword] );
         }
         
         return $this->redirectToRoute( 'vs_users_profile_show' );

@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\RuntimeException;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -48,9 +49,14 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $installInfo        = $this->getInstallInfo();
-        $doctrineMigration  = $this->getDoctrineMigration( $installInfo );
         
-        var_dump( $doctrineMigration );
+        $this->useVankosoftApplicationCoreVersion( $installInfo );
+        $doctrineMigration  = $this->getDoctrineMigration( $installInfo );
+        // var_dump( $doctrineMigration );
+        
+        $bufferedOutput = new BufferedOutput();
+        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', ['version' => $doctrineMigration], $bufferedOutput );
+        var_dump( $bufferedOutput->fetch() );
         
         return Command::SUCCESS;
     }
@@ -80,5 +86,26 @@ EOT
         $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutput );
         
         return $bufferedOutput->fetch();
+    }
+    
+    private function useVankosoftApplicationCoreVersion( ?array $installInfo )
+    {
+        if ( $installInfo ) {
+            $coreVersion = $installInfo[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION];
+            
+            $process = new Process([
+                'php',
+                '/usr/local/bin/composer',
+                'update',
+                'vankosoft/application:' . $coreVersion,
+                '--no-interaction'
+            ]);
+            $process->setWorkingDirectory( $path );
+            $process->run();
+            
+            $arr = \json_decode( $process->getOutput(), true, flags: JSON_THROW_ON_ERROR );
+        }
+        
+        return null;
     }
 }

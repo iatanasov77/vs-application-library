@@ -131,10 +131,13 @@ EOT
         $process->setWorkingDirectory( $this->projectRootPath );
         $process->run();
         $latestVersion = $process->getOutput();
-        //var_dump( $latestVersion ); return;
+        $latestVersion = \trim( $latestVersion );
         
-        if ( $installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] !== \trim( $latestVersion ) ) {
-            $this->commandExecutor->runCommand( 'vankosoft:install:info', ['update' => 'update'] );
+        $installInfoVersion = \trim( $installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] );
+        if ( $installInfoVersion !== $latestVersion ) {
+            var_dump( $installInfoVersion );
+            var_dump( $latestVersion );
+            //$this->commandExecutor->runCommand( 'vankosoft:install:info', ['action' => 'update'] );
         }
     }
 }

@@ -49,7 +49,6 @@ EOT
     
     private function showProjectInstallationInfo( InputInterface $input, OutputInterface $output, $jsonInfo ): int
     {
-        var_dump( $jsonInfo );
         $outputStyle    = new SymfonyStyle( $input, $output );
         
         $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();

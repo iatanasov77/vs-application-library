@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Exception\RuntimeException;
+use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 
 #[AsCommand(
     name: 'vankosoft:install:project-version',
@@ -34,7 +35,9 @@ EOT
         $bufferedOutput = new BufferedOutput();
         $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info'], $bufferedOutput );
         
-        echo $bufferedOutput->fetch();
+        $jsonInfo = $bufferedOutput->fetch();
+        $info = \json_decode( $jsonInfo );
+        var_dump( $info );
         
         return Command::SUCCESS;
     }

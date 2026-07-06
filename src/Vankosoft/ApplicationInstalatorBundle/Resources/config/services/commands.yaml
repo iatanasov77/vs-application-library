@@ -58,3 +58,5 @@ services:
             - '@service_container'
             - '@doctrine'
             - '@validator'
+            - '%kernel.project_dir%'
+

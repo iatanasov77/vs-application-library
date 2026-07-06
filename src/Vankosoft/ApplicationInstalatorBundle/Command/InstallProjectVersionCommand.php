@@ -23,14 +23,18 @@ use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 )]
 final class InstallProjectVersionCommand extends AbstractInstallCommand
 {
+    /** @var string */
+    private $projectRootPath;
+    
     public function __construct(
         ContainerInterface $container,
         ManagerRegistry $doctrine,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        string $projectRootPath
     ) {
         parent::__construct( $container, $doctrine, $validator );
         
-        $this->container    = $container;
+        $this->projectRootPath = $projectRootPath;
     }
     
     protected function configure(): void
@@ -100,7 +104,7 @@ EOT
                 'vankosoft/application:' . $coreVersion,
                 '--no-interaction'
             ]);
-            $process->setWorkingDirectory( $path );
+            $process->setWorkingDirectory( $this->projectRootPath );
             $process->run();
             
             $arr = \json_decode( $process->getOutput(), true, flags: JSON_THROW_ON_ERROR );

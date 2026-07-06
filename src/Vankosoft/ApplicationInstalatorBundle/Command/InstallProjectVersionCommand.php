@@ -54,18 +54,11 @@ EOT
     {
         $installInfo        = $this->getInstallInfo();
         
-        $this->useVankosoftApplicationCoreVersion( $installInfo );
-        $doctrineMigration  = $this->getDoctrineMigration( $installInfo );
-        // var_dump( $doctrineMigration );
+        $composerOutput = $this->useVankosoftApplicationCoreVersion( $installInfo );
+        var_dump( $composerOutput );
         
-        $bufferedOutput = new BufferedOutput();
-        $options = [
-            'version' => $doctrineMigration,
-            '--no-interaction' => true,
-            '--all-or-nothing' => true,
-        ];
-        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', $options, $bufferedOutput );
-        var_dump( $bufferedOutput->fetch() );
+        $migrationOutput = $doctrineMigration  = $this->getDoctrineMigration( $installInfo );
+        var_dump( $migrationOutput );
         
         return Command::SUCCESS;
     }
@@ -94,6 +87,16 @@ EOT
         $bufferedOutput = new BufferedOutput();
         $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutput );
         
+        $doctrineMigration = $bufferedOutput->fetch();
+        
+        $bufferedOutput = new BufferedOutput();
+        $options = [
+            'version' => $doctrineMigration,
+            '--no-interaction' => true,
+            '--all-or-nothing' => true,
+        ];
+        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', $options, $bufferedOutput );
+        
         return $bufferedOutput->fetch();
     }
     
@@ -111,9 +114,7 @@ EOT
             $process->setWorkingDirectory( $this->projectRootPath );
             $process->run( null, ['COMPOSER_HOME' => '/home/vagrant/.composer', 'COMPOSER_ALLOW_SUPERUSER' => 1] );
             
-            $output = $process->getOutput();
-            $arr = \json_decode( $output, true );
-            var_dump( $output );
+            return $process->getOutput();
         }
         
         return null;

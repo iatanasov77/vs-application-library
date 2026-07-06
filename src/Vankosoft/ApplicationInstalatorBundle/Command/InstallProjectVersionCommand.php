@@ -133,7 +133,7 @@ EOT
         $latestVersion = $process->getOutput();
         //var_dump( $latestVersion ); return;
         
-        if ( installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] !== \trim( $latestVersion ) ) {
+        if ( $installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] !== \trim( $latestVersion ) ) {
             $this->commandExecutor->runCommand( 'vankosoft:install:info', ['update' => 'update'] );
         }
     }

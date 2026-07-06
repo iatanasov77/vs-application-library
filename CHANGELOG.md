@@ -1,3 +1,11 @@
+1.14.40	|	Release date: **06.07.2026**
+============================================
+* New Features:
+  - Update Application Insyallator Configs.
+  - Fix a Migration.
+  - Create a Command to Install Project Version.
+
+
 1.14.39	|	Release date: **28.06.2026**
 ============================================
 * New Features:

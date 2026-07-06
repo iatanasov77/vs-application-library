@@ -32,7 +32,7 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $bufferedOutput = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'vankosoft:install:info ', ['json-info' => 'json-info'], $bufferedOutput );
+        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info'], $bufferedOutput );
         
         echo $bufferedOutput->fetch();
         

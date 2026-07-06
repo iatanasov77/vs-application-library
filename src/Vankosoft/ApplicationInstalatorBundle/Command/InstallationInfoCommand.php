@@ -29,23 +29,25 @@ The <info>%command.name%</info> command checks system requirements.
 EOT
             )
             ->addArgument( 'action', InputArgument::OPTIONAL, 'The Installation Info Action to be Handled.' )
+            ->addArgument( 'json-info', InputArgument::OPTIONAL, 'Get Installation Info as JSON Array.' )
         ;
     }
 
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $action = $input->getArgument( 'action' );
+        $action     = $input->getArgument( 'action' );
+        $jsonInfo   = $input->getArgument( 'json-info' );
         
         switch ( $action ) {
             case 'update':
                 return $this->updateProjectInstallationInfo( $input, $output );
                 break;
             default:
-                return $this->showProjectInstallationInfo( $input, $output );
+                return $this->showProjectInstallationInfo( $input, $output, $jsonInfo );
         }
     }
     
-    private function showProjectInstallationInfo( InputInterface $input, OutputInterface $output ): int
+    private function showProjectInstallationInfo( InputInterface $input, OutputInterface $output, $jsonInfo ): int
     {
         $outputStyle    = new SymfonyStyle( $input, $output );
         
@@ -65,9 +67,13 @@ EOT
         }
         
         $versionData    = $versionInfo->getData();
-        $outputStyle->writeln( \sprintf( '<info>Current Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] ) );
-        $outputStyle->writeln( \sprintf( '<info>Current Migration: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION] ) );
-        $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION] ) );
+        if ( $jsonInfo ) {
+            $outputStyle->writeln( \json_encode( $versionData ) );
+        } else {
+            $outputStyle->writeln( \sprintf( '<info>Current Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] ) );
+            $outputStyle->writeln( \sprintf( '<info>Current Migration: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION] ) );
+            $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION] ) );
+        }
         
         return Command::SUCCESS;
     }

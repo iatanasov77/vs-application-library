@@ -49,3 +49,14 @@ services:
             - '@service_container'
             - '@doctrine'
             - '@validator'
+    
+    vs_app.command.install_project-version:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallProjectVersionCommand
+        tags:
+            - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
+            - '%kernel.project_dir%'
+

@@ -92,7 +92,7 @@ EOT
         
         $bufferedOutputMigration = new BufferedOutput();
         $options = [
-            'version' => $doctrineMigration,
+            'version' => \trim( $doctrineMigration ),
             '--no-interaction' => true,
             '--all-or-nothing' => true,
         ];
@@ -109,7 +109,7 @@ EOT
             $process = new Process([
                 '/usr/local/bin/composer',
                 'update',
-                'vankosoft/application:' . \ltrim( $coreVersion, 'v' ),
+                'vankosoft/application:' . \trim( \ltrim( $coreVersion, 'v' ) ),
                 '--no-interaction'
             ]);
             $process->setWorkingDirectory( $this->projectRootPath );
@@ -131,8 +131,10 @@ EOT
         $process->setWorkingDirectory( $this->projectRootPath );
         $process->run();
         $latestVersion = $process->getOutput();
-        var_dump( $latestVersion ); return;
+        //var_dump( $latestVersion ); return;
         
-        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['update' => 'update'] );
+        if ( installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] !== \trim( $latestVersion ) ) {
+            $this->commandExecutor->runCommand( 'vankosoft:install:info', ['update' => 'update'] );
+        }
     }
 }

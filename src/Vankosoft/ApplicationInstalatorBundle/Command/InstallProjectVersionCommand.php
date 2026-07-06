@@ -82,13 +82,16 @@ EOT
     
     private function runDoctrineMigration( ?array $installInfo )
     {
+        $doctrineMigration = null;
         if ( $installInfo ) {
-            return $installInfo[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION];
+            $doctrineMigration = $installInfo[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION];
         }
         
-        $bufferedOutputVersion = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutputVersion );
-        $doctrineMigration = $bufferedOutputVersion->fetch();
+        if ( ! $doctrineMigration ) {
+            $bufferedOutputVersion = new BufferedOutput();
+            $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutputVersion );
+            $doctrineMigration = $bufferedOutputVersion->fetch();
+        }
         
         $bufferedOutputMigration = new BufferedOutput();
         $options = [
@@ -135,9 +138,7 @@ EOT
         
         $installInfoVersion = 'v' . \trim( $installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] );
         if ( $installInfoVersion !== $latestVersion ) {
-            var_dump( $installInfoVersion );
-            var_dump( $latestVersion );
-            //$this->commandExecutor->runCommand( 'vankosoft:install:info', ['action' => 'update'] );
+            $this->commandExecutor->runCommand( 'vankosoft:install:info', ['action' => 'update'] );
         }
     }
 }

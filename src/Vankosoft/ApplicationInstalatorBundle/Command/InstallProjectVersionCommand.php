@@ -57,7 +57,7 @@ EOT
         $composerOutput = $this->useVankosoftApplicationCoreVersion( $installInfo );
         var_dump( $composerOutput );
         
-        $migrationOutput = $doctrineMigration  = $this->getDoctrineMigration( $installInfo );
+        $migrationOutput = $this->runDoctrineMigration( $installInfo );
         var_dump( $migrationOutput );
         
         return Command::SUCCESS;
@@ -78,7 +78,7 @@ EOT
         return $versionInfo ? $info : null;
     }
     
-    private function getDoctrineMigration( ?array $installInfo )
+    private function runDoctrineMigration( ?array $installInfo )
     {
         if ( $installInfo ) {
             return $installInfo[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION];

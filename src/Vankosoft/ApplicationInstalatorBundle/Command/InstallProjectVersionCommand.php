@@ -133,7 +133,7 @@ EOT
         $latestVersion = $process->getOutput();
         $latestVersion = \trim( $latestVersion );
         
-        $installInfoVersion = \trim( $installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] );
+        $installInfoVersion = 'v' . \trim( $installInfo[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] );
         if ( $installInfoVersion !== $latestVersion ) {
             var_dump( $installInfoVersion );
             var_dump( $latestVersion );

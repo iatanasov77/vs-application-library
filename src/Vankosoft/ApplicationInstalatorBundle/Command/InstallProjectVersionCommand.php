@@ -47,6 +47,16 @@ EOT
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
+        $installInfo        = $this->getInstallInfo();
+        $doctrineMigration  = $this->getDoctrineMigration( $installInfo );
+        
+        var_dump( $doctrineMigration );
+        
+        return Command::SUCCESS;
+    }
+    
+    private function getInstallInfo()
+    {
         $bufferedOutput = new BufferedOutput();
         $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info'], $bufferedOutput );
         
@@ -56,8 +66,19 @@ EOT
         $versionInfo = $this->get( 'vs_application_instalator.repository.instalation_info' )->findOneBy([
             'version' => $info[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION]
         ]);
-        var_dump( $versionInfo );
         
-        return Command::SUCCESS;
+        return $versionInfo ? $info : null;
+    }
+    
+    private function getDoctrineMigration( ?array $installInfo )
+    {
+        if ( $installInfo ) {
+            return $installInfo[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION];
+        }
+        
+        $bufferedOutput = new BufferedOutput();
+        $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutput );
+        
+        return $bufferedOutput->fetch();
     }
 }

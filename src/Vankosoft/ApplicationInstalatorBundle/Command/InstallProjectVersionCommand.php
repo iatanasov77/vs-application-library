@@ -107,7 +107,7 @@ EOT
             $process->setWorkingDirectory( $this->projectRootPath );
             $process->run();
             
-            $arr = \json_decode( $process->getOutput(), true, flags: JSON_THROW_ON_ERROR );
+            $arr = \json_decode( $process->getOutput(), true );
         }
         
         return null;

@@ -60,6 +60,8 @@ EOT
         $migrationOutput = $this->runDoctrineMigration( $installInfo );
         var_dump( $migrationOutput );
         
+        $this->updateInstallInfo( $installInfo );
+        
         return Command::SUCCESS;
     }
     
@@ -117,5 +119,20 @@ EOT
         }
         
         return null;
+    }
+    
+    private function updateInstallInfo( ?array $installInfo )
+    {
+        $process = new Process([
+            '/usr/bin/git',
+            'describe',
+            '--abbrev=0'
+        ]);
+        $process->setWorkingDirectory( $this->projectRootPath );
+        $process->run();
+        $latestVersion = $process->getOutput();
+        var_dump( $latestVersion ); return;
+        
+        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['update' => 'update'] );
     }
 }

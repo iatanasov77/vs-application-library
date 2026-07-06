@@ -8,6 +8,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Exception\RuntimeException;
+
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Psr\Container\ContainerInterface;
+
 use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 
 #[AsCommand(
@@ -17,6 +22,16 @@ use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 )]
 final class InstallProjectVersionCommand extends AbstractInstallCommand
 {
+    public function __construct(
+        ContainerInterface $container,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator
+    ) {
+        parent::__construct( $container, $doctrine, $validator );
+        
+        $this->container    = $container;
+    }
+    
     protected function configure(): void
     {
         $this
@@ -33,10 +48,14 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $bufferedOutput = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info'], $bufferedOutput );
+        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info'], $bufferedOutput );
         
         $jsonInfo = $bufferedOutput->fetch();
-        $info = \json_decode( $jsonInfo );
+        $info = \json_decode( $jsonInfo, true );
+        
+        $versionInfo = $this->get( 'vs_application_instalator.repository.instalation_info' )->findOneBy([
+            'version' => $info[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION]
+        ]);
         var_dump( $info );
         
         return Command::SUCCESS;

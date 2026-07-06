@@ -48,7 +48,7 @@ EOT
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         $bufferedOutput = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info'], $bufferedOutput );
+        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info'], $bufferedOutput );
         
         $jsonInfo = $bufferedOutput->fetch();
         $info = \json_decode( $jsonInfo, true );
@@ -56,7 +56,7 @@ EOT
         $versionInfo = $this->get( 'vs_application_instalator.repository.instalation_info' )->findOneBy([
             'version' => $info[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION]
         ]);
-        var_dump( $info );
+        var_dump( $versionInfo );
         
         return Command::SUCCESS;
     }

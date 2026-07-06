@@ -84,20 +84,19 @@ EOT
             return $installInfo[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION];
         }
         
-        $bufferedOutput = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutput );
+        $bufferedOutputVersion = new BufferedOutput();
+        $this->commandExecutor->runCommand( 'doctrine:migrations:latest', [], $bufferedOutputVersion );
+        $doctrineMigration = $bufferedOutputVersion->fetch();
         
-        $doctrineMigration = $bufferedOutput->fetch();
-        
-        $bufferedOutput = new BufferedOutput();
+        $bufferedOutputMigration = new BufferedOutput();
         $options = [
             'version' => $doctrineMigration,
             '--no-interaction' => true,
             '--all-or-nothing' => true,
         ];
-        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', $options, $bufferedOutput );
+        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', $options, $bufferedOutputMigration );
         
-        return $bufferedOutput->fetch();
+        return $bufferedOutputMigration->fetch();
     }
     
     private function useVankosoftApplicationCoreVersion( ?array $installInfo )

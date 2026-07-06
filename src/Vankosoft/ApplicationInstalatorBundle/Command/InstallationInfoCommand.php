@@ -68,11 +68,13 @@ EOT
         }
         
         $versionData    = $versionInfo->getData();
-        
-        
-        $outputStyle->writeln( \sprintf( '<info>Current Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] ) );
-        $outputStyle->writeln( \sprintf( '<info>Current Migration: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION] ) );
-        $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION] ) );
+        if ( $jsonInfo ) {
+            $outputStyle->writeln( \json_encode( $versionData ) );
+        } else {
+            $outputStyle->writeln( \sprintf( '<info>Current Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION] ) );
+            $outputStyle->writeln( \sprintf( '<info>Current Migration: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION] ) );
+            $outputStyle->writeln( \sprintf( '<info>Current Library Version: %s</info>', $versionData[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION] ) );
+        }
         
         return Command::SUCCESS;
     }

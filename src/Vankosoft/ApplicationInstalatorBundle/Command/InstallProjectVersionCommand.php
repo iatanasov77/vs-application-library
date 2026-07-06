@@ -105,7 +105,7 @@ EOT
             $process = new Process([
                 '/usr/local/bin/composer',
                 'update',
-                'vankosoft/application:' . $coreVersion,
+                'vankosoft/application:' . \ltrim( $coreVersion, 'v' ),
                 '--no-interaction'
             ]);
             $process->setWorkingDirectory( $this->projectRootPath );

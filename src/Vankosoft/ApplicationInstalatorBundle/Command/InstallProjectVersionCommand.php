@@ -103,17 +103,17 @@ EOT
             $coreVersion = $installInfo[InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION];
             
             $process = new Process([
-                'php',
                 '/usr/local/bin/composer',
                 'update',
                 'vankosoft/application:' . $coreVersion,
                 '--no-interaction'
             ]);
             $process->setWorkingDirectory( $this->projectRootPath );
-            $process->run();
+            $process->run( null, ['COMPOSER_HOME' => '/home/vagrant/.composer', 'COMPOSER_ALLOW_SUPERUSER' => 1] );
             
-            $arr = \json_decode( $process->getOutput(), true );
-            var_dump( $arr );
+            $output = $process->getOutput();
+            $arr = \json_decode( $output, true );
+            var_dump( $output );
         }
         
         return null;

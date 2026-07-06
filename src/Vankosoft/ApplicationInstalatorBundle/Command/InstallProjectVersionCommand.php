@@ -55,10 +55,10 @@ EOT
         $installInfo        = $this->getInstallInfo();
         
         $composerOutput = $this->useVankosoftApplicationCoreVersion( $installInfo );
-        var_dump( $composerOutput );
+        //var_dump( $composerOutput );
         
         $migrationOutput = $this->runDoctrineMigration( $installInfo );
-        var_dump( $migrationOutput );
+        //var_dump( $migrationOutput );
         
         $this->updateInstallInfo( $installInfo );
         

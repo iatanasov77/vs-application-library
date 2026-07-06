@@ -59,7 +59,12 @@ EOT
         // var_dump( $doctrineMigration );
         
         $bufferedOutput = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', ['version' => $doctrineMigration], $bufferedOutput );
+        $options = [
+            'version' => $doctrineMigration,
+            '--no-interaction' => true,
+            '--all-or-nothing' => true,
+        ];
+        $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', $options, $bufferedOutput );
         var_dump( $bufferedOutput->fetch() );
         
         return Command::SUCCESS;
@@ -108,6 +113,7 @@ EOT
             $process->run();
             
             $arr = \json_decode( $process->getOutput(), true );
+            var_dump( $arr );
         }
         
         return null;

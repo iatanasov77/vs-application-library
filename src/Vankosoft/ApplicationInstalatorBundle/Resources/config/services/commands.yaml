@@ -50,8 +50,8 @@ services:
             - '@doctrine'
             - '@validator'
     
-    vs_app.command.install_project-version:
-        class: Vankosoft\ApplicationInstalatorBundle\Command\InstallProjectVersionCommand
+    vs_app.command.project-version.setup_dependencies:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\ProjectVersionSetupDependenciesCommand
         tags:
             - 'console.command'
         arguments:
@@ -60,3 +60,12 @@ services:
             - '@validator'
             - '%kernel.project_dir%'
 
+    vs_app.command.project-version.setup_database:
+        class: Vankosoft\ApplicationInstalatorBundle\Command\ProjectVersionSetupDatabaseCommand
+        tags:
+            - 'console.command'
+        arguments:
+            - '@service_container'
+            - '@doctrine'
+            - '@validator'
+            - '%kernel.project_dir%'

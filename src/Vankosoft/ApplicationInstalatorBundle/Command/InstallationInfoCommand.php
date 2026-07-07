@@ -65,7 +65,8 @@ EOT
             if ( $input->getOption( 'update' ) ) {
                 $outputStyle->info( \sprintf( 'Version Info for Version: %s not Exists and should be Created.', $currentVersion ) );
                 
-                return Command::SUCCESS;
+                $this->updateProjectInstallationInfo( $input, $output );
+                $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
             } else {
                 $outputStyle->caution( \sprintf( 'Missing Version Info for Version: %s.', $currentVersion ) );
                 

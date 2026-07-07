@@ -34,7 +34,7 @@ EOT
         $installInfo    = $this->getInstallInfo();
         
         $migrationOutput = $this->runDoctrineMigration( $installInfo );
-        var_dump( $migrationOutput );
+        var_dump( \trim( $migrationOutput ) );
         $style->success( \ltrim( $migrationOutput, '[OK] ') );
         $style->newLine();
         

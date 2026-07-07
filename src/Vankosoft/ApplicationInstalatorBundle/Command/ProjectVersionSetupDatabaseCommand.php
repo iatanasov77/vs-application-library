@@ -30,12 +30,16 @@ EOT
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $installInfo        = $this->getInstallInfo();
+        $style          = new SymfonyStyle( $input, $output );
+        $installInfo    = $this->getInstallInfo();
         
         $migrationOutput = $this->runDoctrineMigration( $installInfo );
-        //var_dump( $migrationOutput );
+        $style->success( $migrationOutput );
+        $style->newLine();
         
         $this->updateInstallInfo( $installInfo );
+        $style->success( 'Successfully updated Install Info !!!' );
+        $style->newLine();
         
         return Command::SUCCESS;
     }

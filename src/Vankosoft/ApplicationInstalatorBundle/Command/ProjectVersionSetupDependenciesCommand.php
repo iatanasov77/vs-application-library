@@ -13,7 +13,7 @@ use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 
 #[AsCommand(
     name: 'vankosoft:project-version:setup-dependencies',
-    description: 'Setup VankoSoft Project Version Dependencies .',
+    description: 'Setup VankoSoft Project Version Dependencies.',
     hidden: false
 )]
 class ProjectVersionSetupDependenciesCommand extends ProjectVersionAbstractCommand
@@ -30,10 +30,12 @@ EOT
     
     protected function execute( InputInterface $input, OutputInterface $output ): int
     {
-        $installInfo        = $this->getInstallInfo();
+        $style          = new SymfonyStyle( $input, $output );
+        $installInfo    = $this->getInstallInfo();
         
         $composerOutput = $this->useVankosoftApplicationCoreVersion( $installInfo );
-        //var_dump( $composerOutput );
+        $style->success( $composerOutput );
+        $style->newLine();
         
         return Command::SUCCESS;
     }

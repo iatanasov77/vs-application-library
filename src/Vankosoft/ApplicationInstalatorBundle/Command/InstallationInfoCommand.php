@@ -74,6 +74,7 @@ EOT
                 
                 $entityManager      = $this->get( 'doctrine' )->getManager();
                 $entityManager->persist( $versionInfo );
+                $entityManager->clear();
                 $entityManager->flush();
             } else {
                 $outputStyle->caution( \sprintf( 'Missing Version Info for Version: %s.', $currentVersion ) );

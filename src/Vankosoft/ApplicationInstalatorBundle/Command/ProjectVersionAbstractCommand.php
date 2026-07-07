@@ -29,6 +29,7 @@ abstract class ProjectVersionAbstractCommand extends AbstractInstallCommand
         
         $jsonInfo = $bufferedOutput->fetch();
         $info = \json_decode( $jsonInfo, true );
+        var_dump( $info );
         
         $versionInfo = $this->get( 'vs_application_instalator.repository.instalation_info' )->findOneBy([
             'version' => $info[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION]

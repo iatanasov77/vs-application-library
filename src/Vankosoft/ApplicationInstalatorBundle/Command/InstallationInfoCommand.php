@@ -72,7 +72,7 @@ EOT
                 ];
                 $versionInfo->setData( $versionData );
                 
-                $entityManager      = $this->doctrine->getManager();
+                $entityManager      = $this->get( 'doctrine' )->getManager();
                 $entityManager->persist( $versionInfo );
                 $entityManager->flush();
             } else {
@@ -113,7 +113,7 @@ EOT
         ];
         $versionInfo->setData( $versionData );
         
-        $entityManager      = $this->doctrine->getManager();
+        $entityManager      = $this->get( 'doctrine' )->getManager();
         $entityManager->persist( $versionInfo );
         $entityManager->flush();
         

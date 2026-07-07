@@ -53,15 +53,14 @@ EOT
         
         $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
-            $outputStyle->writeln( '<error>Missing VERSION file.</error>' );
+            $outputStyle->error( 'Missing VERSION file.' );
             
             return Command::FAILURE;
         }
         
         $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
-        
         if ( ! $versionInfo->getId() ) {
-            $outputStyle->writeln( \sprintf( '<error>Missing Version Info for Version: %s.</error>', $currentVersion ) );
+            $outputStyle->caution( \sprintf( 'Missing Version Info for Version: %s.', $currentVersion ) );
             
             return Command::FAILURE;
         }
@@ -84,7 +83,7 @@ EOT
         
         $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
-            $outputStyle->writeln( '<error>Missing VERSION file.</error>' );
+            $outputStyle->error( 'Missing VERSION file.' );
             
             return Command::FAILURE;
         }

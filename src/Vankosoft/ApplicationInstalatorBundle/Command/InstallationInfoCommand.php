@@ -60,7 +60,7 @@ EOT
             return Command::FAILURE;
         }
         
-        $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
+        $versionInfo = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
         if ( ! $versionInfo->getId() ) {
             if ( $input->getOption( 'update' ) ) {
                 $outputStyle->info( \sprintf( 'Version Info for Version: %s not Exists and should be Created.', $currentVersion ) );
@@ -83,6 +83,7 @@ EOT
         }
         
         $versionData    = $versionInfo->getData();
+        var_dump( $versionData );
         if ( $jsonInfo ) {
             $outputStyle->writeln( \json_encode( $versionData ) );
         } else {

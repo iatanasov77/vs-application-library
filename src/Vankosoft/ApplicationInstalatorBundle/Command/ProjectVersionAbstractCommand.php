@@ -28,6 +28,7 @@ abstract class ProjectVersionAbstractCommand extends AbstractInstallCommand
         $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info', '--update' => true], $bufferedOutput );
         
         $jsonInfo = $bufferedOutput->fetch();
+        var_dump( $jsonInfo );
         $info = \json_decode( $jsonInfo, true );
         var_dump( $info );
         

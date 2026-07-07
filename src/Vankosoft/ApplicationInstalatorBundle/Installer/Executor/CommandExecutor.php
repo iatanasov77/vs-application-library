@@ -45,15 +45,15 @@ final class CommandExecutor
         $this->application->setAutoExit( false );
         $exitCode   = $this->application->run( new ArrayInput( $parameters ), $output ?: new NullOutput() );
 
-        if ( 1 === $exitCode ) {
-            throw new \RuntimeException( 'This command terminated with a permission error.' );
+        if ( Command::FAILURE === $exitCode ) {
+            throw new \RuntimeException( 'The command execute fails.' );
         }
 
-        if ( 0 !== $exitCode ) {
+        if ( Command::SUCCESS !== $exitCode ) {
             $this->application->setAutoExit( true );
 
             $errorMessage   = sprintf( 'The command terminated with an error code: %u.', $exitCode );
-            $this->output->writeln( "<error>$errorMessage</error>" );
+            $this->output->error( $errorMessage );
 
             throw new \RuntimeException( $errorMessage, $exitCode );
         }

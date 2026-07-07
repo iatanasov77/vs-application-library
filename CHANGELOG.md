@@ -1,3 +1,9 @@
+1.14.41	|	Release date: **07.07.2026**
+============================================
+* New Features:
+  - Separate Project Version Install Command of two Commans.
+
+
 1.14.40	|	Release date: **06.07.2026**
 ============================================
 * New Features:

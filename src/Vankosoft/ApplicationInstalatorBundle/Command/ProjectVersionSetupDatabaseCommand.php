@@ -34,7 +34,6 @@ EOT
         $installInfo    = $this->getInstallInfo();
         
         $migrationOutput = $this->runDoctrineMigration( $installInfo );
-        var_dump( \trim( $migrationOutput ) );
         $style->success( \ltrim( $migrationOutput, '[OK] ') );
         $style->newLine();
         
@@ -66,7 +65,7 @@ EOT
         ];
         $this->commandExecutor->runCommand( 'doctrine:migrations:migrate', $options, $bufferedOutputMigration );
         
-        return $bufferedOutputMigration->fetch();
+        return \trim( $bufferedOutputMigration->fetch() );
     }
     
     private function updateInstallInfo( ?array $installInfo )

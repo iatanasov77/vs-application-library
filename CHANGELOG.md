@@ -1,3 +1,9 @@
+1.14.42	|	Release date: **07.07.2026**
+============================================
+* New Features:
+  - Improve InstallationInfoCommand.
+
+
 1.14.41	|	Release date: **07.07.2026**
 ============================================
 * New Features:

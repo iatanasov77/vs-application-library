@@ -7,6 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Filesystem\Filesystem;
 use Vankosoft\ApplicationInstalatorBundle\Model\InstalationInfoInterface;
 
@@ -30,6 +31,7 @@ EOT
             )
             ->addArgument( 'action', InputArgument::OPTIONAL, 'The Installation Info Action to be Handled.' )
             ->addArgument( 'json-info', InputArgument::OPTIONAL, 'Get Installation Info as JSON Array.' )
+            ->addOption( 'update', null, InputOption::VALUE_NONE, 'Update Installation Info if Project Version not Exists.' )
         ;
     }
 
@@ -53,20 +55,35 @@ EOT
         
         $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
-            $outputStyle->writeln( '<error>Missing VERSION file.</error>' );
+            $outputStyle->error( 'Missing VERSION file.' );
             
             return Command::FAILURE;
         }
         
-        $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
-        
+        $versionInfo = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
         if ( ! $versionInfo->getId() ) {
-            $outputStyle->writeln( \sprintf( '<error>Missing Version Info for Version: %s.</error>', $currentVersion ) );
-            
-            return Command::FAILURE;
+            if ( $input->getOption( 'update' ) ) {
+                //$outputStyle->info( \sprintf( 'Version Info for Version: %s not Exists and should be Created.', $currentVersion ) );
+                
+                $versionData        = [
+                    InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION                  => $currentVersion,
+                    InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION               => $this->getCurrentDoctrineMigration(),
+                    InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION    => $this->getVankosoftApplicationLibraryVersion(),
+                ];
+                $versionInfo->setData( $versionData );
+                
+                $entityManager      = $this->get( 'doctrine' )->getManager();
+                $entityManager->persist( $versionInfo );
+                $entityManager->flush();
+            } else {
+                $outputStyle->caution( \sprintf( 'Missing Version Info for Version: %s.', $currentVersion ) );
+                
+                return Command::FAILURE;
+            }
         }
         
         $versionData    = $versionInfo->getData();
+        //var_dump( $versionData );
         if ( $jsonInfo ) {
             $outputStyle->writeln( \json_encode( $versionData ) );
         } else {
@@ -84,7 +101,7 @@ EOT
         
         $currentVersion = $this->get( 'vs_application.version_info' )->getCurrentVersion();
         if ( $currentVersion === InstalationInfoInterface::VERSION_UNDEFINED ) {
-            $outputStyle->writeln( '<error>Missing VERSION file.</error>' );
+            $outputStyle->error( 'Missing VERSION file.' );
             
             return Command::FAILURE;
         }

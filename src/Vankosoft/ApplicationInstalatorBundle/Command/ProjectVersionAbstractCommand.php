@@ -25,11 +25,10 @@ abstract class ProjectVersionAbstractCommand extends AbstractInstallCommand
     protected function getInstallInfo()
     {
         $bufferedOutput = new BufferedOutput();
-        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info'], $bufferedOutput );
+        $this->commandExecutor->runCommand( 'vankosoft:install:info', ['json-info' => 'json-info', '--update' => true], $bufferedOutput );
         
         $jsonInfo = $bufferedOutput->fetch();
         $info = \json_decode( $jsonInfo, true );
-        
         $versionInfo = $this->get( 'vs_application_instalator.repository.instalation_info' )->findOneBy([
             'version' => $info[InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION]
         ]);

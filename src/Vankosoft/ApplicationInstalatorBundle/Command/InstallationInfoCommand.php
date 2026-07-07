@@ -65,8 +65,16 @@ EOT
             if ( $input->getOption( 'update' ) ) {
                 $outputStyle->info( \sprintf( 'Version Info for Version: %s not Exists and should be Created.', $currentVersion ) );
                 
-                $this->updateProjectInstallationInfo( $input, $output );
-                $versionInfo    = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
+                $versionData        = [
+                    InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION                  => $currentVersion,
+                    InstalationInfoInterface::VERSION_DATA_DOCTRINE_MIGRATION               => $this->getCurrentDoctrineMigration(),
+                    InstalationInfoInterface::VERSION_DATA_VANKOSOFT_APPLICATION_VERSION    => $this->getVankosoftApplicationLibraryVersion(),
+                ];
+                $versionInfo->setData( $versionData );
+                
+                $entityManager      = $this->doctrine->getManager();
+                $entityManager->persist( $versionInfo );
+                $entityManager->flush();
             } else {
                 $outputStyle->caution( \sprintf( 'Missing Version Info for Version: %s.', $currentVersion ) );
                 
@@ -105,7 +113,7 @@ EOT
         ];
         $versionInfo->setData( $versionData );
         
-        $entityManager      = $this->get( 'doctrine' )->getManager();
+        $entityManager      = $this->doctrine->getManager();
         $entityManager->persist( $versionInfo );
         $entityManager->flush();
         

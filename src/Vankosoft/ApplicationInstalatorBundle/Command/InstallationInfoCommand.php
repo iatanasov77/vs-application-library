@@ -63,7 +63,7 @@ EOT
         $versionInfo = $this->get( 'vs_application.version_info' )->getVersionInfo( $currentVersion );
         if ( ! $versionInfo->getId() ) {
             if ( $input->getOption( 'update' ) ) {
-                $outputStyle->info( \sprintf( 'Version Info for Version: %s not Exists and should be Created.', $currentVersion ) );
+                //$outputStyle->info( \sprintf( 'Version Info for Version: %s not Exists and should be Created.', $currentVersion ) );
                 
                 $versionData        = [
                     InstalationInfoInterface::VERSION_DATA_PROJECT_VERSION                  => $currentVersion,
@@ -83,7 +83,7 @@ EOT
         }
         
         $versionData    = $versionInfo->getData();
-        var_dump( $versionData );
+        //var_dump( $versionData );
         if ( $jsonInfo ) {
             $outputStyle->writeln( \json_encode( $versionData ) );
         } else {

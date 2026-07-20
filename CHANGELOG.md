@@ -1,3 +1,9 @@
+1.14.43	|	Release date: **20.07.2026**
+============================================
+* New Features:
+  - Use Environement Dependent Application Menue Items.
+
+
 1.14.42	|	Release date: **07.07.2026**
 ============================================
 * New Features:

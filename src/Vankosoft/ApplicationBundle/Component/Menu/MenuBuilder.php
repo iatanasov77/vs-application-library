@@ -138,10 +138,17 @@ class MenuBuilder
     
     protected function build( &$menu, $config )
     {
-        var_dump( $this->environement ); die;
         $path   = null;
         
         foreach ( $config as $id => $mg ) {
+            $mgAttributes       = isset( $mg['attributes'] ) ? $mg['attributes'] : [];
+            if (
+                isset( $mgAttributes['environements'] ) &&
+                ! \in_array( $this->environement, $mgAttributes['environements'] )
+            ) {
+                continue;
+            }
+            
             $hasGrantedChild    = false;
             
             $params = [
@@ -149,7 +156,7 @@ class MenuBuilder
                 'uri'               => isset( $mg['uri'] ) ? $mg['uri'] : null,
                 'route'             => isset( $mg['route'] ) ? $mg['route'] : null,
                 'routeParameters'   => isset( $mg['routeParameters'] ) ? $mg['routeParameters'] : [],
-                'attributes'        => isset( $mg['attributes'] ) ? $mg['attributes'] : [],
+                'attributes'        => $mgAttributes,
                 'isDivider'         => isset( $mg['isDivider'] ) ? $mg['isDivider'] : false,
             ];
             

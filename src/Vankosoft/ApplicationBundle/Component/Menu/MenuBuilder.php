@@ -46,6 +46,9 @@ class MenuBuilder
     /** @var string */
     protected $currentPath;
     
+    /** @var string */
+    protected $environement;
+    
     public function __construct(
         string $config_file,
         AuthorizationChecker $security,
@@ -53,7 +56,8 @@ class MenuBuilder
         RouterInterface $router,
         ParameterBagInterface $parameterBag,
         TranslatorInterface $translator,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        string $environement
     ) {
         $config                 = Yaml::parse( file_get_contents( $config_file ) );
         $this->menuConfig       = $config['vs_application']['menu'];
@@ -70,6 +74,8 @@ class MenuBuilder
         $this->currentPath      = $requestStack->getMainRequest()->getRequestUri();
         
         $this->requestStack     = $requestStack;
+        
+        $this->environement     = $environement;
     }
     
     public function mainMenu( FactoryInterface $factory, string $menuName = 'mainMenu' )
@@ -135,6 +141,14 @@ class MenuBuilder
         $path   = null;
         
         foreach ( $config as $id => $mg ) {
+            $mgAttributes       = isset( $mg['attributes'] ) ? $mg['attributes'] : [];
+            if (
+                isset( $mgAttributes['environements'] ) &&
+                ! \in_array( $this->environement, $mgAttributes['environements'] )
+            ) {
+                continue;
+            }
+            
             $hasGrantedChild    = false;
             
             $params = [
@@ -142,7 +156,7 @@ class MenuBuilder
                 'uri'               => isset( $mg['uri'] ) ? $mg['uri'] : null,
                 'route'             => isset( $mg['route'] ) ? $mg['route'] : null,
                 'routeParameters'   => isset( $mg['routeParameters'] ) ? $mg['routeParameters'] : [],
-                'attributes'        => isset( $mg['attributes'] ) ? $mg['attributes'] : [],
+                'attributes'        => $mgAttributes,
                 'isDivider'         => isset( $mg['isDivider'] ) ? $mg['isDivider'] : false,
             ];
             

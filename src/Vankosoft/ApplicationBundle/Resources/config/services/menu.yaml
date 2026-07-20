@@ -23,6 +23,7 @@ services:
             - "@parameter_bag"
             - "@translator"
             - '@request_stack'
+            - '%env(APP_ENV)%'
             
     vs_app.profile_menu:
         class: Knp\Menu\MenuItem

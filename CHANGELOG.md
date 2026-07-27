@@ -1,3 +1,9 @@
+1.14.44	|	Release date: **27.07.2026**
+============================================
+* New Features:
+  - Add a Trait to be used for convert File Sizes.
+
+
 1.14.43	|	Release date: **20.07.2026**
 ============================================
 * New Features:

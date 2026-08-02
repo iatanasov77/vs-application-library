@@ -33,7 +33,7 @@ return static function ( ContainerConfigurator $container ): void
     
     $services->set( 'vs_app.requirements', ApplicationRequirements::class )
         ->args([
-            'requirementCollections' => [
+            '$requirementCollections' => [
                 service( 'vs_app.requirements.settings_requirements' ),
                 service( 'vs_app.requirements.extensions_requirements' ),
                 service( 'vs_app.requirements.filesystem_requirements' ),

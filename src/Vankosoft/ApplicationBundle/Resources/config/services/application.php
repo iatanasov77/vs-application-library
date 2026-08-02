@@ -3,9 +3,6 @@
 use Vankosoft\ApplicationBundle\Component\Application\Project;
 use Vankosoft\ApplicationBundle\Component\Context\HostnameBasedRequestResolver;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationContext;
-
-use Vankosoft\ApplicationBundle\Component\Application\Project;
-use Vankosoft\ApplicationBundle\Component\Context\ApplicationContext;
 use Vankosoft\ApplicationBundle\Component\Context\ApplicationContextInterface;
 
 use Vankosoft\ApplicationBundle\EventListener\ExceptionListener;

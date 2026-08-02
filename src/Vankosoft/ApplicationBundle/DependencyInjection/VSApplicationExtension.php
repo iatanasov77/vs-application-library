@@ -20,14 +20,22 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
      */
     public function load( array $config, ContainerBuilder $container ): void
     {
-        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
-        $this->prepend( $container );
+        /*  
+        $loader = new Loader\PhpFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        $loader->load( 'services.php' );
+        if ( $container->getParameter( 'kernel.environment' ) == 'dev' ) {
+            $loader->load( 'services_dev.php' );
+        }
+        */
         
         $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
         $loader->load( 'services.yaml' );
         if ( $container->getParameter( 'kernel.environment' ) == 'dev' ) {
             $loader->load( 'services_dev.yaml' );
         }
+        
+        
+        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
         
         // Register resources
         $this->registerResources( 'vs_application', $config['orm_driver'], $config['resources'], $container );
@@ -39,6 +47,8 @@ class VSApplicationExtension extends AbstractResourceExtension implements Prepen
         // Set values need to be accesible from controller
         $container->setParameter( 'vs_application.project_type', $config[ 'project_type' ] );
         $container->setParameter( 'vs_application.taxonomy', $config[ 'taxonomy' ] );
+        
+        $this->prepend( $container );
     }
     
     public function prepend( ContainerBuilder $container ): void

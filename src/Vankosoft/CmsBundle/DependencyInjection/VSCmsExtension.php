@@ -19,11 +19,18 @@ class VSCmsExtension extends AbstractResourceExtension
      */
     public function load( array $config, ContainerBuilder $container ): void
     {
+        /*  
+        $loader = new Loader\PhpFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        $loader->load( 'services.php' );
+        */
+        
+        $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        $loader->load( 'services.yaml' );
+        
         
         $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
-        $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        
         //var_dump($config); die;
         $this->registerResources( 'vs_cms', $config['driver'], $config['resources'], $container );
-        $loader->load( 'services.yaml' );
     }
 }

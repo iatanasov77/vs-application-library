@@ -1,3 +1,10 @@
+1.14.45	|	Release date: **02.08.2026**
+============================================
+* New Features:
+  - Improve Login Form Template.
+  - Configure All Services in PHP.
+
+
 1.14.44	|	Release date: **27.07.2026**
 ============================================
 * New Features:

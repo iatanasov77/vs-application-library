@@ -14,9 +14,9 @@
 	],
 	"require" : {
 		"php" : "^8.2",
-		"vankosoft/application-bundle" : "1.13.*",
-		"symfony/security-bundle" : "^6.4 || ^7.4",
-		"symfony/mailer" : "^6.4 || ^7.4",
+		"vankosoft/application-bundle" : "1.14.*",
+		"symfony/security-bundle" : "^6.4 || ^7.4 || ^8.0",
+		"symfony/mailer" : "^6.4 || ^7.4 || ^8.0",
 		"symfonycasts/verify-email-bundle" : "^1.18",
 		"symfonycasts/reset-password-bundle" : "^1.24"
 	},

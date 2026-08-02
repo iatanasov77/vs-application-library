@@ -19,10 +19,18 @@ class VSUsersExtension extends AbstractResourceExtension
      */
     public function load( array $config, ContainerBuilder $container ): void
     {
-        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        $loader = new Loader\PhpFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        $loader->load( 'services.php' );
+        
+        /*  
         $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        $loader->load( 'services.yaml' );
+        */
+        
+        $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        
         //var_dump($config); die;
         $this->registerResources( 'vs_users', $config['driver'], $config['resources'], $container );
-        $loader->load( 'services.yaml' );
+        
     }
 }

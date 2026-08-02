@@ -18,9 +18,14 @@ class VSApplicationInstalatorExtension extends AbstractResourceExtension
     public function load( array $config, ContainerBuilder $container ): void
     {
         $config = $this->processConfiguration( $this->getConfiguration([], $container), $config );
+        
+        $loader = new Loader\PhpFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
+        $loader->load( 'services.php' );
+        
+        /*  
         $loader = new Loader\YamlFileLoader( $container, new FileLocator( __DIR__.'/../Resources/config' ) );
-
         $loader->load( 'services.yaml' );
+        */
         
         // Register resources
         $this->registerResources( 'vs_application_instalator', $config['orm_driver'], $config['resources'], $container );

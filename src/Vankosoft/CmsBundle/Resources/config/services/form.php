@@ -57,12 +57,12 @@ return static function ( ContainerConfigurator $container ): void
      * TocPage Form Options
      */
     $parameters
-        ->set( 'vs_cms.form.pages.ckeditor_uiColor', '#ffffff' )
-        ->set( 'vs_cms.form.pages.ckeditor_extraAllowedContent', '*[*]{*}(*)' )
-        ->set( 'vs_cms.form.pages.ckeditor_toolbar', 'devpage_toolbar' )
-        ->set( 'vs_cms.form.pages.ckeditor_extraPlugins', 'liststyle, font, justify, codesnippet, lightbox, simplebox, simplebox-2, ckeditor_add_class' )
-        ->set( 'vs_cms.form.pages.ckeditor_removeButtons', '' )
-        ->set( 'vs_cms.form.pages.ckeditor_allowedContent', true )
+        ->set( 'vs_cms.form.toc_page.ckeditor_uiColor', '#ffffff' )
+        ->set( 'vs_cms.form.toc_page.ckeditor_extraAllowedContent', '*[*]{*}(*)' )
+        ->set( 'vs_cms.form.toc_page.ckeditor_toolbar', 'devpage_toolbar' )
+        ->set( 'vs_cms.form.toc_page.ckeditor_extraPlugins', 'liststyle, font, justify, codesnippet, lightbox, simplebox, simplebox-2, ckeditor_add_class' )
+        ->set( 'vs_cms.form.toc_page.ckeditor_removeButtons', '' )
+        ->set( 'vs_cms.form.toc_page.ckeditor_allowedContent', true )
     ;
     
     /**

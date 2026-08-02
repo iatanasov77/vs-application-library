@@ -1,4 +1,4 @@
-<?php namespace Symfony\Component\Dependenc};yInjection\Loader\Configurator;
+<?php namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Component\Form\FormFactory;
 use Vankosoft\CmsBundle\Form\PageCategoryForm;

@@ -19,7 +19,7 @@ return static function ( ContainerConfigurator $container ): void
     $parameters = $container->parameters();
     
     $parameters
-        ->set( 'vs_application.doctrine_dbal_cache_dsn', 'env(resolve:CONTACT_EMAIL)' )
+        ->set( 'vs_application.contact_email', 'env(resolve:CONTACT_EMAIL)' )
         ->set( 'vs_application.contact.show_map', true )
         ->set( 'vs_application.contact.show_address', true )
         ->set( 'vs_application.contact.show_phone', true )

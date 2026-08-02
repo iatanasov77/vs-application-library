@@ -31,6 +31,5 @@ class VSUsersExtension extends AbstractResourceExtension
         
         //var_dump($config); die;
         $this->registerResources( 'vs_users', $config['driver'], $config['resources'], $container );
-        
     }
 }

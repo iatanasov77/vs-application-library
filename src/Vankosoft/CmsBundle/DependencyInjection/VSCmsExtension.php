@@ -31,7 +31,5 @@ class VSCmsExtension extends AbstractResourceExtension
         
         //var_dump($config); die;
         $this->registerResources( 'vs_cms', $config['driver'], $config['resources'], $container );
-        
-        
     }
 }

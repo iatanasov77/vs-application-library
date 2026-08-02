@@ -22,13 +22,14 @@ return static function( ContainerConfigurator $container ): void
     $container->import( 'services/widgets.php' );
 
     $parameters
+        ->set( 'vs_application.supress_pdo_exception', false )
+        
         ->set( 'applicationIcon', 'build/default/images/superman.svg' )
         ->set( 'applicationTitle', 'vs_application.template.super_admin_panel' )
         ->set( 'hasTopSearch', true )
         
         ->set( 'vs_application.version', \Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION )
         ->set( 'vs_application.public_dir', '%kernel.project_dir%/public/admin-panel' )
-        ->set( 'vs_application.supress_pdo_exception', false )
         ->set( 'vs_application.page_categories.taxonomy_code', 'page-categories' )
         ->set( 'vs_application.document_categories.taxonomy_code', 'document-categories' )
         ->set( 'vs_application.user_roles.taxonomy_code', 'user-roles' )

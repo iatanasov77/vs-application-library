@@ -1,4 +1,4 @@
-<?php namespace Symfony\Component\Dependenc};yInjection\Loader\Configurator;
+<?php namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Vankosoft\CmsBundle\Component\Generator\UploadedFilePathGenerator;
 use Vankosoft\CmsBundle\Component\Uploader\FileUploader;

@@ -27,7 +27,7 @@ return static function( ContainerConfigurator $container ): void
         ->set( 'hasTopSearch', true )
         
         ->set( 'vs_application.version', \Vankosoft\ApplicationBundle\Component\Application\Kernel::VERSION )
-        ->set( 'vs_application.public_dir', \sprintf( '%s/public/admin-panel', $parameters->get( 'kernel.project_dir' ) ) )
+        ->set( 'vs_application.public_dir', '%kernel.project_dir%/public/admin-panel' )
         ->set( 'vs_application.supress_pdo_exception', false )
         ->set( 'vs_application.page_categories.taxonomy_code', 'page-categories' )
         ->set( 'vs_application.document_categories.taxonomy_code', 'document-categories' )

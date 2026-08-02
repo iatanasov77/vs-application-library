@@ -29,7 +29,7 @@ return static function ( ContainerConfigurator $container ): void
         ->call( 'setResetPasswordHelper', [service( 'symfonycasts.reset_password.helper' )] )
         ->tag( 'controller.service_arguments' );
     
-    $services->set( ForgotPasswordController::class )
+    $services->set( ProfileController::class )
         ->args([
             service( 'doctrine' ),
             param( 'vs_users.model.users.class' ),

@@ -22,7 +22,7 @@
         -->
         <field name="title" type="enum" nullable="false">
             <options>
-                <option name="values">'mr', 'mrs', 'miss'</option>
+                <option name="values">['mr', 'mrs', 'miss']</option>
                 <option name="default">miss</option>
             </options>
         </field>

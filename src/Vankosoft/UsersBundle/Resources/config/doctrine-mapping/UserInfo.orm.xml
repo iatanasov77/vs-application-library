@@ -17,7 +17,20 @@
             </cascade>
         </one-to-one>
         
+        <!--  DBAL 3
         <field name="title" type="string" length="32" nullable="false" column-definition="ENUM('mr', 'mrs', 'miss')" />
+        -->
+        <field name="title" type="enum" nullable="false">
+            <options>
+                <option name="values">
+                    <value>mr</value>
+                    <value>mrs</value>
+                    <value>miss</value>
+                </option>
+                <option name="default">miss</option>
+            </options>
+        </field>
+        
         <field name="firstName" column="first_name" type="string" length="255" nullable="false" />
         <field name="lastName" column="last_name" type="string" length="255" nullable="false" />
         <field name="designation" column="designation" type="string" length="255" nullable="true" />

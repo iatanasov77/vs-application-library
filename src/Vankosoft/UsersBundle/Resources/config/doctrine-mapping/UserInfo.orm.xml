@@ -20,7 +20,7 @@
         <!--  DBAL 3
         <field name="title" type="string" length="32" nullable="false" column-definition="ENUM('mr', 'mrs', 'miss')" />
         -->
-        <field name="title" type="enum" values="ENUM('mr', 'mrs', 'miss')" nullable="false" />
+        <field name="title" type="enum" nullable="false" />
         
         <field name="firstName" column="first_name" type="string" length="255" nullable="false" />
         <field name="lastName" column="last_name" type="string" length="255" nullable="false" />

@@ -1,3 +1,10 @@
+1.14.47	|	Release date: **07.08.2026**
+============================================
+* New Features:
+  - Update Doctrine Mappings that uses Enums.
+  - Update Application Installator Configs.
+
+
 1.14.46	|	Release date: **03.08.2026**
 ============================================
 * New Features:

@@ -21,13 +21,11 @@ final class Version20260501071239 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE VSCMS_QuickLinks CHANGE link_icon_path link_icon_path LONGTEXT DEFAULT NULL');
-        $this->addSql('ALTER TABLE VSUM_UsersInfo CHANGE title title ENUM(\'mr\', \'mrs\', \'miss\')');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE VSCMS_QuickLinks CHANGE link_icon_path link_icon_path VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE VSUM_UsersInfo CHANGE title title VARCHAR(255) DEFAULT NULL');
     }
 }

@@ -22,7 +22,7 @@ final class Version20260807102258 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE VSUM_Users CHANGE created_at created_at DATETIME NOT NULL');
         
-        $this->addSql('ALTER TABLE VSUM_UsersInfo DROP IF EXISTS title');
+        $this->addSql('ALTER TABLE VSUM_UsersInfo DROP COLUMN IF EXISTS title');
         $this->addSql('ALTER TABLE VSUM_UsersInfo ADD title ENUM(\'mr\', \'mrs\', \'miss\') DEFAULT \'miss\' NOT NULL');
     }
 

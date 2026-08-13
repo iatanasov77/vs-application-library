@@ -1,3 +1,9 @@
+1.14.53	|	Release date: **13.08.2026**
+============================================
+* New Features:
+  - Improve User Profile Notifications Modal.
+
+
 1.14.52	|	Release date: **12.08.2026**
 ============================================
 * New Features:

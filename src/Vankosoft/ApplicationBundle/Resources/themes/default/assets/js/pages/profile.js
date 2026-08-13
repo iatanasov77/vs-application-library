@@ -128,7 +128,8 @@ $( function()
         });
     });
     
-    $( '#notification-show-modal' ).on( 'hide.bs.modal', function ( e )
+    var myModalEl = document.getElementById( 'notification-show-modal' );
+    myModalEl.addEventListener( 'hidden.bs.modal', function ( e )
     {
         window.location.reload();
     });

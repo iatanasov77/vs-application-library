@@ -1,3 +1,9 @@
+1.14.55	|	Release date: **05.10.2026**
+============================================
+* New Features:
+  - Add an Interface for Custom Monolog Loggers.
+
+
 1.14.54	|	Release date: **02.10.2026**
 ============================================
 * New Features:

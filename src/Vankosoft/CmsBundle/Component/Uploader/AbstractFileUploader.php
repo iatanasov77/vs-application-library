@@ -53,7 +53,7 @@ abstract class AbstractFileUploader implements FileUploaderInterface
     {
         if ( $filemanagerFile->getFile() ) {
             return $filemanagerFile->getFile()->getSize();
-        } else if ( $filemanagerFile->fileExists( $filemanagerFile->getPath() ) ) {
+        } else if ( $this->filesystem->fileExists( $filemanagerFile->getPath() ) ) {
             return $this->filesystem->fileSize( $filemanagerFile->getPath() );
         } else {
             return 'File NOT Found';

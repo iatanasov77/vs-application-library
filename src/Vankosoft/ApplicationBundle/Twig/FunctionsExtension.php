@@ -20,6 +20,7 @@ class FunctionsExtension extends AbstractExtension
             new TwigFunction( 'extension_loaded', [$this, 'extensionLoaded'] ),
             new TwigFunction( 'class_exists', [$this, 'classExists'] ),
             new TwigFunction( 'get_parameter', [$this, 'getParameter'] ),
+            new TwigFunction( 'file_exists', [$this, 'fileExists'] ),
         ];
     }
     
@@ -36,5 +37,10 @@ class FunctionsExtension extends AbstractExtension
     public function getParameter( string $name )
     {
         return $this->params->has( $name ) ? $this->params->get( $name ) : null;
+    }
+    
+    public function fileExists( string $path ): bool
+    {
+        return \file_exists( $path );
     }
 }

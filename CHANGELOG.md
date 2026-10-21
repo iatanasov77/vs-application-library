@@ -1,3 +1,10 @@
+1.14.56	|	Release date: **21.10.2026**
+============================================
+* New Features:
+  - Add a Twig Function.
+  - Improve CMS Abstract FileManager.
+
+
 1.14.55	|	Release date: **05.10.2026**
 ============================================
 * New Features:

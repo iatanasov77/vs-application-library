@@ -49,12 +49,14 @@ abstract class AbstractFileUploader implements FileUploaderInterface
         return $this->filesystem;
     }
     
-    public function fileSize( FileInterface $filemanagerFile )
+    public function fileSize( FileInterface $filemanagerFile ): int | float
     {
         if ( $filemanagerFile->getFile() ) {
             return $filemanagerFile->getFile()->getSize();
-        } else {
+        } else if ( $this->filesystem->fileExists( $filemanagerFile->getPath() ) ) {
             return $this->filesystem->fileSize( $filemanagerFile->getPath() );
+        } else {
+            return 0;
         }
     }
     
